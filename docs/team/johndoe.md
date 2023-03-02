@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Nigel Chen Chin Hao - Project Portfolio Page
 
 ## Overview
 
