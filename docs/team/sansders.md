@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# sansders - Project Portfolio Page
 
 ## Overview
 
