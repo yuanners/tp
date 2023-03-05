@@ -22,7 +22,7 @@ public class Parser {
         String[] args = argString.split("-{1,2}");
 
         for (int i = 1; i < args.length; i++) {
-            String keyValue[] = formatInput(args[i]);
+            String[] keyValue = formatInput(args[i]);
             argMap.put(keyValue[0], keyValue[1]);
         }
 
