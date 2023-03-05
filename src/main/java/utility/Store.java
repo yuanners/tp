@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Manage the storing and retrival of local files be it JSON or csv.
  */
 public class Store {
-    private final static String STORE_DIR_PATH = "./store";
+    private static final String STORE_DIR_PATH = "./store";
     private String storeFilePath;
 
     public Store(String fileName) {

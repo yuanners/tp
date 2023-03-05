@@ -13,7 +13,7 @@ public class Parser {
     }
 
     public String[] formatInput(String input) {
-        String inputs[] = input.contains(" ") ? input.split(" ", 2) : new String[]{input, ""};
+        String[] inputs = input.contains(" ") ? input.split(" ", 2) : new String[]{input, ""};
         return inputs;
     }
 
