@@ -6,4 +6,8 @@ package utility;
 public class Ui {
     public Ui() {
     }
+
+    public void printUserInput() {
+        System.out.println("Please enter something: ");
+    }
 }

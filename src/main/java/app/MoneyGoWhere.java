@@ -2,13 +2,17 @@ package app;
 
 import item.ItemList;
 import order.OrderList;
+import utility.Parser;
+import utility.Ui;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class MoneyGoWhere {
 
     private ItemList items;
     private OrderList orders;
+    private Parser parser;
 
     public MoneyGoWhere() {
         //Load data from local store
@@ -16,9 +20,11 @@ public class MoneyGoWhere {
     }
 
     private void handleCommand(String command, String arguments) {
+        Parser parser = new Parser();
+        Map<String, String> argumentsMap = parser.formatArguments(arguments);
+
         switch (command) {
         case "some_command":
-            //Parse arguments into something that can be interpreted.
             //Do something
             break;
         default:
@@ -27,15 +33,24 @@ public class MoneyGoWhere {
     }
 
     public void run() {
+
+        Ui ui = new Ui();
+        Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
+            ui.printUserInput();
             String userInput = sc.nextLine();
 
-            //Parse the userInput and split command from arguments
-            handleCommand("", "");
+            if (userInput.equals("exit")) {
+                break;
+            }
 
+            String[] userInputs = parser.formatInput(userInput);
+            handleCommand(userInputs[0], userInputs[1]);
         }
+
+        sc.close();
     }
 
 
