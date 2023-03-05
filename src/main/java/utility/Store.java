@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Store {
     private final static String STORE_DIR_PATH = "./store";
     private String storeFilePath;
+
     public Store(String fileName) {
         this.storeFilePath = STORE_DIR_PATH + '/' + fileName;
     }
@@ -31,6 +32,7 @@ public class Store {
     /**
      * Method return type need to be changed.
      * Void is the just a temporary solution.
+     *
      * @throws IOException
      */
     public void load() throws IOException {
