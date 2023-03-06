@@ -10,4 +10,8 @@ public class Ui {
     public void printUserInput() {
         System.out.println("Please enter something: ");
     }
+
+    public void printInvalidIndex() {System.out.println("Please enter a valid index!");}
+
+    public void printRequiresInteger() {System.out.println("This input requires a whole number!");}
 }
