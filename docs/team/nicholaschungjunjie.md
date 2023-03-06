@@ -1,4 +1,4 @@
-# sansders - Project Portfolio Page
+# Nicholas Chung Jun Jie - Project Portfolio Page
 
 ## Overview
 
