@@ -1,5 +1,6 @@
 package app;
 
+import item.Item;
 import item.ItemList;
 import order.OrderList;
 import utility.Parser;
@@ -15,16 +16,34 @@ public class MoneyGoWhere {
     private Parser parser;
 
     public MoneyGoWhere() {
-        //Load data from local store
-        //Else initialize new store
+        items = new ItemList();
     }
 
-    private void handleCommand(String command, String arguments) {
-        Parser parser = new Parser();
-        Map<String, String> argumentsMap = parser.formatArguments(arguments);
+    private void handleCommand(Command command) {
+        switch (command.getCommand()) {
+        case "listitem":
+            //Print some header
+            items.displayList();
+            break;
+        case "additem":
+            //Print some header
+            command.duplicateArgument("name", "n");
+            command.duplicateArgument("price", "p");
 
-        switch (command) {
-        case "some_command":
+            String name = command.getArgumentMap().get("name");
+            Double price = Double.valueOf(command.getArgumentMap().get("price"));
+
+            Item item = new Item(name, price);
+            items.appendItems(item);
+
+            break;
+        case "deleteitem":
+            //Do something
+            break;
+        case "listorder":
+            //Do something
+            break;
+        case "addorder":
             //Do something
             break;
         default:
@@ -35,7 +54,6 @@ public class MoneyGoWhere {
     public void run() {
 
         Ui ui = new Ui();
-        Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -46,8 +64,8 @@ public class MoneyGoWhere {
                 break;
             }
 
-            String[] userInputs = parser.formatInput(userInput);
-            handleCommand(userInputs[0], userInputs[1]);
+            Command command = new Command(userInput);
+            handleCommand(command);
         }
 
         sc.close();
