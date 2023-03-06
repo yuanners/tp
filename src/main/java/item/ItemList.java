@@ -14,7 +14,7 @@ public class ItemList {
         System.out.printf("| %-5s | %-25s | %-5s |\n","Index","Name","Price");
         System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
         for (int i = 0; i < items.size(); i++) {
-            System.out.printf("| %-6d | %-25s | %-5.2f |\n", i, items.get(i).getName(), items.get(i).getPrice());
+            System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, items.get(i).getName(), items.get(i).getPrice());
         }
     }
 
