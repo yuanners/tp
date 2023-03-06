@@ -11,6 +11,10 @@ public class Ui {
         System.out.println("Please enter something: ");
     }
 
+    public void printInvalidIndex() {System.out.println("Please enter a valid index!");}
+
+    public void printRequiresInteger() {System.out.println("This input requires a whole number!");}
+    
     /**
      * Prints string to user and moves the cursor to a new line.
      */
