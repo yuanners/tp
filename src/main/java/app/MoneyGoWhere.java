@@ -1,6 +1,5 @@
 package app;
 
-import com.google.gson.JsonParseException;
 import item.Item;
 import item.ItemList;
 import order.Order;
@@ -9,9 +8,8 @@ import validation.ItemValidation;
 import utility.Parser;
 import utility.Store;
 import utility.Ui;
-import validation.invalidArgumentException;
+import exception.InvalidArgumentException;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -29,7 +27,7 @@ public class MoneyGoWhere {
     }
 
 
-    public void handleCommand(Command command) throws invalidArgumentException {
+    public void handleCommand(Command command) throws InvalidArgumentException {
         Ui ui = new Ui();
         ItemValidation itemValidation = new ItemValidation();
         switch (command.getCommand()) {
@@ -96,7 +94,7 @@ public class MoneyGoWhere {
 
             try {
                 handleCommand(command);
-            } catch (invalidArgumentException e) {
+            } catch (InvalidArgumentException e) {
 
             }
         }

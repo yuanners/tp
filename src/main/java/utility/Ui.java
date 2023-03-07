@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * All print command will be done through here.
  */
 public class Ui {
-    public Ui () {
+    public Ui() {
     }
 
     public final static String NULL_MESSAGE = "Input is empty. Please enter something.";
@@ -26,37 +26,40 @@ public class Ui {
     public final static String PRICE_DECIMAL_ERROR = "Price must be in 2 decimal points.";
     public final static String INVALID_PRICE_ERROR = "Price must be a number.";
     public final static String SUCCESSFUL_COMMAND = "Successfully executed your command!";
-    public void printUserInput () {
-        System.out.println ("Please enter something: ");
+
+    public void printUserInput() {
+        System.out.println("Please enter something: ");
     }
 
-    public void printInvalidIndex () {
-        System.out.println ("Please enter a valid index!");
+    public void printInvalidIndex() {
+        System.out.println("Please enter a valid index!");
     }
 
-    public void printRequiresInteger () { System.out.println ("This input requires a whole number!"); }
+    public void printRequiresInteger() {
+        System.out.println("This input requires a whole number!");
+    }
 
-    public void printTableHeader (String col1, String col2, String col3) {
+    public void printTableHeader(String col1, String col2, String col3) {
         System.out.printf("| %-5s | %-25s | %-5s |\n", col1, col2, col3);
         System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
     }
 
-    public void printItemMenu (int index, String name, double price) {
+    public void printItemMenu(int index, String name, double price) {
         System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, name, price);
     }
 
     /**
      * Prints string to user and moves the cursor to a new line.
      */
-    public void println (Object string) {
-        System.out.println (string);
+    public void println(Object string) {
+        System.out.println(string);
     }
 
     /**
      * Prints string to user without moving the cursor to a new line.
      */
-    public void print (Object string) {
-        System.out.print (string);
+    public void print(Object string) {
+        System.out.print(string);
     }
 
     /**
@@ -73,12 +76,12 @@ public class Ui {
 
         for (int i = 0; i < orders.size(); i++) {
 
-            System.out.println("Order " + (i+1));
+            System.out.println("Order " + (i + 1));
             System.out.println("Order ID: " + orders.get(i).getOrderId());
             System.out.println("Order time: " + orders.get(i).getDateTime());
 
             for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
-                System.out.println((j+1) +". "
+                System.out.println((j + 1) + ". "
                         + orders.get(i).getOrderEntries().get(j).getItem().getName()
                         + "x" + orders.get(i).getOrderEntries().get(j).getQuantity());
 

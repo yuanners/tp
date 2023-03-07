@@ -1,4 +1,4 @@
-package item;
+package exception;
 
 public class ItemException extends Exception {
 
