@@ -16,12 +16,4 @@ public class validation {
             throw new invalidArgumentException (Ui.ERROR_MESSAGE);
         }
     }
-
-    public void validateInteger (String input) throws invalidArgumentException {
-        try {
-            Integer.parseInt (input);
-        } catch (NumberFormatException n) {
-            throw new invalidArgumentException (Ui.INTEGER_ERROR);
-        }
-    }
 }
