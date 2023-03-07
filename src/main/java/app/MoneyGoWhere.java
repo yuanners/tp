@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public ItemList items;
+    public OrderEntry OrderEntry;
     private OrderList orders;
     private Parser parser;
 
@@ -84,7 +85,7 @@ public class MoneyGoWhere {
                 } else {
                     quantity = 1;
                 }
-                OrderEntry orderEntry = new OrderEntry (items.getItems ().get (itemIndex), quantity);
+                OrderEntry = new OrderEntry (items.getItems ().get (itemIndex), quantity);
                 //System.out.println ("Name is: "+orderEntry.getItem ().getName ()+orderEntry.getQuantity ());
                 break;
             default:
