@@ -1,12 +1,14 @@
 package app;
 
+import com.google.gson.JsonParseException;
 import item.Item;
 import item.ItemList;
 import order.OrderList;
 import utility.Parser;
+import utility.Store;
 import utility.Ui;
 
-import java.util.Map;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MoneyGoWhere {
@@ -15,8 +17,22 @@ public class MoneyGoWhere {
     private OrderList orders;
     private Parser parser;
 
+    private Store itemStore;
+
     public MoneyGoWhere() {
-        items = new ItemList();
+
+        this.itemStore = new Store("test.txt");
+        try {
+            this.items = itemStore.load(ItemList.class);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+            this.items = new ItemList();
+        }
+        catch (JsonParseException e){
+            System.out.println("JSON CORRUPTED");
+            this.items = new ItemList();
+        }
+
     }
 
     private void handleCommand(Command command) {
@@ -35,6 +51,12 @@ public class MoneyGoWhere {
 
             Item item = new Item(name, price);
             items.appendItems(item);
+            try{
+                itemStore.save(items);
+
+            }catch(IOException e){
+                System.out.println(e.getMessage());
+            }
 
             break;
         case "deleteitem":

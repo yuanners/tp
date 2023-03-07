@@ -1,7 +1,13 @@
 package utility;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
+import com.google.gson.stream.MalformedJsonException;
+
 
 /**
  * Parse command to object
@@ -29,4 +35,22 @@ public class Parser {
         return argMap;
     }
 
+    public String jsonStringify(Object object){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            return gson.toJson(object);
+
+
+    }
+
+    public <T> T jsonParse(FileReader fr, Class<T> type) throws JsonParseException{
+        Gson gson = new Gson();
+        return gson.fromJson(fr, type);
+    }
 }
+
+
+
+
+
+
