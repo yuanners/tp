@@ -14,19 +14,40 @@ addorder -i 1 -q 2, -i 3, -i 4 iq 3 -d
 public class orderValidation extends validation {
     Ui ui = new Ui ();
 
-    public boolean isValidArgument (Command arg) {
+    @Override
+    public void validateArgument (Command arg) throws invalidArgumentException {
+
+        try {
+            super.validateArgument (arg);
+        } catch (invalidArgumentException e) {
+            throw new invalidArgumentException(Ui.ERROR_MESSAGE);
+        }
+
+    }
+
+    public boolean isValidFormat(Command arg) {
         if(isArgumentPresent (arg)){
-            if (!(arg.getArgumentString ().contains ("-d") || arg.getArgumentString ().contains ("--done"))
-                    || !(arg.getArgumentString ().contains ("-i") || arg.getArgumentString ().contains ("--item"))) {
+            if (arg.getArgumentString ().contains ("-d") || arg.getArgumentString ().contains ("--done")
+                    || arg.getArgumentString ().contains ("-i") || arg.getArgumentString ().contains ("--item")) {
+                return true;
+            }else{
                 ui.println (ui.MISSING_ORDER_ARGUMENT);
                 return false;
-            } else {
-                if(isValidFlagArgument (arg)){
-                    return true;
-                }
             }
         }
         return false;
+    }
+
+
+    public boolean isValid(Command arg) {
+        try {
+            validateArgument(arg);
+        } catch (invalidArgumentException e) {
+            ui.println(e.getMessage());
+            return false;
+        }
+
+        return isValidFlagArgument (arg);
     }
 
     public boolean isInteger (String input) {
@@ -43,9 +64,9 @@ public class orderValidation extends validation {
         boolean isValidQuantity = true;
         boolean isValidItem;
         if (arg.getArgumentString ().contains ("-q") || arg.getArgumentString ().contains ("--quantity")) {
-            isValidQuantity = isInteger (arg.getArgumentMap ().get ("q"));
+            isValidQuantity = isInteger (arg.getArgumentMap ().get ("q").trim());
         }
-        isValidItem = isInteger (arg.getArgumentMap ().get ("i"));
+        isValidItem = isInteger (arg.getArgumentMap ().get ("i").trim());
         return isValidQuantity && isValidItem;
     }
 

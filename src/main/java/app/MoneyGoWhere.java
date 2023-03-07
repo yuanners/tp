@@ -69,17 +69,24 @@ public class MoneyGoWhere {
                 break;
             case "addorder":
                 orderValidation orderValidation = new orderValidation ();
-                if (!(orderValidation.isValidArgument (command))) break;
+                if (!orderValidation.isValidFormat (command)) break;
+
                 command.duplicateArgument ("item", "i");
                 command.duplicateArgument ("quantity", "q");
-                int itemIndex = Integer.parseInt (command.getArgumentMap ().get ("item"));
+
+                if (!orderValidation.isValid (command)) break;
+
+                int itemIndex = Integer.parseInt (command.getArgumentMap ().get ("item").trim());
                 int quantity;
+
                 if (command.getArgumentMap ().get ("quantity") != null) {
-                    quantity = Integer.parseInt (command.getArgumentMap ().get ("quantity"));
+                    quantity = Integer.parseInt (command.getArgumentMap ().get ("quantity").trim());
                 } else {
                     quantity = 1;
                 }
                 OrderEntry orderEntry = new OrderEntry (items.getItems ().get (itemIndex), quantity);
+                //System.out.println ("Name is: "+orderEntry.getItem ().getName ()+orderEntry.getQuantity ());
+                break;
             default:
                 //Handle error if command not found
         }
