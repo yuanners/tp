@@ -25,9 +25,7 @@ public class Ui {
     public final static String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
     public final static String PRICE_DECIMAL_ERROR = "Price must be in 2 decimal points.";
     public final static String INVALID_PRICE_ERROR = "Price must be a number.";
-
     public final static String SUCCESSFUL_COMMAND = "Successfully executed your command!";
-
     public void printUserInput () {
         System.out.println ("Please enter something: ");
     }

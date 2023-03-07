@@ -1,14 +1,17 @@
 package app;
 
+import com.google.gson.JsonParseException;
 import item.Item;
 import item.ItemList;
 import order.Order;
 import order.OrderList;
 import validation.ItemValidation;
 import utility.Parser;
+import utility.Store;
 import utility.Ui;
 import validation.invalidArgumentException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -17,6 +20,8 @@ public class MoneyGoWhere {
     public ItemList items;
     private OrderList orderList;
     private Parser parser = new Parser();
+
+    private Store itemStore;
 
     public MoneyGoWhere() {
         items = new ItemList();
@@ -28,48 +33,49 @@ public class MoneyGoWhere {
         Ui ui = new Ui();
         ItemValidation itemValidation = new ItemValidation();
         switch (command.getCommand()) {
-            case "listitem":
-                items.displayList();
-                break;
-            case "additem":
-                //Print some header
-                if (!itemValidation.isValidFormat(command)) break;
+        case "listitem":
+            items.displayList();
+            break;
+        case "additem":
+            //Print some header
+            if (!itemValidation.isValid(command)) break;
 
-                command.duplicateArgument("name", "n");
-                command.duplicateArgument("price", "p");
+            command.duplicateArgument("name", "n");
+            command.duplicateArgument("price", "p");
 
-                if (!itemValidation.isValid(command)) break;
+            if (!itemValidation.isValid(command)) break;
 
-                String name = command.getArgumentMap().get("name");
-                Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
-                Item item = new Item(name, price);
-                items.appendItems(item);
-                System.out.println(ui.SUCCESSFUL_COMMAND);
+            String name = command.getArgumentMap().get("name");
+            Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
-                break;
-            case "deleteitem":
-                command.duplicateArgument("index", "i");
+            Item item = new Item(name, price);
+            items.appendItems(item);
+            System.out.println(ui.SUCCESSFUL_COMMAND);
 
-                if (!itemValidation.isValidFormatDelete(command)) break;
-                if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) break;
-                if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) break;
+            break;
+        case "deleteitem":
+            command.duplicateArgument("index", "i");
 
-                items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
+            if (!itemValidation.isValidFormatDelete(command)) break;
+            if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) break;
+            if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) break;
 
-                System.out.println(ui.SUCCESSFUL_COMMAND);
+            items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
 
-                break;
-            case "listorder":
-                orderList.displayList();
-                break;
-            case "addorder":
-                Order order = new Order();
-                order.addOrder(command, parser, items);
-                orderList.appendOrder(order);
-                break;
-            default:
-                //Handle error if command not found
+            System.out.println(ui.SUCCESSFUL_COMMAND);
+
+            break;
+        case "listorder":
+            orderList.displayList();
+            break;
+        case "addorder":
+            Order order = new Order();
+            order.addOrder(command, parser, items);
+            orderList.appendOrder(order);
+            break;
+        default:
+            //Handle error if command not found
         }
     }
 
