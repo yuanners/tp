@@ -12,7 +12,7 @@ public class ItemValidation extends validation {
         String args = c.getArgumentString();
 
         if(!(args.contains("n") || args.contains("name")) || !(args.contains("p") || args.contains("price"))) {
-            ui.println("Invalid format.");
+            ui.println(Ui.INVALID_ADDITEM_FORMAT);
             return false;
         }
 
@@ -29,20 +29,11 @@ public class ItemValidation extends validation {
             return false;
         }
 
-        if(c.getArgumentMap().get("n").length() > 25) {
-            ui.println("Name exceeds the 25 character limit.");
-            return false;
-        }
+        boolean nameIsValid = validateName(c, ui);
 
-        String price = c.getArgumentMap().get("p");
-        int indexOfDecimalPoint = price.indexOf(".");
-        int numOfDecimalPoint = price.length() - indexOfDecimalPoint - 1;
+        boolean priceIsValid = validatePrice(c, ui);
 
-        if(numOfDecimalPoint != 2) {
-            return false;
-        }
-
-        return true;
+        return nameIsValid && priceIsValid;
     }
 
     @Override
@@ -51,18 +42,61 @@ public class ItemValidation extends validation {
         try {
             super.validateArgument (arg);
         } catch (invalidArgumentException e) {
-            throw new invalidArgumentException("ERROR_MESSAGE");
+            throw new invalidArgumentException(Ui.ERROR_MESSAGE);
         }
 
     }
 
-    public void validateIntArgument (Command arg) throws invalidArgumentException {
-        try {
-            Integer.parseInt (arg.getArgumentString ());
-        } catch (NumberFormatException n) {
-            //a constant error message to print eg Please enter item index to add order
-            throw new invalidArgumentException ("INT_ERROR_MESSAGE");
+    public boolean validateName(Command c, Ui ui) {
+        if(c.getArgumentMap().get("n").length() > 25) {
+            ui.println(Ui.ITEM_NAME_MAX_LENGTH_ERROR);
+            return false;
         }
+
+        if(c.getArgumentMap().get("n").length() <1) {
+            ui.println(Ui.ITEM_NAME_MIN_LENGTH_ERROR);
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean validatePrice (Command c, Ui ui) {
+        String price = c.getArgumentMap().get("p");
+
+        if(price.length() < 1) {
+            ui.println(Ui.ITEM_PRICE_MIN_LENGTH_ERROR);
+            return false;
+        }
+
+        Double tempPrice;
+
+        try {
+            tempPrice = Double.valueOf(price);
+        } catch (NumberFormatException e) {
+            ui.println(Ui.INVALID_PRICE_ERROR);
+            return false;
+        }
+
+        if(tempPrice < 0.00) {
+            ui.println(Ui.ITEM_PRICE_NEGATIVE_ERROR);
+            return false;
+        }
+
+        if(!price.contains(".")) {
+            ui.println(Ui.PRICE_DECIMAL_ERROR);
+            return false;
+        }
+
+        int indexOfDecimalPoint = price.indexOf(".");
+        int numOfDecimalPoint = price.length() - indexOfDecimalPoint - 1;
+
+        if(numOfDecimalPoint != 2) {
+            ui.println(Ui.PRICE_DECIMAL_ERROR);
+            return false;
+        }
+
+        return true;
     }
 
 //    public void validateCommand (Command arg) throws invalidCommandException {

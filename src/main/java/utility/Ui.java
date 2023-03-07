@@ -10,6 +10,13 @@ public class Ui {
     public final static String NULL_MESSAGE = "Input is empty. Please enter something.";
     public final static String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
     public final static String INTEGER_ERROR = "Argument needs to be an integer";
+    public final static String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
+    public final static String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
+    public final static String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
+    public final static String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
+    public final static String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
+    public final static String PRICE_DECIMAL_ERROR = "Price must be in 2 decimal points.";
+    public final static String INVALID_PRICE_ERROR = "Price must be a number.";
 
     public void printUserInput () {
         System.out.println ("Please enter something: ");
