@@ -2,8 +2,7 @@ package app;
 
 import item.Item;
 import item.ItemList;
-import item.ItemException;
-import order.Order;
+
 import order.OrderEntry;
 import validation.ItemValidation;
 import order.OrderList;
@@ -12,7 +11,6 @@ import utility.Ui;
 import validation.invalidArgumentException;
 import validation.orderValidation;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class MoneyGoWhere {
@@ -37,12 +35,12 @@ public class MoneyGoWhere {
             //Print some header
             ItemValidation itemValidation = new ItemValidation ();
 
-            if (!itemValidation.isValidFormat(command)) break;
+            if (!itemValidation.isValidFormat(command)) { break; }
 
             command.duplicateArgument("name", "n");
             command.duplicateArgument("price", "p");
 
-            if (!itemValidation.isValid(command)) break;
+            if (!itemValidation.isValid(command)) { break; }
 
             String name = command.getArgumentMap().get("name");
             Double price = Double.valueOf(command.getArgumentMap().get("price"));
@@ -64,18 +62,18 @@ public class MoneyGoWhere {
             } catch (NumberFormatException e) {
                 ui.printRequiresInteger();
             }
-                break;
+            break;
         case "listorder":
             //Do something
             break;
         case "addorder":
             orderValidation orderValidation = new orderValidation ();
-            if (!orderValidation.isValidFormat (command)) break;
+            if (!orderValidation.isValidFormat (command)) { break; }
 
             command.duplicateArgument ("item", "i");
             command.duplicateArgument ("quantity", "q");
 
-            if (!orderValidation.isValid (command)) break;
+            if (!orderValidation.isValid (command)) { break; }
 
             int itemIndex = Integer.parseInt (command.getArgumentMap ().get ("item").trim());
             int quantity;
@@ -111,7 +109,7 @@ public class MoneyGoWhere {
             try {
                 handleCommand(command);
             } catch (invalidArgumentException e) {
-
+                ui.println(e.getMessage());
             }
         }
 
