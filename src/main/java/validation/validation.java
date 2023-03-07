@@ -1,6 +1,6 @@
 package validation;
 
-
+import utility.Ui;
 import app.Command;
 
 public class validation {
@@ -11,9 +11,9 @@ public class validation {
     //handles the common input validators
     public void validateArgument (Command arg) throws invalidArgumentException {
         if (arg.getUserInput () == null) {
-            throw new invalidArgumentException (UI.NULL_ERROR);
+            throw new invalidArgumentException (Ui.NULL_MESSAGE);
         } else if (arg.getUserInput ().contains (":") || arg.getUserInput ().contains (";")) {
-            throw new invalidArgumentException (UI.ERROR_MESSAGE);
+            throw new invalidArgumentException (Ui.ERROR_MESSAGE);
         }
     }
 
@@ -21,7 +21,7 @@ public class validation {
         try {
             Integer.parseInt (input);
         } catch (NumberFormatException n) {
-            throw new invalidArgumentException (UI.INTEGER_ERROR);
+            throw new invalidArgumentException (Ui.INTEGER_ERROR);
         }
     }
 }

@@ -1,8 +1,8 @@
 package validation;
 
 public class invalidCommandException extends Exception {
-    public invalidCommandException (String message, Throwable cause) {
+    public invalidCommandException (String message) {
 
-        super (message, cause);
+        super (message);
     }
 }

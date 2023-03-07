@@ -1,8 +1,8 @@
 package validation;
 
 public class invalidFlagException extends Exception {
-    public invalidFlagException (String message, Throwable cause) {
+    public invalidFlagException (String message) {
 
-        super (message, cause);
+        super (message);
     }
 }
