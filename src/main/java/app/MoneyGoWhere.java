@@ -17,15 +17,16 @@ import java.util.Scanner;
 
 public class MoneyGoWhere {
 
-    private ItemList items;
+    public ItemList items;
     private OrderList orders;
     private Parser parser;
 
-    public MoneyGoWhere () {
-        items = new ItemList ();
+    public MoneyGoWhere() {
+        items = new ItemList();
     }
 
-    private void handleCommand (Command command) throws invalidArgumentException {
+
+    public void handleCommand (Command command) throws invalidArgumentException {
         Ui ui = new Ui ();
         switch (command.getCommand ()) {
             case "listitem":
@@ -35,34 +36,33 @@ public class MoneyGoWhere {
                 //Print some header
                 ItemValidation itemValidation = new ItemValidation ();
 
-                if (!itemValidation.isValidFormat (command)) break;
+            if (!itemValidation.isValidFormat(command)) break;
 
-                command.duplicateArgument ("name", "n");
-                command.duplicateArgument ("price", "p");
+            command.duplicateArgument("name", "n");
+            command.duplicateArgument("price", "p");
 
-                if (!itemValidation.isValid (command)) break;
+            if (!itemValidation.isValid(command)) break;
 
-                String name = command.getArgumentMap ().get ("name");
-                Double price = Double.valueOf (command.getArgumentMap ().get ("price"));
-
-
-                Item item = new Item (name, price);
-                items.appendItems (item);
+            String name = command.getArgumentMap().get("name");
+            Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
 
-                break;
-            case "deleteitem":
-                command.duplicateArgument ("index", "i");
+            Item item = new Item(name, price);
+            items.appendItems(item);
 
-                try {
-                    int index = Integer.parseInt (command.getArgumentMap ().get ("index"));
-                    items.deleteItems (index);
-                } catch (IndexOutOfBoundsException e) {
-                    ui.printInvalidIndex ();
-                } catch (NumberFormatException e) {
-                    ui.printRequiresInteger ();
-                }
 
+            break;
+        case "deleteitem":
+            command.duplicateArgument("index", "i");
+
+            try {
+                int index = Integer.parseInt(command.getArgumentMap().get("index"));
+                items.deleteItems(index);
+            } catch (IndexOutOfBoundsException e) {
+                ui.printInvalidIndex();
+            } catch (NumberFormatException e) {
+                ui.printRequiresInteger();
+            }
                 break;
             case "listorder":
                 //Do something
@@ -92,29 +92,29 @@ public class MoneyGoWhere {
         }
     }
 
-    public void run () {
+    public void run() {
 
-        Ui ui = new Ui ();
-        Scanner sc = new Scanner (System.in);
+        Ui ui = new Ui();
+        Scanner sc = new Scanner(System.in);
 
         while (true) {
-            ui.printUserInput ();
-            String userInput = sc.nextLine ();
+            ui.printUserInput();
+            String userInput = sc.nextLine();
 
-            if (userInput.equals ("exit")) {
+            if (userInput.equals("exit")) {
                 break;
             }
 
-            Command command = new Command (userInput);
+            Command command = new Command(userInput);
 
             try {
-                handleCommand (command);
+                handleCommand(command);
             } catch (invalidArgumentException e) {
 
             }
         }
 
-        sc.close ();
+        sc.close();
     }
 
 
