@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class MoneyGoWhere {
 
-    private ItemList items;
+    public ItemList items;
     private OrderList orders;
     private Parser parser;
 
@@ -21,7 +21,7 @@ public class MoneyGoWhere {
         items = new ItemList();
     }
 
-    private void handleCommand(Command command) {
+    public void handleCommand(Command command) {
         Ui ui = new Ui();
         switch (command.getCommand()) {
         case "listitem":
