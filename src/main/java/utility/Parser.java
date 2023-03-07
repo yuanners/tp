@@ -1,12 +1,15 @@
 package utility;
 
 import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.MalformedJsonException;
 
 
@@ -55,7 +58,7 @@ public class Parser {
 
     }
 
-    public <T> T jsonParse(FileReader fr, Class<T> type) throws JsonParseException {
+    public <T> T jsonParse(FileReader fr, Type type) throws JsonParseException {
         Gson gson = new Gson();
         return gson.fromJson(fr, type);
     }

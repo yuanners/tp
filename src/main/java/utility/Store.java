@@ -1,12 +1,10 @@
 package utility;
 
-import com.google.gson.JsonParseException;
-import com.google.gson.stream.MalformedJsonException;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -38,18 +36,11 @@ public class Store {
         fw.close();
     }
 
-    /**
-     * Method return type need to be changed.
-     * Void is the just a temporary solution.
-     *
-     * @throws IOException
-     */
-    public <T> T load(Class<T> type) throws IOException {
+    public <T> T load(Type type) throws IOException {
         File file = new File(storeFilePath);
         FileReader fr = new FileReader(file);
         Parser parser = new Parser();
 
         return parser.jsonParse(fr, type);
     }
-
 }
