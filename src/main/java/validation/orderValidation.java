@@ -24,14 +24,14 @@ public class orderValidation extends validation {
             Integer.parseInt (arg.getArgumentString ());
         } catch (NumberFormatException n) {
             //a constant error message to print eg Please enter item index to add order
-            throw new invalidArgumentException (Ui.INT_ERROR_MESSAGE);
+            throw new invalidArgumentException (Ui.INTEGER_ERROR);
         }
     }
 
     public void validateCommand (Command arg) throws invalidCommandException {
         if (!(arg.getCommand ().contains ("addorder"))) {
             //a constant error message to print eg Please use addorder to add order
-            throw new invalidArgumentException(Ui.ERROR_MESSAGE);
+            throw new invalidCommandException(Ui.ERROR_MESSAGE);
         }
     }
 }

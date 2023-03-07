@@ -41,13 +41,10 @@ public class MoneyGoWhere {
             String name = command.getArgumentMap().get("name");
             Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
-            try {
-                Item item = new Item(name, price);
-                items.appendItems(item);
-            } catch (ItemException e) {
-                //print error message
-                System.out.println(e.getMessage());
-            }
+
+            Item item = new Item(name, price);
+            items.appendItems(item);
+
 
             break;
         case "deleteitem":
