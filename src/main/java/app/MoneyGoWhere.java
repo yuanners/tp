@@ -21,10 +21,9 @@ public class MoneyGoWhere {
     private OrderList orders;
     private Parser parser;
 
-    public MoneyGoWhere () {
-        items = new ItemList ();
+    public MoneyGoWhere() {
+        items = new ItemList();
     }
-
 
 
     public void handleCommand (Command command) throws invalidArgumentException {
@@ -37,32 +36,32 @@ public class MoneyGoWhere {
             //Print some header
             ItemValidation itemValidation = new ItemValidation ();
 
-            if (!itemValidation.isValidFormat (command)) break;
+            if (!itemValidation.isValidFormat(command)) break;
 
-            command.duplicateArgument ("name", "n");
-            command.duplicateArgument ("price", "p");
+            command.duplicateArgument("name", "n");
+            command.duplicateArgument("price", "p");
 
-            if (!itemValidation.isValid (command)) break;
+            if (!itemValidation.isValid(command)) break;
 
-            String name = command.getArgumentMap ().get ("name");
-            Double price = Double.valueOf (command.getArgumentMap ().get ("price"));
+            String name = command.getArgumentMap().get("name");
+            Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
 
-            Item item = new Item (name, price);
-            items.appendItems (item);
-
+            Item item = new Item(name, price);
+            items.appendItems(item);
 
             break;
         case "deleteitem":
-            command.duplicateArgument ("index", "i");
+
+            command.duplicateArgument("index", "i");
 
             try {
-                int index = Integer.parseInt (command.getArgumentMap ().get ("index"));
-                items.deleteItems (index);
+                int index = Integer.parseInt(command.getArgumentMap().get("index"));
+                items.deleteItems(index);
             } catch (IndexOutOfBoundsException e) {
-                ui.printInvalidIndex ();
+                ui.printInvalidIndex();
             } catch (NumberFormatException e) {
-                ui.printRequiresInteger ();
+                ui.printRequiresInteger();
             }
 
             break;
@@ -70,46 +69,48 @@ public class MoneyGoWhere {
             //Do something
             break;
         case "addorder":
-            orderValidation orderValidation = new orderValidation ();
-            if (!(orderValidation.isValidArgument (command))) break;
-            command.duplicateArgument ("item", "i");
-            command.duplicateArgument ("quantity", "q");
-            int itemIndex = Integer.parseInt (command.getArgumentMap ().get ("item"));
+
+            orderValidation orderValidation = new orderValidation();
+            if (!(orderValidation.isValidArgument(command))) break;
+            command.duplicateArgument("item", "i");
+            command.duplicateArgument("quantity", "q");
+            int itemIndex = Integer.parseInt(command.getArgumentMap().get("item"));
             int quantity;
-            if (command.getArgumentMap ().get ("quantity") != null) {
-                quantity = Integer.parseInt (command.getArgumentMap ().get ("quantity"));
+            if (command.getArgumentMap().get("quantity") != null) {
+                quantity = Integer.parseInt(command.getArgumentMap().get("quantity"));
             } else {
                 quantity = 1;
             }
-            OrderEntry orderEntry = new OrderEntry (items.getItems ().get (itemIndex), quantity);
+            OrderEntry orderEntry = new OrderEntry(items.getItems().get(itemIndex), quantity);
+
         default:
             //Handle error if command not found
         }
     }
 
-    public void run () {
+    public void run() {
 
-        Ui ui = new Ui ();
-        Scanner sc = new Scanner (System.in);
+        Ui ui = new Ui();
+        Scanner sc = new Scanner(System.in);
 
         while (true) {
-            ui.printUserInput ();
-            String userInput = sc.nextLine ();
+            ui.printUserInput();
+            String userInput = sc.nextLine();
 
-            if (userInput.equals ("exit")) {
+            if (userInput.equals("exit")) {
                 break;
             }
 
-            Command command = new Command (userInput);
+            Command command = new Command(userInput);
 
             try {
-                handleCommand (command);
+                handleCommand(command);
             } catch (invalidArgumentException e) {
 
             }
         }
 
-        sc.close ();
+        sc.close();
     }
 
 
