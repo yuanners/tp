@@ -17,8 +17,11 @@ public class Ui {
     public final static String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
     public final static String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
     public final static String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
+    public final static String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
     public final static String PRICE_DECIMAL_ERROR = "Price must be in 2 decimal points.";
     public final static String INVALID_PRICE_ERROR = "Price must be a number.";
+
+    public final static String SUCCESSFUL_COMMAND = "Successfully executed your command!";
 
     public void printUserInput () {
         System.out.println ("Please enter something: ");
@@ -28,8 +31,15 @@ public class Ui {
         System.out.println ("Please enter a valid index!");
     }
 
-    public void printRequiresInteger () {
-        System.out.println ("This input requires a whole number!");
+    public void printRequiresInteger () { System.out.println ("This input requires a whole number!"); }
+
+    public void printTableHeader (String col1, String col2, String col3) {
+        System.out.printf("| %-5s | %-25s | %-5s |\n", col1, col2, col3);
+        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+    }
+
+    public void printItemMenu (int index, String name, double price) {
+        System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, name, price);
     }
 
     /**
