@@ -1,5 +1,11 @@
 package utility;
 
+import order.Order;
+import order.OrderEntry;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * All print command will be done through here.
  */
@@ -44,5 +50,24 @@ public class Ui {
      */
     public void print (Object string) {
         System.out.print (string);
+    }
+
+    public void printOrderListHeader() {
+        System.out.printf("| %-5s | %-25s | %-5s |\n","Index","Name","Price");
+    }
+
+    public void printOrder(Order order) {
+
+        ArrayList<OrderEntry> orderEntries = order.getOrderEntries();
+
+        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+
+        for (int i = 0; i < orderEntries.size(); i++) {
+            System.out.printf("| %-5d | %-25s | %-5.2f |\n", i,
+                    orderEntries.get(i).getItem().getName(),
+                    orderEntries.get(i).getItem().getPrice());
+        }
+
+        System.out.println();
     }
 }

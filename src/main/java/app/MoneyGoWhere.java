@@ -2,27 +2,25 @@ package app;
 
 import item.Item;
 import item.ItemList;
-import item.ItemException;
 import order.Order;
-import order.OrderEntry;
-import validation.ItemValidation;
 import order.OrderList;
+import validation.ItemValidation;
 import utility.Parser;
 import utility.Ui;
 import validation.invalidArgumentException;
-import validation.orderValidation;
 
-import java.util.Map;
 import java.util.Scanner;
+
 
 public class MoneyGoWhere {
 
     public ItemList items;
-    private OrderList orders;
-    private Parser parser;
+    private OrderList orderList;
+    private Parser parser = new Parser();
 
     public MoneyGoWhere() {
         items = new ItemList();
+        orderList = new OrderList();
     }
 
 
@@ -36,22 +34,21 @@ public class MoneyGoWhere {
                 //Print some header
                 ItemValidation itemValidation = new ItemValidation ();
 
-            if (!itemValidation.isValidFormat(command)) break;
+                if (!itemValidation.isValidFormat(command)) break;
 
-            command.duplicateArgument("name", "n");
-            command.duplicateArgument("price", "p");
+                command.duplicateArgument("name", "n");
+                command.duplicateArgument("price", "p");
 
-            if (!itemValidation.isValid(command)) break;
+                if (!itemValidation.isValid(command)) break;
 
-            String name = command.getArgumentMap().get("name");
-            Double price = Double.valueOf(command.getArgumentMap().get("price"));
-
-
-            Item item = new Item(name, price);
-            items.appendItems(item);
+                String name = command.getArgumentMap().get("name");
+                Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
 
-            break;
+                Item item = new Item(name, price);
+                items.appendItems(item);
+
+                break;
         case "deleteitem":
             command.duplicateArgument("index", "i");
 
@@ -65,27 +62,12 @@ public class MoneyGoWhere {
             }
                 break;
             case "listorder":
-                //Do something
+                orderList.displayList();
                 break;
             case "addorder":
-                orderValidation orderValidation = new orderValidation ();
-                if (!orderValidation.isValidFormat (command)) break;
-
-                command.duplicateArgument ("item", "i");
-                command.duplicateArgument ("quantity", "q");
-
-                if (!orderValidation.isValid (command)) break;
-
-                int itemIndex = Integer.parseInt (command.getArgumentMap ().get ("item").trim());
-                int quantity;
-
-                if (command.getArgumentMap ().get ("quantity") != null) {
-                    quantity = Integer.parseInt (command.getArgumentMap ().get ("quantity").trim());
-                } else {
-                    quantity = 1;
-                }
-                OrderEntry orderEntry = new OrderEntry (items.getItems ().get (itemIndex), quantity);
-                //System.out.println ("Name is: "+orderEntry.getItem ().getName ()+orderEntry.getQuantity ());
+                Order order = new Order();
+                order.addOrder(command, parser, items);
+                orderList.appendOrder(order);
                 break;
             default:
                 //Handle error if command not found
