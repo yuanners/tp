@@ -2,6 +2,7 @@ package validation;
 
 import app.Command;
 import utility.Ui;
+
 /* for add order
 -i or --item for item index
 -d ot --done for end of input
@@ -11,27 +12,48 @@ addorder -i 1 -q 2, -i 3, -i 4 iq 3 -d
 */
 
 public class orderValidation extends validation {
-    @Override
-    public void validateArgument (Command arg) throws invalidArgumentException {
-        super.validateArgument (arg);
-        if (!(arg.getArgumentString ().contains ("-d"))) {
+    Ui ui = new Ui ();
 
+    public boolean isValidArgument (Command arg) {
+        if(isArgumentPresent (arg)){
+            if (!(arg.getArgumentString ().contains ("-d") || arg.getArgumentString ().contains ("--done"))
+                    || !(arg.getArgumentString ().contains ("-i") || arg.getArgumentString ().contains ("--item"))) {
+                ui.println (ui.MISSING_ORDER_ARGUMENT);
+                return false;
+            } else {
+                if(isValidFlagArgument (arg)){
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
-    public void validateIntArgument (Command arg) throws invalidArgumentException {
+    public boolean isInteger (String input) {
         try {
-            Integer.parseInt (arg.getArgumentString ());
+            Integer.parseInt (input);
         } catch (NumberFormatException n) {
-            //a constant error message to print eg Please enter item index to add order
-            throw new invalidArgumentException (Ui.INTEGER_ERROR);
+            ui.println (ui.INTEGER_ERROR);
+            return false;
         }
+        return true;
     }
 
-    public void validateCommand (Command arg) throws invalidCommandException {
-        if (!(arg.getCommand ().contains ("addorder"))) {
-            //a constant error message to print eg Please use addorder to add order
-            throw new invalidCommandException(Ui.ERROR_MESSAGE);
+    public boolean isValidFlagArgument (Command arg) {
+        boolean isValidQuantity = true;
+        boolean isValidItem;
+        if (arg.getArgumentString ().contains ("-q") || arg.getArgumentString ().contains ("--quantity")) {
+            isValidQuantity = isInteger (arg.getArgumentMap ().get ("q"));
         }
+        isValidItem = isInteger (arg.getArgumentMap ().get ("i"));
+        return isValidQuantity && isValidItem;
+    }
+
+
+    public boolean isArgumentPresent (Command arg) {
+        if (arg.getCommand ().contains ("addorder") && arg.getArgumentString () != null) {
+            return true;
+        }
+        return false;
     }
 }

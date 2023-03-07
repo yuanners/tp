@@ -7,6 +7,7 @@ import app.Command;
 import app.MoneyGoWhere;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
+import validation.invalidArgumentException;
 
 import java.util.Scanner;
 
@@ -27,7 +28,12 @@ class ItemTest {
 
 
         Command command = new Command(userInput);
-        moneyGoWhere.handleCommand(command);
+
+        try {
+            moneyGoWhere.handleCommand(command);
+        } catch (invalidArgumentException e) {
+            ui.println(e.getMessage());
+        }
 
     }
 
@@ -39,7 +45,6 @@ class ItemTest {
         assertEquals("chicken rice" , moneyGoWhere.items.getItems().get(moneyGoWhere.items.getItems().size() - 1).getName() );
         assertEquals(2.5 , moneyGoWhere.items.getItems().get(moneyGoWhere.items.getItems().size() - 1).getPrice() );
     }
-
 
 
 }
