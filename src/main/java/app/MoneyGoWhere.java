@@ -20,9 +20,9 @@ public class MoneyGoWhere {
     }
 
     private void handleCommand(Command command) {
+        Ui ui = new Ui();
         switch (command.getCommand()) {
         case "listitem":
-            //Print some header
             items.displayList();
             break;
         case "additem":
@@ -38,7 +38,17 @@ public class MoneyGoWhere {
 
             break;
         case "deleteitem":
-            //Do something
+            command.duplicateArgument("index", "i");
+
+            try {
+                int index = Integer.parseInt(command.getArgumentMap().get("index"));
+                items.deleteItems(index);
+            } catch (IndexOutOfBoundsException e) {
+                ui.printInvalidIndex();
+            } catch (NumberFormatException e) {
+                ui.printRequiresInteger();
+            }
+
             break;
         case "listorder":
             //Do something
