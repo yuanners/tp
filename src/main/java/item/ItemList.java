@@ -1,6 +1,7 @@
 package item;
 
 import java.util.ArrayList;
+import utility.Ui;
 
 public class ItemList {
 
@@ -11,10 +12,11 @@ public class ItemList {
     }
 
     public void displayList() {
-        System.out.printf("| %-5s | %-25s | %-5s |\n","Index","Name","Price");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+        Ui ui = new Ui();
+
+        ui.printTableHeader("Index", "Name", "Price");
         for (int i = 0; i < items.size(); i++) {
-            System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, items.get(i).getName(), items.get(i).getPrice());
+            ui.printItemMenu(i, items.get(i).getName(), items.get(i).getPrice());
         }
     }
 
@@ -28,6 +30,10 @@ public class ItemList {
 
     public ArrayList<Item> getItems() {
         return items;
+    }
+
+    public Item getItem(int index) {
+        return items.get(index);
     }
 
     public void setItems(ArrayList<Item> items) {

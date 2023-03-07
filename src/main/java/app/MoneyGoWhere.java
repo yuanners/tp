@@ -24,16 +24,15 @@ public class MoneyGoWhere {
     }
 
 
-    public void handleCommand (Command command) throws invalidArgumentException {
-        Ui ui = new Ui ();
-        switch (command.getCommand ()) {
+    public void handleCommand(Command command) throws invalidArgumentException {
+        Ui ui = new Ui();
+        ItemValidation itemValidation = new ItemValidation();
+        switch (command.getCommand()) {
             case "listitem":
-                items.displayList ();
+                items.displayList();
                 break;
             case "additem":
                 //Print some header
-                ItemValidation itemValidation = new ItemValidation ();
-
                 if (!itemValidation.isValidFormat(command)) break;
 
                 command.duplicateArgument("name", "n");
@@ -44,22 +43,22 @@ public class MoneyGoWhere {
                 String name = command.getArgumentMap().get("name");
                 Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
-
                 Item item = new Item(name, price);
                 items.appendItems(item);
+                System.out.println(ui.SUCCESSFUL_COMMAND);
 
                 break;
-        case "deleteitem":
-            command.duplicateArgument("index", "i");
+            case "deleteitem":
+                command.duplicateArgument("index", "i");
 
-            try {
-                int index = Integer.parseInt(command.getArgumentMap().get("index"));
-                items.deleteItems(index);
-            } catch (IndexOutOfBoundsException e) {
-                ui.printInvalidIndex();
-            } catch (NumberFormatException e) {
-                ui.printRequiresInteger();
-            }
+                if (!itemValidation.isValidFormatDelete(command)) break;
+                if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) break;
+                if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) break;
+
+                items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
+
+                System.out.println(ui.SUCCESSFUL_COMMAND);
+
                 break;
             case "listorder":
                 orderList.displayList();

@@ -2,10 +2,12 @@ package validation;
 
 import app.Command;
 import utility.Ui;
+import item.ItemList;
+import java.util.ArrayList;
 
 public class ItemValidation extends validation {
 
-    public boolean isValidFormat(Command c) {
+    public boolean isValidFormatAdd(Command c) {
 
         Ui ui = new Ui();
 
@@ -29,9 +31,9 @@ public class ItemValidation extends validation {
             return false;
         }
 
-        boolean nameIsValid = validateName(c, ui);
+        boolean nameIsValid = isValidName(c, ui);
 
-        boolean priceIsValid = validatePrice(c, ui);
+        boolean priceIsValid = isValidPrice(c, ui);
 
         return nameIsValid && priceIsValid;
     }
@@ -47,7 +49,7 @@ public class ItemValidation extends validation {
 
     }
 
-    public boolean validateName(Command c, Ui ui) {
+    public boolean isValidName(Command c, Ui ui) {
         if(c.getArgumentMap().get("n").length() > 25) {
             ui.println(Ui.ITEM_NAME_MAX_LENGTH_ERROR);
             return false;
@@ -61,7 +63,7 @@ public class ItemValidation extends validation {
         return true;
     }
 
-    public boolean validatePrice (Command c, Ui ui) {
+    public boolean isValidPrice (Command c, Ui ui) {
         String price = c.getArgumentMap().get("p");
         price = price.trim();
 
@@ -94,6 +96,41 @@ public class ItemValidation extends validation {
 
         if(numOfDecimalPoint != 2) {
             ui.println(Ui.PRICE_DECIMAL_ERROR);
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean isInteger (String input) {
+        Ui ui = new Ui();
+        try {
+            Integer.parseInt (input);
+        } catch (NumberFormatException n) {
+            ui.println (ui.INTEGER_ERROR);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidIndex (String input, ItemList items) {
+        Ui ui = new Ui();
+        try {
+            items.getItem(Integer.parseInt(input));
+        } catch (IndexOutOfBoundsException e) {
+            ui.printInvalidIndex();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidFormatDelete(Command c) {
+        Ui ui = new Ui();
+
+        String args = c.getArgumentString();
+
+        if(!(args.contains("i") || args.contains("index"))) {
+            ui.println(Ui.INVALID_DELETEITEM_FORMAT);
             return false;
         }
 
