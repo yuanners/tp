@@ -20,7 +20,7 @@ public class orderValidation extends validation {
             throw new invalidArgumentException (Ui.MISSING_ORDER_ARGUMENT);
         }
     }
-
+    
     public void validateFlagArgument (Command arg) throws invalidFlagException, invalidArgumentException {
         validateInteger (arg.getArgumentMap ().get ("i"));
         if (arg.getArgumentString ().contains ("-q") || arg.getArgumentString ().contains ("--quantity")) {
@@ -32,6 +32,7 @@ public class orderValidation extends validation {
     public void validateCommand (Command arg) throws invalidCommandException {
         if (arg.getCommand ().contains ("addorder") && arg.getArgumentString () == null) {
             throw new invalidCommandException (Ui.MISSING_ARGUMENT);
+
         }
     }
 }
