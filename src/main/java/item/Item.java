@@ -4,7 +4,12 @@ public class Item {
     private String name;
     private double price;
 
-    public Item(String name, double price) {
+    public Item(String name, Double price) throws ItemException {
+
+        if(name == null) throw new ItemException("Name cannot be empty.");
+        if(price == null) throw new ItemException("Price cannot be empty.");
+        if(price < 0.00) throw new ItemException("Price cannot be negative.");
+
         this.name = name;
         this.price = price;
     }
