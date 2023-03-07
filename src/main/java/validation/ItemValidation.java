@@ -63,6 +63,7 @@ public class ItemValidation extends validation {
 
     public boolean validatePrice (Command c, Ui ui) {
         String price = c.getArgumentMap().get("p");
+        price = price.trim();
 
         if(price.length() < 1) {
             ui.println(Ui.ITEM_PRICE_MIN_LENGTH_ERROR);

@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class MoneyGoWhere {
 
-    private ItemList items;
+    public ItemList items;
     private OrderList orders;
     private Parser parser;
 
@@ -25,15 +25,16 @@ public class MoneyGoWhere {
         items = new ItemList();
     }
 
-    private void handleCommand(Command command) throws invalidArgumentException {
-        Ui ui = new Ui();
-        switch (command.getCommand()) {
-        case "listitem":
-            items.displayList();
-            break;
-        case "additem":
-            //Print some header
-            ItemValidation itemValidation = new ItemValidation();
+
+    public void handleCommand (Command command) throws invalidArgumentException {
+        Ui ui = new Ui ();
+        switch (command.getCommand ()) {
+            case "listitem":
+                items.displayList ();
+                break;
+            case "additem":
+                //Print some header
+                ItemValidation itemValidation = new ItemValidation ();
 
             if (!itemValidation.isValidFormat(command)) break;
 
