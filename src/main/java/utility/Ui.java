@@ -10,6 +10,8 @@ public class Ui {
     public final static String NULL_MESSAGE = "Input is empty. Please enter something.";
     public final static String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
     public final static String INTEGER_ERROR = "Argument needs to be an integer";
+    public final static String MISSING_ARGUMENT = "The argument cannot be empty.";
+    public final static String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
 
     public void printUserInput () {
         System.out.println ("Please enter something: ");
