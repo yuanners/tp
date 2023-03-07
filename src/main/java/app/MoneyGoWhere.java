@@ -2,6 +2,8 @@ package app;
 
 import item.Item;
 import item.ItemList;
+import item.ItemException;
+import validation.ItemValidation;
 import order.OrderList;
 import utility.Parser;
 import utility.Ui;
@@ -27,14 +29,25 @@ public class MoneyGoWhere {
             break;
         case "additem":
             //Print some header
+            ItemValidation itemValidation = new ItemValidation();
+
+            if(!itemValidation.isValidFormat(command)) break;
+
             command.duplicateArgument("name", "n");
             command.duplicateArgument("price", "p");
+
+            if(!itemValidation.isValid(command)) break;
 
             String name = command.getArgumentMap().get("name");
             Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
-            Item item = new Item(name, price);
-            items.appendItems(item);
+            try {
+                Item item = new Item(name, price);
+                items.appendItems(item);
+            } catch (ItemException e) {
+                //print error message
+                System.out.println(e.getMessage());
+            }
 
             break;
         case "deleteitem":
