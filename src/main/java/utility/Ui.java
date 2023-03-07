@@ -1,5 +1,10 @@
 package utility;
 
+import order.Order;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 /**
  * All print command will be done through here.
  */
@@ -54,5 +59,40 @@ public class Ui {
      */
     public void print (Object string) {
         System.out.print (string);
+    }
+
+    /**
+     * Prints the list of orders.
+     * This includes the subtotal cost of each order.
+     *
+     * @param orders
+     */
+    public void printOrderList(ArrayList<Order> orders) {
+
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        System.out.println("================================================");
+
+        for (int i = 0; i < orders.size(); i++) {
+
+            System.out.println("Order " + (i+1));
+            System.out.println("Order ID: " + orders.get(i).getOrderId());
+            System.out.println("Order time: " + orders.get(i).getDateTime());
+
+            for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
+                System.out.println((j+1) +". "
+                        + orders.get(i).getOrderEntries().get(j).getItem().getName()
+                        + "x" + orders.get(i).getOrderEntries().get(j).getQuantity());
+
+            }
+
+            String subtotal = df.format(orders.get(i).getSubTotal());
+            System.out.println("\nSubtotal: $" + subtotal);
+
+            System.out.println("================================================");
+
+        }
+
+
     }
 }

@@ -29,4 +29,15 @@ public class Parser {
         return argMap;
     }
 
+    public String extractStringWithinBraces(String input) {
+        int startIndex = input.indexOf('{');
+        int endIndex = input.indexOf('}');
+        if (startIndex != -1 && endIndex != -1 && endIndex > startIndex) {
+            return input.substring(startIndex + 1, endIndex);
+        } else {
+            return null;
+        }
+    }
+
+
 }
