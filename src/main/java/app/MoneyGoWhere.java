@@ -51,6 +51,8 @@ public class MoneyGoWhere {
             items.appendItems(item);
             System.out.println(ui.SUCCESSFUL_COMMAND);
 
+            items.save();
+
             break;
         case "deleteitem":
             command.duplicateArgument("index", "i");
