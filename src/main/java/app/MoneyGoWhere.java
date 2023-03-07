@@ -30,60 +30,60 @@ public class MoneyGoWhere {
     public void handleCommand (Command command) throws invalidArgumentException {
         Ui ui = new Ui ();
         switch (command.getCommand ()) {
-            case "listitem":
-                items.displayList ();
-                break;
-            case "additem":
-                //Print some header
-                ItemValidation itemValidation = new ItemValidation ();
+        case "listitem":
+            items.displayList ();
+            break;
+        case "additem":
+            //Print some header
+            ItemValidation itemValidation = new ItemValidation ();
 
-                if (!itemValidation.isValidFormat (command)) break;
+            if (!itemValidation.isValidFormat (command)) break;
 
-                command.duplicateArgument ("name", "n");
-                command.duplicateArgument ("price", "p");
+            command.duplicateArgument ("name", "n");
+            command.duplicateArgument ("price", "p");
 
-                if (!itemValidation.isValid (command)) break;
+            if (!itemValidation.isValid (command)) break;
 
-                String name = command.getArgumentMap ().get ("name");
-                Double price = Double.valueOf (command.getArgumentMap ().get ("price"));
-
-
-                Item item = new Item (name, price);
-                items.appendItems (item);
+            String name = command.getArgumentMap ().get ("name");
+            Double price = Double.valueOf (command.getArgumentMap ().get ("price"));
 
 
-                break;
-            case "deleteitem":
-                command.duplicateArgument ("index", "i");
+            Item item = new Item (name, price);
+            items.appendItems (item);
 
-                try {
-                    int index = Integer.parseInt (command.getArgumentMap ().get ("index"));
-                    items.deleteItems (index);
-                } catch (IndexOutOfBoundsException e) {
-                    ui.printInvalidIndex ();
-                } catch (NumberFormatException e) {
-                    ui.printRequiresInteger ();
-                }
 
-                break;
-            case "listorder":
-                //Do something
-                break;
-            case "addorder":
-                orderValidation orderValidation = new orderValidation ();
-                if (!(orderValidation.isValidArgument (command))) break;
-                command.duplicateArgument ("item", "i");
-                command.duplicateArgument ("quantity", "q");
-                int itemIndex = Integer.parseInt (command.getArgumentMap ().get ("item"));
-                int quantity;
-                if (command.getArgumentMap ().get ("quantity") != null) {
-                    quantity = Integer.parseInt (command.getArgumentMap ().get ("quantity"));
-                } else {
-                    quantity = 1;
-                }
-                OrderEntry orderEntry = new OrderEntry (items.getItems ().get (itemIndex), quantity);
-            default:
-                //Handle error if command not found
+            break;
+        case "deleteitem":
+            command.duplicateArgument ("index", "i");
+
+            try {
+                int index = Integer.parseInt (command.getArgumentMap ().get ("index"));
+                items.deleteItems (index);
+            } catch (IndexOutOfBoundsException e) {
+                ui.printInvalidIndex ();
+            } catch (NumberFormatException e) {
+                ui.printRequiresInteger ();
+            }
+
+            break;
+        case "listorder":
+            //Do something
+            break;
+        case "addorder":
+            orderValidation orderValidation = new orderValidation ();
+            if (!(orderValidation.isValidArgument (command))) break;
+            command.duplicateArgument ("item", "i");
+            command.duplicateArgument ("quantity", "q");
+            int itemIndex = Integer.parseInt (command.getArgumentMap ().get ("item"));
+            int quantity;
+            if (command.getArgumentMap ().get ("quantity") != null) {
+                quantity = Integer.parseInt (command.getArgumentMap ().get ("quantity"));
+            } else {
+                quantity = 1;
+            }
+            OrderEntry orderEntry = new OrderEntry (items.getItems ().get (itemIndex), quantity);
+        default:
+            //Handle error if command not found
         }
     }
 
