@@ -1,9 +1,8 @@
 package utility;
 
 import order.Order;
-import order.OrderEntry;
 
-import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -52,22 +51,38 @@ public class Ui {
         System.out.print (string);
     }
 
-    public void printOrderListHeader() {
-        System.out.printf("| %-5s | %-25s | %-5s |\n","Index","Name","Price");
-    }
+    /**
+     * Prints the list of orders.
+     * This includes the subtotal cost of each order.
+     *
+     * @param orders
+     */
+    public void printOrderList(ArrayList<Order> orders) {
 
-    public void printOrder(Order order) {
+        DecimalFormat df = new DecimalFormat("#.00");
 
-        ArrayList<OrderEntry> orderEntries = order.getOrderEntries();
+        System.out.println("================================================");
 
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+        for (int i = 0; i < orders.size(); i++) {
 
-        for (int i = 0; i < orderEntries.size(); i++) {
-            System.out.printf("| %-5d | %-25s | %-5.2f |\n", i,
-                    orderEntries.get(i).getItem().getName(),
-                    orderEntries.get(i).getItem().getPrice());
+            System.out.println("Order " + (i+1));
+            System.out.println("Order ID: " + orders.get(i).getOrderId());
+            System.out.println("Order time: " + orders.get(i).getDateTime());
+
+            for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
+                System.out.println((j+1) +". "
+                        + orders.get(i).getOrderEntries().get(j).getItem().getName()
+                        + "x" + orders.get(i).getOrderEntries().get(j).getQuantity());
+
+            }
+
+            String subtotal = df.format(orders.get(i).getSubTotal());
+            System.out.println("\nSubtotal: $" + subtotal);
+
+            System.out.println("================================================");
+
         }
 
-        System.out.println();
+
     }
 }
