@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "name": "chicken ",
+      "price": 123.0
+    },
+    {
+      "na",
+    {
+      "name": "bread ",
+      "price": 0.5
+    }
+  ]
+}

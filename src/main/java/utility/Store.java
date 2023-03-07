@@ -1,11 +1,14 @@
 package utility;
 
+import com.google.gson.JsonParseException;
+import com.google.gson.stream.MalformedJsonException;
+
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * Manage the storing and retrival of local files be it JSON or csv.
@@ -13,17 +16,23 @@ import java.util.Scanner;
 public class Store {
     private static final String STORE_DIR_PATH = "./store";
     private String storeFilePath;
+    private String fileExtension;
 
     public Store(String fileName) {
         this.storeFilePath = STORE_DIR_PATH + '/' + fileName;
+
+        int index = fileName.lastIndexOf('.');
+        this.fileExtension = index > 0 ? fileName.substring(index + 1) : "";
     }
 
-    public void save() throws IOException {
+    public void save(Object object) throws IOException {
         Files.createDirectories(Paths.get(STORE_DIR_PATH));
         File file = new File(storeFilePath);
         FileWriter fw = new FileWriter(file);
+        Parser parser = new Parser();
 
-        //Perform parser and save to file in a consistent format
+        String jsonString = parser.jsonStringify(object);
+        fw.write(jsonString);
 
         fw.flush();
         fw.close();
@@ -35,14 +44,12 @@ public class Store {
      *
      * @throws IOException
      */
-    public void load() throws IOException {
+    public <T> T load(Class<T> type) throws IOException {
         File file = new File(storeFilePath);
-        Scanner sc = new Scanner(file);
-        sc.useDelimiter("\n");
+        FileReader fr = new FileReader(file);
+        Parser parser = new Parser();
 
-        //Perform parser and load file to the corresponding object
-
-        sc.close();
+        return parser.jsonParse(fr, type);
     }
 
 }

@@ -10,7 +10,7 @@ public class Command {
     private String argumentString;
     private Map<String, String> argumentMap;
 
-    public Command(String userInput){
+    public Command(String userInput) {
         Parser parser = new Parser();
         String[] userInputs = parser.formatInput(userInput);
 

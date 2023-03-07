@@ -1,11 +1,11 @@
 package validation;
 
 import app.Command;
+import exception.InvalidArgumentException;
 import utility.Ui;
 import item.ItemList;
-import java.util.ArrayList;
 
-public class ItemValidation extends validation {
+public class ItemValidation extends Validation {
 
     public boolean isValidFormatAdd(Command c) {
 
@@ -13,7 +13,7 @@ public class ItemValidation extends validation {
 
         String args = c.getArgumentString();
 
-        if(!(args.contains("n") || args.contains("name")) || !(args.contains("p") || args.contains("price"))) {
+        if (!(args.contains("n") || args.contains("name")) || !(args.contains("p") || args.contains("price"))) {
             ui.println(Ui.INVALID_ADDITEM_FORMAT);
             return false;
         }
@@ -26,7 +26,7 @@ public class ItemValidation extends validation {
 
         try {
             validateArgument(c);
-        } catch (invalidArgumentException e) {
+        } catch (InvalidArgumentException e) {
             ui.println(e.getMessage());
             return false;
         }
@@ -39,23 +39,23 @@ public class ItemValidation extends validation {
     }
 
     @Override
-    public void validateArgument (Command arg) throws invalidArgumentException {
+    public void validateArgument(Command arg) throws InvalidArgumentException {
 
         try {
-            super.validateArgument (arg);
-        } catch (invalidArgumentException e) {
-            throw new invalidArgumentException(Ui.ERROR_MESSAGE);
+            super.validateArgument(arg);
+        } catch (InvalidArgumentException e) {
+            throw new InvalidArgumentException(Ui.ERROR_MESSAGE);
         }
 
     }
 
     public boolean isValidName(Command c, Ui ui) {
-        if(c.getArgumentMap().get("n").length() > 25) {
+        if (c.getArgumentMap().get("n").length() > 25) {
             ui.println(Ui.ITEM_NAME_MAX_LENGTH_ERROR);
             return false;
         }
 
-        if(c.getArgumentMap().get("n").length() <1) {
+        if (c.getArgumentMap().get("n").length() < 1) {
             ui.println(Ui.ITEM_NAME_MIN_LENGTH_ERROR);
             return false;
         }
@@ -63,11 +63,11 @@ public class ItemValidation extends validation {
         return true;
     }
 
-    public boolean isValidPrice (Command c, Ui ui) {
+    public boolean isValidPrice(Command c, Ui ui) {
         String price = c.getArgumentMap().get("p");
         price = price.trim();
 
-        if(price.length() < 1) {
+        if (price.length() < 1) {
             ui.println(Ui.ITEM_PRICE_MIN_LENGTH_ERROR);
             return false;
         }
@@ -81,12 +81,12 @@ public class ItemValidation extends validation {
             return false;
         }
 
-        if(tempPrice < 0.00) {
+        if (tempPrice < 0.00) {
             ui.println(Ui.ITEM_PRICE_NEGATIVE_ERROR);
             return false;
         }
 
-        if(!price.contains(".")) {
+        if (!price.contains(".")) {
             ui.println(Ui.PRICE_DECIMAL_ERROR);
             return false;
         }
@@ -94,7 +94,7 @@ public class ItemValidation extends validation {
         int indexOfDecimalPoint = price.indexOf(".");
         int numOfDecimalPoint = price.length() - indexOfDecimalPoint - 1;
 
-        if(numOfDecimalPoint != 2) {
+        if (numOfDecimalPoint != 2) {
             ui.println(Ui.PRICE_DECIMAL_ERROR);
             return false;
         }
@@ -102,18 +102,18 @@ public class ItemValidation extends validation {
         return true;
     }
 
-    public boolean isInteger (String input) {
+    public boolean isInteger(String input) {
         Ui ui = new Ui();
         try {
-            Integer.parseInt (input);
+            Integer.parseInt(input);
         } catch (NumberFormatException n) {
-            ui.println (ui.INTEGER_ERROR);
+            ui.println(ui.INTEGER_ERROR);
             return false;
         }
         return true;
     }
 
-    public boolean isValidIndex (String input, ItemList items) {
+    public boolean isValidIndex(String input, ItemList items) {
         Ui ui = new Ui();
         try {
             items.getItem(Integer.parseInt(input));
@@ -129,7 +129,7 @@ public class ItemValidation extends validation {
 
         String args = c.getArgumentString();
 
-        if(!(args.contains("i") || args.contains("index"))) {
+        if (!(args.contains("i") || args.contains("index"))) {
             ui.println(Ui.INVALID_DELETEITEM_FORMAT);
             return false;
         }

@@ -3,7 +3,7 @@ package order;
 import app.Command;
 import item.ItemList;
 import utility.Parser;
-import validation.orderValidation;
+import validation.OrderValidation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -68,9 +68,9 @@ public class Order implements OrderInterface {
 
     public boolean addOrder(Command command, Parser parser, ItemList items) {
 
-        orderValidation orderValidation = new orderValidation();
+        OrderValidation orderValidation = new OrderValidation();
 
-        if (!orderValidation.isValidFormat (command)) return false;
+        if (!orderValidation.isValidFormat(command)) return false;
 
         // If command contains multiple OrderEntries, do this
         if (command.getUserInput().contains("{") && command.getUserInput().contains("}")) {
@@ -80,7 +80,7 @@ public class Order implements OrderInterface {
             ArrayList<String> arrayListOfOrderEntries = new ArrayList<String>(Arrays
                     .asList(allOrderEntriesAsString.split(",")));
 
-            for (String orderEntryCommand: arrayListOfOrderEntries) {
+            for (String orderEntryCommand : arrayListOfOrderEntries) {
                 handleMultipleAddOrder(orderEntryCommand.trim(), orderValidation, items);
             }
         }
@@ -91,11 +91,10 @@ public class Order implements OrderInterface {
         }
 
 
-
         return true;
     }
 
-    public boolean handleMultipleAddOrder(String orderEntryCommand, orderValidation orderValidation, ItemList items) {
+    public boolean handleMultipleAddOrder(String orderEntryCommand, OrderValidation orderValidation, ItemList items) {
 
         Command command = new Command("addOrder " + orderEntryCommand);
 
@@ -123,7 +122,7 @@ public class Order implements OrderInterface {
         return true;
     }
 
-    public boolean handleAddOrder(Command command, orderValidation orderValidation, ItemList items) {
+    public boolean handleAddOrder(Command command, OrderValidation orderValidation, ItemList items) {
 
         command.duplicateArgument("item", "i");
         command.duplicateArgument("quantity", "q");
@@ -137,8 +136,8 @@ public class Order implements OrderInterface {
 
         // Checks if quantity of orderEntry is specified
         // If not specified, it defaults to 1
-        if (command.getArgumentMap().get ("quantity") != null) {
-            quantity = Integer.parseInt (command.getArgumentMap().get("quantity").trim());
+        if (command.getArgumentMap().get("quantity") != null) {
+            quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
         } else {
             quantity = 1;
         }

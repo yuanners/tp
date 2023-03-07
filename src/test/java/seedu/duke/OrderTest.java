@@ -7,9 +7,7 @@ import app.Command;
 import app.MoneyGoWhere;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
-import validation.invalidArgumentException;
-
-import java.util.Scanner;
+import exception.InvalidArgumentException;
 
 class OrderTest {
 
@@ -31,7 +29,7 @@ class OrderTest {
 
         try {
             moneyGoWhere.handleCommand(command);
-        } catch (invalidArgumentException e) {
+        } catch (InvalidArgumentException e) {
             ui.println(e.getMessage());
         }
 
