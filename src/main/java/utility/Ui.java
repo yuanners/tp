@@ -12,20 +12,20 @@ public class Ui {
     public Ui() {
     }
 
-    public final static String NULL_MESSAGE = "Input is empty. Please enter something.";
-    public final static String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
-    public final static String INTEGER_ERROR = "Argument needs to be an integer";
-    public final static String MISSING_ARGUMENT = "The argument cannot be empty.";
-    public final static String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
-    public final static String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
-    public final static String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
-    public final static String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
-    public final static String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
-    public final static String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
-    public final static String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
-    public final static String PRICE_DECIMAL_ERROR = "Price must be in 2 decimal points.";
-    public final static String INVALID_PRICE_ERROR = "Price must be a number.";
-    public final static String SUCCESSFUL_COMMAND = "Successfully executed your command!";
+    public final String NULL_MESSAGE = "Input is empty. Please enter something.";
+    public final String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
+    public final String INTEGER_ERROR = "Argument needs to be an integer";
+    public final String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
+    public final String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
+    public final String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
+    public final String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
+    public final String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
+    public final  String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
+    public final String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
+    public final String PRICE_DECIMAL_ERROR = "Price must be in 2 decimal points.";
+    public final String INVALID_PRICE_ERROR = "Price must be a number.";
+    public final String SUCCESSFUL_COMMAND = "Successfully executed your command!";
+    public final String PROMPT_MESSAGE = "Please enter again:";
 
     public void printUserInput() {
         System.out.println("Please enter something: ");
@@ -66,7 +66,7 @@ public class Ui {
      * Prints the list of orders.
      * This includes the subtotal cost of each order.
      *
-     * @param orders
+     * @param orders Arraylist of orders stored
      */
     public void printOrderList(ArrayList<Order> orders) {
 

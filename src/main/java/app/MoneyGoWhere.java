@@ -36,12 +36,16 @@ public class MoneyGoWhere {
             break;
         case "additem":
             //Print some header
-            if (!itemValidation.isValid(command)) break;
+            if (!itemValidation.isValid(command)){
+                break;
+            }
 
             command.duplicateArgument("name", "n");
             command.duplicateArgument("price", "p");
 
-            if (!itemValidation.isValid(command)) break;
+            if (!itemValidation.isValid(command)){
+                break;
+            }
 
 
             String name = command.getArgumentMap().get("name");
@@ -57,9 +61,15 @@ public class MoneyGoWhere {
         case "deleteitem":
             command.duplicateArgument("index", "i");
 
-            if (!itemValidation.isValidFormatDelete(command)) break;
-            if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) break;
-            if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) break;
+            if (!itemValidation.isValidFormatDelete(command)) {
+                break;
+            }
+            if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) {
+                break;
+            }
+            if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+                break;
+            }
 
             items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
 
@@ -97,7 +107,7 @@ public class MoneyGoWhere {
             try {
                 handleCommand(command);
             } catch (InvalidArgumentException e) {
-
+                ui.println (ui.PROMPT_MESSAGE);
             }
         }
 
