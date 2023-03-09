@@ -44,7 +44,10 @@ class ItemTest {
 
         assertEquals("chicken rice" , moneyGoWhere.items.getItems().get(moneyGoWhere.items.getItems().size() - 1).getName() );
         assertEquals(2.5 , moneyGoWhere.items.getItems().get(moneyGoWhere.items.getItems().size() - 1).getPrice() );
-    }
 
+        runTest("listitem", moneyGoWhere);
+
+        runTest("deleteitem -i 0", moneyGoWhere);
+    }
 
 }
