@@ -15,6 +15,10 @@ public class OrderList {
         this.orders.add(order);
     }
 
+    public ArrayList<Order> getOrderList() {
+        return this.orders;
+    }
+
     // Print stuff
     public void displayList() {
         Ui ui = new Ui();

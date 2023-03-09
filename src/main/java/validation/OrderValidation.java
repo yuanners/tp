@@ -8,15 +8,15 @@ import utility.Ui;
  * Handles order related input validation
  */
 public class OrderValidation extends Validation {
-    Ui ui = new Ui ();
+    Ui ui = new Ui();
 
     @Override
 
-    public void validateArgument (Command arg) throws InvalidArgumentException {
+    public void validateArgument(Command arg) throws InvalidArgumentException {
         try {
-            super.validateArgument (arg);
+            super.validateArgument(arg);
         } catch (InvalidArgumentException e) {
-            throw new InvalidArgumentException (ui.ERROR_MESSAGE);
+            throw new InvalidArgumentException(ui.ERROR_MESSAGE);
         }
     }
 
@@ -26,13 +26,13 @@ public class OrderValidation extends Validation {
      * @param arg User command
      * @return validation result (true/false)
      */
-    public boolean isValidFormat (Command arg) {
-        if (isArgumentPresent (arg)) {
-            if (arg.getArgumentString ().contains ("-d") || arg.getArgumentString ().contains ("--done")
-                    || arg.getArgumentString ().contains ("-i") || arg.getArgumentString ().contains ("--item")) {
+    public boolean isValidFormat(Command arg) {
+        if (isArgumentPresent(arg)) {
+            if (arg.getArgumentString().contains("-d") || arg.getArgumentString().contains("--done")
+                    || arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
                 return true;
             } else {
-                ui.println (ui.MISSING_ORDER_ARGUMENT);
+                ui.println(ui.MISSING_ORDER_ARGUMENT);
                 return false;
             }
         }
@@ -45,15 +45,15 @@ public class OrderValidation extends Validation {
      * @param arg user input
      * @return validation result (true/false)
      */
-    public boolean isValid (Command arg) {
+    public boolean isValid(Command arg) {
         try {
-            validateArgument (arg);
+            validateArgument(arg);
         } catch (InvalidArgumentException e) {
-            ui.println (e.getMessage ());
+            ui.println(e.getMessage());
             return false;
         }
 
-        return isValidFlagArgument (arg);
+        return isValidFlagArgument(arg);
     }
 
     /**
@@ -62,11 +62,11 @@ public class OrderValidation extends Validation {
      * @param input the input after flags
      * @return validation outcome (true/false)
      */
-    public boolean isInteger (String input) {
+    public boolean isInteger(String input) {
         try {
-            Integer.parseInt (input);
+            Integer.parseInt(input);
         } catch (NumberFormatException n) {
-            ui.println (ui.INTEGER_ERROR);
+            ui.println(ui.INTEGER_ERROR);
             return false;
         }
         return true;
@@ -78,13 +78,13 @@ public class OrderValidation extends Validation {
      * @param arg user input
      * @return validation outcome (true/false)
      */
-    public boolean isValidFlagArgument (Command arg) {
+    public boolean isValidFlagArgument(Command arg) {
         boolean isValidQuantity = true;
         boolean isValidItem;
-        if (arg.getArgumentString ().contains ("-q") || arg.getArgumentString ().contains ("--quantity")) {
-            isValidQuantity = isInteger (arg.getArgumentMap ().get ("q").trim ());
+        if (arg.getArgumentString().contains("-q") || arg.getArgumentString().contains("--quantity")) {
+            isValidQuantity = isInteger(arg.getArgumentMap().get("q").trim());
         }
-        isValidItem = isInteger (arg.getArgumentMap ().get ("i").trim ());
+        isValidItem = isInteger(arg.getArgumentMap().get("i").trim());
         return isValidQuantity && isValidItem;
     }
 
@@ -94,11 +94,11 @@ public class OrderValidation extends Validation {
      * @param arg user input
      * @return validation outcome
      */
-    public boolean isArgumentPresent (Command arg) {
-        if (arg.getCommand ().contains ("addorder") && arg.getArgumentString () != null) {
+    public boolean isArgumentPresent(Command arg) {
+        if (arg.getCommand().contains("addorder") && arg.getArgumentString() != null) {
             return true;
         }
-        ui.println (ui.NULL_MESSAGE);
+        ui.println(ui.NULL_MESSAGE);
         return false;
     }
 }

@@ -5,8 +5,8 @@ package exception;
  */
 public class InvalidFlagException extends Exception {
 
-    public InvalidFlagException (String message) {
+    public InvalidFlagException(String message) {
 
-        super (message);
+        super(message);
     }
 }

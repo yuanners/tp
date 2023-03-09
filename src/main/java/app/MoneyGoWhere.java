@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public ItemList items;
-    private OrderList orderList;
+    public OrderList orderList;
     private Parser parser = new Parser();
 
     private Store itemStore;
@@ -31,61 +31,61 @@ public class MoneyGoWhere {
         Ui ui = new Ui();
         ItemValidation itemValidation = new ItemValidation();
         switch (command.getCommand()) {
-        case "listitem":
-            items.displayList();
-            break;
-        case "additem":
-            //Print some header
-            if (!itemValidation.isValid(command)){
+            case "listitem":
+                items.displayList();
                 break;
-            }
+            case "additem":
+                //Print some header
+                if (!itemValidation.isValid(command)) {
+                    break;
+                }
 
-            command.duplicateArgument("name", "n");
-            command.duplicateArgument("price", "p");
+                command.duplicateArgument("name", "n");
+                command.duplicateArgument("price", "p");
 
-            if (!itemValidation.isValid(command)){
+                if (!itemValidation.isValid(command)) {
+                    break;
+                }
+
+
+                String name = command.getArgumentMap().get("name");
+                Double price = Double.valueOf(command.getArgumentMap().get("price"));
+
+                Item item = new Item(name, price);
+                items.appendItems(item);
+                System.out.println(ui.SUCCESSFUL_COMMAND);
+
+                items.save();
+
                 break;
-            }
+            case "deleteitem":
+                command.duplicateArgument("index", "i");
 
+                if (!itemValidation.isValidFormatDelete(command)) {
+                    break;
+                }
+                if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) {
+                    break;
+                }
+                if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+                    break;
+                }
 
-            String name = command.getArgumentMap().get("name");
-            Double price = Double.valueOf(command.getArgumentMap().get("price"));
+                items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
 
-            Item item = new Item(name, price);
-            items.appendItems(item);
-            System.out.println(ui.SUCCESSFUL_COMMAND);
+                System.out.println(ui.SUCCESSFUL_COMMAND);
 
-            items.save();
-
-            break;
-        case "deleteitem":
-            command.duplicateArgument("index", "i");
-
-            if (!itemValidation.isValidFormatDelete(command)) {
                 break;
-            }
-            if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) {
+            case "listorder":
+                orderList.displayList();
                 break;
-            }
-            if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+            case "addorder":
+                Order order = new Order();
+                order.addOrder(command, parser, items);
+                orderList.appendOrder(order);
                 break;
-            }
-
-            items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
-
-            System.out.println(ui.SUCCESSFUL_COMMAND);
-
-            break;
-        case "listorder":
-            orderList.displayList();
-            break;
-        case "addorder":
-            Order order = new Order();
-            order.addOrder(command, parser, items);
-            orderList.appendOrder(order);
-            break;
-        default:
-            //Handle error if command not found
+            default:
+                //Handle error if command not found
         }
     }
 
@@ -107,7 +107,7 @@ public class MoneyGoWhere {
             try {
                 handleCommand(command);
             } catch (InvalidArgumentException e) {
-                ui.println (ui.PROMPT_MESSAGE);
+                ui.println(ui.PROMPT_MESSAGE);
             }
         }
 

@@ -5,8 +5,8 @@ package exception;
  */
 public class InvalidCommandException extends Exception {
 
-    public InvalidCommandException (String message) {
+    public InvalidCommandException(String message) {
 
-        super (message);
+        super(message);
     }
 }

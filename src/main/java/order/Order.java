@@ -70,7 +70,7 @@ public class Order implements OrderInterface {
 
         OrderValidation orderValidation = new OrderValidation();
 
-        if (!orderValidation.isValidFormat(command)){
+        if (!orderValidation.isValidFormat(command)) {
             return false;
         }
 
@@ -103,7 +103,7 @@ public class Order implements OrderInterface {
         command.duplicateArgument("item", "i");
         command.duplicateArgument("quantity", "q");
 
-        if (orderValidation.isValid (command)) {
+        if (orderValidation.isValid(command)) {
             return false;
         }
 
@@ -129,7 +129,7 @@ public class Order implements OrderInterface {
         command.duplicateArgument("item", "i");
         command.duplicateArgument("quantity", "q");
 
-        if (orderValidation.isValid (command)) {
+        if (orderValidation.isValid(command)) {
             return false;
         }
 
