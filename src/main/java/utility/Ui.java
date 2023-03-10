@@ -20,7 +20,7 @@ public class Ui {
     public final String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
     public final String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
     public final String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
-    public final String PRICE_DECIMAL_ERROR = "Price must be in 2 decimal points.";
+    public final String PRICE_DECIMAL_ERROR = "Price must have more than 2 decimal points.";
     public final String INVALID_PRICE_ERROR = "Price must be a number.";
     public final String SUCCESSFUL_COMMAND = "Successfully executed your command!";
     public final String PROMPT_MESSAGE = "Please enter again:";
