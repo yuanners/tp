@@ -44,6 +44,9 @@ public class Store {
             break;
         case "csv":
             saveAsCsv(jsonString, file);
+            break;
+        default:
+            //A method that provide a generic save capability
         }
 
 

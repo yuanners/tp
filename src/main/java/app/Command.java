@@ -5,8 +5,8 @@ import utility.Parser;
 import java.util.Map;
 
 /**
- * The Command class represents a user command that has been entered by the user. It parses the command and its arguments,
- * and stores them for later use.
+ * The Command class represents a user command that has been entered by the user.
+ * It parses the command and its arguments, and stores them for later use.
  */
 public class Command {
     private String userInput;
