@@ -73,13 +73,17 @@ public class MoneyGoWhere {
 
             break;
         case "listorder":
+
             orderList.displayList();
             break;
+
         case "addorder":
+
             Order order = new Order();
             order.addOrder(command, parser, items);
             orderList.appendOrder(order);
             break;
+
         default:
             //Handle error if command not found
         }
