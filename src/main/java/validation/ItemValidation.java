@@ -137,10 +137,10 @@ public class ItemValidation extends Validation {
         return true;
     }
 
-//    public void validateCommand (Command arg) throws invalidCommandException {
-//        if (!(arg.getCommand ().contains ("additem"))) {
-//            //a constant error message to print eg Please use addorder to add order
-//            throw new invalidArgumentException ("ERROR_MESSAGE");
-//        }
+//  public void validateCommand (Command arg) throws invalidCommandException {
+//      if (!(arg.getCommand ().contains ("additem"))) {
+//          a constant error message to print eg Please use addorder to add order
+//          throw new invalidArgumentException ("ERROR_MESSAGE");
 //      }
+//  }
 }
