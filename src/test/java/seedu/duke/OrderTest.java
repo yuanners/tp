@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import app.Command;
@@ -31,7 +30,7 @@ class OrderTest {
     }
 
     @Test
-    public void OrderTest() {
+    public void orderTest() {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("additem -p 2.50 -n chicken rice", moneyGoWhere);
         runTest("addorder {-i 0 -q 3} -d", moneyGoWhere);
