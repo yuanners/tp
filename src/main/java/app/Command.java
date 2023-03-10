@@ -4,12 +4,22 @@ import utility.Parser;
 
 import java.util.Map;
 
+/**
+ * The Command class represents a user command that has been entered by the user. It parses the command and its arguments,
+ * and stores them for later use.
+ */
 public class Command {
     private String userInput;
     private String command;
     private String argumentString;
     private Map<String, String> argumentMap;
 
+    /**
+     * Constructs a Command object by parsing the user input string. It uses the Parser class to split the input
+     * into command and arguments, and then formats the arguments into a map.
+     *
+     * @param userInput the input string entered by the user
+     */
     public Command(String userInput) {
         Parser parser = new Parser();
         String[] userInputs = parser.formatInput(userInput);
@@ -21,11 +31,18 @@ public class Command {
         this.argumentMap = parser.formatArguments(argumentString);
     }
 
-    public void duplicateArgument(String longVersion, String shortVersion) {
-        if (argumentMap.containsKey(shortVersion)) {
-            argumentMap.put(longVersion, argumentMap.get(shortVersion));
+    /**
+     * Maps the long and short aliases for an argument. If the short alias already exists, its value is assigned to
+     * the long alias. If the long alias already exists, its value is assigned to the short alias.
+     *
+     * @param longAlias  the long alias of the argument
+     * @param shortAlias the short alias of the argument
+     */
+    public void mapArgumentAlias(String longAlias, String shortAlias) {
+        if (argumentMap.containsKey(shortAlias)) {
+            argumentMap.put(longAlias, argumentMap.get(shortAlias));
         } else {
-            argumentMap.put(shortVersion, argumentMap.get(longVersion));
+            argumentMap.put(shortAlias, argumentMap.get(longAlias));
         }
     }
 

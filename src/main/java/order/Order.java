@@ -98,8 +98,8 @@ public class Order implements OrderInterface {
 
         Command command = new Command("addOrder " + orderEntryCommand);
 
-        command.duplicateArgument("item", "i");
-        command.duplicateArgument("quantity", "q");
+        command.mapArgumentAlias("item", "i");
+        command.mapArgumentAlias("quantity", "q");
 
         if (!orderValidation.isValid(command)) {
             return false;
@@ -124,8 +124,8 @@ public class Order implements OrderInterface {
 
     public boolean handleAddOrder(Command command, OrderValidation orderValidation, ItemList items) {
 
-        command.duplicateArgument("item", "i");
-        command.duplicateArgument("quantity", "q");
+        command.mapArgumentAlias("item", "i");
+        command.mapArgumentAlias("quantity", "q");
 
         if (!orderValidation.isValid(command)) {
             return false;

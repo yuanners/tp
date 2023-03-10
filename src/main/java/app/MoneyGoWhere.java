@@ -19,8 +19,6 @@ public class MoneyGoWhere {
     private OrderList orderList;
     private Parser parser = new Parser();
 
-    private Store itemStore;
-
     public MoneyGoWhere() {
         items = new ItemList();
         orderList = new OrderList();
@@ -38,11 +36,10 @@ public class MoneyGoWhere {
             //Print some header
             if (!itemValidation.isValid(command)) break;
 
-            command.duplicateArgument("name", "n");
-            command.duplicateArgument("price", "p");
+            command.mapArgumentAlias("name", "n");
+            command.mapArgumentAlias("price", "p");
 
             if (!itemValidation.isValid(command)) break;
-
 
             String name = command.getArgumentMap().get("name");
             Double price = Double.valueOf(command.getArgumentMap().get("price"));
@@ -55,7 +52,7 @@ public class MoneyGoWhere {
 
             break;
         case "deleteitem":
-            command.duplicateArgument("index", "i");
+            command.mapArgumentAlias("index", "i");
 
             if (!itemValidation.isValidFormatDelete(command)) break;
             if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) break;

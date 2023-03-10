@@ -16,9 +16,10 @@ public class ItemList {
     private Store store;
 
     public ItemList() {
+        this.store = new Store("menu.json");
+        Type type = new TypeToken<ArrayList<Item>>() {}.getType();
+
         try {
-            this.store = new Store("menu.json");
-            Type type = new TypeToken<ArrayList<Item>>() {}.getType();
             this.items = store.load(type);
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -59,10 +60,6 @@ public class ItemList {
 
     public void setItems(ArrayList<Item> items) {
         this.items = items;
-    }
-
-    public void load() {
-
     }
 
     public void save() {

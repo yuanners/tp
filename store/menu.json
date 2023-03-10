@@ -1,6 +1,14 @@
 [
   {
     "name": "Chicken Rice ",
-    "price": 3.50
+    "price": 3.5
+  },
+  {
+    "name": "chicken",
+    "price": 22.0
+  },
+  {
+    "name": "noodle",
+    "price": 22.0
   }
 ]
