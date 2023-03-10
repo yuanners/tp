@@ -84,7 +84,7 @@ public class Ui {
             for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
                 System.out.println((j + 1) + ". "
                         + orders.get(i).getOrderEntries().get(j).getItem().getName()
-                        + "x" + orders.get(i).getOrderEntries().get(j).getQuantity());
+                        + " x" + orders.get(i).getOrderEntries().get(j).getQuantity());
 
             }
 

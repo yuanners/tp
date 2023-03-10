@@ -1,5 +1,6 @@
 package app;
 
+import exception.InvalidArgumentException;
 import item.Item;
 import item.ItemList;
 import validation.item.AddItemValidation;
@@ -8,7 +9,7 @@ import order.Order;
 import order.OrderList;
 import utility.Parser;
 import utility.Ui;
-import exception.InvalidArgumentException;
+import validation.ItemValidation;
 
 import java.util.Scanner;
 
@@ -75,14 +76,17 @@ public class MoneyGoWhere {
             System.out.println(ui.SUCCESSFUL_COMMAND);
 
             break;
+
         case "listorder":
             orderList.displayList();
             break;
+
         case "addorder":
             Order order = new Order();
             order.addOrder(command, parser, items);
             orderList.appendOrder(order);
             break;
+
         default:
             //Handle error if command not found
         }
