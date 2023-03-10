@@ -1,8 +1,9 @@
-package validation;
+package validation.order;
 
 import app.Command;
 import exception.InvalidArgumentException;
 import utility.Ui;
+import validation.Validation;
 
 /**
  * Handles order related input validation

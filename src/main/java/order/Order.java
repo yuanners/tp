@@ -3,11 +3,9 @@ package order;
 import app.Command;
 import item.ItemList;
 import utility.Parser;
-import validation.OrderValidation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 public class Order implements OrderInterface {
@@ -66,87 +64,63 @@ public class Order implements OrderInterface {
 
     }
 
-    public boolean addOrder(Command command, Parser parser, ItemList items) {
+    public void addOrder(Command command, Parser parser, ItemList listOfItems) {
 
-        OrderValidation orderValidation = new OrderValidation();
+        command.mapArgumentAlias("item", "i");
+        command.mapArgumentAlias("items", "I");
 
-        if (!orderValidation.isValidFormat(command)) {
-            return false;
+        if (command.getArgumentMap().get("item") != null) {
+            handleAddOrder(command, listOfItems);
+        } else {
+            handleMultipleAddOrders(command, listOfItems);
         }
 
-        // If command contains multiple OrderEntries, do this
-        if (command.getUserInput().contains("{") && command.getUserInput().contains("}")) {
-            String allOrderEntriesAsString;
-            allOrderEntriesAsString = parser.extractStringWithinBraces(command.getUserInput());
+    }
 
-            ArrayList<String> arrayListOfOrderEntries = new ArrayList<String>(Arrays
-                    .asList(allOrderEntriesAsString.split(",")));
+    public void handleAddOrder(Command command, ItemList listOfItems) {
 
-            for (String orderEntryCommand : arrayListOfOrderEntries) {
-                handleMultipleAddOrder(orderEntryCommand.trim(), orderValidation, items);
+        command.mapArgumentAlias("item", "i");
+        command.mapArgumentAlias("quantity", "q");
+
+        int itemIndex = Integer.parseInt(command.getArgumentMap().get("item").trim());
+        int quantity;
+
+        // Checks if quantity of orderEntry is specified
+        // If not specified, it defaults to 1
+        if (command.getArgumentMap().get("quantity") != null) {
+            quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
+        } else {
+            quantity = 1;
+        }
+
+        OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
+        this.orderEntries.add(orderEntry);
+
+    }
+
+    public void handleMultipleAddOrders(Command command, ItemList listOfItems) {
+
+        command.mapArgumentAlias("items", "I");
+
+        String[] ordersArguments = command.getArgumentMap().get("items").split(",");
+
+        for (String orderString : ordersArguments) {
+
+            if (orderString.charAt(0) == '[') {
+                orderString = orderString.substring(1);
             }
+
+            if (orderString.substring(orderString.length() - 1).equals("]")) {
+                orderString = orderString.substring(0, orderString.length() - 1);
+            }
+
+            orderString = orderString.trim();
+            int itemIndex = Integer.parseInt(orderString.split(" ")[0]);
+            int quantity = Integer.parseInt(orderString.split(" ")[1]);
+
+            OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
+            this.orderEntries.add(orderEntry);
         }
 
-        // If command only contains 1 OrderEntry, do this
-        else {
-            handleAddOrder(command, orderValidation, items);
-        }
-
-
-        return true;
-    }
-
-    public boolean handleMultipleAddOrder(String orderEntryCommand, OrderValidation orderValidation, ItemList items) {
-
-        Command command = new Command("addOrder " + orderEntryCommand);
-
-        command.mapArgumentAlias("item", "i");
-        command.mapArgumentAlias("quantity", "q");
-
-        if (orderValidation.isValid(command)) {
-            return false;
-        }
-
-        int itemIndex = Integer.parseInt(command.getArgumentMap().get("item").trim());
-        int quantity;
-
-        // Checks if quantity of orderEntry is specified
-        // If not specified, it defaults to 1
-        if (command.getArgumentMap().get("quantity") != null) {
-            quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
-        } else {
-            quantity = 1;
-        }
-
-        OrderEntry orderEntry = new OrderEntry(items.getItems().get(itemIndex), quantity);
-        this.orderEntries.add(orderEntry);
-
-        return true;
-    }
-
-    public boolean handleAddOrder(Command command, OrderValidation orderValidation, ItemList items) {
-
-        command.mapArgumentAlias("item", "i");
-        command.mapArgumentAlias("quantity", "q");
-
-        if (orderValidation.isValid(command)) {
-            return false;
-        }
-
-        int itemIndex = Integer.parseInt(command.getArgumentMap().get("item").trim());
-        int quantity;
-
-        // Checks if quantity of orderEntry is specified
-        // If not specified, it defaults to 1
-        if (command.getArgumentMap().get("quantity") != null) {
-            quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
-        } else {
-            quantity = 1;
-        }
-
-        OrderEntry orderEntry = new OrderEntry(items.getItems().get(itemIndex), quantity);
-        this.orderEntries.add(orderEntry);
-
-        return true;
     }
 }
