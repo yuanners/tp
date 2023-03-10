@@ -18,7 +18,8 @@ public class ItemList {
     public ItemList() {
         try {
             this.store = new Store("menu.json");
-            Type type = new TypeToken<ArrayList<Item>>() {}.getType();
+            Type type = new TypeToken<ArrayList<Item>>() {
+            }.getType();
             this.items = store.load(type);
         } catch (IOException e) {
             System.out.println(e.getMessage());
