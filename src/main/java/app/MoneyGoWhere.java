@@ -1,13 +1,13 @@
 package app;
 
+import exception.InvalidArgumentException;
 import item.Item;
 import item.ItemList;
 import order.Order;
 import order.OrderList;
-import validation.ItemValidation;
 import utility.Parser;
 import utility.Ui;
-import exception.InvalidArgumentException;
+import validation.ItemValidation;
 
 import java.util.Scanner;
 
@@ -72,13 +72,12 @@ public class MoneyGoWhere {
             System.out.println(ui.SUCCESSFUL_COMMAND);
 
             break;
-        case "listorder":
 
+        case "listorder":
             orderList.displayList();
             break;
 
         case "addorder":
-
             Order order = new Order();
             order.addOrder(command, parser, items);
             orderList.appendOrder(order);
