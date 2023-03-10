@@ -17,7 +17,8 @@ public class ItemList {
 
     public ItemList() {
         this.store = new Store("menu.json");
-        Type type = new TypeToken<ArrayList<Item>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Item>>() {
+        }.getType();
 
         try {
             this.items = store.load(type);

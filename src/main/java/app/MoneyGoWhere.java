@@ -6,7 +6,6 @@ import order.Order;
 import order.OrderList;
 import validation.ItemValidation;
 import utility.Parser;
-import utility.Store;
 import utility.Ui;
 import exception.InvalidArgumentException;
 
@@ -28,20 +27,20 @@ public class MoneyGoWhere {
     public void handleCommand(Command command) throws InvalidArgumentException {
         Ui ui = new Ui();
         ItemValidation itemValidation = new ItemValidation();
-        switch(command.getCommand()) {
+        switch (command.getCommand()) {
         case "listitem":
             items.displayList();
             break;
         case "additem":
             //Print some header
-            if(!itemValidation.isValid(command)) {
+            if (!itemValidation.isValid(command)) {
                 break;
             }
 
             command.mapArgumentAlias("name", "n");
             command.mapArgumentAlias("price", "p");
 
-            if(!itemValidation.isValid(command)) {
+            if (!itemValidation.isValid(command)) {
                 break;
             }
 
@@ -58,13 +57,13 @@ public class MoneyGoWhere {
         case "deleteitem":
             command.mapArgumentAlias("index", "i");
 
-            if(!itemValidation.isValidFormatDelete(command)) {
+            if (!itemValidation.isValidFormatDelete(command)) {
                 break;
             }
-            if(!itemValidation.isInteger(command.getArgumentMap().get("index"))) {
+            if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) {
                 break;
             }
-            if(!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+            if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
                 break;
             }
 
@@ -91,11 +90,11 @@ public class MoneyGoWhere {
         Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
 
-        while(true) {
+        while (true) {
             ui.printUserInput();
             String userInput = sc.nextLine();
 
-            if(userInput.equals("exit")) {
+            if (userInput.equals("exit")) {
                 break;
             }
 
@@ -103,7 +102,7 @@ public class MoneyGoWhere {
 
             try {
                 handleCommand(command);
-            } catch(InvalidArgumentException e) {
+            } catch (InvalidArgumentException e) {
                 ui.println(ui.PROMPT_MESSAGE);
             }
         }

@@ -16,7 +16,8 @@ public class OrderList {
 
     public OrderList() {
         this.store = new Store("orders.json");
-        Type type = new TypeToken<ArrayList<Order>>() {}.getType();
+        Type type = new TypeToken<ArrayList<Order>>() {
+        }.getType();
 
         try {
             this.orders = store.load(type);
