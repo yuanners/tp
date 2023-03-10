@@ -9,8 +9,12 @@ public class Validation {
 
     }
 
-    //handles the common input validators
+    /**
+     * handles the common input validators
+     */
+
     public void validateArgument(Command arg) throws InvalidArgumentException {
+        Ui Ui = new Ui();
         if (arg.getUserInput() == null) {
             throw new InvalidArgumentException(Ui.NULL_MESSAGE);
         } else if (arg.getUserInput().contains(":") || arg.getUserInput().contains(";")) {

@@ -37,6 +37,10 @@ public class OrderList {
         save();
     }
 
+    public ArrayList<Order> getOrderList() {
+        return this.orders;
+    }
+
     // Print stuff
     public void displayList() {
         Ui ui = new Ui();

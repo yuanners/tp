@@ -70,7 +70,9 @@ public class Order implements OrderInterface {
 
         OrderValidation orderValidation = new OrderValidation();
 
-        if (!orderValidation.isValidFormat(command)) return false;
+        if (!orderValidation.isValidFormat(command)) {
+            return false;
+        }
 
         // If command contains multiple OrderEntries, do this
         if (command.getUserInput().contains("{") && command.getUserInput().contains("}")) {
@@ -101,7 +103,7 @@ public class Order implements OrderInterface {
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
 
-        if (!orderValidation.isValid(command)) {
+        if (orderValidation.isValid(command)) {
             return false;
         }
 
@@ -127,7 +129,7 @@ public class Order implements OrderInterface {
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
 
-        if (!orderValidation.isValid(command)) {
+        if (orderValidation.isValid(command)) {
             return false;
         }
 

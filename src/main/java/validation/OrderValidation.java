@@ -4,28 +4,28 @@ import app.Command;
 import exception.InvalidArgumentException;
 import utility.Ui;
 
-/* for add order
--i or --item for item index
--d ot --done for end of input
--q or --quantity for quantity(optional)
-example:
-addorder -i 1 -q 2, -i 3, -i 4 iq 3 -d
-*/
-
+/**
+ * Handles order related input validation
+ */
 public class OrderValidation extends Validation {
     Ui ui = new Ui();
 
     @Override
-    public void validateArgument(Command arg) throws InvalidArgumentException {
 
+    public void validateArgument(Command arg) throws InvalidArgumentException {
         try {
             super.validateArgument(arg);
         } catch (InvalidArgumentException e) {
-            throw new InvalidArgumentException(Ui.ERROR_MESSAGE);
+            throw new InvalidArgumentException(ui.ERROR_MESSAGE);
         }
-
     }
 
+    /**
+     * If argument is present, check if the required flags are present
+     *
+     * @param arg User command
+     * @return validation result (true/false)
+     */
     public boolean isValidFormat(Command arg) {
         if (isArgumentPresent(arg)) {
             if (arg.getArgumentString().contains("-d") || arg.getArgumentString().contains("--done")
@@ -39,7 +39,12 @@ public class OrderValidation extends Validation {
         return false;
     }
 
-
+    /**
+     * Call override validation method to check common validations
+     *
+     * @param arg user input
+     * @return validation result (true/false)
+     */
     public boolean isValid(Command arg) {
         try {
             validateArgument(arg);
@@ -51,6 +56,12 @@ public class OrderValidation extends Validation {
         return isValidFlagArgument(arg);
     }
 
+    /**
+     * Check if the input after items and quantity flags are integer
+     *
+     * @param input the input after flags
+     * @return validation outcome (true/false)
+     */
     public boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
@@ -61,6 +72,12 @@ public class OrderValidation extends Validation {
         return true;
     }
 
+    /**
+     * Check if the argument contains the required flags for addorder
+     *
+     * @param arg user input
+     * @return validation outcome (true/false)
+     */
     public boolean isValidFlagArgument(Command arg) {
         boolean isValidQuantity = true;
         boolean isValidItem;
@@ -71,11 +88,17 @@ public class OrderValidation extends Validation {
         return isValidQuantity && isValidItem;
     }
 
-
+    /**
+     * Check if there is argument after the addorder command
+     *
+     * @param arg user input
+     * @return validation outcome
+     */
     public boolean isArgumentPresent(Command arg) {
         if (arg.getCommand().contains("addorder") && arg.getArgumentString() != null) {
             return true;
         }
+        ui.println(ui.NULL_MESSAGE);
         return false;
     }
 }

@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public ItemList items;
-    private OrderList orderList;
+    public OrderList orderList;
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
@@ -28,18 +28,22 @@ public class MoneyGoWhere {
     public void handleCommand(Command command) throws InvalidArgumentException {
         Ui ui = new Ui();
         ItemValidation itemValidation = new ItemValidation();
-        switch (command.getCommand()) {
+        switch(command.getCommand()) {
         case "listitem":
             items.displayList();
             break;
         case "additem":
             //Print some header
-            if (!itemValidation.isValid(command)) break;
+            if(!itemValidation.isValid(command)) {
+                break;
+            }
 
             command.mapArgumentAlias("name", "n");
             command.mapArgumentAlias("price", "p");
 
-            if (!itemValidation.isValid(command)) break;
+            if(!itemValidation.isValid(command)) {
+                break;
+            }
 
             String name = command.getArgumentMap().get("name");
             Double price = Double.valueOf(command.getArgumentMap().get("price"));
@@ -54,9 +58,15 @@ public class MoneyGoWhere {
         case "deleteitem":
             command.mapArgumentAlias("index", "i");
 
-            if (!itemValidation.isValidFormatDelete(command)) break;
-            if (!itemValidation.isInteger(command.getArgumentMap().get("index"))) break;
-            if (!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) break;
+            if(!itemValidation.isValidFormatDelete(command)) {
+                break;
+            }
+            if(!itemValidation.isInteger(command.getArgumentMap().get("index"))) {
+                break;
+            }
+            if(!itemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+                break;
+            }
 
             items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
 
@@ -81,11 +91,11 @@ public class MoneyGoWhere {
         Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        while(true) {
             ui.printUserInput();
             String userInput = sc.nextLine();
 
-            if (userInput.equals("exit")) {
+            if(userInput.equals("exit")) {
                 break;
             }
 
@@ -93,8 +103,8 @@ public class MoneyGoWhere {
 
             try {
                 handleCommand(command);
-            } catch (InvalidArgumentException e) {
-
+            } catch(InvalidArgumentException e) {
+                ui.println(ui.PROMPT_MESSAGE);
             }
         }
 
