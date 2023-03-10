@@ -3,7 +3,7 @@ package order;
 import app.Command;
 import item.ItemList;
 import utility.Parser;
-import validation.OrderValidation;
+import validation.order.OrderValidation;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
