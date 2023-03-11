@@ -27,9 +27,6 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder -i 0 -q 169", moneyGoWhere);
 
-//        moneyGoWhere.orderList.getOrderList()
-//                .get(moneyGoWhere.orderList.getOrderList().size() - 1);
-
         assertEquals("Chicken Rice ", moneyGoWhere.orderList.getOrderList()
                 .get(moneyGoWhere.orderList.getOrderList().size() - 1)
                 .getOrderEntries()
