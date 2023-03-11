@@ -5,6 +5,7 @@ import item.ItemList;
 import utility.Parser;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public class Order implements OrderInterface {
     private String orderId;
     private LocalDateTime dateTime;
     private ArrayList<OrderEntry> orderEntries;
-
+    private DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM:SS");
 
     public Order() {
         this.orderId = UUID.randomUUID().toString();
@@ -35,8 +36,8 @@ public class Order implements OrderInterface {
         this.orderId = orderId;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getDateTime() {
+        return dateTime.format(FORMATTER);
     }
 
     public void setDateTime(LocalDateTime dateTime) {
