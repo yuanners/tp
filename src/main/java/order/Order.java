@@ -15,39 +15,84 @@ public class Order implements OrderInterface {
     private LocalDateTime dateTime;
     private ArrayList<OrderEntry> orderEntries;
 
+    /**
+     * Constructs an Order object with a unique ID,
+     * the current date and time and an empty ArrayList of
+     * OrderEntry objects.
+     */
     public Order() {
         this.orderId = UUID.randomUUID().toString();
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
     }
 
+    /**
+     * Constructs an Order object with a unique ID,
+     * the current date and time and an ArrayList of
+     * OrderEntry objects.
+     *
+     * @param orderEntries ArrayList of OrderEntry objects
+     */
     public Order(ArrayList<OrderEntry> orderEntries) {
         this.orderId = UUID.randomUUID().toString();
         this.dateTime = LocalDateTime.now();
         this.orderEntries = orderEntries;
     }
 
+    /**
+     * Gets the unique ID of the Order.
+     *
+     * @return String orderId
+     */
     public String getOrderId() {
         return orderId;
     }
 
+    /**
+     * Sets the unique ID of the Order.
+     *
+     * @param orderId unique ID of the Order
+     */
     public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
+    /**
+     * Gets the date and time of the Order in the format
+     * yyyy-MM-dd HH:mm:ss.
+     *
+     * @return String dateTime
+     */
     public String getDateTime() {
-        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");;
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        ;
         return dateTime.format(FORMATTER);
     }
 
+    /**
+     * Gets the ArrayList of OrderEntry objects of the Order.
+     *
+     * @return ArrayList of OrderEntry objects
+     */
     public ArrayList<OrderEntry> getOrderEntries() {
         return orderEntries;
     }
 
+    /**
+     * Sets the ArrayList of OrderEntry objects of the Order.
+     *
+     * @param orderEntries ArrayList of OrderEntry objects
+     */
     public void setOrderEntries(ArrayList<OrderEntry> orderEntries) {
         this.orderEntries = orderEntries;
     }
 
+    /**
+     * Calculates the subtotal of the Order by summing up the
+     * price of each item multiplied by its quantity in the order.
+     *
+     * @return double subtotal
+     */
     @Override
     public double getSubTotal() {
 
@@ -61,6 +106,13 @@ public class Order implements OrderInterface {
 
     }
 
+    /**
+     * Adds one or multiple items to the Order.
+     *
+     * @param command     Command object representing the user input
+     * @param parser      Parser object to parse the user input
+     * @param listOfItems ItemList object containing the available items
+     */
     public void addOrder(Command command, Parser parser, ItemList listOfItems) {
 
         command.mapArgumentAlias("item", "i");
@@ -71,9 +123,14 @@ public class Order implements OrderInterface {
         } else {
             handleMultipleAddOrders(command, listOfItems);
         }
-
     }
 
+    /**
+     * Adds a single item order to the current order instance
+     *
+     * @param command     the command object containing the user input
+     * @param listOfItems the list of items from which the item is selected
+     */
     public void handleAddOrder(Command command, ItemList listOfItems) {
 
         command.mapArgumentAlias("item", "i");
@@ -95,6 +152,12 @@ public class Order implements OrderInterface {
 
     }
 
+    /**
+     * Adds multiple item orders to the current order instance
+     *
+     * @param command     the command object containing the user input
+     * @param listOfItems the list of items from which the items are selected
+     */
     public void handleMultipleAddOrders(Command command, ItemList listOfItems) {
 
         command.mapArgumentAlias("items", "I");
