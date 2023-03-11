@@ -14,7 +14,6 @@ public class Order implements OrderInterface {
     private String orderId;
     private LocalDateTime dateTime;
     private ArrayList<OrderEntry> orderEntries;
-    private DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public Order() {
         this.orderId = UUID.randomUUID().toString();
@@ -37,11 +36,8 @@ public class Order implements OrderInterface {
     }
 
     public String getDateTime() {
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");;
         return dateTime.format(FORMATTER);
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     public ArrayList<OrderEntry> getOrderEntries() {

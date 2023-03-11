@@ -24,7 +24,6 @@ class ItemTest {
         String userInput = input;
 
 
-
         Command command = new Command(userInput);
 
         try {
@@ -39,10 +38,10 @@ class ItemTest {
     public void itemTest() {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("additem -p 2.50 -n chicken rice", moneyGoWhere);
-        assertEquals("chicken rice" , moneyGoWhere.items.getItems().
-                get(moneyGoWhere.items.getItems().size() - 1).getName() );
-        assertEquals(2.5 , moneyGoWhere.items.getItems().
-                get(moneyGoWhere.items.getItems().size() - 1).getPrice() );
+        assertEquals("chicken rice", moneyGoWhere.items.getItems().
+                get(moneyGoWhere.items.getItems().size() - 1).getName());
+        assertEquals(2.5, moneyGoWhere.items.getItems().
+                get(moneyGoWhere.items.getItems().size() - 1).getPrice());
 
         runTest("listitem", moneyGoWhere);
 
