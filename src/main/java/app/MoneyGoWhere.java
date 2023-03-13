@@ -30,66 +30,67 @@ public class MoneyGoWhere {
         AddItemValidation addItemValidation = new AddItemValidation();
         ItemValidation itemValidation = new ItemValidation();
         Validation validation = new Validation();
-        switch (command.getCommand()) {
-            case "listitem":
-                items.displayList();
+        switch(command.getCommand()) {
+        case "listitem":
+            items.displayList();
+            break;
+        case "additem":
+            //Print some header
+            if(!validation.isValidFormat(command, "n", "name") ||
+                    !validation.isValidFormat(command, "p", "price")) {
                 break;
-            case "additem":
-                //Print some header
-                if (!validation.isValidFormat(command, "n", "name") || !validation.isValidFormat(command, "p", "price")) {
-                    break;
-                }
+            }
 
-                command.mapArgumentAlias("name", "n");
-                command.mapArgumentAlias("price", "p");
+            command.mapArgumentAlias("name", "n");
+            command.mapArgumentAlias("price", "p");
 
-                if (!addItemValidation.isValid(command)) {
-                    break;
-                }
-
-                String name = command.getArgumentMap().get("name");
-                Double price = Double.valueOf(command.getArgumentMap().get("price"));
-
-                Item item = new Item(name, price);
-                items.appendItem(item);
-                ui.printCommandSuccess(command.getCommand());
-
-                items.save();
-
+            if(!addItemValidation.isValid(command)) {
                 break;
-            case "deleteitem":
-                command.mapArgumentAlias("index", "i");
+            }
 
-                if (!validation.isValidFormat(command, "i", "index")) {
-                    break;
-                }
-                if (!validation.isInteger(command.getArgumentMap().get("index"))) {
-                    break;
-                }
-                if (!validation.isValidIndex(command.getArgumentMap().get("index"), items)) {
-                    break;
-                }
+            String name = command.getArgumentMap().get("name");
+            Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
-                items.deleteItem(Integer.parseInt(command.getArgumentMap().get("index")));
+            Item item = new Item(name, price);
+            items.appendItem(item);
+            ui.printCommandSuccess(command.getCommand());
 
-                ui.printCommandSuccess(command.getCommand());
+            items.save();
 
-                items.save();
+            break;
+        case "deleteitem":
+            command.mapArgumentAlias("index", "i");
 
+            if(!validation.isValidFormat(command, "i", "index")) {
                 break;
-
-            case "listorder":
-                transactions.displayList();
+            }
+            if(!validation.isInteger(command.getArgumentMap().get("index"))) {
                 break;
-
-            case "addorder":
-                Order order = new Order();
-                order.addOrder(command, parser, items);
-                transactions.appendOrder(order);
+            }
+            if(!validation.isValidIndex(command.getArgumentMap().get("index"), items)) {
                 break;
+            }
 
-            default:
-                ui.printInvalidCommand(command.getCommand());
+            items.deleteItem(Integer.parseInt(command.getArgumentMap().get("index")));
+
+            ui.printCommandSuccess(command.getCommand());
+
+            items.save();
+
+            break;
+
+        case "listorder":
+            transactions.displayList();
+            break;
+
+        case "addorder":
+            Order order = new Order();
+            order.addOrder(command, parser, items);
+            transactions.appendOrder(order);
+            break;
+
+        default:
+            ui.printInvalidCommand(command.getCommand());
         }
     }
 
@@ -98,11 +99,11 @@ public class MoneyGoWhere {
         Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
 
-        while (true) {
+        while(true) {
             ui.promptUserInput();
             String userInput = sc.nextLine();
 
-            if (userInput.equals("exit")) {
+            if(userInput.equals("exit")) {
                 break;
             }
 
@@ -110,7 +111,7 @@ public class MoneyGoWhere {
 
             try {
                 handleCommand(command);
-            } catch (InvalidArgumentException e) {
+            } catch(InvalidArgumentException e) {
                 ui.promptUserInputError();
             }
         }
