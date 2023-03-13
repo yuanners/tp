@@ -1,5 +1,6 @@
 package utility;
 
+import app.Command;
 import order.Order;
 
 import java.text.DecimalFormat;
@@ -31,6 +32,8 @@ public class Ui {
     public void printUserInput() {
         System.out.println("Please enter something: ");
     }
+
+    public void printInvalidCommand(String command) { System.out.println("The command: " + command + " is not a valid command.");}
 
     public void printInvalidIndex() {
         System.out.println("Please enter a valid index!");

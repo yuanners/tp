@@ -89,7 +89,7 @@ public class MoneyGoWhere {
             break;
 
         default:
-            //Handle error if command not found
+            ui.printInvalidCommand(command.getCommand());
         }
     }
 
