@@ -27,7 +27,7 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder -i 0 -q 169", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken Rice ", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()
@@ -49,7 +49,7 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder -I [0 69, 1 169]", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken Rice ", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()
@@ -85,7 +85,7 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder -i 0 -q 169", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken Rice ", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()
@@ -107,7 +107,7 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder --items [0 69, 1 169]", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken Rice ", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()
