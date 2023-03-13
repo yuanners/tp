@@ -25,7 +25,6 @@ public class MoneyGoWhere {
     }
 
 
-
     public void handleCommand(Command command) throws InvalidArgumentException {
         Ui ui = new Ui();
         AddItemValidation addItemValidation = new AddItemValidation();
@@ -84,6 +83,7 @@ public class MoneyGoWhere {
             Order order = new Order();
             order.addOrder(command, parser, items);
             orderList.appendOrder(order);
+            orderList.save();
             break;
 
         default:

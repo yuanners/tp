@@ -31,6 +31,22 @@ public class OrderList {
         }
     }
 
+    public OrderList(Store store) {
+        this.store = store;
+        Type type = new TypeToken<ArrayList<Order>>() {
+        }.getType();
+
+        try {
+            this.orders = store.load(type);
+        } catch (IOException e) {
+            System.out.println("File does not exist. Initializing new list");
+            this.orders = new ArrayList<>();
+        } catch (JsonParseException | NumberFormatException e) {
+            System.out.println("Data file corrupted. Do you want to initialize new list? [Y]es or [N]o");
+            this.orders = new ArrayList<>();
+        }
+    }
+
     public void appendOrder(Order order) {
         this.orders.add(order);
         save();
@@ -49,6 +65,7 @@ public class OrderList {
     public void save() {
         try {
             store.save(orders);
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

@@ -5,7 +5,7 @@
       "date": {
         "year": 2023,
         "month": 3,
-        "day": 10
+        "day": 2
       },
       "time": {
         "hour": 9,
@@ -210,6 +210,31 @@
           "price": 3.5
         },
         "quantity": 100
+      }
+    ]
+  },
+  {
+    "orderId": "70dc329e-a255-418f-b3a5-67fd2409d206",
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 13
+      },
+      "time": {
+        "hour": 11,
+        "minute": 47,
+        "second": 32,
+        "nano": 605080000
+      }
+    },
+    "orderEntries": [
+      {
+        "item": {
+          "name": "Chicken Rice ",
+          "price": 3.5
+        },
+        "quantity": 45
       }
     ]
   }
