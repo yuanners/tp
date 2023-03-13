@@ -43,6 +43,10 @@ public class Ui {
         System.out.println("Please enter a valid index!");
     }
 
+    public void printIntegerOverflowError() {
+        System.out.println("Integer overflow! Please enter an integer within the valid range.");
+    }
+
     /**
      * Prints error message informing user to input a whole number
      */
