@@ -12,7 +12,7 @@ class OrderTest {
 
     public void runTest(String input, MoneyGoWhere moneyGoWhere) {
         Ui ui = new Ui();
-        ui.printUserInput();
+        ui.promptUserInput();
         Command command = new Command(input);
         try {
             moneyGoWhere.handleCommand(command);

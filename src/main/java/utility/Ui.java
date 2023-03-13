@@ -1,6 +1,5 @@
 package utility;
 
-import app.Command;
 import item.Item;
 import order.Order;
 
@@ -14,16 +13,7 @@ public class Ui {
 
     public final String NULL_MESSAGE = "Input is empty. Please enter something.";
     public final String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
-    public final String INTEGER_ERROR = "Argument needs to be an integer";
-    public final String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
-    public final String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
-    public final String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
-    public final String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
-    public final String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
-    public final String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
-    public final String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
-    public final String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
-    public final String INVALID_PRICE_ERROR = "Price must be a number.";
+
     /*** GENERAL PRINT STATEMENTS ***/
 
     /**
@@ -60,6 +50,14 @@ public class Ui {
         System.out.println("This input requires a whole number!");
     }
 
+    public void printNegativeError() {
+        System.out.print("Value cannot be negative.");
+    }
+
+    public void printMinLengthError(String option) {
+        System.out.println(option + " cannot be empty.");
+    }
+
     public void printCommandSuccess(String command) {
         System.out.println("The command: " + command + "was successfully executed!");
     }
@@ -80,7 +78,17 @@ public class Ui {
 
 
     /*** ITEM AND MENU PRINT STATEMENTS ***/
+    public void printInvalidDouble() {
+        System.out.println("Price must have at most 2 decimal points.");
+    }
 
+    public void printInvalidFormat(String command) {
+        System.out.println("The usage of " + command + " is invalid.");
+    }
+
+    public void printMaxLengthError() {
+        System.out.println("Name exceeds the 25 character limit.");
+    }
 
     /**
      * Prints all items in a table format

@@ -11,8 +11,11 @@ public class Validation {
     public Validation() {
     }
 
-    /**
+   /**
      * Handles the common input validators
+     *
+     * @param arg The given command
+     * @throws InvalidArgumentException
      */
     public void validateArgument(Command arg) throws InvalidArgumentException {
         if (arg.getUserInput() == null) {
@@ -52,6 +55,25 @@ public class Validation {
             ui.printInvalidIndex();
             return false;
         }
+        return true;
+    }
+
+    /**
+     * Checks if the required flag is given
+     *
+     * @param c Given command
+     * @param shortFlag Short version of flag
+     * @param longFlag Long version of flag
+     * @return Validation result (true/false)
+     */
+    public boolean isValidFormat(Command c, String shortFlag, String longFlag) {
+        String args = c.getArgumentString();
+
+        if (!(args.contains(shortFlag) || args.contains(longFlag))) {
+            ui.printInvalidFormat(c.getCommand());
+            return false;
+        }
+
         return true;
     }
 }
