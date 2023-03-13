@@ -6,15 +6,14 @@ import utility.Ui;
 
 public class AddItemValidation extends ItemValidation {
 
-    public boolean isValidFormat(Command c) {
+    public boolean isValidFormat(Command c) throws InvalidArgumentException {
 
         Ui ui = new Ui();
 
         String args = c.getArgumentString();
 
         if (!(args.contains("n") || args.contains("name")) || !(args.contains("p") || args.contains("price"))) {
-            ui.println(ui.INVALID_ADDITEM_FORMAT);
-            return false;
+            throw new InvalidArgumentException(ui.INVALID_ADDITEM_FORMAT);
         }
 
         return true;
@@ -60,10 +59,10 @@ public class AddItemValidation extends ItemValidation {
             return false;
         }
 
-        Double tempPrice;
+        double tempPrice;
 
-        if(super.isDouble(price)) {
-            tempPrice = Double.valueOf(price);
+        if (super.isDouble(price)) {
+            tempPrice = Double.parseDouble(price);
         } else {
             return false;
         }

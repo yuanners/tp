@@ -6,31 +6,18 @@ import utility.Ui;
 import validation.Validation;
 
 public class ItemValidation extends Validation {
+    Ui ui = new Ui();
 
     @Override
     public void validateArgument(Command arg) throws InvalidArgumentException {
-        Ui ui = new Ui();
         try {
             super.validateArgument(arg);
         } catch (InvalidArgumentException e) {
             throw new InvalidArgumentException(ui.ERROR_MESSAGE);
         }
-
-    }
-
-    public boolean isInteger(String input) {
-        Ui ui = new Ui();
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException n) {
-            ui.println(ui.INTEGER_ERROR);
-            return false;
-        }
-        return true;
     }
 
     public boolean isDouble(String input) {
-        Ui ui = new Ui();
         try {
             Double.valueOf(input);
         } catch (NumberFormatException e) {

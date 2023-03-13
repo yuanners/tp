@@ -12,7 +12,6 @@ public class OrderValidation extends Validation {
     Ui ui = new Ui();
 
     @Override
-
     public void validateArgument(Command arg) throws InvalidArgumentException {
         try {
             super.validateArgument(arg);
@@ -55,22 +54,6 @@ public class OrderValidation extends Validation {
         }
 
         return isValidFlagArgument(arg);
-    }
-
-    /**
-     * Check if the input after items and quantity flags are integer
-     *
-     * @param input the input after flags
-     * @return validation outcome (true/false)
-     */
-    public boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException n) {
-            ui.println(ui.INTEGER_ERROR);
-            return false;
-        }
-        return true;
     }
 
     /**

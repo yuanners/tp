@@ -24,8 +24,6 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-
-
     public void handleCommand(Command command) throws InvalidArgumentException {
         Ui ui = new Ui();
         AddItemValidation addItemValidation = new AddItemValidation();
@@ -52,7 +50,7 @@ public class MoneyGoWhere {
 
             Item item = new Item(name, price);
             items.appendItem(item);
-            System.out.println(ui.SUCCESSFUL_COMMAND);
+            ui.printCommandSuccess(command.getCommand());
 
             items.save();
 
@@ -72,7 +70,7 @@ public class MoneyGoWhere {
 
             items.deleteItem(Integer.parseInt(command.getArgumentMap().get("index")));
 
-            System.out.println(ui.SUCCESSFUL_COMMAND);
+            ui.printCommandSuccess(command.getCommand());
 
             items.save();
 
@@ -99,7 +97,7 @@ public class MoneyGoWhere {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            ui.printUserInput();
+            ui.promptUserInput();
             String userInput = sc.nextLine();
 
             if (userInput.equals("exit")) {
@@ -111,7 +109,7 @@ public class MoneyGoWhere {
             try {
                 handleCommand(command);
             } catch (InvalidArgumentException e) {
-                ui.println(ui.PROMPT_MESSAGE);
+                ui.promptUserInputError();
             }
         }
 
