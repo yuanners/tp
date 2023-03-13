@@ -13,11 +13,11 @@ import java.util.ArrayList;
 /**
  * The OrderList class represents a list of orders.
  */
-public class OrderList {
+public class Transaction {
     /**
      * The list of orders.
      */
-    private ArrayList<Order> orders;
+    private ArrayList<Order> transactions;
 
     /**
      * The store used to load and save the order list.
@@ -27,22 +27,22 @@ public class OrderList {
     /**
      * Constructs an empty order list.
      */
-    public OrderList() {
+    public Transaction() {
         this.store = new Store("orders.json");
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
 
         try {
-            this.orders = store.load(type);
+            this.transactions = store.load(type);
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            this.orders = new ArrayList<>();
+            this.transactions = new ArrayList<>();
         } catch (JsonParseException e) {
             System.out.println(e.getMessage());
-            this.orders = new ArrayList<>();
+            this.transactions = new ArrayList<>();
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
-            this.orders = new ArrayList<>();
+            this.transactions = new ArrayList<>();
         }
     }
 
@@ -52,7 +52,7 @@ public class OrderList {
      * @param order the order to append to the order list
      */
     public void appendOrder(Order order) {
-        this.orders.add(order);
+        this.transactions.add(order);
         save();
     }
 
@@ -62,7 +62,7 @@ public class OrderList {
      * @return the list of orders
      */
     public ArrayList<Order> getOrderList() {
-        return this.orders;
+        return this.transactions;
     }
 
     /**
@@ -70,7 +70,7 @@ public class OrderList {
      */
     public void displayList() {
         Ui ui = new Ui();
-        ui.printOrderList(this.orders);
+        ui.printOrderList(this.transactions);
     }
 
     /**
@@ -78,7 +78,7 @@ public class OrderList {
      */
     public void save() {
         try {
-            store.save(orders);
+            store.save(transactions);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

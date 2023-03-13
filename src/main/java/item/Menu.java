@@ -10,12 +10,12 @@ import com.google.gson.JsonParseException;
 import utility.Store;
 import utility.Ui;
 
-public class ItemList {
+public class Menu {
 
     private ArrayList<Item> items;
     private Store store;
 
-    public ItemList() {
+    public Menu() {
         this.store = new Store("menu.json");
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
@@ -36,18 +36,15 @@ public class ItemList {
 
     public void displayList() {
         Ui ui = new Ui();
-
-        ui.printTableHeader("Index", "Name", "Price");
-        for (int i = 0; i < items.size(); i++) {
-            ui.printItemMenu(i, items.get(i).getName(), items.get(i).getPrice());
-        }
+        ui.printMenu(items);
+        ui.printCommandSuccess("listitem");
     }
 
-    public void appendItems(Item item) {
+    public void appendItem(Item item) {
         this.items.add(item);
     }
 
-    public void deleteItems(int index) {
+    public void deleteItem(int index) {
         this.items.remove(index);
     }
 
