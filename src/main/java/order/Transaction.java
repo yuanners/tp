@@ -14,11 +14,11 @@ import java.util.ArrayList;
 /**
  * The OrderList class represents a list of orders.
  */
-public class Transactions {
+public class Transaction {
     /**
      * The list of orders.
      */
-    private ArrayList<Order> orders;
+    private ArrayList<Order> transactions;
 
     /**
      * The store used to load and save the order list.
@@ -28,35 +28,22 @@ public class Transactions {
     /**
      * Constructs an empty order list.
      */
-    public Transactions() {
+    public Transaction() {
         this.store = new Store("orders.json");
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
 
         try {
-            this.orders = store.load(type);
+            this.transactions = store.load(type);
         } catch (IOException e) {
-            System.out.println("File does not exist. Initializing new list");
-            this.orders = new ArrayList<>();
-        } catch (JsonParseException | NumberFormatException e) {
-            System.out.println("Data file corrupted. Do you want to initialize new list? [Y]es or [N]o");
-            this.orders = new ArrayList<>();
-        }
-    }
-
-    public OrderList(Store store) {
-        this.store = store;
-        Type type = new TypeToken<ArrayList<Order>>() {
-        }.getType();
-
-        try {
-            this.orders = store.load(type);
-        } catch (IOException e) {
-            System.out.println("File does not exist. Initializing new list");
-            this.orders = new ArrayList<>();
-        } catch (JsonParseException | NumberFormatException e) {
-            System.out.println("Data file corrupted. Do you want to initialize new list? [Y]es or [N]o");
-            this.orders = new ArrayList<>();
+            System.out.println(e.getMessage());
+            this.transactions = new ArrayList<>();
+        } catch (JsonParseException e) {
+            System.out.println(e.getMessage());
+            this.transactions = new ArrayList<>();
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            this.transactions = new ArrayList<>();
         }
     }
 
@@ -66,7 +53,7 @@ public class Transactions {
      * @param order the order to append to the order list
      */
     public void appendOrder(Order order) {
-        this.orders.add(order);
+        this.transactions.add(order);
         save();
     }
 
@@ -76,7 +63,7 @@ public class Transactions {
      * @return the list of orders
      */
     public ArrayList<Order> getOrderList() {
-        return this.orders;
+        return this.transactions;
     }
 
     /**
@@ -84,7 +71,7 @@ public class Transactions {
      */
     public void displayList() {
         Ui ui = new Ui();
-        ui.printOrderList(this.orders);
+        ui.printOrderList(this.transactions);
     }
 
     /**
@@ -93,7 +80,6 @@ public class Transactions {
     public void save() {
         try {
             store.save(orders);
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

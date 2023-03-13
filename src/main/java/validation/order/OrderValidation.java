@@ -11,35 +11,6 @@ import validation.Validation;
 public class OrderValidation extends Validation {
     Ui ui = new Ui();
 
-    @Override
-
-    public void validateArgument(Command arg) throws InvalidArgumentException {
-        try {
-            super.validateArgument(arg);
-        } catch (InvalidArgumentException e) {
-            throw new InvalidArgumentException(ui.ERROR_MESSAGE);
-        }
-    }
-
-    /**
-     * If argument is present, check if the required flags are present
-     *
-     * @param arg User command
-     * @return validation result (true/false)
-     */
-    public boolean isValidFormat(Command arg) {
-        if (isArgumentPresent(arg)) {
-            if (arg.getArgumentString().contains("-d") || arg.getArgumentString().contains("--done")
-                    || arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
-                return true;
-            } else {
-                ui.println(ui.MISSING_ORDER_ARGUMENT);
-                return false;
-            }
-        }
-        return false;
-    }
-
     /**
      * Call override validation method to check common validations
      *
@@ -55,22 +26,6 @@ public class OrderValidation extends Validation {
         }
 
         return isValidFlagArgument(arg);
-    }
-
-    /**
-     * Check if the input after items and quantity flags are integer
-     *
-     * @param input the input after flags
-     * @return validation outcome (true/false)
-     */
-    public boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-        } catch (NumberFormatException n) {
-            ui.println(ui.INTEGER_ERROR);
-            return false;
-        }
-        return true;
     }
 
     /**

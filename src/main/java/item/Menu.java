@@ -55,18 +55,15 @@ public class Menu {
 
     public void displayList() {
         Ui ui = new Ui();
-
-        ui.printTableHeader("Index", "Name", "Price");
-        for (int i = 0; i < items.size(); i++) {
-            ui.printItemMenu(i, items.get(i).getName(), items.get(i).getPrice());
-        }
+        ui.printMenu(items);
+        ui.printCommandSuccess("listitem");
     }
 
-    public void appendItems(Item item) {
+    public void appendItem(Item item) {
         this.items.add(item);
     }
 
-    public void deleteItems(int index) {
+    public void deleteItem(int index) {
         this.items.remove(index);
     }
 

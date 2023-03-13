@@ -20,7 +20,7 @@ class ItemTest {
         Ui ui = new Ui();
 
 
-        ui.printUserInput();
+        ui.promptUserInput();
         String userInput = input;
 
 
