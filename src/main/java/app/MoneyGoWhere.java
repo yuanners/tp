@@ -2,11 +2,11 @@ package app;
 
 import exception.InvalidArgumentException;
 import item.Item;
-import item.ItemList;
+import item.Menu;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 import order.Order;
-import order.OrderList;
+import order.Transactions;
 import utility.Parser;
 import utility.Ui;
 
@@ -15,13 +15,13 @@ import java.util.Scanner;
 
 public class MoneyGoWhere {
 
-    public ItemList items;
-    public OrderList orderList;
+    public Menu items;
+    public Transactions orderList;
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
-        items = new ItemList();
-        orderList = new OrderList();
+        items = new Menu();
+        orderList = new Transactions();
     }
 
 
