@@ -47,11 +47,20 @@ public class Ui {
         System.out.println("Integer overflow! Please enter an integer within the valid range.");
     }
 
+    public void printDoubleOverflowError() {
+        System.out.println("Double overflow! Please enter a double within the valid range.");
+    }
+
+
     /**
      * Prints error message informing user to input a whole number
      */
     public void printRequiresInteger() {
         System.out.println("This input requires a whole number!");
+    }
+
+    public void printRequiresNumber() {
+        System.out.println("This input requires a number!");
     }
 
     public void printNegativeError() {
@@ -82,13 +91,14 @@ public class Ui {
 
 
     /*** ITEM AND MENU PRINT STATEMENTS ***/
-    public void printInvalidDouble() {
+    public void printInvalidPrice() {
         System.out.println("Price must have at most 2 decimal points.");
     }
 
     public void printInvalidFormat(String command) {
         System.out.println("The usage of " + command + " is invalid.");
     }
+
 
     public void printMaxLengthError() {
         System.out.println("Name exceeds the 25 character limit.");

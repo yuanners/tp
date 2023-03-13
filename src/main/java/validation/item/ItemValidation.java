@@ -17,7 +17,7 @@ public class ItemValidation extends Validation {
         try {
             Double.valueOf(input);
         } catch (NumberFormatException e) {
-            ui.printInvalidDouble();
+            ui.printRequiresNumber();
             return false;
         }
         return true;
