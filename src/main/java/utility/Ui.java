@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Ui {
 
     public final String NULL_MESSAGE = "Input is empty. Please enter something.";
-    public final String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
 
     /**
      * General print statements
