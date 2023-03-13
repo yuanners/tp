@@ -36,11 +36,8 @@ public class Menu {
 
     public void displayList() {
         Ui ui = new Ui();
-
-        ui.printTableHeader("Index", "Name", "Price");
-        for (int i = 0; i < items.size(); i++) {
-            ui.printItemMenu(i, items.get(i).getName(), items.get(i).getPrice());
-        }
+        ui.printMenu(items);
+        ui.printCommandSuccess("listitem");
     }
 
     public void appendItem(Item item) {

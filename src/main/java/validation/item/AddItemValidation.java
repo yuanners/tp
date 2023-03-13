@@ -5,24 +5,9 @@ import exception.InvalidArgumentException;
 import utility.Ui;
 
 public class AddItemValidation extends ItemValidation {
-
-    public boolean isValidFormat(Command c) {
-
-        Ui ui = new Ui();
-
-        String args = c.getArgumentString();
-
-        if (!(args.contains("n") || args.contains("name")) || !(args.contains("p") || args.contains("price"))) {
-            ui.println(ui.INVALID_ADDITEM_FORMAT);
-            return false;
-        }
-
-        return true;
-    }
+    private Ui ui = new Ui();
 
     public boolean isValid(Command c) {
-        Ui ui = new Ui();
-
         try {
             super.validateArgument(c);
         } catch (InvalidArgumentException e) {
@@ -30,53 +15,59 @@ public class AddItemValidation extends ItemValidation {
             return false;
         }
 
-        boolean nameIsValid = isValidName(c, ui);
+        boolean nameIsValid = isValidName(c);
 
-        boolean priceIsValid = isValidPrice(c, ui);
+        boolean priceIsValid = isValidPrice(c);
 
         return nameIsValid && priceIsValid;
     }
 
-    public boolean isValidName(Command c, Ui ui) {
+    public boolean isValidName(Command c) {
         if (c.getArgumentMap().get("n").length() > 25) {
-            ui.println(ui.ITEM_NAME_MAX_LENGTH_ERROR);
+            ui.printMaxLengthError();
             return false;
         }
 
         if (c.getArgumentMap().get("n").length() < 1) {
-            ui.println(ui.ITEM_NAME_MIN_LENGTH_ERROR);
+            ui.printMinLengthError("Name");
             return false;
         }
 
         return true;
     }
 
-    public boolean isValidPrice(Command c, Ui ui) {
+    /**
+     * Checks if the given input for price is valid
+     *
+     * @param c Given command
+     * @return Valdiation result (true/false)
+     */
+    public boolean isValidPrice(Command c) {
         String price = c.getArgumentMap().get("p");
         price = price.trim();
 
         if (price.length() < 1) {
-            ui.println(ui.ITEM_PRICE_MIN_LENGTH_ERROR);
+            ui.printMinLengthError("Price");
             return false;
         }
 
-        Double tempPrice;
+        double tempPrice;
 
-        if(super.isDouble(price)) {
-            tempPrice = Double.valueOf(price);
+        if (super.isDouble(price)) {
+            tempPrice = Double.parseDouble(price);
         } else {
             return false;
         }
 
         if (tempPrice < 0.00) {
-            ui.println(ui.ITEM_PRICE_NEGATIVE_ERROR);
+            ui.printNegativeError();
             return false;
         }
 
-        int numOfDecimalPoint = super.getNumOfDecimalPoints(price);
+        int numOfDecimalPoint = price.length() - price.indexOf('.') - 1;
 
         if (numOfDecimalPoint > 2) {
-            ui.println(ui.PRICE_DECIMAL_ERROR);
+            ui.printInvalidDouble();
             return false;
         }
 

@@ -3,12 +3,13 @@ package app;
 import exception.InvalidArgumentException;
 import item.Item;
 import item.Menu;
+import validation.Validation;
 import validation.item.AddItemValidation;
-import validation.item.DeleteItemValidation;
 import order.Order;
 import order.Transaction;
 import utility.Parser;
 import utility.Ui;
+import validation.item.ItemValidation;
 
 import java.util.Scanner;
 
@@ -24,72 +25,71 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-
-
     public void handleCommand(Command command) throws InvalidArgumentException {
         Ui ui = new Ui();
         AddItemValidation addItemValidation = new AddItemValidation();
-        DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
+        ItemValidation itemValidation = new ItemValidation();
+        Validation validation = new Validation();
         switch (command.getCommand()) {
-        case "listitem":
-            items.displayList();
-            break;
-        case "additem":
-            //Print some header
-            if (!addItemValidation.isValidFormat(command)) {
+            case "listitem":
+                items.displayList();
                 break;
-            }
+            case "additem":
+                //Print some header
+                if (!validation.isValidFormat(command, "n", "name") || !validation.isValidFormat(command, "p", "price")) {
+                    break;
+                }
 
-            command.mapArgumentAlias("name", "n");
-            command.mapArgumentAlias("price", "p");
+                command.mapArgumentAlias("name", "n");
+                command.mapArgumentAlias("price", "p");
 
-            if (!addItemValidation.isValid(command)) {
+                if (!addItemValidation.isValid(command)) {
+                    break;
+                }
+
+                String name = command.getArgumentMap().get("name");
+                Double price = Double.valueOf(command.getArgumentMap().get("price"));
+
+                Item item = new Item(name, price);
+                items.appendItem(item);
+                ui.printCommandSuccess(command.getCommand());
+
+                items.save();
+
                 break;
-            }
+            case "deleteitem":
+                command.mapArgumentAlias("index", "i");
 
-            String name = command.getArgumentMap().get("name");
-            Double price = Double.valueOf(command.getArgumentMap().get("price"));
+                if (!validation.isValidFormat(command, "i", "index")) {
+                    break;
+                }
+                if (!validation.isInteger(command.getArgumentMap().get("index"))) {
+                    break;
+                }
+                if (!validation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+                    break;
+                }
 
-            Item item = new Item(name, price);
-            items.appendItem(item);
-            System.out.println(ui.SUCCESSFUL_COMMAND);
+                items.deleteItem(Integer.parseInt(command.getArgumentMap().get("index")));
 
-            items.save();
+                ui.printCommandSuccess(command.getCommand());
 
-            break;
-        case "deleteitem":
-            command.mapArgumentAlias("index", "i");
+                items.save();
 
-            if (!deleteItemValidation.isValidFormat(command)) {
                 break;
-            }
-            if (!deleteItemValidation.isInteger(command.getArgumentMap().get("index"))) {
+
+            case "listorder":
+                transactions.displayList();
                 break;
-            }
-            if (!deleteItemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+
+            case "addorder":
+                Order order = new Order();
+                order.addOrder(command, parser, items);
+                transactions.appendOrder(order);
                 break;
-            }
 
-            items.deleteItem(Integer.parseInt(command.getArgumentMap().get("index")));
-
-            System.out.println(ui.SUCCESSFUL_COMMAND);
-
-            items.save();
-
-            break;
-
-        case "listorder":
-            transactions.displayList();
-            break;
-
-        case "addorder":
-            Order order = new Order();
-            order.addOrder(command, parser, items);
-            transactions.appendOrder(order);
-            break;
-
-        default:
-            //Handle error if command not found
+            default:
+                ui.printInvalidCommand(command.getCommand());
         }
     }
 
@@ -99,7 +99,7 @@ public class MoneyGoWhere {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            ui.printUserInput();
+            ui.promptUserInput();
             String userInput = sc.nextLine();
 
             if (userInput.equals("exit")) {
@@ -111,7 +111,7 @@ public class MoneyGoWhere {
             try {
                 handleCommand(command);
             } catch (InvalidArgumentException e) {
-                ui.println(ui.PROMPT_MESSAGE);
+                ui.promptUserInputError();
             }
         }
 
