@@ -6,7 +6,7 @@ import item.Menu;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 import order.Order;
-import order.Transactions;
+import order.Transaction;
 import utility.Parser;
 import utility.Ui;
 
@@ -16,12 +16,12 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public Menu items;
-    public Transactions orderList;
+    public Transaction transactions;
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
         items = new Menu();
-        orderList = new Transactions();
+        transactions = new Transaction();
     }
 
 
@@ -51,7 +51,7 @@ public class MoneyGoWhere {
             Double price = Double.valueOf(command.getArgumentMap().get("price"));
 
             Item item = new Item(name, price);
-            items.appendItems(item);
+            items.appendItem(item);
             System.out.println(ui.SUCCESSFUL_COMMAND);
 
             items.save();
@@ -70,7 +70,7 @@ public class MoneyGoWhere {
                 break;
             }
 
-            items.deleteItems(Integer.parseInt(command.getArgumentMap().get("index")));
+            items.deleteItem(Integer.parseInt(command.getArgumentMap().get("index")));
 
             System.out.println(ui.SUCCESSFUL_COMMAND);
 
@@ -79,13 +79,13 @@ public class MoneyGoWhere {
             break;
 
         case "listorder":
-            orderList.displayList();
+            transactions.displayList();
             break;
 
         case "addorder":
             Order order = new Order();
             order.addOrder(command, parser, items);
-            orderList.appendOrder(order);
+            transactions.appendOrder(order);
             break;
 
         default:

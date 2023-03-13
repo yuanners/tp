@@ -27,18 +27,18 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder -i 0 -q 169", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getItem().getName());
 
-        assertEquals(169, moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals(169, moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getQuantity());
 
     }
@@ -49,32 +49,32 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder -I [0 69, 1 169]", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getItem().getName());
 
-        assertEquals(69, moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals(69, moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getQuantity());
 
-        assertEquals("chicken rice", moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getItem().getName());
 
-        assertEquals(169, moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals(169, moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getQuantity());
 
     }
@@ -85,18 +85,18 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder -i 0 -q 169", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getItem().getName());
 
-        assertEquals(169, moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals(169, moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getQuantity());
 
     }
@@ -107,32 +107,32 @@ class OrderTest {
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
         runTest("addorder --items [0 69, 1 169]", moneyGoWhere);
 
-        assertEquals("Chicken Rice ", moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals("Chicken Rice ", moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getItem().getName());
 
-        assertEquals(69, moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals(69, moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getQuantity());
 
-        assertEquals("chicken rice", moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getItem().getName());
 
-        assertEquals(169, moneyGoWhere.orderList.getOrderList()
-                .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+        assertEquals(169, moneyGoWhere.transactions.getOrderList()
+                .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
-                .get(moneyGoWhere.orderList.getOrderList()
-                        .get(moneyGoWhere.orderList.getOrderList().size() - 1)
+                .get(moneyGoWhere.transactions.getOrderList()
+                        .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 1).getQuantity());
 
     }
