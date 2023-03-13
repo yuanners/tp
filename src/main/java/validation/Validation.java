@@ -11,7 +11,7 @@ public class Validation {
     public Validation() {
     }
 
-   /**
+    /**
      * Handles the common input validators
      *
      * @param arg The given command
@@ -33,9 +33,13 @@ public class Validation {
      */
     public boolean isInteger(String input) {
         try {
+            if (!input.matches("^\\d+$")) {
+                ui.printRequiresInteger();
+                return false;
+            }
             Integer.parseInt(input);
         } catch (NumberFormatException n) {
-            ui.printRequiresInteger();
+            ui.printIntegerOverflowError();
             return false;
         }
         return true;
