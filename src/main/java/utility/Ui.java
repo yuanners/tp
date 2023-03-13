@@ -64,6 +64,9 @@ public class Ui {
         System.out.println("The command: " + command + "was successfully executed!");
     }
 
+    public void printExitMessage(){
+        System.out.println("Thank you for using MoneyGoWhere. Goodbye!");
+    }
     /**
      * Prints string to user and moves the cursor to a new line.
      */

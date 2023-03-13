@@ -104,6 +104,7 @@ public class MoneyGoWhere {
             String userInput = sc.nextLine();
 
             if(userInput.equals("exit")) {
+                ui.printExitMessage();
                 break;
             }
 
