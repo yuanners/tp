@@ -74,6 +74,8 @@ public class MoneyGoWhere {
 
             System.out.println(ui.SUCCESSFUL_COMMAND);
 
+            items.save();
+
             break;
 
         case "listorder":
