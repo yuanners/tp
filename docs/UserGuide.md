@@ -1,42 +1,52 @@
 # User Guide
 
 ## Introduction
+Thank you for your interest in MoneyGoWhere! This user guide aims to show off the features of the application and how to use it.
 
-{Give a product intro}
+MoneyGoWhere is a point-of-sale, desktop app for tracking sales and inventory, optimised for use via a Command line Interface (CLI). With the ability to type fast and with familiarity of the system, you will be able to quickly track sales, check inventory and calculate change. This CLI application is comparable with GUI applications due to its low-cost and adaptability.
+
+This application is primarily tailored towards the hawker stall ownders at The Deck in National University of Singapore.
+
+<br>
+
+## Table of Contents
+
+<br>
 
 ## Quick Start
+<br>
 
-{Give steps to get started quickly}
+## Our Style Guide
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+<br>
 
-## Features 
+## Features
 
-{Give detailed description of each feature}
+### Items
+#### Add an Item
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+#### Delete an Item
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+#### List all Items
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+<br>
 
-Example of usage: 
+### Orders
+#### Add an Order
+##### Single Item
 
-`todo n/Write the rest of the User Guide d/next week`
+##### Multiple Items
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+#### List all Orders
 
-## FAQ
+<br>
 
-**Q**: How do I transfer my data to another computer? 
+### Exit
 
-**A**: {your answer here}
+<br>
+
+## Save File
+
+<br>
 
 ## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
