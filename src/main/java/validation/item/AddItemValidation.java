@@ -59,6 +59,11 @@ public class AddItemValidation extends ItemValidation {
             return false;
         }
 
+        if (tempPrice > Double.MAX_VALUE) {
+            ui.printDoubleOverflowError();
+            return false;
+        }
+
         if (tempPrice < 0.00) {
             ui.printNegativeError();
             return false;
@@ -67,7 +72,7 @@ public class AddItemValidation extends ItemValidation {
         int numOfDecimalPoint = price.length() - price.indexOf('.') - 1;
 
         if (numOfDecimalPoint > 2) {
-            ui.printInvalidDouble();
+            ui.printInvalidPrice();
             return false;
         }
 
