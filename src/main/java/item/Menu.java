@@ -43,11 +43,11 @@ public class Menu {
         }
     }
 
-    public void appendItems(Item item) {
+    public void appendItem(Item item) {
         this.items.add(item);
     }
 
-    public void deleteItems(int index) {
+    public void deleteItem(int index) {
         this.items.remove(index);
     }
 
