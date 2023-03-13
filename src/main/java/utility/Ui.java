@@ -14,7 +14,8 @@ public class Ui {
     public final String NULL_MESSAGE = "Input is empty. Please enter something.";
     public final String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
 
-    /** General print statements
+    /**
+     * General print statements
      * Prompts user for input
      */
     public void promptUserInput() {
@@ -109,7 +110,8 @@ public class Ui {
 
 
 
-    /** ORDER AND TRANSACTION PRINT STATEMENTS
+    /**
+     * ORDER AND TRANSACTION PRINT STATEMENTS
      * Prints the list of orders.
      * This includes the subtotal cost of each order.
      *
