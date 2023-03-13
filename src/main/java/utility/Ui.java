@@ -102,6 +102,10 @@ public class Ui {
         System.out.println("Name exceeds the 25 character limit.");
     }
 
+    public void printDuplicateItemNameError() {
+        System.out.println("Item name already exists.");
+    }
+
     /**
      * Prints all items in a table format
      *

@@ -44,7 +44,7 @@ public class MoneyGoWhere {
             command.mapArgumentAlias("name", "n");
             command.mapArgumentAlias("price", "p");
 
-            if(!addItemValidation.isValid(command)) {
+            if(!addItemValidation.isValid(command, items)) {
                 break;
             }
 
