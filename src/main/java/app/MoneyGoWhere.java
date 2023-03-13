@@ -6,7 +6,7 @@ import item.Menu;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 import order.Order;
-import order.Transactions;
+import order.Transaction;
 import utility.Parser;
 import utility.Ui;
 
@@ -16,12 +16,12 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public Menu items;
-    public Transactions transactions;
+    public Transaction transactions;
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
         items = new Menu();
-        transactions = new Transactions();
+        transactions = new Transaction();
     }
 
 
