@@ -1,7 +1,7 @@
 package order;
 
 import app.Command;
-import item.ItemList;
+import item.Menu;
 import utility.Parser;
 
 import java.time.LocalDateTime;
@@ -113,7 +113,7 @@ public class Order implements OrderInterface {
      * @param parser      Parser object to parse the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public void addOrder(Command command, Parser parser, ItemList listOfItems) {
+    public void addOrder(Command command, Parser parser, Menu listOfItems) {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("items", "I");
@@ -131,7 +131,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the item is selected
      */
-    public void handleAddOrder(Command command, ItemList listOfItems) {
+    public void handleAddOrder(Command command, Menu listOfItems) {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -158,7 +158,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the items are selected
      */
-    public void handleMultipleAddOrders(Command command, ItemList listOfItems) {
+    public void handleMultipleAddOrders(Command command, Menu listOfItems) {
 
         command.mapArgumentAlias("items", "I");
 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * The OrderList class represents a list of orders.
  */
-public class OrderList {
+public class Transactions {
     /**
      * The list of orders.
      */
@@ -27,7 +27,7 @@ public class OrderList {
     /**
      * Constructs an empty order list.
      */
-    public OrderList() {
+    public Transactions() {
         this.store = new Store("orders.json");
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
