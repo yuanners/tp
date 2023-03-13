@@ -20,8 +20,6 @@ public class Validation {
     public void validateArgument(Command arg) throws InvalidArgumentException {
         if (arg.getUserInput() == null) {
             throw new InvalidArgumentException(ui.NULL_MESSAGE);
-        } else if (arg.getUserInput().contains(":") || arg.getUserInput().contains(";")) {
-            throw new InvalidArgumentException(ui.ERROR_MESSAGE);
         }
     }
 
