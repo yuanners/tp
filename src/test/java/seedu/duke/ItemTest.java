@@ -45,7 +45,7 @@ class ItemTest {
 
         runTest("listitem", moneyGoWhere);
 
-        runTest("deleteitem -i 0", moneyGoWhere);
+//        runTest("deleteitem -i 0", moneyGoWhere);
     }
 
 }

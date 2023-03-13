@@ -2,12 +2,13 @@ package validation.item;
 
 import app.Command;
 import exception.InvalidArgumentException;
+import item.Menu;
 import utility.Ui;
 
 public class AddItemValidation extends ItemValidation {
     private Ui ui = new Ui();
 
-    public boolean isValid(Command c) {
+    public boolean isValid(Command c, Menu items) {
         try {
             super.validateArgument(c);
         } catch (InvalidArgumentException e) {
@@ -15,14 +16,14 @@ public class AddItemValidation extends ItemValidation {
             return false;
         }
 
-        boolean nameIsValid = isValidName(c);
+        boolean nameIsValid = isValidName(c, items);
 
         boolean priceIsValid = isValidPrice(c);
 
         return nameIsValid && priceIsValid;
     }
 
-    public boolean isValidName(Command c) {
+    public boolean isValidName(Command c, Menu items) {
         if (c.getArgumentMap().get("n").length() > 25) {
             ui.printMaxLengthError();
             return false;
@@ -31,6 +32,15 @@ public class AddItemValidation extends ItemValidation {
         if (c.getArgumentMap().get("n").length() < 1) {
             ui.printMinLengthError("Name");
             return false;
+        }
+
+        String newItemName = c.getArgumentMap().get("name");
+        int menuSize = items.getItems().size();
+        for(int i = 0; i<menuSize; i++) {
+            if(newItemName.toLowerCase().equals(items.getItem(i).getName().toLowerCase())) {
+                ui.printDuplicateItemNameError();
+                return false;
+            }
         }
 
         return true;
