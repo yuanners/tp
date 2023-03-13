@@ -12,11 +12,9 @@ import java.util.ArrayList;
 public class Ui {
 
     public final String NULL_MESSAGE = "Input is empty. Please enter something.";
-    public final String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
-
-    /*** GENERAL PRINT STATEMENTS ***/
 
     /**
+     * General print statements
      * Prompts user for input
      */
     public void promptUserInput() {
@@ -113,16 +111,16 @@ public class Ui {
         System.out.printf("| %-5s | %-25s | %-5s |\n", "Index", "Name", "Price");
         System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
 
-        for (int i = 0; i < menu.size(); ++i) {
+        for(int i = 0; i < menu.size(); ++i) {
             System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
         }
     }
 
 
-    /*** ORDER AND TRANSACTION PRINT STATEMENTS ***/
 
 
     /**
+     * ORDER AND TRANSACTION PRINT STATEMENTS
      * Prints the list of orders.
      * This includes the subtotal cost of each order.
      *
@@ -134,13 +132,13 @@ public class Ui {
 
         System.out.println("================================================");
 
-        for (int i = 0; i < orders.size(); i++) {
+        for(int i = 0; i < orders.size(); i++) {
 
             System.out.println("Order " + (i + 1));
             System.out.println("Order ID: " + orders.get(i).getOrderId());
             System.out.println("Order time: " + orders.get(i).getDateTime());
 
-            for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
+            for(int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
                 System.out.println((j + 1) + ". "
                         + orders.get(i).getOrderEntries().get(j).getItem().getName()
                         + " x" + orders.get(i).getOrderEntries().get(j).getQuantity());
