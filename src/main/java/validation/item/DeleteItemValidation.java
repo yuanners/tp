@@ -1,12 +1,12 @@
 package validation.item;
 
 import app.Command;
-import item.ItemList;
+import item.Menu;
 import utility.Ui;
 
 public class DeleteItemValidation extends ItemValidation {
 
-    public boolean isValidIndex(String input, ItemList items) {
+    public boolean isValidIndex(String input, Menu items) {
         Ui ui = new Ui();
         try {
             items.getItem(Integer.parseInt(input));

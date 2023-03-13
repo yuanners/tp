@@ -10,12 +10,12 @@ import com.google.gson.JsonParseException;
 import utility.Store;
 import utility.Ui;
 
-public class ItemList {
+public class Menu {
 
     private ArrayList<Item> items;
     private Store store;
 
-    public ItemList() {
+    public Menu() {
         this.store = new Store("menu.json");
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
