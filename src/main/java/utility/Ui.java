@@ -30,7 +30,6 @@ public class Ui {
     public final String SUCCESSFUL_COMMAND = "Successfully executed your command!";
     public final String PROMPT_MESSAGE = "Please enter again:";
     public final String REQUIRE_INTEGER = "This input requires a whole number!";
-    public final String NEGATIVE_ERROR = "Value cannot be negative.";
     /**
      * General print statements
      * Prompts user for input
