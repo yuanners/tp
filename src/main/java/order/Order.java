@@ -132,8 +132,8 @@ public class Order implements OrderInterface {
                 isValid = true;
             }
         } else if(command.getArgumentMap().get("items") != null) {
-                handleMultipleAddOrders(command, listOfItems);
-                isValid = true;
+            handleMultipleAddOrders(command, listOfItems);
+            isValid = true;
         } else {
             ui.invalidOrderCommand();
             isValid = false;

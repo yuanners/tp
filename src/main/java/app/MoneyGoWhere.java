@@ -118,6 +118,7 @@ public class MoneyGoWhere {
             } catch(InvalidArgumentException e) {
                 ui.promptUserInputError();
             } catch(InvalidFlagException i) {
+                ui.promptUserInput();
             }
         }
 
