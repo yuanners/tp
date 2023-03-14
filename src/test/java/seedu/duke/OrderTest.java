@@ -66,7 +66,7 @@ class OrderTest {
                         .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getQuantity());
 
-        assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken rice1", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()
@@ -124,7 +124,7 @@ class OrderTest {
                         .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getQuantity());
 
-        assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken rice1", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()
