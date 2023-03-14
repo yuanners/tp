@@ -38,10 +38,10 @@ class ItemTest {
     @Test
     public void itemTest() {
 
-        runTest("additem -p 20 -n chicken rice1", moneyGoWhere);
-        assertEquals("chicken rice1", moneyGoWhere.items.getItems().
+        runTest("additem -p 20.1 -n chicken rice2", moneyGoWhere);
+        assertEquals("chicken rice2", moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getName());
-        assertEquals(20.00, moneyGoWhere.items.getItems().
+        assertEquals(20.10, moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getPrice());
 
         runTest("listitem", moneyGoWhere);
@@ -51,13 +51,13 @@ class ItemTest {
 
     @Test
     public void itemTest2() {
-        runTest("additem -p 2kuku0.01 -n chicken rice2", moneyGoWhere);
+        runTest("additem -p 2kuku0.01 -n chicken rice3", moneyGoWhere);
     }
 
     @Test
     public void itemTest3() {
         // max 2dp error
-        runTest("additem -p 20.001 -n chicken rice3", moneyGoWhere);
+        runTest("additem -p 20.001 -n chicken rice4", moneyGoWhere);
     }
 
 }
