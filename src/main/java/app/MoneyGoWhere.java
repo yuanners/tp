@@ -1,6 +1,7 @@
 package app;
 
 import exception.InvalidArgumentException;
+import exception.InvalidFlagException;
 import item.Item;
 import item.Menu;
 import validation.Validation;
@@ -25,7 +26,7 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-    public void handleCommand(Command command) throws InvalidArgumentException {
+    public void handleCommand(Command command) throws InvalidArgumentException, InvalidFlagException {
         Ui ui = new Ui();
         AddItemValidation addItemValidation = new AddItemValidation();
         ItemValidation itemValidation = new ItemValidation();
@@ -85,8 +86,10 @@ public class MoneyGoWhere {
 
         case "addorder":
             Order order = new Order();
-            order.addOrder(command, parser, items);
-            transactions.appendOrder(order);
+            if(order.addOrder(command, parser, items)) {
+                transactions.appendOrder(order);
+                ui.printCommandSuccess(command.getCommand());
+            }
             break;
 
         default:
@@ -114,6 +117,7 @@ public class MoneyGoWhere {
                 handleCommand(command);
             } catch(InvalidArgumentException e) {
                 ui.promptUserInputError();
+            } catch(InvalidFlagException i) {
             }
         }
 

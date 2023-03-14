@@ -1,6 +1,9 @@
 [
   {
     "orderId": "19fcc4fb-98b1-4344-a5cb-e6ff07ffd798",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -26,6 +29,9 @@
   },
   {
     "orderId": "d6e8ceb4-2f6e-46fb-b187-d67110aacbe5",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -51,6 +57,9 @@
   },
   {
     "orderId": "36f07f45-f45d-465f-b1e3-1802da73858b",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -76,6 +85,9 @@
   },
   {
     "orderId": "c2301142-cb58-45c3-ad50-0fb18ab08b14",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -101,6 +113,9 @@
   },
   {
     "orderId": "46e10fda-24a0-4517-b249-71fe7e5a41fc",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -126,6 +141,9 @@
   },
   {
     "orderId": "8c610c36-02a9-4b5c-87b8-82e98660a126",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -158,6 +176,9 @@
   },
   {
     "orderId": "d75dbde7-b3a2-40e5-8ed6-7211a6b0ed3a",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -183,6 +204,9 @@
   },
   {
     "orderId": "726f6618-4946-4276-a400-0b779d5c6519",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -215,6 +239,9 @@
   },
   {
     "orderId": "c71174c1-7068-404a-a6c5-352d5965f546",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -240,6 +267,9 @@
   },
   {
     "orderId": "d8527cde-b5df-4ea7-bec7-6c6a7ace5acb",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -265,6 +295,9 @@
   },
   {
     "orderId": "301ce378-f6cf-4aea-b9ea-f4930de134c7",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -290,6 +323,9 @@
   },
   {
     "orderId": "d0dacb93-5c38-485c-9dc0-fcf18c3e54c0",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -315,6 +351,9 @@
   },
   {
     "orderId": "b26ccd81-5039-4486-865b-fa76c550334b",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -340,6 +379,9 @@
   },
   {
     "orderId": "3a9bea5d-54ef-47e3-bb1b-fd01cb3ef443",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -372,6 +414,9 @@
   },
   {
     "orderId": "fe79e976-16a2-4814-b6a1-ea52cb943379",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -397,6 +442,9 @@
   },
   {
     "orderId": "99e67a1f-79cc-454c-a329-b3e8c7b95fa3",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -429,6 +477,9 @@
   },
   {
     "orderId": "2b01b219-d5b7-4259-8ead-189cc5292b48",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -475,6 +526,9 @@
   },
   {
     "orderId": "534e1dcb-2a52-4749-9e4f-ebf7d3dcc4ad",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -500,6 +554,9 @@
   },
   {
     "orderId": "fd57ef37-5bee-42af-9c72-fe141d595ee7",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -525,6 +582,9 @@
   },
   {
     "orderId": "97d9e8c4-73a1-49d8-bf59-e0ec1e826285",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -550,6 +610,9 @@
   },
   {
     "orderId": "e393c3e0-bfc5-43b0-b2de-5b5ddca0146e",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -575,6 +638,9 @@
   },
   {
     "orderId": "430bbaca-39ba-4fa2-a867-a48f244d70c6",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -607,6 +673,9 @@
   },
   {
     "orderId": "7de38a38-5b89-4598-a441-2c495c3f6ff3",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -632,6 +701,9 @@
   },
   {
     "orderId": "5fd803a2-f80d-46f3-be05-849cd4223b5c",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -664,6 +736,9 @@
   },
   {
     "orderId": "a2224d85-b170-4f44-943f-c85a9dbc511e",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -689,6 +764,9 @@
   },
   {
     "orderId": "5dd60817-e808-490e-bdcf-52d11ab018e5",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -721,6 +799,9 @@
   },
   {
     "orderId": "67796447-5bdb-41db-b254-60abb0455c3e",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -746,6 +827,9 @@
   },
   {
     "orderId": "0528e34f-b918-489c-8e84-439e13178bdd",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -778,6 +862,9 @@
   },
   {
     "orderId": "580bbdad-2f55-4d8f-a6c6-7e34ca8c7809",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -803,6 +890,9 @@
   },
   {
     "orderId": "18b40a8a-0b46-44cc-a3f0-f8e6bdb8b1be",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -835,6 +925,9 @@
   },
   {
     "orderId": "d903d826-106f-4e24-aa94-a093a2ee7c79",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -860,6 +953,9 @@
   },
   {
     "orderId": "379b8fb2-25e0-411b-a86f-752d9836133e",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -892,6 +988,9 @@
   },
   {
     "orderId": "28ed0e92-a4aa-49e6-8dde-e98e7c6f5f58",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -917,6 +1016,9 @@
   },
   {
     "orderId": "da2d3664-754e-4c67-a45f-dc9e9547ff45",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -949,6 +1051,9 @@
   },
   {
     "orderId": "89aa2fe4-7fda-46a3-8ad4-c7123db4a059",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -974,6 +1079,9 @@
   },
   {
     "orderId": "5a530b5f-5530-486a-941e-be540aa3e461",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1006,6 +1114,9 @@
   },
   {
     "orderId": "935e57a1-6293-42bb-a117-8d6ac14ea890",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1031,6 +1142,9 @@
   },
   {
     "orderId": "ba3598a6-d67b-427b-ba0f-41c2579f003b",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1063,6 +1177,9 @@
   },
   {
     "orderId": "d9e6b25a-538d-420e-b1f1-67261f9c5f41",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1088,6 +1205,9 @@
   },
   {
     "orderId": "977f2322-41fe-4aa5-ae3d-fb9da8e2182b",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1120,6 +1240,9 @@
   },
   {
     "orderId": "9286cc16-0105-4af5-8013-d280bbf1cc61",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1145,6 +1268,9 @@
   },
   {
     "orderId": "6a1689c4-8f7c-4c16-a7c2-05bc43399b3a",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1177,6 +1303,9 @@
   },
   {
     "orderId": "c04a0b66-4a2c-4831-9b74-2fce59932d90",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1202,6 +1331,9 @@
   },
   {
     "orderId": "28bd4349-a4b1-468b-8afd-e63e4f85bf79",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1234,6 +1366,9 @@
   },
   {
     "orderId": "ddd4008d-3852-41d5-88e2-4387a34e7f1b",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1259,6 +1394,9 @@
   },
   {
     "orderId": "8a330cfe-1add-4057-80a7-94216c80a5b2",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1284,6 +1422,9 @@
   },
   {
     "orderId": "3aef418c-94da-4fdd-92f1-84e9b6e562cd",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1309,6 +1450,9 @@
   },
   {
     "orderId": "68d3ba79-8edb-4a98-ba88-adfcbbfbaaa3",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1341,6 +1485,9 @@
   },
   {
     "orderId": "b49e095e-b294-485a-84c1-fac73ee06ab9",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1366,6 +1513,9 @@
   },
   {
     "orderId": "2f3c440a-5a8b-43a4-a86d-3a43e081630a",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1398,6 +1548,9 @@
   },
   {
     "orderId": "b050fdf7-799c-4148-82b4-9994752455b8",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1423,6 +1576,9 @@
   },
   {
     "orderId": "98be25db-4643-4bf2-8a7f-ad918f3b9777",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1455,6 +1611,9 @@
   },
   {
     "orderId": "3daa9362-ac9f-42df-8918-ca23d229d9c2",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1480,6 +1639,9 @@
   },
   {
     "orderId": "1c1ca8f1-e61e-49a9-b555-e58eda79c723",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1512,6 +1674,9 @@
   },
   {
     "orderId": "9c6a9223-166f-48f6-990e-9e75ce0914ee",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1537,6 +1702,9 @@
   },
   {
     "orderId": "a06fcaab-559b-4cff-a2e3-0ac2be249d7d",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1569,6 +1737,9 @@
   },
   {
     "orderId": "1406097b-c788-438a-9cb0-ef6abff6ae45",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1594,6 +1765,9 @@
   },
   {
     "orderId": "b93a3481-2c18-44e9-a907-06d881a26fa6",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
     "dateTime": {
       "date": {
         "year": 2023,
@@ -1621,6 +1795,248 @@
           "price": 2.5
         },
         "quantity": 169
+      }
+    ]
+  },
+  {
+    "orderId": "74e85acd-10d4-4314-b54d-720ffc6b60e3",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 1,
+        "minute": 2,
+        "second": 32,
+        "nano": 550827000
+      }
+    },
+    "orderEntries": [
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 169
+      }
+    ]
+  },
+  {
+    "orderId": "1e148100-31d5-4c79-9782-6db68089d01c",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 1,
+        "minute": 2,
+        "second": 32,
+        "nano": 569943000
+      }
+    },
+    "orderEntries": [
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 69
+      },
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 169
+      }
+    ]
+  },
+  {
+    "orderId": "7b973971-3cd9-4667-9474-85c9346d9c36",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 1,
+        "minute": 2,
+        "second": 32,
+        "nano": 581033000
+      }
+    },
+    "orderEntries": [
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 169
+      }
+    ]
+  },
+  {
+    "orderId": "0ff6e0dc-fa6f-45e7-ab5b-c89e5028aae4",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 1,
+        "minute": 2,
+        "second": 32,
+        "nano": 588240000
+      }
+    },
+    "orderEntries": [
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 69
+      },
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 169
+      }
+    ]
+  },
+  {
+    "orderId": "c55b91c7-a12e-449e-8c71-b14e5f9cd8b9",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 1,
+        "minute": 2,
+        "second": 49,
+        "nano": 132328000
+      }
+    },
+    "orderEntries": []
+  },
+  {
+    "orderId": "848fdf04-5597-419d-8f5f-d435c9d5cc9e",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 1,
+        "minute": 3,
+        "second": 30,
+        "nano": 494047000
+      }
+    },
+    "orderEntries": []
+  },
+  {
+    "orderId": "cf429326-1a9b-4e74-97bb-56cc118bd7ef",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 1,
+        "minute": 9,
+        "second": 54,
+        "nano": 963121000
+      }
+    },
+    "orderEntries": []
+  },
+  {
+    "orderId": "d734bdb1-5996-47bc-8fc7-9f358e5b6c17",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 11,
+        "minute": 22,
+        "second": 37,
+        "nano": 531912000
+      }
+    },
+    "orderEntries": [
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 193939339
+      }
+    ]
+  },
+  {
+    "orderId": "85295879-c30f-442e-8ea8-b1b2944a1c28",
+    "ui": {
+      "NULL_MESSAGE": "Input is empty. Please enter something."
+    },
+    "dateTime": {
+      "date": {
+        "year": 2023,
+        "month": 3,
+        "day": 14
+      },
+      "time": {
+        "hour": 13,
+        "minute": 53,
+        "second": 37,
+        "nano": 395204000
+      }
+    },
+    "orderEntries": [
+      {
+        "item": {
+          "name": "chicken rice",
+          "price": 2.5
+        },
+        "quantity": 1
       }
     ]
   }

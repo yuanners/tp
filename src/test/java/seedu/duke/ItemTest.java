@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import app.Command;
 import app.MoneyGoWhere;
+import exception.InvalidFlagException;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
 import exception.InvalidArgumentException;
@@ -28,7 +29,7 @@ class ItemTest {
 
         try {
             moneyGoWhere.handleCommand(command);
-        } catch (InvalidArgumentException e) {
+        } catch (InvalidArgumentException | InvalidFlagException e) {
             ui.println(e.getMessage());
         }
 

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Ui {
 
     public final String NULL_MESSAGE = "Input is empty. Please enter something.";
-
     /**
      * General print statements
      * Prompts user for input
@@ -61,12 +60,13 @@ public class Ui {
     }
 
     public void printCommandSuccess(String command) {
-        System.out.println("The command: " + command + "was successfully executed!");
+        System.out.println("The command: " + command + " was successfully executed!");
     }
 
-    public void printExitMessage(){
+    public void printExitMessage() {
         System.out.println("Thank you for using MoneyGoWhere. Goodbye!");
     }
+
     /**
      * Prints string to user and moves the cursor to a new line.
      */
@@ -110,8 +110,6 @@ public class Ui {
     }
 
 
-
-
     /**
      * ORDER AND TRANSACTION PRINT STATEMENTS
      * Prints the list of orders.
@@ -119,6 +117,15 @@ public class Ui {
      *
      * @param orders Arraylist of orders stored
      */
+    public void invalidOrderCommand(){
+        System.out.println("Please use -i or -I flags for addorder command.");
+    }
+    public void invalidOrderSyntax(){
+        System.out.println("Please enter the item's index number after the flag.");
+    }
+    public void invalidIndex(){
+        System.out.println("Please enter an integer for item number or quantity.");
+    }
     public void printOrderList(ArrayList<Order> orders) {
 
         DecimalFormat df = new DecimalFormat("#.00");
