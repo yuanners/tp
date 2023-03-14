@@ -55,7 +55,7 @@ public class AddItemValidation extends ItemValidation {
         int menuSize = items.getItems().size();
         for(int i = 0; i<menuSize; i++) {
             if(newItemName.toLowerCase().equals(items.getItem(i).getName().toLowerCase())) {
-               throw new ItemException(ui.ITEM_DUPLICATE_NAME_ERROR);
+                throw new ItemException(ui.ITEM_DUPLICATE_NAME_ERROR);
             }
         }
 
