@@ -121,12 +121,17 @@ public class Order implements OrderInterface {
      */
     public boolean addOrder(Command command, Parser parser, Menu listOfItems)
             throws InvalidArgumentException, InvalidFlagException {
+
         boolean isValid = false;
+
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("items", "I");
+
         AddOrderValidation addOrderValidation = new AddOrderValidation();
         AddMultipleOrderValidation addMultipleOrderValidation = new AddMultipleOrderValidation();
+
         if(command.getArgumentMap().get("item") != null) {
+
             if(addOrderValidation.validateAddOrder(command)) {
                 addSingleOrder(command, listOfItems);
                 isValid = true;
@@ -138,6 +143,7 @@ public class Order implements OrderInterface {
             ui.invalidOrderCommand();
             isValid = false;
         }
+
         return isValid;
     }
 
@@ -148,10 +154,13 @@ public class Order implements OrderInterface {
      * @param listOfItems the list of items from which the item is selected
      */
     public void addSingleOrder(Command command, Menu listOfItems) {
+
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
+
         int itemIndex = handleOrderIndex(command, listOfItems);
         int quantity = handleQuantity(command);
+
         OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
         this.orderEntries.add(orderEntry);
     }
@@ -164,8 +173,10 @@ public class Order implements OrderInterface {
      * @return item index
      */
     public int handleOrderIndex(Command command, Menu listOfItems) {
+
         command.mapArgumentAlias("item", "i");
         int itemIndex = Integer.parseInt(command.getArgumentMap().get("item").trim());
+
         return itemIndex;
     }
 
@@ -177,13 +188,16 @@ public class Order implements OrderInterface {
      * @return quantity
      */
     public int handleQuantity(Command command) {
+
         command.mapArgumentAlias("quantity", "q");
         int quantity;
+
         if(command.getArgumentMap().get("quantity") != null) {
             quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
         } else {
             quantity = 1;
         }
+
         return quantity;
     }
 
