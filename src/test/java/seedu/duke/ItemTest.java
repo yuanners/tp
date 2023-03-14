@@ -11,7 +11,7 @@ import utility.Ui;
 import exception.InvalidArgumentException;
 
 class ItemTest {
-
+    MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
     public void sampleTest() {
         assertTrue(true);
     }
@@ -37,16 +37,27 @@ class ItemTest {
 
     @Test
     public void itemTest() {
-        MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
-        runTest("additem -p 2.50 -n chicken rice", moneyGoWhere);
-        assertEquals("chicken rice", moneyGoWhere.items.getItems().
+
+        runTest("additem -p 20.1 -n chicken rice2", moneyGoWhere);
+        assertEquals("chicken rice2", moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getName());
-        assertEquals(2.5, moneyGoWhere.items.getItems().
+        assertEquals(20.10, moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getPrice());
 
         runTest("listitem", moneyGoWhere);
 
-        runTest("deleteitem -i 0", moneyGoWhere);
+        runTest("deleteitem -i " + (moneyGoWhere.items.getItems().size()-1), moneyGoWhere);
+    }
+
+    @Test
+    public void itemTest2() {
+        runTest("additem -p 2kuku0.01 -n chicken rice3", moneyGoWhere);
+    }
+
+    @Test
+    public void itemTest3() {
+        // max 2dp error
+        runTest("additem -p 20.001 -n chicken rice4", moneyGoWhere);
     }
 
 }
