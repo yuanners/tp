@@ -1,16 +1,13 @@
 package app;
 
 import exception.InvalidArgumentException;
-import item.Item;
+import exception.InvalidFlagException;
+import exception.ItemException;
 import item.Menu;
-import validation.item.AddItemValidation;
 import order.Order;
 import order.Transaction;
 import utility.Parser;
 import utility.Ui;
-import validation.item.DeleteItemValidation;
-
-
 import java.util.Scanner;
 
 
@@ -25,76 +22,42 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-    public void handleCommand(Command command) throws InvalidArgumentException {
+    public void handleCommand(Command command) throws InvalidArgumentException, InvalidFlagException {
         Ui ui = new Ui();
 
-        switch(command.getCommand()) {
-        case "listitem":
-            items.displayList();
-            break;
-        case "additem":
-            //Print some header
-            AddItemValidation addItemValidation = new AddItemValidation();
-
-            if(!addItemValidation.isValidFormat(command, "n", "name") ||
-                    !addItemValidation.isValidFormat(command, "p", "price")) {
+        try {
+            switch(command.getCommand()) {
+            case "listitem":
+                items.displayList();
                 break;
-            }
-
-            command.mapArgumentAlias("name", "n");
-            command.mapArgumentAlias("price", "p");
-
-            if(!addItemValidation.isValid(command, items)) {
+            case "additem":
+                items.addItem(command, items);
+                ui.printCommandSuccess(command.getCommand());
                 break;
-            }
-
-            String name = command.getArgumentMap().get("name");
-            Double price = Double.valueOf(command.getArgumentMap().get("price"));
-
-            Item item = new Item(name, price);
-            items.appendItem(item);
-            ui.printCommandSuccess(command.getCommand());
-
-            items.save();
-
-            break;
-        case "deleteitem":
-
-            DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
-
-            command.mapArgumentAlias("index", "i");
-
-            if(!deleteItemValidation.isValidFormat(command, "i", "index")) {
+            case "deleteitem":
+                items.deleteItem(command, items);
+                ui.printCommandSuccess(command.getCommand());
                 break;
-            }
-            if(!deleteItemValidation.isInteger(command.getArgumentMap().get("index"))) {
+            case "listorder":
+                transactions.displayList();
                 break;
-            }
-            if(!deleteItemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+
+            case "addorder":
+                Order order = new Order();
+                if(order.addOrder(command, parser, items)) {
+                    transactions.appendOrder(order);
+                    ui.printCommandSuccess(command.getCommand());
+                }
                 break;
+
+            default:
+                ui.printInvalidCommand(command.getCommand());
             }
-
-            items.deleteItem(Integer.parseInt(command.getArgumentMap().get("index")));
-
-            ui.printCommandSuccess(command.getCommand());
-
-            items.save();
-
-            break;
-
-        case "listorder":
-            transactions.displayList();
-            break;
-
-        case "addorder":
-            Order order = new Order();
-            order.addOrder(command, parser, items);
-            transactions.appendOrder(order);
-            break;
-
-        default:
-            ui.printInvalidCommand(command.getCommand());
+        } catch (ItemException e) {
+            ui.println(e.getMessage());
         }
+
+
     }
 
     public void run() {
@@ -107,6 +70,7 @@ public class MoneyGoWhere {
             String userInput = sc.nextLine();
 
             if(userInput.equals("exit")) {
+                ui.printExitMessage();
                 break;
             }
 
@@ -116,6 +80,8 @@ public class MoneyGoWhere {
                 handleCommand(command);
             } catch(InvalidArgumentException e) {
                 ui.promptUserInputError();
+            } catch(InvalidFlagException i) {
+                ui.promptUserInput();
             }
         }
 

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import app.Command;
 import app.MoneyGoWhere;
+import exception.InvalidFlagException;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
 import exception.InvalidArgumentException;
@@ -18,6 +19,8 @@ class OrderTest {
             moneyGoWhere.handleCommand(command);
         } catch (InvalidArgumentException e) {
             ui.println(e.getMessage());
+        } catch(InvalidFlagException e) {
+            ui.invalidOrderCommand();
         }
     }
 
@@ -63,7 +66,7 @@ class OrderTest {
                         .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getQuantity());
 
-        assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken rice1", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()
@@ -121,7 +124,7 @@ class OrderTest {
                         .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                         .getOrderEntries().size() - 2).getQuantity());
 
-        assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
+        assertEquals("chicken rice1", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
                 .getOrderEntries()
                 .get(moneyGoWhere.transactions.getOrderList()

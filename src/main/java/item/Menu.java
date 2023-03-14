@@ -5,10 +5,14 @@ import java.util.ArrayList;
 
 import java.lang.reflect.Type;
 
+import app.Command;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
+import exception.ItemException;
 import utility.Store;
 import utility.Ui;
+import validation.item.AddItemValidation;
+import validation.item.DeleteItemValidation;
 
 public class Menu {
 
@@ -44,7 +48,7 @@ public class Menu {
         this.items.add(item);
     }
 
-    public void deleteItem(int index) {
+    public void removeItem(int index) {
         this.items.remove(index);
     }
 
@@ -66,5 +70,38 @@ public class Menu {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void addItem(Command command, Menu items) throws ItemException {
+        try {
+            AddItemValidation addItemValidation = new AddItemValidation();
+            addItemValidation.validateFlags(command);
+            command.mapArgumentAlias(addItemValidation.LONG_NAME_FLAG, addItemValidation.SHORT_NAME_FLAG);
+            command.mapArgumentAlias(addItemValidation.LONG_PRICE_FLAG, addItemValidation.SHORT_PRICE_FLAG);
+            addItemValidation.validateCommand(command, items);
+        } catch (ItemException e) {
+            throw new ItemException(e.getMessage());
+        }
+
+        String name = command.getArgumentMap().get("name");
+        Double price = Double.valueOf(command.getArgumentMap().get("price"));
+        Item item = new Item(name, price);
+        appendItem(item);
+        save();
+    }
+
+    public void deleteItem(Command command, Menu items) throws ItemException{
+        try {
+            DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
+            deleteItemValidation.validateFlags(command);
+            command.mapArgumentAlias(deleteItemValidation.LONG_INDEX_FLAG, deleteItemValidation.SHORT_INDEX_FLAG);
+            deleteItemValidation.validateCommand(command, items);
+        } catch (ItemException e) {
+            throw new ItemException(e.getMessage());
+        }
+
+        int index = Integer.parseInt(command.getArgumentMap().get("index"));
+        removeItem(index);
+        save();
     }
 }
