@@ -13,7 +13,6 @@ public class DeleteItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param c Given command
-     * @return Validation result (true/false)
      */
     public void validateFlags(Command c) throws ItemException {
         String args = c.getArgumentString();

@@ -7,17 +7,16 @@ import item.Menu;
 import utility.Ui;
 
 public class AddItemValidation extends ItemValidation {
-    private Ui ui = new Ui();
     public final String SHORT_NAME_FLAG = "n";
     public final String LONG_NAME_FLAG = "name";
     public final String SHORT_PRICE_FLAG = "p";
     public final String LONG_PRICE_FLAG = "price";
+    private Ui ui = new Ui();
 
     /**
      * Checks if the required flag is given
      *
      * @param c Given command
-     * @return Validation result (true/false)
      */
     public void validateFlags(Command c) throws ItemException{
         String args = c.getArgumentString();
@@ -66,7 +65,6 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the given input for price is valid
      *
      * @param c Given command
-     * @return Valdiation result (true/false)
      */
     public void validatePrice(Command c) throws ItemException {
         String price = c.getArgumentMap().get(LONG_PRICE_FLAG);

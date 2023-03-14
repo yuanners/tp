@@ -81,7 +81,7 @@ public class Ui {
     /*** ITEM AND MENU PRINT STATEMENTS ***/
 
     public String printInvalidFlags(String command) {
-       return "The usage of " + command + " is invalid.";
+        return "The usage of " + command + " is invalid.";
     }
 
     /**
