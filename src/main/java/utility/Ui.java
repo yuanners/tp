@@ -112,10 +112,6 @@ public class Ui {
 
     /**
      * ORDER AND TRANSACTION PRINT STATEMENTS
-     * Prints the list of orders.
-     * This includes the subtotal cost of each order.
-     *
-     * @param orders Arraylist of orders stored
      */
     public void invalidOrderCommand(){
         System.out.println("Please use -i or -I flags for addorder command.");
@@ -126,6 +122,12 @@ public class Ui {
     public void invalidIndex(){
         System.out.println("Please enter an integer for item number or quantity.");
     }
+
+    /**
+     * Prints the list of orders.
+     * This includes the subtotal cost of each order.
+     * @param orders
+     */
     public void printOrderList(ArrayList<Order> orders) {
 
         DecimalFormat df = new DecimalFormat("#.00");

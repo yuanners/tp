@@ -119,7 +119,8 @@ public class Order implements OrderInterface {
      * @param parser      Parser object to parse the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Parser parser, Menu listOfItems) throws InvalidArgumentException, InvalidFlagException {
+    public boolean addOrder(Command command, Parser parser, Menu listOfItems)
+            throws InvalidArgumentException, InvalidFlagException {
         boolean isValid = false;
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("items", "I");
@@ -131,10 +132,8 @@ public class Order implements OrderInterface {
                 isValid = true;
             }
         } else if(command.getArgumentMap().get("items") != null) {
-            //if(addMultipleOrderValidation.validateAddMultipleOrder(command)) {
                 handleMultipleAddOrders(command, listOfItems);
                 isValid = true;
-            //}
         } else {
             ui.invalidOrderCommand();
             isValid = false;
