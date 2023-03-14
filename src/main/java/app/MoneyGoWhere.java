@@ -4,13 +4,13 @@ import exception.InvalidArgumentException;
 import exception.InvalidFlagException;
 import item.Item;
 import item.Menu;
-import validation.Validation;
 import validation.item.AddItemValidation;
 import order.Order;
 import order.Transaction;
 import utility.Parser;
 import utility.Ui;
-import validation.item.ItemValidation;
+import validation.item.DeleteItemValidation;
+
 
 import java.util.Scanner;
 
@@ -28,17 +28,17 @@ public class MoneyGoWhere {
 
     public void handleCommand(Command command) throws InvalidArgumentException, InvalidFlagException {
         Ui ui = new Ui();
-        AddItemValidation addItemValidation = new AddItemValidation();
-        ItemValidation itemValidation = new ItemValidation();
-        Validation validation = new Validation();
+
         switch(command.getCommand()) {
         case "listitem":
             items.displayList();
             break;
         case "additem":
             //Print some header
-            if(!validation.isValidFormat(command, "n", "name") ||
-                    !validation.isValidFormat(command, "p", "price")) {
+            AddItemValidation addItemValidation = new AddItemValidation();
+
+            if(!addItemValidation.isValidFormat(command, "n", "name") ||
+                    !addItemValidation.isValidFormat(command, "p", "price")) {
                 break;
             }
 
@@ -60,15 +60,18 @@ public class MoneyGoWhere {
 
             break;
         case "deleteitem":
+
+            DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
+
             command.mapArgumentAlias("index", "i");
 
-            if(!validation.isValidFormat(command, "i", "index")) {
+            if(!deleteItemValidation.isValidFormat(command, "i", "index")) {
                 break;
             }
-            if(!validation.isInteger(command.getArgumentMap().get("index"))) {
+            if(!deleteItemValidation.isInteger(command.getArgumentMap().get("index"))) {
                 break;
             }
-            if(!validation.isValidIndex(command.getArgumentMap().get("index"), items)) {
+            if(!deleteItemValidation.isValidIndex(command.getArgumentMap().get("index"), items)) {
                 break;
             }
 
