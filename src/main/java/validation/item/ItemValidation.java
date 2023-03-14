@@ -21,11 +21,4 @@ public class ItemValidation extends Validation {
         return true;
     }
 
-    /*
-    public int getNumOfDecimalPoints(String input) {
-        int indexOfDecimalPoint = input.indexOf(".");
-        int numOfDecimalPoint = input.length() - indexOfDecimalPoint - 1;
-        return numOfDecimalPoint;
-    }
-    */
 }
