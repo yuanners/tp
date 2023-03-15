@@ -30,6 +30,13 @@ public class AddOrderValidation extends Validation {
         }
     }
 
+    /**
+     * Validate the item index and quantity
+     *
+     * @param arg  user command
+     * @param menu itemlist
+     * @throws OrderException custom exception for order validation
+     */
     public void validateAddOrder(Command arg, Menu menu) throws OrderException {
         String itemIndex = "";
 
@@ -132,7 +139,7 @@ public class AddOrderValidation extends Validation {
             } else {
                 quantity = Integer.parseInt(arg.getArgumentMap().get("quantity").trim());
             }
-        }else{
+        } else {
             return true;
         }
 

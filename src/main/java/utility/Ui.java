@@ -13,9 +13,11 @@ public class Ui {
     private String NULL_MESSAGE = "Input is empty. Please enter something.";
     private String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
-    private String MISSING_ORDER_FLAG = "Please use -i or -I flags to add order.";
-    private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags";
-    private String INVALID_ORDER_INTEGER = "Item index and quantity must be a positive number";
+    private String MISSING_ORDER_FLAG = "Please use correctly formatted flags to add order.";
+    private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags.";
+    private String INVALID_ORDER_INTEGER = "Item index and quantity must be a positive number.";
+    private String INVALID_MULTIPLE_ORDER_FORMAT = "Wrong format to add multiple orders.";
+    private String INVALID_MULTIPLE_ORDER_INTEGER = "Please enter positive numbers only.";
     private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
     private String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
     private String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
@@ -29,6 +31,7 @@ public class Ui {
     private String INVALID_PRICE_ERROR = "Price must be a number.";
     private String REQUIRE_INTEGER = "This input requires a whole number!";
     private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
+
     /**
      * General print statements
      * Prompts user for input
@@ -93,8 +96,17 @@ public class Ui {
     public String getMissingOrderFlag() {
         return MISSING_ORDER_FLAG;
     }
-    public String getInvalidOrderInteger(){return INVALID_ORDER_INTEGER;}
 
+    public String getInvalidOrderInteger() {
+        return INVALID_ORDER_INTEGER;
+    }
+
+    public String getInvalidMultipleOrderFormat() {
+        return INVALID_MULTIPLE_ORDER_FORMAT;
+    }
+    public String getInvalidMultipleOrderInteger(){
+        return INVALID_MULTIPLE_ORDER_INTEGER;
+    }
     public String getItemDuplicateNameError() {
         return ITEM_DUPLICATE_NAME_ERROR;
     }
@@ -138,10 +150,14 @@ public class Ui {
     public String getInvalidPriceError() {
         return INVALID_PRICE_ERROR;
     }
+
     public String getRequireInteger() {
         return REQUIRE_INTEGER;
     }
-    public String getExitMessage(){return EXIT_MESSAGE;}
+
+    public String getExitMessage() {
+        return EXIT_MESSAGE;
+    }
 
     /**
      * Prints all items in a table format
@@ -161,6 +177,7 @@ public class Ui {
     /**
      * Prints the list of orders.
      * This includes the subtotal cost of each order.
+     *
      * @param orders list of orders
      */
     public void printOrderList(ArrayList<Order> orders) {

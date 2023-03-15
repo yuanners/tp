@@ -18,6 +18,7 @@ public class Validation {
      * @throws InvalidArgumentException
      */
     public void validateArgument(Command arg) throws InvalidArgumentException {
+        assert arg.getUserInput() != null : "Null input should be handled";
         if (arg.getUserInput() == null) {
             throw new InvalidArgumentException(ui.getNullMessage());
         }

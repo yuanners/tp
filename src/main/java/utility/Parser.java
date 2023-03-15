@@ -2,7 +2,6 @@ package utility;
 
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.lang.reflect.Type;
 import java.util.regex.Matcher;
@@ -41,7 +40,8 @@ public class Parser {
     public Map<String, String> formatArguments(String argString) {
 
 
-        String regex = "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]+)|\\s+'([^']*)'|\\s+\"([^\"]*)\"|\\s*([^\\s-][^\\s]*)|\\s*(?=--|-|$))?";
+        String regex = "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]+)|\\s+'([^']*)'|\\s+\"([^\"]*)\"|" +
+                "\\s*([^\\s-][^\\s]*)|\\s*(?=--|-|$))?";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(argString);
