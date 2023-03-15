@@ -104,7 +104,7 @@ public class Order implements OrderInterface {
 
         double subtotal = 0;
 
-        for(OrderEntry i : this.orderEntries) {
+        for (OrderEntry i : this.orderEntries) {
             subtotal += (i.getQuantity() * i.getItem().getPrice());
         }
 
@@ -116,10 +116,9 @@ public class Order implements OrderInterface {
      * Adds one or multiple items to the Order.
      *
      * @param command     Command object representing the user input
-     * @param parser      Parser object to parse the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Parser parser, Menu listOfItems)
+    public boolean addOrder(Command command, Menu listOfItems)
             throws InvalidArgumentException, InvalidFlagException {
 
         boolean isValid = false;
@@ -130,18 +129,18 @@ public class Order implements OrderInterface {
         AddOrderValidation addOrderValidation = new AddOrderValidation();
         AddMultipleOrderValidation addMultipleOrderValidation = new AddMultipleOrderValidation();
 
-        if(command.getArgumentMap().get("item") != null) {
-
-            if(addOrderValidation.validateAddOrder(command)) {
+        if (command.getArgumentMap().get("item") != null) {
+            if (addOrderValidation.validateAddOrder(command)) {
                 addSingleOrder(command, listOfItems);
                 isValid = true;
             }
-        } else if(command.getArgumentMap().get("items") != null) {
-            handleMultipleAddOrders(command, listOfItems);
-            isValid = true;
+        } else if (command.getArgumentMap().get("items") != null) {
+            if (addMultipleOrderValidation.validateAddMultipleOrder(command)) {
+                handleMultipleAddOrders(command, listOfItems);
+                isValid = true;
+            }
         } else {
             ui.invalidOrderCommand();
-            isValid = false;
         }
 
         return isValid;
@@ -192,7 +191,7 @@ public class Order implements OrderInterface {
         command.mapArgumentAlias("quantity", "q");
         int quantity;
 
-        if(command.getArgumentMap().get("quantity") != null) {
+        if (command.getArgumentMap().get("quantity") != null) {
             quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
         } else {
             quantity = 1;
@@ -213,13 +212,13 @@ public class Order implements OrderInterface {
 
         String[] ordersArguments = command.getArgumentMap().get("items").split(",");
 
-        for(String orderString : ordersArguments) {
+        for (String orderString : ordersArguments) {
 
-            if(orderString.charAt(0) == '[') {
+            if (orderString.charAt(0) == '[') {
                 orderString = orderString.substring(1);
             }
 
-            if(orderString.substring(orderString.length() - 1).equals("]")) {
+            if (orderString.substring(orderString.length() - 1).equals("]")) {
                 orderString = orderString.substring(0, orderString.length() - 1);
             }
 
