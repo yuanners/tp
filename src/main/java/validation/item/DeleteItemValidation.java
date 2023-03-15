@@ -36,13 +36,13 @@ public class DeleteItemValidation extends ItemValidation {
     public void validateIndex(Command c, Menu items) throws ItemException {
         int result = isInteger(c.getArgumentMap().get(LONG_INDEX_FLAG));
         if(result == 1) {
-            throw new ItemException(ui.getREQUIRE_INTEGER());
+            throw new ItemException(ui.getRequireInteger());
         }
         if(result == 2) {
-            throw new ItemException(ui.getINTEGER_OVERFLOW());
+            throw new ItemException(ui.getIntegerOverflow());
         }
         if(!isValidIndex(c.getArgumentMap().get(LONG_INDEX_FLAG), items)) {
-            throw new ItemException(ui.getINVALID_INDEX());
+            throw new ItemException(ui.getInvalidIndex());
         }
     }
 }

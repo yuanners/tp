@@ -82,79 +82,79 @@ public class Ui {
     }
 
     /*** Getter Methods to retrieve error messages ***/
-    public String getNULL_MESSAGE() {
+    public String getNullMessage() {
         return NULL_MESSAGE;
     }
 
-    public String getDOUBLE_OVERFLOW() {
+    public String getDoubleOverflow() {
         return DOUBLE_OVERFLOW;
     }
 
-    public String getERROR_MESSAGE() {
+    public String getErrorMessage() {
         return ERROR_MESSAGE;
     }
 
-    public String getINTEGER_ERROR() {
+    public String getIntegerError() {
         return INTEGER_ERROR;
     }
 
-    public String getMISSING_ORDER_ARGUMENT() {
+    public String getMissingOrderArgument() {
         return MISSING_ORDER_ARGUMENT;
     }
 
-    public String getITEM_DUPLICATE_NAME_ERROR() {
+    public String getItemDuplicateNameError() {
         return ITEM_DUPLICATE_NAME_ERROR;
     }
 
-    public String getITEM_NAME_MIN_LENGTH_ERROR() {
+    public String getItemNameMinLengthError() {
         return ITEM_NAME_MIN_LENGTH_ERROR;
     }
 
-    public String getITEM_NAME_MAX_LENGTH_ERROR() {
+    public String getItemNameMaxLengthError() {
         return ITEM_NAME_MAX_LENGTH_ERROR;
     }
 
-    public String getITEM_PRICE_MIN_LENGTH_ERROR() {
+    public String getItemPriceMinLengthError() {
         return ITEM_PRICE_MIN_LENGTH_ERROR;
     }
 
-    public String getITEM_PRICE_NEGATIVE_ERROR() {
+    public String getItemPriceNegativeError() {
         return ITEM_PRICE_NEGATIVE_ERROR;
     }
 
-    public String getINTEGER_OVERFLOW() {
+    public String getIntegerOverflow() {
         return INTEGER_OVERFLOW;
     }
 
-    public String getINVALID_ADDITEM_FORMAT() {
+    public String getInvalidAdditemFormat() {
         return INVALID_ADDITEM_FORMAT;
     }
 
-    public String getINVALID_DELETEITEM_FORMAT() {
+    public String getInvalidDeleteitemFormat() {
         return INVALID_DELETEITEM_FORMAT;
     }
 
-    public String getINVALID_INDEX() {
+    public String getInvalidIndex() {
         return INVALID_INDEX;
     }
 
-    public String getPRICE_DECIMAL_ERROR() {
+    public String getPriceDecimalError() {
         return PRICE_DECIMAL_ERROR;
     }
 
-    public String getINVALID_PRICE_ERROR() {
+    public String getInvalidPriceError() {
         return INVALID_PRICE_ERROR;
     }
 
-    public String getSUCCESSFUL_COMMAND() {
+    public String getSuccessfulCommand() {
         return SUCCESSFUL_COMMAND;
     }
 
-    public String getPROMPT_MESSAGE() {
+    public String getPromptMessage() {
         return PROMPT_MESSAGE;
     }
 
-    public String getREQUIRE_INTEGER() {
+    public String getRequireInteger() {
         return REQUIRE_INTEGER;
     }
 
