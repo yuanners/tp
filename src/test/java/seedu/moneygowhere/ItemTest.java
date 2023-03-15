@@ -1,14 +1,12 @@
-package seedu.duke;
+package seedu.moneygowhere;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import app.Command;
 import app.MoneyGoWhere;
-import exception.InvalidFlagException;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
-import exception.InvalidArgumentException;
 
 class ItemTest {
     MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
@@ -27,11 +25,7 @@ class ItemTest {
 
         Command command = new Command(userInput);
 
-        try {
-            moneyGoWhere.handleCommand(command);
-        } catch (InvalidArgumentException | InvalidFlagException e) {
-            ui.println(e.getMessage());
-        }
+        moneyGoWhere.handleCommand(command);
 
     }
 

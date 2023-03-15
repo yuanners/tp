@@ -10,12 +10,12 @@ import java.util.ArrayList;
  * All print command will be done through here.
  */
 public class Ui {
-
     private String NULL_MESSAGE = "Input is empty. Please enter something.";
     private String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
-    private String INTEGER_ERROR = "Argument needs to be an integer";
-    private String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
+    private String MISSING_ORDER_FLAG = "Please use -i or -I flags to add order.";
+    private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags";
+    private String INVALID_ORDER_INTEGER = "Item index and quantity must be a positive number";
     private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
     private String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
     private String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
@@ -27,19 +27,14 @@ public class Ui {
     private String INVALID_INDEX = "Please enter a valid index!";
     private String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
     private String INVALID_PRICE_ERROR = "Price must be a number.";
-    private String SUCCESSFUL_COMMAND = "Successfully executed your command!";
-    private String PROMPT_MESSAGE = "Please enter again:";
     private String REQUIRE_INTEGER = "This input requires a whole number!";
+    private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
     /**
      * General print statements
      * Prompts user for input
      */
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
-    }
-
-    public void promptUserInputError() {
-        System.out.println("Please enter again:");
     }
 
     /**
@@ -58,9 +53,6 @@ public class Ui {
         System.out.println("The command: " + command + " was successfully executed!");
     }
 
-    public void printExitMessage() {
-        System.out.println("Thank you for using MoneyGoWhere. Goodbye!");
-    }
 
     /**
      * Prints string to user and moves the cursor to a new line.
@@ -94,13 +86,14 @@ public class Ui {
         return ERROR_MESSAGE;
     }
 
-    public String getIntegerError() {
-        return INTEGER_ERROR;
-    }
-
     public String getMissingOrderArgument() {
         return MISSING_ORDER_ARGUMENT;
     }
+
+    public String getMissingOrderFlag() {
+        return MISSING_ORDER_FLAG;
+    }
+    public String getInvalidOrderInteger(){return INVALID_ORDER_INTEGER;}
 
     public String getItemDuplicateNameError() {
         return ITEM_DUPLICATE_NAME_ERROR;
@@ -145,18 +138,10 @@ public class Ui {
     public String getInvalidPriceError() {
         return INVALID_PRICE_ERROR;
     }
-
-    public String getSuccessfulCommand() {
-        return SUCCESSFUL_COMMAND;
-    }
-
-    public String getPromptMessage() {
-        return PROMPT_MESSAGE;
-    }
-
     public String getRequireInteger() {
         return REQUIRE_INTEGER;
     }
+    public String getExitMessage(){return EXIT_MESSAGE;}
 
     /**
      * Prints all items in a table format
@@ -174,22 +159,9 @@ public class Ui {
 
 
     /**
-     * ORDER AND TRANSACTION PRINT STATEMENTS
-     */
-    public void invalidOrderCommand(){
-        System.out.println("Please use -i or -I flags for addorder command.");
-    }
-    public void invalidOrderSyntax(){
-        System.out.println("Please enter the item's index number after the flag.");
-    }
-    public void invalidIndex(){
-        System.out.println("Please enter an integer for item number or quantity.");
-    }
-
-    /**
      * Prints the list of orders.
      * This includes the subtotal cost of each order.
-     * @param orders
+     * @param orders list of orders
      */
     public void printOrderList(ArrayList<Order> orders) {
 
