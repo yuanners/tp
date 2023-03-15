@@ -59,8 +59,6 @@ public class MoneyGoWhere {
             ui.println(a.getMessage());
         } catch(InvalidFlagException f) {
             ui.println(f.getMessage());
-        } catch(InvalidCommandException c) {
-            ui.println(c.getMessage());
         }
 
     }
@@ -87,8 +85,6 @@ public class MoneyGoWhere {
                 ui.println(f.getMessage());
             } catch(InvalidArgumentException a) {
                 ui.println(a.getMessage());
-            } catch(InvalidCommandException c) {
-                ui.println(c.getMessage());
             }
         }
 
