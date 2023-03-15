@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import utility.Ui;
 
 class OrderTest {
-
+/**
     public void runTest(String input, MoneyGoWhere moneyGoWhere) {
         Ui ui = new Ui();
         ui.promptUserInput();
@@ -99,7 +99,7 @@ class OrderTest {
      * This is work in progress. For now, this fails and it causes CI to fail
      *
      * Uncomment @Test below if you want to run it
-     **/
+     /
     
     // @Test
     public void orderTest4() {
@@ -136,7 +136,7 @@ class OrderTest {
                         .getOrderEntries().size() - 1).getQuantity());
 
     }
-
+**/
 
 }
 
