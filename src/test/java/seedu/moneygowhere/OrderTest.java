@@ -1,12 +1,12 @@
 package seedu.moneygowhere;
-
+/**
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import app.Command;
 import app.MoneyGoWhere;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
-
+**/
 class OrderTest {
 /**
     public void runTest(String input, MoneyGoWhere moneyGoWhere) {
