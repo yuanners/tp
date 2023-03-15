@@ -41,7 +41,9 @@ public class Command {
     public void mapArgumentAlias(String longAlias, String shortAlias) {
         if(argumentMap.containsKey(shortAlias)) {
             argumentMap.put(longAlias, argumentMap.get(shortAlias));
-        } else {
+        }
+
+        if (argumentMap.containsKey(longAlias)) {
             argumentMap.put(shortAlias, argumentMap.get(longAlias));
         }
     }

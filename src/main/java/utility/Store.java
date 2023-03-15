@@ -22,7 +22,7 @@ import com.opencsv.CSVWriter;
  * whether they are in JSON or CSV format.
  */
 public class Store {
-    private static final String STORE_DIR_PATH = "./store";
+    private static final String STORE_DIR_PATH = "./datastore";
     private String storeFilePath;
     private String fileExtension;
 
