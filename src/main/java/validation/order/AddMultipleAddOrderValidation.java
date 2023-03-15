@@ -1,15 +1,12 @@
 package validation.order;
 
-import app.Command;
-import exception.InvalidArgumentException;
-import exception.InvalidFlagException;
 import item.Menu;
 import utility.Ui;
 
-public class AddMultipleOrderValidation extends OrderValidation{
+public class AddMultipleAddOrderValidation extends AddOrderValidation {
     private Menu items = new Menu();
     private Ui ui = new Ui();
-    public AddMultipleOrderValidation(){
+    public AddMultipleAddOrderValidation(){
 
     }
     /*

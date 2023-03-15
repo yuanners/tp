@@ -1,8 +1,8 @@
 package app;
 
 import exception.InvalidArgumentException;
-import exception.InvalidFlagException;
 import exception.ItemException;
+import exception.OrderException;
 import item.Menu;
 import order.Order;
 import order.Transaction;
@@ -23,7 +23,7 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-    public void handleCommand(Command command) throws InvalidArgumentException, InvalidFlagException{
+    public void handleCommand(Command command) {
         Ui ui = new Ui();
 
         try {
@@ -55,10 +55,8 @@ public class MoneyGoWhere {
             }
         } catch(ItemException e) {
             ui.println(e.getMessage());
-        } catch(InvalidArgumentException a) {
-            ui.println(a.getMessage());
-        } catch(InvalidFlagException f) {
-            ui.println(f.getMessage());
+        } catch(OrderException o) {
+            ui.println(o.getMessage());
         }
 
     }
@@ -73,19 +71,13 @@ public class MoneyGoWhere {
             String userInput = sc.nextLine();
 
             if(userInput.equals("exit")) {
-                ui.println(ui.EXIT_MESSAGE);
+                ui.println(ui.getExitMessage());
                 break;
             }
 
             Command command = new Command(userInput);
 
-            try {
-                handleCommand(command);
-            } catch(InvalidFlagException f) {
-                ui.println(f.getMessage());
-            } catch(InvalidArgumentException a) {
-                ui.println(a.getMessage());
-            }
+            handleCommand(command);
         }
 
         sc.close();

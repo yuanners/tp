@@ -1,11 +1,10 @@
 package order;
 
 import app.Command;
-import exception.InvalidArgumentException;
-import exception.InvalidFlagException;
+import exception.OrderException;
 import item.Menu;
 import utility.Parser;
-import validation.order.AddMultipleOrderValidation;
+import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
 import java.time.LocalDateTime;
@@ -102,7 +101,7 @@ public class Order implements OrderInterface {
 
         double subtotal = 0;
 
-        for(OrderEntry i : this.orderEntries) {
+        for (OrderEntry i : this.orderEntries) {
             subtotal += (i.getQuantity() * i.getItem().getPrice());
         }
 
@@ -114,30 +113,27 @@ public class Order implements OrderInterface {
      * Adds one or multiple items to the Order.
      *
      * @param command     Command object representing the user input
-     * @param parser      Parser object to parse the user input
      * @param listOfItems ItemList object containing the available items
      */
     public void addOrder(Command command, Parser parser, Menu listOfItems)
-            throws InvalidArgumentException, InvalidFlagException{
+            throws OrderException {
 
         try{
             AddOrderValidation addOrderValidation = new AddOrderValidation();
-            AddMultipleOrderValidation addMultipleOrderValidation = new AddMultipleOrderValidation();
+            AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation();
             command.mapArgumentAlias("item", "i");
             command.mapArgumentAlias("items", "I");
 
             if(command.getArgumentMap().get("item") != null) {
-                addOrderValidation.validateAddOrder(command);
+                addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
             } else if(command.getArgumentMap().get("items") != null) {
                 handleMultipleAddOrders(command, listOfItems);
             }else{
-                addOrderValidation.validateAddOrder(command);
+                addOrderValidation.checkValidFlag(command);
             }
-        } catch(InvalidArgumentException a) {
-            throw new InvalidArgumentException(a.getMessage());
-        } catch(InvalidFlagException f) {
-            throw new InvalidFlagException(f.getMessage());
+        } catch(OrderException o) {
+            throw new OrderException(o.getMessage());
         }
 
     }
@@ -186,7 +182,7 @@ public class Order implements OrderInterface {
         command.mapArgumentAlias("quantity", "q");
         int quantity;
 
-        if(command.getArgumentMap().get("quantity") != null) {
+        if (command.getArgumentMap().get("quantity") != null) {
             quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
         } else {
             quantity = 1;
@@ -207,13 +203,13 @@ public class Order implements OrderInterface {
 
         String[] ordersArguments = command.getArgumentMap().get("items").split(",");
 
-        for(String orderString : ordersArguments) {
+        for (String orderString : ordersArguments) {
 
-            if(orderString.charAt(0) == '[') {
+            if (orderString.charAt(0) == '[') {
                 orderString = orderString.substring(1);
             }
 
-            if(orderString.substring(orderString.length() - 1).equals("]")) {
+            if (orderString.substring(orderString.length() - 1).equals("]")) {
                 orderString = orderString.substring(0, orderString.length() - 1);
             }
 
