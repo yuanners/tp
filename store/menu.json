@@ -1,11 +1,11 @@
 [
   {
     "name": "chicken rice",
-    "price": 2.5
+    "price": 20.0
   },
   {
-    "name": "chicken rice",
-    "price": 2.5
+    "name": "chicken rice1",
+    "price": 20.0
   },
   {
     "name": "chicken rice",
@@ -58,5 +58,9 @@
   {
     "name": "Chicken",
     "price": 2.0
+  },
+  {
+    "name": "CHICKEN RICE 123",
+    "price": 123.12
   }
 ]

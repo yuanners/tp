@@ -10,19 +10,31 @@ import java.util.ArrayList;
  * All print command will be done through here.
  */
 public class Ui {
-
-    public final String NULL_MESSAGE = "Input is empty. Please enter something.";
-
+    private String NULL_MESSAGE = "Input is empty. Please enter something.";
+    private String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
+    private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
+    private String MISSING_ORDER_FLAG = "Please use -i or -I flags to add order.";
+    private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags";
+    private String INVALID_ORDER_INTEGER = "Item index and quantity must be a positive number";
+    private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
+    private String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
+    private String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
+    private String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
+    private String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
+    private String INTEGER_OVERFLOW = "Integer overflow! Please enter an integer within the valid range.";
+    private String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
+    private String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
+    private String INVALID_INDEX = "Please enter a valid index!";
+    private String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
+    private String INVALID_PRICE_ERROR = "Price must be a number.";
+    private String REQUIRE_INTEGER = "This input requires a whole number!";
+    private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
     /**
      * General print statements
      * Prompts user for input
      */
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
-    }
-
-    public void promptUserInputError() {
-        System.out.println("Please enter again:");
     }
 
     /**
@@ -35,43 +47,12 @@ public class Ui {
     }
 
     /**
-     * Prints invalid index
-     */
-    public void printInvalidIndex() {
-        System.out.println("Please enter a valid index!");
-    }
-
-    public void printIntegerOverflowError() {
-        System.out.println("Integer overflow! Please enter an integer within the valid range.");
-    }
-
-    public void printDoubleOverflowError() {
-        System.out.println("Double overflow! Please enter a double within the valid range.");
-    }
-
-
-    /**
      * Prints error message informing user to input a whole number
      */
-    public void printRequiresInteger() {
-        System.out.println("This input requires a whole number!");
-    }
-
-    public void printRequiresNumber() {
-        System.out.println("This input requires a number!");
-    }
-
-    public void printNegativeError() {
-        System.out.print("Value cannot be negative.");
-    }
-
-    public void printMinLengthError(String option) {
-        System.out.println(option + " cannot be empty.");
-    }
-
     public void printCommandSuccess(String command) {
-        System.out.println("The command: " + command + "was successfully executed!");
+        System.out.println("The command: " + command + " was successfully executed!");
     }
+
 
     /**
      * Prints string to user and moves the cursor to a new line.
@@ -87,24 +68,80 @@ public class Ui {
         System.out.print(string);
     }
 
-
     /*** ITEM AND MENU PRINT STATEMENTS ***/
-    public void printInvalidPrice() {
-        System.out.println("Price must have at most 2 decimal points.");
+    public String printInvalidFlags(String command) {
+        return "The usage of " + command + " is invalid.";
     }
 
-    public void printInvalidFormat(String command) {
-        System.out.println("The usage of " + command + " is invalid.");
+    /*** Getter Methods to retrieve error messages ***/
+    public String getNullMessage() {
+        return NULL_MESSAGE;
     }
 
-
-    public void printMaxLengthError() {
-        System.out.println("Name exceeds the 25 character limit.");
+    public String getDoubleOverflow() {
+        return DOUBLE_OVERFLOW;
     }
 
-    public void printDuplicateItemNameError() {
-        System.out.println("Item name already exists.");
+    public String getErrorMessage() {
+        return ERROR_MESSAGE;
     }
+
+    public String getMissingOrderArgument() {
+        return MISSING_ORDER_ARGUMENT;
+    }
+
+    public String getMissingOrderFlag() {
+        return MISSING_ORDER_FLAG;
+    }
+    public String getInvalidOrderInteger(){return INVALID_ORDER_INTEGER;}
+
+    public String getItemDuplicateNameError() {
+        return ITEM_DUPLICATE_NAME_ERROR;
+    }
+
+    public String getItemNameMinLengthError() {
+        return ITEM_NAME_MIN_LENGTH_ERROR;
+    }
+
+    public String getItemNameMaxLengthError() {
+        return ITEM_NAME_MAX_LENGTH_ERROR;
+    }
+
+    public String getItemPriceMinLengthError() {
+        return ITEM_PRICE_MIN_LENGTH_ERROR;
+    }
+
+    public String getItemPriceNegativeError() {
+        return ITEM_PRICE_NEGATIVE_ERROR;
+    }
+
+    public String getIntegerOverflow() {
+        return INTEGER_OVERFLOW;
+    }
+
+    public String getInvalidAdditemFormat() {
+        return INVALID_ADDITEM_FORMAT;
+    }
+
+    public String getInvalidDeleteitemFormat() {
+        return INVALID_DELETEITEM_FORMAT;
+    }
+
+    public String getInvalidIndex() {
+        return INVALID_INDEX;
+    }
+
+    public String getPriceDecimalError() {
+        return PRICE_DECIMAL_ERROR;
+    }
+
+    public String getInvalidPriceError() {
+        return INVALID_PRICE_ERROR;
+    }
+    public String getRequireInteger() {
+        return REQUIRE_INTEGER;
+    }
+    public String getExitMessage(){return EXIT_MESSAGE;}
 
     /**
      * Prints all items in a table format
@@ -121,14 +158,10 @@ public class Ui {
     }
 
 
-
-
     /**
-     * ORDER AND TRANSACTION PRINT STATEMENTS
      * Prints the list of orders.
      * This includes the subtotal cost of each order.
-     *
-     * @param orders Arraylist of orders stored
+     * @param orders list of orders
      */
     public void printOrderList(ArrayList<Order> orders) {
 
@@ -154,4 +187,5 @@ public class Ui {
 
         }
     }
+
 }
