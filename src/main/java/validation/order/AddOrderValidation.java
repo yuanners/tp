@@ -62,7 +62,7 @@ public class AddOrderValidation extends Validation {
      * @throws OrderException custom exception for order validation
      */
     public void checkValidFlagArgument(Command arg) throws OrderException {
-        if(arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
+        if(arg.getArgumentMap().containsKey("i") || arg.getArgumentMap().containsKey("item")) {
             if(!(isInteger(arg.getArgumentMap().get("i").trim()))
                     || !(isInteger(arg.getArgumentMap().get("item").trim()))) {
                 throw new OrderException(ui.getInvalidOrderInteger());
