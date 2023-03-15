@@ -40,8 +40,7 @@ public class Parser {
     public Map<String, String> formatArguments(String argString) {
 
 
-        String regex = "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]+)|\\s+'([^']*)'|\\s+\"([^\"]*)\"|" +
-                "\\s*([^\\s-][^\\s]*)|\\s*(?=--|-|$))?";
+        String regex = "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]\\w+)|\\s+'([^']*)'|\\s+\"([^\"]*)\"|\\s*([^\\s-][^\\s]*)|\\s*(?=--|-|$))?";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(argString);

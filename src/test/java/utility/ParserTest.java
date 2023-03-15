@@ -44,4 +44,15 @@ class ParserTest {
 
         assertEquals(true, argMap.containsKey("a"));
     }
+
+    @Test
+    void formatArguments_printMap(){
+        Parser p = new Parser();
+
+        String arguments = "-p 2sdkfnds";
+
+        Map<String, String> argMap = p.formatArguments(arguments);
+
+        System.out.println(argMap);
+    }
 }
