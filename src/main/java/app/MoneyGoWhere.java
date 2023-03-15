@@ -8,6 +8,7 @@ import order.Order;
 import order.Transaction;
 import utility.Parser;
 import utility.Ui;
+
 import java.util.Scanner;
 
 
@@ -22,7 +23,7 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-    public void handleCommand(Command command) throws InvalidArgumentException, InvalidFlagException {
+    public void handleCommand(Command command) throws InvalidArgumentException, InvalidFlagException{
         Ui ui = new Ui();
 
         try {
@@ -44,19 +45,23 @@ public class MoneyGoWhere {
 
             case "addorder":
                 Order order = new Order();
-                if(order.addOrder(command, parser, items)) {
-                    transactions.appendOrder(order);
-                    ui.printCommandSuccess(command.getCommand());
-                }
+                order.addOrder(command, parser, items);
+                transactions.appendOrder(order);
+                ui.printCommandSuccess(command.getCommand());
                 break;
 
             default:
                 ui.printInvalidCommand(command.getCommand());
             }
-        } catch (ItemException e) {
+        } catch(ItemException e) {
             ui.println(e.getMessage());
+        } catch(InvalidArgumentException a) {
+            ui.println(a.getMessage());
+        } catch(InvalidFlagException f) {
+            ui.println(f.getMessage());
+        } catch(InvalidCommandException c) {
+            ui.println(c.getMessage());
         }
-
 
     }
 
@@ -70,7 +75,7 @@ public class MoneyGoWhere {
             String userInput = sc.nextLine();
 
             if(userInput.equals("exit")) {
-                ui.printExitMessage();
+                ui.println(ui.EXIT_MESSAGE);
                 break;
             }
 
@@ -78,10 +83,12 @@ public class MoneyGoWhere {
 
             try {
                 handleCommand(command);
-            } catch(InvalidArgumentException e) {
-                ui.promptUserInputError();
-            } catch(InvalidFlagException i) {
-                ui.promptUserInput();
+            } catch(InvalidFlagException f) {
+                ui.println(f.getMessage());
+            } catch(InvalidArgumentException a) {
+                ui.println(a.getMessage());
+            } catch(InvalidCommandException c) {
+                ui.println(c.getMessage());
             }
         }
 

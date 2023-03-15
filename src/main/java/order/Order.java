@@ -5,7 +5,6 @@ import exception.InvalidArgumentException;
 import exception.InvalidFlagException;
 import item.Menu;
 import utility.Parser;
-import utility.Ui;
 import validation.order.AddMultipleOrderValidation;
 import validation.order.AddOrderValidation;
 
@@ -17,7 +16,6 @@ import java.util.UUID;
 public class Order implements OrderInterface {
 
     private String orderId;
-    private Ui ui = new Ui();
     private LocalDateTime dateTime;
     private ArrayList<OrderEntry> orderEntries;
 
@@ -119,32 +117,29 @@ public class Order implements OrderInterface {
      * @param parser      Parser object to parse the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Parser parser, Menu listOfItems)
-            throws InvalidArgumentException, InvalidFlagException {
+    public void addOrder(Command command, Parser parser, Menu listOfItems)
+            throws InvalidArgumentException, InvalidFlagException{
 
-        boolean isValid = false;
+        try{
+            AddOrderValidation addOrderValidation = new AddOrderValidation();
+            AddMultipleOrderValidation addMultipleOrderValidation = new AddMultipleOrderValidation();
+            command.mapArgumentAlias("item", "i");
+            command.mapArgumentAlias("items", "I");
 
-        command.mapArgumentAlias("item", "i");
-        command.mapArgumentAlias("items", "I");
-
-        AddOrderValidation addOrderValidation = new AddOrderValidation();
-        AddMultipleOrderValidation addMultipleOrderValidation = new AddMultipleOrderValidation();
-
-        if(command.getArgumentMap().get("item") != null) {
-
-            if(addOrderValidation.validateAddOrder(command)) {
+            if(command.getArgumentMap().get("item") != null) {
+                addOrderValidation.validateAddOrder(command);
                 addSingleOrder(command, listOfItems);
-                isValid = true;
+            } else if(command.getArgumentMap().get("items") != null) {
+                handleMultipleAddOrders(command, listOfItems);
+            }else{
+                addOrderValidation.validateAddOrder(command);
             }
-        } else if(command.getArgumentMap().get("items") != null) {
-            handleMultipleAddOrders(command, listOfItems);
-            isValid = true;
-        } else {
-            ui.invalidOrderCommand();
-            isValid = false;
+        } catch(InvalidArgumentException a) {
+            throw new InvalidArgumentException(a.getMessage());
+        } catch(InvalidFlagException f) {
+            throw new InvalidFlagException(f.getMessage());
         }
 
-        return isValid;
     }
 
     /**
@@ -158,7 +153,7 @@ public class Order implements OrderInterface {
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
 
-        int itemIndex = handleOrderIndex(command, listOfItems);
+        int itemIndex = handleOrderIndex(command);
         int quantity = handleQuantity(command);
 
         OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
@@ -169,10 +164,9 @@ public class Order implements OrderInterface {
      * Get the item index from user input
      *
      * @param command     user input command
-     * @param listOfItems storing all the menu items
      * @return item index
      */
-    public int handleOrderIndex(Command command, Menu listOfItems) {
+    public int handleOrderIndex(Command command) {
 
         command.mapArgumentAlias("item", "i");
         int itemIndex = Integer.parseInt(command.getArgumentMap().get("item").trim());

@@ -12,6 +12,7 @@ public class AddMultipleOrderValidation extends OrderValidation{
     public AddMultipleOrderValidation(){
 
     }
+    /*
     public boolean validateAddMultipleOrder(Command arg) throws InvalidArgumentException, InvalidFlagException {
         boolean isCorrectFormat = isValidFlag(arg) && isArgumentPresent(arg);
         boolean isValid = false;
@@ -28,5 +29,5 @@ public class AddMultipleOrderValidation extends OrderValidation{
         }
         return isValid;
     }
-
+*/
 }

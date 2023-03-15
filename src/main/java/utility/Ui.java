@@ -13,9 +13,11 @@ public class Ui {
 
     public final String NULL_MESSAGE = "Input is empty. Please enter something.";
     public final String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
-    public final String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
     public final String INTEGER_ERROR = "Argument needs to be an integer";
-    public final String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
+    public final String MISSING_ORDER_FLAG = "Please use -i or -I to add order.";
+    public final String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after the flags.";
+    public final String INVALID_QUANTITY_ARGUMENT = "Please enter integer for quantity.";
+    public final String INVALID_INDEX_ARGUMENT ="Please enter integer for item index";
     public final String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
     public final String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
     public final String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
@@ -30,6 +32,7 @@ public class Ui {
     public final String SUCCESSFUL_COMMAND = "Successfully executed your command!";
     public final String PROMPT_MESSAGE = "Please enter again:";
     public final String REQUIRE_INTEGER = "This input requires a whole number!";
+    public final String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
     /**
      * General print statements
      * Prompts user for input
@@ -59,9 +62,6 @@ public class Ui {
         System.out.println("The command: " + command + " was successfully executed!");
     }
 
-    public void printExitMessage() {
-        System.out.println("Thank you for using MoneyGoWhere. Goodbye!");
-    }
 
     /**
      * Prints string to user and moves the cursor to a new line.
@@ -97,19 +97,6 @@ public class Ui {
         }
     }
 
-
-    /**
-     * ORDER AND TRANSACTION PRINT STATEMENTS
-     */
-    public void invalidOrderCommand(){
-        System.out.println("Please use -i or -I flags for addorder command.");
-    }
-    public void invalidOrderSyntax(){
-        System.out.println("Please enter the item's index number after the flag.");
-    }
-    public void invalidIndex(){
-        System.out.println("Please enter an integer for item number or quantity.");
-    }
 
     /**
      * Prints the list of orders.

@@ -12,15 +12,18 @@ public class AddOrderValidation extends OrderValidation{
     public AddOrderValidation(){
 
     }
-    public boolean validateAddOrder(Command arg) throws InvalidArgumentException, InvalidFlagException {
-        boolean isValid = false;
-        if(isValidFlagArgument(arg)){
+    public void validateAddOrder(Command arg) throws InvalidArgumentException, InvalidFlagException {
+
+        try{
+            checkValidFlagArgument(arg);
             String itemIndex = arg.getArgumentMap().get("item").trim();
-            if(isValidIndex(itemIndex, items)) {
-                isValid = true;
+            if(!isValidIndex(itemIndex, items)) {
+                throw new InvalidArgumentException(ui.INVALID_INDEX);
             }
+        } catch(InvalidArgumentException a) {
+            throw new InvalidArgumentException(a.getMessage());
         }
-        return isValid;
+
     }
 
 }
