@@ -104,8 +104,12 @@ class OrderTest {
 
     }
 
-    /*** This is work in progress. For now, this fails and it causes CI to fail ***/
-    /*** Uncomment @Test below if you want to run it ***/
+    /**
+     * This is work in progress. For now, this fails and it causes CI to fail
+     *
+     * Uncomment @Test below if you want to run it
+     **/
+    
     // @Test
     public void orderTest4() {
 
