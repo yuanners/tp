@@ -41,7 +41,8 @@ public class Parser {
 
 
         String regex =
-                "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]\\w+)|\\s+'([^']*)'|\\s+\"([^\"]*)\"|\\s*([^\\s-][^\\s]*)|\\s*(?=--|-|$))?";
+                "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]\\w+)|\\s+'([^']*)'|\\s+" +
+                        "\"([^\"]*)\"|\\s*([^\\s-][^\\s]*)|\\s*(?=--|-|$))?";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(argString);
