@@ -11,25 +11,25 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    public final String NULL_MESSAGE = "Input is empty. Please enter something.";
-    public final String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
-    public final String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
-    public final String INTEGER_ERROR = "Argument needs to be an integer";
-    public final String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
-    public final String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
-    public final String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
-    public final String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
-    public final String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
-    public final String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
-    public final String INTEGER_OVERFLOW = "Integer overflow! Please enter an integer within the valid range.";
-    public final String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
-    public final String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
-    public final String INVALID_INDEX = "Please enter a valid index!";
-    public final String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
-    public final String INVALID_PRICE_ERROR = "Price must be a number.";
-    public final String SUCCESSFUL_COMMAND = "Successfully executed your command!";
-    public final String PROMPT_MESSAGE = "Please enter again:";
-    public final String REQUIRE_INTEGER = "This input requires a whole number!";
+    private String NULL_MESSAGE = "Input is empty. Please enter something.";
+    private String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
+    private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
+    private String INTEGER_ERROR = "Argument needs to be an integer";
+    private String MISSING_ORDER_ARGUMENT = "Please use -i or --item and -d or --done to add order.";
+    private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
+    private String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
+    private String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
+    private String ITEM_PRICE_MIN_LENGTH_ERROR = "Price cannot be empty.";
+    private String ITEM_PRICE_NEGATIVE_ERROR = "Price cannot be negative.";
+    private String INTEGER_OVERFLOW = "Integer overflow! Please enter an integer within the valid range.";
+    private String INVALID_ADDITEM_FORMAT = "additem command format is invalid.";
+    private String INVALID_DELETEITEM_FORMAT = "deleteitem command format is invalid.";
+    private String INVALID_INDEX = "Please enter a valid index!";
+    private String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
+    private String INVALID_PRICE_ERROR = "Price must be a number.";
+    private String SUCCESSFUL_COMMAND = "Successfully executed your command!";
+    private String PROMPT_MESSAGE = "Please enter again:";
+    private String REQUIRE_INTEGER = "This input requires a whole number!";
     /**
      * General print statements
      * Prompts user for input
@@ -54,7 +54,6 @@ public class Ui {
     /**
      * Prints error message informing user to input a whole number
      */
-
     public void printCommandSuccess(String command) {
         System.out.println("The command: " + command + " was successfully executed!");
     }
@@ -78,9 +77,85 @@ public class Ui {
     }
 
     /*** ITEM AND MENU PRINT STATEMENTS ***/
-
     public String printInvalidFlags(String command) {
         return "The usage of " + command + " is invalid.";
+    }
+
+    /*** Getter Methods to retrieve error messages ***/
+    public String getNullMessage() {
+        return NULL_MESSAGE;
+    }
+
+    public String getDoubleOverflow() {
+        return DOUBLE_OVERFLOW;
+    }
+
+    public String getErrorMessage() {
+        return ERROR_MESSAGE;
+    }
+
+    public String getIntegerError() {
+        return INTEGER_ERROR;
+    }
+
+    public String getMissingOrderArgument() {
+        return MISSING_ORDER_ARGUMENT;
+    }
+
+    public String getItemDuplicateNameError() {
+        return ITEM_DUPLICATE_NAME_ERROR;
+    }
+
+    public String getItemNameMinLengthError() {
+        return ITEM_NAME_MIN_LENGTH_ERROR;
+    }
+
+    public String getItemNameMaxLengthError() {
+        return ITEM_NAME_MAX_LENGTH_ERROR;
+    }
+
+    public String getItemPriceMinLengthError() {
+        return ITEM_PRICE_MIN_LENGTH_ERROR;
+    }
+
+    public String getItemPriceNegativeError() {
+        return ITEM_PRICE_NEGATIVE_ERROR;
+    }
+
+    public String getIntegerOverflow() {
+        return INTEGER_OVERFLOW;
+    }
+
+    public String getInvalidAdditemFormat() {
+        return INVALID_ADDITEM_FORMAT;
+    }
+
+    public String getInvalidDeleteitemFormat() {
+        return INVALID_DELETEITEM_FORMAT;
+    }
+
+    public String getInvalidIndex() {
+        return INVALID_INDEX;
+    }
+
+    public String getPriceDecimalError() {
+        return PRICE_DECIMAL_ERROR;
+    }
+
+    public String getInvalidPriceError() {
+        return INVALID_PRICE_ERROR;
+    }
+
+    public String getSuccessfulCommand() {
+        return SUCCESSFUL_COMMAND;
+    }
+
+    public String getPromptMessage() {
+        return PROMPT_MESSAGE;
+    }
+
+    public String getRequireInteger() {
+        return REQUIRE_INTEGER;
     }
 
     /**
@@ -140,4 +215,5 @@ public class Ui {
 
         }
     }
+
 }

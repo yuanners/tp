@@ -44,7 +44,7 @@ public class MoneyGoWhere {
 
             case "addorder":
                 Order order = new Order();
-                if(order.addOrder(command, parser, items)) {
+                if(order.addOrder(command, items)) {
                     transactions.appendOrder(order);
                     ui.printCommandSuccess(command.getCommand());
                 }

@@ -19,7 +19,7 @@ public class Validation {
      */
     public void validateArgument(Command arg) throws InvalidArgumentException {
         if (arg.getUserInput() == null) {
-            throw new InvalidArgumentException(ui.NULL_MESSAGE);
+            throw new InvalidArgumentException(ui.getNullMessage());
         }
     }
 
