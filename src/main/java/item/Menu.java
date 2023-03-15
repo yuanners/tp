@@ -34,7 +34,7 @@ public class Menu {
         }
     }
 
-    public ItemList(Store store) {
+    public Menu(Store store) {
         this.store = store;
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();

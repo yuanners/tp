@@ -30,6 +30,7 @@ public class MoneyGoWhere {
         AddItemValidation addItemValidation = new AddItemValidation();
         ItemValidation itemValidation = new ItemValidation();
         Validation validation = new Validation();
+
         switch(command.getCommand()) {
         case "listitem":
             items.displayList();
@@ -86,7 +87,7 @@ public class MoneyGoWhere {
         case "addorder":
             Order order = new Order();
             order.addOrder(command, parser, items);
-            orderList.appendOrder(order);
+            transactions.appendOrder(order);
             break;
 
         default:

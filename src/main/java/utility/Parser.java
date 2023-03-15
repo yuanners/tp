@@ -2,8 +2,11 @@ package utility;
 
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.lang.reflect.Type;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 import com.google.gson.Gson;
@@ -34,15 +37,30 @@ public class Parser {
      * @param argString the argument string
      * @return a map of argument key-value pairs
      */
+
     public Map<String, String> formatArguments(String argString) {
+
+
+        String regex = "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]+)|\\s+'([^']*)'|\\s+\"([^\"]*)\"|\\s*([^\\s-][^\\s]*)|\\s*(?=--|-|$))?";
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(argString);
+
         Map<String, String> argMap = new HashMap<>();
 
-        //Argument is delimit with '-' or '--'
-        String[] args = argString.split("-{1,2}");
-
-        for (int i = 1; i < args.length; i++) {
-            String[] keyValue = formatInput(args[i]);
-            argMap.put(keyValue[0].trim(), keyValue[1].trim());
+        while (matcher.find()) {
+            String flag = matcher.group(1);
+            String value = "";
+            if (matcher.group(2) != null) {
+                value = matcher.group(2);
+            } else if (matcher.group(3) != null) {
+                value = matcher.group(3);
+            } else if (matcher.group(4) != null) {
+                value = matcher.group(4);
+            } else if (matcher.group(5) != null) {
+                value = matcher.group(5);
+            }
+            argMap.put(flag, value);
         }
 
         return argMap;

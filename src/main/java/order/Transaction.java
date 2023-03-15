@@ -79,7 +79,7 @@ public class Transaction {
      */
     public void save() {
         try {
-            store.save(orders);
+            store.save(transactions);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
