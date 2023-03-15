@@ -41,7 +41,7 @@ class OrderTest {
     public void orderTest2() {
 
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
-        runTest("addorder -I [1 69, 2 169]", moneyGoWhere);
+        runTest("addorder -I [1:69, 2:169]", moneyGoWhere);
 
         assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
@@ -105,7 +105,7 @@ class OrderTest {
     public void orderTest4() {
 
         MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
-        runTest("addorder --items [0 69, 1 169]", moneyGoWhere);
+        runTest("addorder --items [0:69, 1:169]", moneyGoWhere);
 
         assertEquals("chicken rice", moneyGoWhere.transactions.getOrderList()
                 .get(moneyGoWhere.transactions.getOrderList().size() - 1)
