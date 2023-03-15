@@ -1,6 +1,5 @@
 package app;
 
-import exception.InvalidArgumentException;
 import exception.ItemException;
 import exception.OrderException;
 import item.Menu;
