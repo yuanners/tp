@@ -35,9 +35,9 @@ class ItemTest {
         runTest("additem -p 20.1 -n \"chicken rice100\"", moneyGoWhere);
         assertEquals("chicken rice100", moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getName());
+
         assert moneyGoWhere.items.getItems().
-                get(moneyGoWhere.items.getItems().size() - 1).getName()
-                == "chicken rice100": "Item name should be chicken rice100";
+                get(moneyGoWhere.items.getItems().size() - 1).getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
         assertEquals(20.10, moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getPrice());
@@ -56,7 +56,7 @@ class ItemTest {
     @Test
     public void itemTest3() {
         // max 2dp error
-        runTest("additem -p 20.001 -n \"chicken rice4\"", moneyGoWhere);
+        runTest("additem -p 20.0001 -n \"chicken rice4\"", moneyGoWhere);
 
     }
 
