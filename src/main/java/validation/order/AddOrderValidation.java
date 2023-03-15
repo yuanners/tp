@@ -41,7 +41,9 @@ public class AddOrderValidation extends Validation {
 
         if(!isValidIndex(itemIndex, menu)) {
             throw new OrderException(ui.getInvalidIndex());
-        } else if(!(isValidQuantity(arg))) {
+        }
+
+        if(!(isValidQuantity(arg))) {
             throw new OrderException(ui.getInvalidOrderInteger());
         }
     }
@@ -56,13 +58,6 @@ public class AddOrderValidation extends Validation {
         if(arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
             if(!(isInteger(arg.getArgumentMap().get("i").trim()))
                     || !(isInteger(arg.getArgumentMap().get("item").trim()))) {
-                throw new OrderException(ui.getInvalidOrderInteger());
-            }
-        }
-
-        if(arg.getArgumentString().contains("-q") || arg.getArgumentString().contains("--quantity")) {
-            if(!(isInteger(arg.getArgumentMap().get("q").trim()))
-                    || !(isInteger(arg.getArgumentMap().get("quantity").trim()))) {
                 throw new OrderException(ui.getInvalidOrderInteger());
             }
         }
@@ -121,20 +116,32 @@ public class AddOrderValidation extends Validation {
      * @param arg user input
      * @return validation outcome (true/false)
      */
-    public boolean isValidQuantity(Command arg) {
+    public boolean isValidQuantity(Command arg) throws OrderException {
         int quantity = 0;
         if(arg.getArgumentString().contains("-q")) {
-            quantity = Integer.parseInt(arg.getArgumentMap().get("q").trim());
+
+            if(!(isInteger(arg.getArgumentMap().get("q").trim()))) {
+                throw new OrderException(ui.getInvalidOrderInteger());
+            } else {
+                quantity = Integer.parseInt(arg.getArgumentMap().get("q").trim());
+            }
+
         } else if(arg.getArgumentString().contains("--quantity")) {
-            quantity = Integer.parseInt(arg.getArgumentMap().get("quantity").trim());
-        } else {
+            if(!(isInteger(arg.getArgumentMap().get("quantity").trim()))) {
+                throw new OrderException(ui.getInvalidOrderInteger());
+            } else {
+                quantity = Integer.parseInt(arg.getArgumentMap().get("quantity").trim());
+            }
+        }else{
             return true;
         }
+
         if(quantity <= 0) {
             return false;
         }
         return true;
     }
-
-
 }
+
+
+

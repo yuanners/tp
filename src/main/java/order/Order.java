@@ -163,8 +163,6 @@ public class Order implements OrderInterface {
      * @return item index
      */
     public int handleOrderIndex(Command command) {
-
-        command.mapArgumentAlias("item", "i");
         int itemIndex = Integer.parseInt(command.getArgumentMap().get("item").trim());
 
         return itemIndex;
@@ -178,8 +176,6 @@ public class Order implements OrderInterface {
      * @return quantity
      */
     public int handleQuantity(Command command) {
-
-        command.mapArgumentAlias("quantity", "q");
         int quantity;
 
         if (command.getArgumentMap().get("quantity") != null) {
