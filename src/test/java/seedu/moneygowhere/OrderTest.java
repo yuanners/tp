@@ -1,12 +1,13 @@
 package seedu.moneygowhere;
 /**
-    import static org.junit.jupiter.api.Assertions.assertEquals;
+ * import static org.junit.jupiter.api.Assertions.assertEquals;
+ * <p>
+ * import app.Command;
+ * import app.MoneyGoWhere;
+ * import org.junit.jupiter.api.Test;
+ * import utility.Ui;
+ **/
 
-    import app.Command;
-    import app.MoneyGoWhere;
-    import org.junit.jupiter.api.Test;
-    import utility.Ui;
-**/
 /**
  public void runTest(String input, MoneyGoWhere moneyGoWhere) {
  Ui ui = new Ui();
@@ -15,8 +16,7 @@ package seedu.moneygowhere;
  moneyGoWhere.handleCommand(command);
  }
 
- @Test
- public void orderTest() {
+ @Test public void orderTest() {
 
  MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
  runTest("addorder -i 0 -q 169", moneyGoWhere);
@@ -36,8 +36,7 @@ package seedu.moneygowhere;
 
  }
 
- @Test
- public void orderTest2() {
+ @Test public void orderTest2() {
 
  MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
  runTest("addorder -I [1:69, 2:169]", moneyGoWhere);
@@ -72,8 +71,7 @@ package seedu.moneygowhere;
 
  }
 
- @Test
- public void orderTest3() {
+ @Test public void orderTest3() {
 
  MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
  runTest("addorder -i 0 -q 169", moneyGoWhere);
