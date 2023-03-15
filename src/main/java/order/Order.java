@@ -211,8 +211,8 @@ public class Order implements OrderInterface {
             }
 
             orderString = orderString.trim();
-            int itemIndex = Integer.parseInt(orderString.split(" ")[0]);
-            int quantity = Integer.parseInt(orderString.split(" ")[1]);
+            int itemIndex = Integer.parseInt(orderString.split(":")[0]);
+            int quantity = Integer.parseInt(orderString.split(":")[1]);
 
             OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
             this.orderEntries.add(orderEntry);
