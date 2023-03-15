@@ -44,18 +44,18 @@ public class AddItemValidation extends ItemValidation {
 
     public void validateName(Command c, Menu items) throws ItemException {
         if (c.getArgumentMap().get(LONG_NAME_FLAG).length() > 25) {
-            throw new ItemException(ui.ITEM_NAME_MAX_LENGTH_ERROR);
+            throw new ItemException(ui.getItemNameMaxLengthError());
         }
 
         if (c.getArgumentMap().get(LONG_NAME_FLAG).length() < 1) {
-            throw new ItemException(ui.ITEM_NAME_MIN_LENGTH_ERROR);
+            throw new ItemException(ui.getItemNameMinLengthError());
         }
 
         String newItemName = c.getArgumentMap().get(LONG_NAME_FLAG);
         int menuSize = items.getItems().size();
         for(int i = 0; i<menuSize; i++) {
             if(newItemName.toLowerCase().equals(items.getItem(i).getName().toLowerCase())) {
-                throw new ItemException(ui.ITEM_DUPLICATE_NAME_ERROR);
+                throw new ItemException(ui.getItemDuplicateNameError());
             }
         }
 
@@ -71,27 +71,27 @@ public class AddItemValidation extends ItemValidation {
         price = price.trim();
 
         if (price.length() < 1) {
-            throw new ItemException(ui.ITEM_PRICE_MIN_LENGTH_ERROR);
+            throw new ItemException(ui.getItemPriceMinLengthError());
         }
 
         if (!super.isDouble(price)) {
-            throw new ItemException(ui.INVALID_PRICE_ERROR);
+            throw new ItemException(ui.getInvalidPriceError());
         }
 
         double tempPrice = Double.parseDouble(price);
 
         if (tempPrice > Double.MAX_VALUE) {
-            throw new ItemException(ui.DOUBLE_OVERFLOW);
+            throw new ItemException(ui.getDoubleOverflow());
         }
 
         if (tempPrice < 0.00) {
-            throw new ItemException(ui.ITEM_PRICE_NEGATIVE_ERROR);
+            throw new ItemException(ui.getItemPriceNegativeError());
         }
 
         int numOfDecimalPoint = price.length() - price.indexOf('.') - 1;
 
         if (numOfDecimalPoint > 2) {
-            throw new ItemException(ui.PRICE_DECIMAL_ERROR);
+            throw new ItemException(ui.getPriceDecimalError());
         }
 
     }

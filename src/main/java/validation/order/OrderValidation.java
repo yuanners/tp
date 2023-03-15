@@ -36,7 +36,7 @@ public class OrderValidation extends Validation {
      * @throws InvalidArgumentException
      */
     public boolean isArgumentPresent(Command arg) throws InvalidArgumentException {
-        if(arg.getArgumentMap().get("i").trim() != null || arg.getArgumentMap().get("I").trim() != null) {
+        if(arg.getArgumentMap().get("i") != null || arg.getArgumentMap().get("I") != null) {
             return true;
         } else {
             ui.invalidOrderSyntax();
