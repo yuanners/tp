@@ -37,7 +37,8 @@ class ItemTest {
                 get(moneyGoWhere.items.getItems().size() - 1).getName());
 
         assert moneyGoWhere.items.getItems().
-                get(moneyGoWhere.items.getItems().size() - 1).getName().equals("chicken rice100"): "Item name should be chicken rice100";
+                get(moneyGoWhere.items.getItems().size() - 1)
+                .getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
         assertEquals(20.10, moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getPrice());
