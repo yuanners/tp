@@ -44,9 +44,9 @@ public class AddOrderValidation extends Validation {
         }
 
         if (!isInteger(item)) {
-            if (menu.findMatchingItemNames(item, menu.getItems()).size() > 1){
-               throw new ItemException(ui.getMultipleSimilarItemsFound());
-            } else if (menu.findMatchingItemNames(item, menu.getItems()).size() == 0){
+            if (menu.findMatchingItemNames(item, menu.getItems()).size() > 1) {
+                throw new ItemException(ui.getMultipleSimilarItemsFound());
+            } else if (menu.findMatchingItemNames(item, menu.getItems()).size() == 0) {
                 throw new ItemException(ui.getNoSuchItem());
             }
         }
