@@ -160,17 +160,33 @@ public class Ui {
     }
 
     /**
+     * Prints table header for menu
+     */
+    public void printMenuHeader() {
+        System.out.printf("| %-5s | %-25s | %-5s |\n", "Index", "Name", "Price");
+        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+    }
+
+    /**
      * Prints all items in a table format
      *
      * @param menu List of items
      */
     public void printMenu(ArrayList<Item> menu) {
-        System.out.printf("| %-5s | %-25s | %-5s |\n", "Index", "Name", "Price");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
-
+        printMenuHeader();
         for(int i = 0; i < menu.size(); ++i) {
             System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
         }
+    }
+
+    /**
+     * Prints specific index and name of item
+     * @param index Given index
+     * @param menu List of items
+     */
+
+    public void printFindItem(int index, ArrayList<Item> menu) {
+        System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
     }
 
 

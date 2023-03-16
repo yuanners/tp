@@ -13,6 +13,7 @@ import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
+import validation.item.FindItemValidation;
 
 public class Menu {
 
@@ -109,7 +110,7 @@ public class Menu {
         save();
     }
 
-    public void deleteItem(Command command, Menu items) throws ItemException{
+    public void deleteItem(Command command, Menu items) throws ItemException {
         try {
             DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
             deleteItemValidation.validateFlags(command);
@@ -122,5 +123,27 @@ public class Menu {
         int index = Integer.parseInt(command.getArgumentMap().get("index"));
         removeItem(index);
         save();
+    }
+
+    public void find(Command command, ArrayList<Item> menu) throws ItemException {
+        try {
+            FindItemValidation findItemValidation = new FindItemValidation();
+            findItemValidation.validateFlags(command);
+            command.mapArgumentAlias(findItemValidation.LONG_NAME_FLAG, findItemValidation.SHORT_NAME_FLAG);
+            findItemValidation.validateName(command);
+        } catch (ItemException e) {
+            throw new ItemException(e.getMessage());
+        }
+
+        Ui ui = new Ui();
+
+        String name = command.getArgumentMap().get("description");
+
+        ui.printMenuHeader();
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().contains(name)) {
+                ui.printFindItem(i, menu);
+            }
+        }
     }
 }
