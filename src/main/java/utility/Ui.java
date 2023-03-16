@@ -221,4 +221,7 @@ public class Ui {
         }
     }
 
+    public void printItemNotFound() {
+        System.out.println("The entered item cannot be found.");
+    }
 }

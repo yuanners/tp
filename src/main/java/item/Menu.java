@@ -125,23 +125,42 @@ public class Menu {
         save();
     }
 
-    public void find(Command command, ArrayList<Item> menu) throws ItemException {
-        try {
-            FindItemValidation findItemValidation = new FindItemValidation();
-            findItemValidation.validateFlags(command);
-            command.mapArgumentAlias(findItemValidation.LONG_NAME_FLAG, findItemValidation.SHORT_NAME_FLAG);
-            findItemValidation.validateName(command);
-        } catch (ItemException e) {
-            throw new ItemException(e.getMessage());
-        }
+    public void findItem(Command command, ArrayList<Item> menu) {
 
         Ui ui = new Ui();
+        String itemName = command.getArgumentString().toLowerCase();;
 
-        String name = command.getArgumentMap().get("description");
-
-        ui.printMenuHeader();
         for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getName().contains(name)) {
+            if (menu.get(i).getName().toLowerCase().contains(itemName)) {
+                showResultsOfFind(menu.get(i).getName(), menu);
+                return;
+            }
+        }
+
+        ui.printItemNotFound();
+
+    }
+
+    public boolean find(Command command, ArrayList<Item> menu) {
+
+        String itemName = command.getArgumentString();
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().contains(itemName)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void showResultsOfFind(String itemName, ArrayList<Item> menu) {
+
+        Ui ui = new Ui();
+        ui.printMenuHeader();
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().contains(itemName)) {
                 ui.printFindItem(i, menu);
             }
         }

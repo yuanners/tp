@@ -37,7 +37,7 @@ public class MoneyGoWhere {
                 break;
 
             case "finditem":
-                menu.find(command, menu.getItems());
+                menu.findItem(command, menu.getItems());
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
