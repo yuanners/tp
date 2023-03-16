@@ -27,38 +27,38 @@ public class MoneyGoWhere {
 
         try {
             switch (command.getCommand()) {
-                case "listitem":
-                    menu.displayList();
-                    break;
+            case "listitem":
+                menu.displayList();
+                break;
 
-                case "additem":
-                    menu.addItem(command, menu);
-                    ui.printCommandSuccess(command.getCommand());
-                    break;
+            case "additem":
+                menu.addItem(command, menu);
+                ui.printCommandSuccess(command.getCommand());
+                break;
 
-                case "find":
-                    menu.find(command, menu.getItems());
-                    ui.printCommandSuccess(command.getCommand());
-                    break;
+            case "find":
+                menu.find(command, menu.getItems());
+                ui.printCommandSuccess(command.getCommand());
+                break;
 
-                case "deleteitem":
-                    menu.deleteItem(command, menu);
-                    ui.printCommandSuccess(command.getCommand());
-                    break;
+            case "deleteitem":
+                menu.deleteItem(command, menu);
+                ui.printCommandSuccess(command.getCommand());
+                break;
 
-                case "listorder":
-                    transactions.displayList();
-                    break;
+            case "listorder":
+                transactions.displayList();
+                break;
 
-                case "addorder":
-                    Order order = new Order();
-                    order.addOrder(command, parser, menu);
-                    transactions.appendOrder(order);
-                    ui.printCommandSuccess(command.getCommand());
-                    break;
+            case "addorder":
+                Order order = new Order();
+                order.addOrder(command, parser, menu);
+                transactions.appendOrder(order);
+                ui.printCommandSuccess(command.getCommand());
+                break;
 
-                default:
-                    ui.printInvalidCommand(command.getCommand());
+            default:
+                ui.printInvalidCommand(command.getCommand());
             }
         } catch (ItemException e) {
             ui.println(e.getMessage());
