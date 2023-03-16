@@ -13,7 +13,6 @@ import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
-import validation.item.FindItemValidation;
 
 public class Menu {
 
@@ -125,23 +124,50 @@ public class Menu {
         save();
     }
 
-    public void find(Command command, ArrayList<Item> menu) throws ItemException {
-        try {
-            FindItemValidation findItemValidation = new FindItemValidation();
-            findItemValidation.validateFlags(command);
-            command.mapArgumentAlias(findItemValidation.LONG_NAME_FLAG, findItemValidation.SHORT_NAME_FLAG);
-            findItemValidation.validateName(command);
-        } catch (ItemException e) {
-            throw new ItemException(e.getMessage());
-        }
+    public int findItemIndex(String itemName, ArrayList<Item> menu) {
 
         Ui ui = new Ui();
+        itemName = itemName.toLowerCase();
 
-        String name = command.getArgumentMap().get("description");
-
-        ui.printMenuHeader();
         for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getName().contains(name)) {
+            if (menu.get(i).getName().toLowerCase().contains(itemName)) {
+                return i;
+            }
+        }
+
+        ui.printItemNotFound();
+        return -1;
+
+    }
+
+    public ArrayList<Integer> findMatchingItemNames(String itemName, ArrayList<Item> menu) {
+
+        ArrayList<Integer> itemIndexes = new ArrayList<>();
+        itemName = itemName.toLowerCase();
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().toLowerCase().contains(itemName)) {
+                if (itemName.equals(menu.get(i).getName().toLowerCase())) {
+                    itemIndexes.removeAll(itemIndexes);
+                    itemIndexes.add(i);
+                    break;
+                }
+                itemIndexes.add(i);
+            }
+        }
+
+        return itemIndexes;
+    }
+
+    public void showResultsOfFind(Command command, ArrayList<Item> menu) {
+
+        Ui ui = new Ui();
+        ui.printMenuHeader();
+
+        String itemName = command.getArgumentString();
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().contains(itemName)) {
                 ui.printFindItem(i, menu);
             }
         }

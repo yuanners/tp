@@ -37,7 +37,7 @@ public class MoneyGoWhere {
                 break;
 
             case "finditem":
-                menu.find(command, menu.getItems());
+                menu.showResultsOfFind(command, menu.getItems());
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
@@ -52,7 +52,7 @@ public class MoneyGoWhere {
 
             case "addorder":
                 Order order = new Order();
-                order.addOrder(command, parser, menu);
+                order.addOrder(command, menu);
                 transactions.appendOrder(order);
                 ui.printCommandSuccess(command.getCommand());
                 break;
