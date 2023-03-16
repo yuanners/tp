@@ -115,7 +115,7 @@ public class Order implements OrderInterface {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public void addOrder(Command command, Parser parser, Menu listOfItems)
+    public void addOrder(Command command, Menu listOfItems)
             throws OrderException {
 
         try{
@@ -125,7 +125,7 @@ public class Order implements OrderInterface {
             command.mapArgumentAlias("items", "I");
 
             if(command.getArgumentMap().get("item") != null) {
-                addOrderValidation.validateCommand(command);
+                command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
             } else if(command.getArgumentMap().get("items") != null) {
                 addMultipleOrderValidation.validateAddMultipleOrder(command);

@@ -15,7 +15,7 @@ public class Ui {
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
     private String MISSING_ORDER_FLAG = "Please use correctly formatted flags to add order.";
     private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags.";
-    private String INVALID_ORDER_INTEGER = "Item index and quantity must be a positive number.";
+    private String INVALID_ORDER_INTEGER = "Quantity must be a positive number.";
     private String INVALID_MULTIPLE_ORDER_FORMAT = "Wrong format to add multiple orders.";
     private String INVALID_MULTIPLE_ORDER_INTEGER = "Please enter positive numbers only.";
     private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
@@ -31,6 +31,9 @@ public class Ui {
     private String INVALID_PRICE_ERROR = "Price must be a number.";
     private String REQUIRE_INTEGER = "This input requires a whole number!";
     private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
+    private String NO_SUCH_ITEM = "No such item exists.";
+    private String MULTIPLE_SIMILAR_ITEMS = "Your input referenced multiple similar items. " +
+            "Please try again with a more specific item name.";
 
     /**
      * General print statements
@@ -157,6 +160,14 @@ public class Ui {
 
     public String getExitMessage() {
         return EXIT_MESSAGE;
+    }
+
+    public String getNoSuchItem() {
+        return NO_SUCH_ITEM;
+    }
+
+    public String getMultipleSimilarItemsFound() {
+        return MULTIPLE_SIMILAR_ITEMS;
     }
 
     /**

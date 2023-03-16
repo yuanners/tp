@@ -1,6 +1,7 @@
 package item;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import java.lang.reflect.Type;
@@ -124,39 +125,47 @@ public class Menu {
         save();
     }
 
-    public void findItem(Command command, ArrayList<Item> menu) {
+    public int findItemIndex(String itemName, ArrayList<Item> menu) {
 
         Ui ui = new Ui();
-        String itemName = command.getArgumentString().toLowerCase();;
+        itemName = itemName.toLowerCase();
 
         for (int i = 0; i < menu.size(); i++) {
             if (menu.get(i).getName().toLowerCase().contains(itemName)) {
-                showResultsOfFind(menu.get(i).getName(), menu);
-                return;
+                return i;
             }
         }
 
         ui.printItemNotFound();
+        return -1;
 
     }
 
-    public boolean find(Command command, ArrayList<Item> menu) {
+    public ArrayList<Integer> findMatchingItemNames(String itemName, ArrayList<Item> menu) {
 
-        String itemName = command.getArgumentString();
+        ArrayList<Integer> itemIndexes = new ArrayList<>();
+        itemName = itemName.toLowerCase();
 
         for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getName().contains(itemName)) {
-                return true;
+            if (menu.get(i).getName().toLowerCase().contains(itemName)) {
+                if (itemName.equals(menu.get(i).getName().toLowerCase())) {
+                    itemIndexes.removeAll(itemIndexes);
+                    itemIndexes.add(i);
+                    break;
+                }
+                itemIndexes.add(i);
             }
         }
 
-        return false;
+        return itemIndexes;
     }
 
-    private void showResultsOfFind(String itemName, ArrayList<Item> menu) {
+    public void showResultsOfFind(Command command, ArrayList<Item> menu) {
 
         Ui ui = new Ui();
         ui.printMenuHeader();
+
+        String itemName = command.getArgumentString();
 
         for (int i = 0; i < menu.size(); i++) {
             if (menu.get(i).getName().contains(itemName)) {
