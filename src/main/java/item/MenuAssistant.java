@@ -20,6 +20,14 @@ public class MenuAssistant {
         deleteItemValidation = new DeleteItemValidation();
     }
 
+    public void printResult(Command command, boolean isCancelled) {
+        if (isCancelled) {
+            ui.printCommandCancelled(command.getCommand());
+        } else {
+            ui.printCommandSuccess(command.getCommand());
+        }
+    }
+
     private boolean getName(Command command, Menu menu) {
         String name = "";
         boolean isValidName = false;
@@ -139,6 +147,30 @@ public class MenuAssistant {
         menu.save();
 
         return false;
+    }
+
+    private boolean getKeyword(Command command, Menu menu) {
+        String keyword = "";
+        boolean isRunning = false;
+
+        ui.promptItemKeyword();
+        keyword = sc.nextLine();
+
+        if(keyword.equals("/cancel")) {
+            return true;
+        }
+
+        command.setArgumentString(keyword);
+        menu.showResultsOfFind(command, menu.getItems());
+
+
+        return false;
+    }
+    public boolean showResultsOfFind(Command command, Menu menu) {
+        boolean isCancelled = false;
+        isCancelled = getKeyword(command, menu);
+
+        return isCancelled;
     }
 
 }
