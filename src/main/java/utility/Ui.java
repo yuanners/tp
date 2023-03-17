@@ -42,15 +42,18 @@ public class Ui {
      * General print statements
      * Prompts user for input
      */
-    public String printMissingOrderID(){
+    public String printMissingOrderID() {
         return MISSING_ORDER_ID;
     }
-    public String printInvalidRefundStatus(){
+
+    public String printInvalidRefundStatus() {
         return INVALID_REFUND_STATUS;
     }
-    public String printInvalidOrderID(){
+
+    public String printInvalidOrderID() {
         return INVALID_ORDER_ID;
     }
+
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
     }
@@ -119,9 +122,11 @@ public class Ui {
     public String getInvalidMultipleOrderFormat() {
         return INVALID_MULTIPLE_ORDER_FORMAT;
     }
-    public String getInvalidMultipleOrderInteger(){
+
+    public String getInvalidMultipleOrderInteger() {
         return INVALID_MULTIPLE_ORDER_INTEGER;
     }
+
     public String getItemDuplicateNameError() {
         return ITEM_DUPLICATE_NAME_ERROR;
     }
@@ -197,15 +202,16 @@ public class Ui {
      */
     public void printMenu(ArrayList<Item> menu) {
         printMenuHeader();
-        for(int i = 0; i < menu.size(); ++i) {
+        for (int i = 0; i < menu.size(); ++i) {
             System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
         }
     }
 
     /**
      * Prints specific index and name of item
+     *
      * @param index Given index
-     * @param menu List of items
+     * @param menu  List of items
      */
 
     public void printFindItem(int index, ArrayList<Item> menu) {
@@ -225,13 +231,13 @@ public class Ui {
 
         System.out.println("================================================");
 
-        for(int i = 0; i < orders.size(); i++) {
+        for (int i = 0; i < orders.size(); i++) {
 
             System.out.println("Order " + (i + 1));
             System.out.println("Order ID: " + orders.get(i).getOrderId());
             System.out.println("Order time: " + orders.get(i).getDateTime());
 
-            for(int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
+            for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
                 System.out.println((j + 1) + ". "
                         + orders.get(i).getOrderEntries().get(j).getItem().getName()
                         + " x" + orders.get(i).getOrderEntries().get(j).getQuantity());

@@ -16,7 +16,15 @@ public class Order implements OrderInterface {
     private String orderId;
     private LocalDateTime dateTime;
     private ArrayList<OrderEntry> orderEntries;
-    private enum status = 
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     /**
      * Constructs an Order object with a unique ID,
@@ -25,6 +33,7 @@ public class Order implements OrderInterface {
      */
     public Order() {
         this.orderId = UUID.randomUUID().toString();
+        this.status = "COMPLETED";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
     }

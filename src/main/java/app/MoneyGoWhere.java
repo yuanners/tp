@@ -5,6 +5,7 @@ import exception.OrderException;
 import item.Menu;
 import order.Order;
 import order.Transaction;
+import payment.Refund;
 import utility.Parser;
 import utility.Ui;
 
@@ -56,7 +57,11 @@ public class MoneyGoWhere {
                 transactions.appendOrder(order);
                 ui.printCommandSuccess(command.getCommand());
                 break;
-
+            case "refundorder":
+                Refund refund = new Refund();
+                refund.refundTransaction(command, transactions);
+                ui.printCommandSuccess(command.getCommand());
+                break;
             default:
                 ui.printInvalidCommand(command.getCommand());
             }
