@@ -109,7 +109,7 @@ public class Menu {
         save();
     }
 
-    public void deleteItem(Command command, Menu items) throws ItemException{
+    public void deleteItem(Command command, Menu items) throws ItemException {
         try {
             DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
             deleteItemValidation.validateFlags(command);
@@ -122,5 +122,54 @@ public class Menu {
         int index = Integer.parseInt(command.getArgumentMap().get("index"));
         removeItem(index);
         save();
+    }
+
+    public int findItemIndex(String itemName, ArrayList<Item> menu) {
+
+        Ui ui = new Ui();
+        itemName = itemName.toLowerCase();
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().toLowerCase().contains(itemName)) {
+                return i;
+            }
+        }
+
+        ui.printItemNotFound();
+        return -1;
+
+    }
+
+    public ArrayList<Integer> findMatchingItemNames(String itemName, ArrayList<Item> menu) {
+
+        ArrayList<Integer> itemIndexes = new ArrayList<>();
+        itemName = itemName.toLowerCase();
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().toLowerCase().contains(itemName)) {
+                if (itemName.equals(menu.get(i).getName().toLowerCase())) {
+                    itemIndexes.removeAll(itemIndexes);
+                    itemIndexes.add(i);
+                    break;
+                }
+                itemIndexes.add(i);
+            }
+        }
+
+        return itemIndexes;
+    }
+
+    public void showResultsOfFind(Command command, ArrayList<Item> menu) {
+
+        Ui ui = new Ui();
+        ui.printMenuHeader();
+
+        String itemName = command.getArgumentString();
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (menu.get(i).getName().contains(itemName)) {
+                ui.printFindItem(i, menu);
+            }
+        }
     }
 }

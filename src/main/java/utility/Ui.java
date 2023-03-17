@@ -15,7 +15,7 @@ public class Ui {
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
     private String MISSING_ORDER_FLAG = "Please use correctly formatted flags to add order.";
     private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags.";
-    private String INVALID_ORDER_INTEGER = "Item index and quantity must be a positive number.";
+    private String INVALID_ORDER_INTEGER = "Quantity must be a positive number.";
     private String INVALID_MULTIPLE_ORDER_FORMAT = "Wrong format to add multiple orders.";
     private String INVALID_MULTIPLE_ORDER_INTEGER = "Please enter positive numbers only.";
     private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
@@ -31,6 +31,9 @@ public class Ui {
     private String INVALID_PRICE_ERROR = "Price must be a number.";
     private String REQUIRE_INTEGER = "This input requires a whole number!";
     private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
+    private String NO_SUCH_ITEM = "No such item exists.";
+    private String MULTIPLE_SIMILAR_ITEMS = "Your input referenced multiple similar items. " +
+            "Please try again with a more specific item name.";
 
     /**
      * General print statements
@@ -38,6 +41,20 @@ public class Ui {
      */
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
+    }
+
+    /**
+     * Prompts user for item name when in assistance mode
+     */
+    public void promptItemName() {
+        System.out.println("Please enter the item's name: ");
+    }
+
+    /**
+     * Prompts user for item price when in assistance mode
+     */
+    public void promptItemPrice() {
+        System.out.println("Please enter the item's price: ");
     }
 
     /**
@@ -50,10 +67,17 @@ public class Ui {
     }
 
     /**
-     * Prints error message informing user to input a whole number
+     * Prints error message informing user that command has executed successfully
      */
     public void printCommandSuccess(String command) {
         System.out.println("The command: " + command + " was successfully executed!");
+    }
+
+    /**
+     * Prints error message informing user to input a whole number
+     */
+    public void printCommandCancelled(String command) {
+        System.out.println("The command: " + command + " has been cancelled.");
     }
 
 
@@ -159,18 +183,42 @@ public class Ui {
         return EXIT_MESSAGE;
     }
 
+    public String getNoSuchItem() {
+        return NO_SUCH_ITEM;
+    }
+
+    public String getMultipleSimilarItemsFound() {
+        return MULTIPLE_SIMILAR_ITEMS;
+    }
+
+    /**
+     * Prints table header for menu
+     */
+    public void printMenuHeader() {
+        System.out.printf("| %-5s | %-25s | %-5s |\n", "Index", "Name", "Price");
+        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+    }
+
     /**
      * Prints all items in a table format
      *
      * @param menu List of items
      */
     public void printMenu(ArrayList<Item> menu) {
-        System.out.printf("| %-5s | %-25s | %-5s |\n", "Index", "Name", "Price");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
-
+        printMenuHeader();
         for(int i = 0; i < menu.size(); ++i) {
             System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
         }
+    }
+
+    /**
+     * Prints specific index and name of item
+     * @param index Given index
+     * @param menu List of items
+     */
+
+    public void printFindItem(int index, ArrayList<Item> menu) {
+        System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
     }
 
 
@@ -205,4 +253,7 @@ public class Ui {
         }
     }
 
+    public void printItemNotFound() {
+        System.out.println("The entered item cannot be found.");
+    }
 }

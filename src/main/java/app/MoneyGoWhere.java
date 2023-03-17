@@ -3,6 +3,7 @@ package app;
 import exception.ItemException;
 import exception.OrderException;
 import item.Menu;
+import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import utility.Parser;
@@ -13,12 +14,12 @@ import java.util.Scanner;
 
 public class MoneyGoWhere {
 
-    public Menu items;
+    public Menu menu;
     public Transaction transactions;
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
-        items = new Menu();
+        menu = new Menu();
         transactions = new Transaction();
     }
 
@@ -26,25 +27,43 @@ public class MoneyGoWhere {
         Ui ui = new Ui();
 
         try {
-            switch(command.getCommand()) {
+            switch (command.getCommand()) {
             case "listitem":
-                items.displayList();
+                menu.displayList();
                 break;
+
+            case "/additem":
+                MenuAssistant menuAssistant = new MenuAssistant();
+                boolean isCancelled = menuAssistant.addItem(command, menu);
+                if (isCancelled) {
+                    ui.printCommandCancelled(command.getCommand());
+                } else {
+                    ui.printCommandSuccess(command.getCommand());
+                }
+                break;
+
             case "additem":
-                items.addItem(command, items);
+                menu.addItem(command, menu);
                 ui.printCommandSuccess(command.getCommand());
                 break;
+
+            case "finditem":
+                menu.showResultsOfFind(command, menu.getItems());
+                ui.printCommandSuccess(command.getCommand());
+                break;
+
             case "deleteitem":
-                items.deleteItem(command, items);
+                menu.deleteItem(command, menu);
                 ui.printCommandSuccess(command.getCommand());
                 break;
+
             case "listorder":
                 transactions.displayList();
                 break;
 
             case "addorder":
                 Order order = new Order();
-                order.addOrder(command, parser, items);
+                order.addOrder(command, menu);
                 transactions.appendOrder(order);
                 ui.printCommandSuccess(command.getCommand());
                 break;
@@ -52,9 +71,9 @@ public class MoneyGoWhere {
             default:
                 ui.printInvalidCommand(command.getCommand());
             }
-        } catch(ItemException e) {
+        } catch (ItemException e) {
             ui.println(e.getMessage());
-        } catch(OrderException o) {
+        } catch (OrderException o) {
             ui.println(o.getMessage());
         }
 
@@ -65,11 +84,11 @@ public class MoneyGoWhere {
         Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
 
-        while(true) {
+        while (true) {
             ui.promptUserInput();
             String userInput = sc.nextLine();
 
-            if(userInput.equals("exit")) {
+            if (userInput.equals("exit")) {
                 ui.println(ui.getExitMessage());
                 break;
             }
