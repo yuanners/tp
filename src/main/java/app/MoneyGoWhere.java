@@ -32,7 +32,7 @@ public class MoneyGoWhere {
                 menu.displayList();
                 break;
 
-            case "/additem":
+            case "additem":
                 MenuAssistant menuAssistant = new MenuAssistant();
                 boolean isCancelled = menuAssistant.addItem(command, menu);
                 if (isCancelled) {
@@ -42,7 +42,7 @@ public class MoneyGoWhere {
                 }
                 break;
 
-            case "additem":
+            case "/additem":
                 menu.addItem(command, menu);
                 ui.printCommandSuccess(command.getCommand());
                 break;
