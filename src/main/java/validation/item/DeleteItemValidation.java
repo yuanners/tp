@@ -22,10 +22,10 @@ public class DeleteItemValidation extends ItemValidation {
         }
     }
 
-    public void validateCommand(Command c, Menu items) throws ItemException {
+    public void validateCommand(Command c, Menu menu) throws ItemException {
         try {
             validateArgument(c);
-            validateIndex(c, items);
+            validateIndex(c, menu);
         } catch (ItemException e) {
             throw new ItemException(e.getMessage());
         } catch (InvalidArgumentException e) {
@@ -33,7 +33,7 @@ public class DeleteItemValidation extends ItemValidation {
         }
     }
 
-    public void validateIndex(Command c, Menu items) throws ItemException {
+    public void validateIndex(Command c, Menu menu) throws ItemException {
         int result = isInteger(c.getArgumentMap().get(LONG_INDEX_FLAG));
         if(result == 1) {
             throw new ItemException(ui.getRequireInteger());
@@ -41,7 +41,7 @@ public class DeleteItemValidation extends ItemValidation {
         if(result == 2) {
             throw new ItemException(ui.getIntegerOverflow());
         }
-        if(!isValidIndex(c.getArgumentMap().get(LONG_INDEX_FLAG), items)) {
+        if(!isValidIndex(c.getArgumentMap().get(LONG_INDEX_FLAG), menu)) {
             throw new ItemException(ui.getInvalidIndex());
         }
     }
