@@ -19,7 +19,6 @@ public class MenuAssistant {
         Ui ui = new Ui();
         AddItemValidation addItemValidation = new AddItemValidation();
 
-
         while (!isValidName) {
             ui.promptItemName();
             name = sc.nextLine();
@@ -48,7 +47,6 @@ public class MenuAssistant {
         boolean isValidPrice = false;
         Ui ui = new Ui();
         AddItemValidation addItemValidation = new AddItemValidation();
-
 
         while (!isValidPrice) {
             ui.promptItemPrice();
