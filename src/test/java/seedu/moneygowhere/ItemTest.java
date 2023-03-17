@@ -1,7 +1,6 @@
 package seedu.moneygowhere;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import app.Command;
 import app.MoneyGoWhere;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 class ItemTest {
     MoneyGoWhere moneyGoWhere;
     Scanner sc;
-    public void ItemTest() {
+    public ItemTest() {
         moneyGoWhere = new MoneyGoWhere();
         sc = new Scanner(System.in);
     }
@@ -46,14 +45,14 @@ class ItemTest {
         assertEquals(20.10, moneyGoWhere.menu.getItems().
                 get(moneyGoWhere.menu.getItems().size() - 1).getPrice());
 
-        runTest("listitem", moneyGoWhere);
-
-        runTest("deleteitem -i " + (moneyGoWhere.menu.getItems().size()-1), moneyGoWhere);
     }
 
     @Test
     public void itemTest2() {
         runTest("additem -p 2kuku0.01 -n \"chicken rice3\"", moneyGoWhere);
+        assert moneyGoWhere.menu.getItems().
+                get(moneyGoWhere.menu.getItems().size() - 1)
+                .getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
     }
 
@@ -61,7 +60,20 @@ class ItemTest {
     public void itemTest3() {
         // max 2dp error
         runTest("additem -p 20.0001 -n \"chicken rice4\"", moneyGoWhere);
+        assert moneyGoWhere.menu.getItems().
+                get(moneyGoWhere.menu.getItems().size() - 1)
+                .getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
+    }
+
+    @Test
+    public void itemTest4() {
+
+        runTest("listitem", moneyGoWhere);
+
+        runTest("deleteitem -i " + (moneyGoWhere.menu.getItems().size()-1), moneyGoWhere);
+
+        runTest("listitem", moneyGoWhere);
     }
 
 }
