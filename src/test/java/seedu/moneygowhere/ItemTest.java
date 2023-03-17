@@ -8,10 +8,14 @@ import app.MoneyGoWhere;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
 
+import java.util.Scanner;
+
 class ItemTest {
-    MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
-    public void sampleTest() {
-        assertTrue(true);
+    MoneyGoWhere moneyGoWhere;
+    Scanner sc;
+    public void ItemTest() {
+        moneyGoWhere = new MoneyGoWhere();
+        sc = new Scanner(System.in);
     }
 
     public void runTest(String input, MoneyGoWhere moneyGoWhere) {
@@ -22,10 +26,9 @@ class ItemTest {
         ui.promptUserInput();
         String userInput = input;
 
-
         Command command = new Command(userInput);
 
-        moneyGoWhere.handleCommand(command);
+        moneyGoWhere.handleCommand(command, sc);
 
     }
 
