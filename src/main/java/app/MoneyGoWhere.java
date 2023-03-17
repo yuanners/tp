@@ -30,6 +30,9 @@ public class MoneyGoWhere {
         boolean isCancelled;
         try {
             switch (command.getCommand()) {
+            case "/listitem":
+                // Fallthrough
+                
             case "listitem":
                 menu.displayList();
                 break;
