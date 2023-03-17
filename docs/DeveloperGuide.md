@@ -19,7 +19,7 @@
 
 ## Implementation
 
-## Appendix - Requirements
+## Appendix: Requirements
 
 ### Project Scope
 ### User Stories
