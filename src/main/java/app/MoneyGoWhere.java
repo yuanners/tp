@@ -15,17 +15,19 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public Menu menu;
+    MenuAssistant menuAssistant;
     public Transaction transactions;
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
         menu = new Menu();
+        menuAssistant = new MenuAssistant();
         transactions = new Transaction();
     }
 
     public void handleCommand(Command command) {
         Ui ui = new Ui();
-
+        boolean isCancelled;
         try {
             switch (command.getCommand()) {
             case "listitem":
@@ -33,8 +35,7 @@ public class MoneyGoWhere {
                 break;
 
             case "additem":
-                MenuAssistant menuAssistant = new MenuAssistant();
-                boolean isCancelled = menuAssistant.addItem(command, menu);
+                isCancelled = menuAssistant.addItem(command, menu);
                 if (isCancelled) {
                     ui.printCommandCancelled(command.getCommand());
                 } else {
@@ -53,6 +54,15 @@ public class MoneyGoWhere {
                 break;
 
             case "deleteitem":
+                isCancelled = menuAssistant.deleteItem(command, menu);
+                if (isCancelled) {
+                    ui.printCommandCancelled(command.getCommand());
+                } else {
+                    ui.printCommandSuccess(command.getCommand());
+                }
+                break;
+
+            case "/deleteitem":
                 menu.deleteItem(command, menu);
                 ui.printCommandSuccess(command.getCommand());
                 break;
