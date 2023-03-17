@@ -7,8 +7,6 @@ import app.MoneyGoWhere;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
 
-import java.util.Scanner;
-
 class ItemTest {
     MoneyGoWhere moneyGoWhere;
 
