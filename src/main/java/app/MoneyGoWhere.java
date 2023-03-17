@@ -86,11 +86,6 @@ public class MoneyGoWhere {
 
         while (true) {
             ui.promptUserInput();
-
-            if(!sc.hasNextLine()) {
-                continue;
-            }
-
             String userInput = sc.nextLine();
 
             if (userInput.equals("exit")) {
