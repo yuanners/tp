@@ -4,21 +4,25 @@ import app.Command;
 import exception.ItemException;
 import utility.Ui;
 import validation.item.AddItemValidation;
+import validation.item.DeleteItemValidation;
 
 import java.util.Scanner;
 
 public class MenuAssistant {
+    Ui ui;
     Scanner sc;
+    AddItemValidation addItemValidation;
+    DeleteItemValidation deleteItemValidation;
     public MenuAssistant() {
+        ui = new Ui();
         sc = new Scanner(System.in);
+        addItemValidation = new AddItemValidation();
+        deleteItemValidation = new DeleteItemValidation();
     }
 
     private boolean getName(Command command, Menu menu) {
         String name = "";
         boolean isValidName = false;
-        Ui ui = new Ui();
-        AddItemValidation addItemValidation = new AddItemValidation();
-
 
         while (!isValidName) {
             ui.promptItemName();
@@ -46,9 +50,6 @@ public class MenuAssistant {
     private boolean getPrice(Command command, Menu menu) {
         String price = "";
         boolean isValidPrice = false;
-        Ui ui = new Ui();
-        AddItemValidation addItemValidation = new AddItemValidation();
-
 
         while (!isValidPrice) {
             ui.promptItemPrice();
@@ -92,6 +93,51 @@ public class MenuAssistant {
         Item item = new Item(name, price);
         menu.appendItem(item);
         menu.save();
+        return false;
+    }
+
+    private boolean getIndex(Command command, Menu menu) {
+        String index = "";
+        boolean isValidIndex = false;
+
+        while (!isValidIndex) {
+            ui.promptItemIndex();
+            index = sc.nextLine();
+
+            if(index.equals("/cancel")) {
+                return true;
+            }
+
+            command.getArgumentMap().put(deleteItemValidation.LONG_INDEX_FLAG, index);
+            command.getArgumentMap().put(deleteItemValidation.SHORT_INDEX_FLAG, index);
+
+            try {
+                deleteItemValidation.validateIndex(command, menu);
+                isValidIndex = true;
+            } catch(ItemException e) {
+                ui.println(e.getMessage());
+            }
+
+        }
+        return false;
+    }
+    public boolean deleteItem(Command command, Menu menu) {
+        if(menu.getItems().size() == 0) {
+            ui.println(ui.getEmptyMenu());
+            return true;
+        }
+
+        boolean isCancelled = false;
+        isCancelled = getIndex(command, menu);
+
+        if(isCancelled) {
+            return true;
+        }
+
+        int index = Integer.parseInt(command.getArgumentMap().get("index"));
+        menu.removeItem(index);
+        menu.save();
+
         return false;
     }
 

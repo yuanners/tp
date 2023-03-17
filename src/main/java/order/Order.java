@@ -127,7 +127,7 @@ public class Order implements OrderInterface {
                 command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
             } else if(command.getArgumentMap().get("items") != null) {
-                addMultipleOrderValidation.validateAddMultipleOrder(command);
+                command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
             }else{
                 addOrderValidation.checkValidFlag(command);
