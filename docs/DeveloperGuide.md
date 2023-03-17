@@ -5,7 +5,7 @@
 * [Introduction](#introduction)
 * [Design](#design)
 * [Implementation](#implementation)
-* [Appendix: Requirements](#appendix-requirements)
+* [Requirements](#requirements)
   * [Project Scope](#project-scope)
   * [User Stories](#user-stories)
   * [Non-functional Requirements](#non-functional-requirements)
@@ -19,7 +19,7 @@
 
 ## Implementation
 
-## Appendix: Requirements
+## Requirements
 
 ### Project Scope
 ### User Stories
