@@ -66,6 +66,13 @@ public class Ui {
     }
 
     /**
+     * Prompts user for item keyword when in assistance mode
+     */
+    public void promptItemKeyword() {
+        System.out.println("Please enter the keyword to search for: ");
+    }
+
+    /**
      * Prints an error message with the wrong command.
      *
      * @param command The extracted command word

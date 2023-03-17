@@ -36,11 +36,7 @@ public class MoneyGoWhere {
 
             case "additem":
                 isCancelled = menuAssistant.addItem(command, menu);
-                if (isCancelled) {
-                    ui.printCommandCancelled(command.getCommand());
-                } else {
-                    ui.printCommandSuccess(command.getCommand());
-                }
+                menuAssistant.printResult(command, isCancelled);
                 break;
 
             case "/additem":
@@ -49,17 +45,18 @@ public class MoneyGoWhere {
                 break;
 
             case "finditem":
+                isCancelled = menuAssistant.showResultsOfFind(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+
+            case "/finditem":
                 menu.showResultsOfFind(command, menu.getItems());
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
             case "deleteitem":
                 isCancelled = menuAssistant.deleteItem(command, menu);
-                if (isCancelled) {
-                    ui.printCommandCancelled(command.getCommand());
-                } else {
-                    ui.printCommandSuccess(command.getCommand());
-                }
+                menuAssistant.printResult(command, isCancelled);
                 break;
 
             case "/deleteitem":
