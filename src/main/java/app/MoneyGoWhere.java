@@ -3,6 +3,7 @@ package app;
 import exception.ItemException;
 import exception.OrderException;
 import item.Menu;
+import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import utility.Parser;
@@ -29,6 +30,16 @@ public class MoneyGoWhere {
             switch (command.getCommand()) {
             case "listitem":
                 menu.displayList();
+                break;
+
+            case "/additem":
+                MenuAssistant menuAssistant = new MenuAssistant();
+                boolean isCancelled = menuAssistant.addItem(command, menu);
+                if (isCancelled) {
+                    ui.printCommandCancelled(command.getCommand());
+                } else {
+                    ui.printCommandSuccess(command.getCommand());
+                }
                 break;
 
             case "additem":
