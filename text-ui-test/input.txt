@@ -1,0 +1,3 @@
+additem -p 20.1 -n "chicken rice100"
+deleteitem -i 3
+exit
