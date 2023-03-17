@@ -122,9 +122,9 @@ of the mode used.
 3. Move the jar file into a folder. This will allow you to view all data related to MoneyGoWhere easily, as all data
    files will be stored here.
 4. Open the command terminal and navigate to the folder where the `.jar` file is. If you are unsure of how to do so,
-   follow steps 4 to 6.
-5. Right-click the file and select the "Copy as path" option.
-   #TODO: Add image
+   follow steps 5 to 7.
+5. Right-click the file and select the "Properties" option. Then, copy the text under "Location". 
+   ![image](images/userGuide/findFileLocation.png)
 6. Open a command terminal by entering `cmd` in your start menu.
 7. In the terminal, navigate to the location of the folder by doing `cd "<file path>"`.
     - This step is important as it ensures that the saved tasks file will be saved in the same directory. Otherwise, the
