@@ -1,14 +1,12 @@
-package seedu.duke;
+package seedu.moneygowhere;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import app.Command;
 import app.MoneyGoWhere;
-import exception.InvalidFlagException;
 import org.junit.jupiter.api.Test;
 import utility.Ui;
-import exception.InvalidArgumentException;
 
 class ItemTest {
     MoneyGoWhere moneyGoWhere = new MoneyGoWhere();
@@ -27,20 +25,21 @@ class ItemTest {
 
         Command command = new Command(userInput);
 
-        try {
-            moneyGoWhere.handleCommand(command);
-        } catch (InvalidArgumentException | InvalidFlagException e) {
-            ui.println(e.getMessage());
-        }
+        moneyGoWhere.handleCommand(command);
 
     }
 
     @Test
     public void itemTest() {
 
-        runTest("additem -p 20.1 -n chicken rice2", moneyGoWhere);
-        assertEquals("chicken rice2", moneyGoWhere.items.getItems().
+        runTest("additem -p 20.1 -n \"chicken rice100\"", moneyGoWhere);
+        assertEquals("chicken rice100", moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getName());
+
+        assert moneyGoWhere.items.getItems().
+                get(moneyGoWhere.items.getItems().size() - 1)
+                .getName().equals("chicken rice100"): "Item name should be chicken rice100";
+
         assertEquals(20.10, moneyGoWhere.items.getItems().
                 get(moneyGoWhere.items.getItems().size() - 1).getPrice());
 
@@ -51,13 +50,15 @@ class ItemTest {
 
     @Test
     public void itemTest2() {
-        runTest("additem -p 2kuku0.01 -n chicken rice3", moneyGoWhere);
+        runTest("additem -p 2kuku0.01 -n \"chicken rice3\"", moneyGoWhere);
+
     }
 
     @Test
     public void itemTest3() {
         // max 2dp error
-        runTest("additem -p 20.001 -n chicken rice4", moneyGoWhere);
+        runTest("additem -p 20.0001 -n \"chicken rice4\"", moneyGoWhere);
+
     }
 
 }

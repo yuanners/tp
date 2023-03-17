@@ -43,6 +43,10 @@ public class AddItemValidation extends ItemValidation {
     }
 
     public void validateName(Command c, Menu items) throws ItemException {
+        if(c.getArgumentMap().get(LONG_NAME_FLAG) == null) {
+            throw new ItemException(ui.getItemNameMinLengthError());
+        }
+
         if (c.getArgumentMap().get(LONG_NAME_FLAG).length() > 25) {
             throw new ItemException(ui.getItemNameMaxLengthError());
         }
@@ -67,6 +71,10 @@ public class AddItemValidation extends ItemValidation {
      * @param c Given command
      */
     public void validatePrice(Command c) throws ItemException {
+        if(c.getArgumentMap().get(LONG_PRICE_FLAG) == null) {
+            throw new ItemException(ui.getItemPriceMinLengthError());
+        }
+
         String price = c.getArgumentMap().get(LONG_PRICE_FLAG);
         price = price.trim();
 
