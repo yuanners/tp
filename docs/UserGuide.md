@@ -24,16 +24,16 @@ the mode used.
 1. [Quick Setup](#quick-setup)
 2. [Advanced Mode Style Guide](#advanced-mode-style-guide)
 3. [Features](#advanced-commands)
-    1. [Items](#advanced-mode--items)
-        * [Add Items](#advanced-mode--add-an-item)
-        * [Delete Items](#advanced-mode--delete-an-item)
-        * [List Items](#advanced-mode--list-all-items)
-        * [Find Items](#advanced-mode--find-an-item)
-    2. [Orders](#advanced-mode--orders)
-        * [Add Order](#advanced-mode--add-an-order)
-            * [Single Item](#advanced-mode--single-item)
-            * [Multiple Items](#advanced-mode--multiple-items)
-        * [List all Orders](#advanced-mode--list-all-orders)
+    1. [Items](#advanced-mode-items)
+        * [Add Items](#advanced-mode-add-an-item)
+        * [Delete Items](#advanced-mode-delete-an-item)
+        * [List Items](#advanced-mode-list-all-items)
+        * [Find Items](#advanced-mode-find-an-item)
+    2. [Orders](#advanced-mode-orders)
+        * [Add Order](#advanced-mode-add-an-order)
+            * [Single Item](#advanced-mode-single-item)
+            * [Multiple Items](#advanced-mode-multiple-items)
+        * [List all Orders](#advanced-mode-list-all-orders)
 4. [Save File](#save-file)
 5. [Glossary](#glossary)
 
@@ -64,31 +64,31 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
   be signified by `-n` or `--name`. More details are given in each command.
     * All of these command options are **case-sensitive**.
 
-#### Advanced Mode: Items
+#### Advanced Mode Items
 
-##### Advanced Mode: Add an Item
+##### Advanced Mode Add an Item
 
-##### Advanced Mode: Delete an Item
+##### Advanced Mode Delete an Item
 
-##### Advanced Mode: List all Items
+##### Advanced Mode List all Items
 
-##### Advanced Mode: Find an Item
-
-<br>
-
-#### Advanced Mode: Orders
-
-##### Advanced Mode: Add an Order
-
-###### Advanced Mode: Single Item
-
-###### Advanced Mode: Multiple Items
-
-##### Advanced Mode: List all Orders
+##### Advanced Mode Find an Item
 
 <br>
 
-### Advanced Mode: Command Summary
+#### Advanced Mode Orders
+
+##### Advanced Mode Add an Order
+
+###### Advanced Mode Single Item
+
+###### Advanced Mode Multiple Items
+
+##### Advanced Mode List all Orders
+
+<br>
+
+### Advanced Mode Command Summary
 
 <br>
 <hr>
@@ -105,8 +105,8 @@ of the mode used.
 1. [Setting up MoneyGoWhere](#setting-up-moneygowhere)
 2. [Basic Mode Style Guide](#basic-mode-style-guide)
 3. [Basic Commands](#basic-commands)
-   1. [Items](#basic-mode--items)
-   2. [Orders](#basic-mode--orders)
+   1. [Items](#basic-mode-items)
+   2. [Orders](#basic-mode-orders)
 4. [Save File](#save-file)
 5. [Glossary](#glossary)
 
@@ -139,9 +139,9 @@ of the mode used.
 
 ### Basic Commands
 
-#### Basic Mode: Items
+#### Basic Mode Items
 
-#### Basic Mode: Orders
+#### Basic Mode Orders
 
 <br>
 <hr>
