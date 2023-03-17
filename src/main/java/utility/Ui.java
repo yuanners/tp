@@ -44,6 +44,20 @@ public class Ui {
     }
 
     /**
+     * Prompts user for item name when in assistance mode
+     */
+    public void promptItemName() {
+        System.out.println("Please enter the item's name: ");
+    }
+
+    /**
+     * Prompts user for item price when in assistance mode
+     */
+    public void promptItemPrice() {
+        System.out.println("Please enter the item's price: ");
+    }
+
+    /**
      * Prints an error message with the wrong command.
      *
      * @param command The extracted command word
@@ -53,10 +67,17 @@ public class Ui {
     }
 
     /**
-     * Prints error message informing user to input a whole number
+     * Prints error message informing user that command has executed successfully
      */
     public void printCommandSuccess(String command) {
         System.out.println("The command: " + command + " was successfully executed!");
+    }
+
+    /**
+     * Prints error message informing user to input a whole number
+     */
+    public void printCommandCancelled(String command) {
+        System.out.println("The command: " + command + " has been cancelled.");
     }
 
 
