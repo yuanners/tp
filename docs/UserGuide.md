@@ -1,6 +1,6 @@
 # User Guide
 
-## Introduction
+# Introduction
 
 Thank you for your interest in MoneyGoWhere! This user guide aims to show off the features of the application and how to
 use it.
@@ -12,7 +12,10 @@ low-cost and adaptability.
 
 This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
 
-## Table of Contents
+## Advanced Guide
+To see the beginner's version, [please click here](#Basic-Guide).
+
+### Table of Contents
 
 1. [Introduction](#Introduction)
 2. [Quick Start](#Quick-Start)
@@ -31,77 +34,67 @@ This application is primarily tailored towards the hawker stall owners at The De
     3. [Exit](#Exit)
 5. [Save File](#Save-File)
 
-## Quick Setup
+### Quick Setup
 
 1. Ensure you have Java 11 installed, and [download the latest release of MoneyGoWhere](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it in a folder.
 2. Open the command terminal and navigate to the folder where the `.jar` file is, by doing `cd "<file path>"`.
 3. Use the command `java -jar moneygowhere.jar` to launch our application. If correct, you should see the following on startup:
    **TODO: Insert Image**
 
-<details>
-<summary>Guided Setup</summary>
-<ol>
-<li><span>Before installing and using Duke, do note that Java 11 is required. If you do not already have it installed, you can do so </span><a href="https://www.oracle.com/sg/java/technologies/downloads/#java11" target="_blank" rel="noopener"><span>here</span></a><span>.</span></li>
-
-<li><span>After installing Java 11, please download the </span><code>.jar</code><span> file </span><a href="https://github.com/AY2223S2-CS2113T-T09-2/tp/releases" target="_blank" rel="noopener"><span>here</span></a><span> and place it in a folder. Doing so ensures that the save-file will not be lost, allowing you to use data that you have previously entered. Click on </span><code>MoneyGoWhere.jar</code><span> to automatically download the file. Ensure that it is the latest version.</span><br>
-<strong><span>#TODO: Add image</span></strong></li>
-<li><span>Move the jar file into a folder. This will allow you to view all data related to MoneyGoWhere easily, as all data files will be stored here.</span></li>
-
-<li><span>Open the command terminal and navigate to the folder where the </span><code>.jar</code><span> file is. If you are unsure of how to do so, follow steps 4 to 6.</span></li>
-
-<li><span>Right-click the file and select the “Copy as path” option.</span><br>
-<strong><span>#TODO: Add image</span></strong></li>
-<li><span>Open a command terminal by entering </span><code>cmd</code><span> in your start menu.</span></li>
-
-<li><span>In the terminal, navigate to the location of the folder by doing </span><code>cd "<file path>"</code><span>.</span>
-    <ul>
-    <li><span>This step is important as it ensures that the saved tasks file will be saved in the same directory. Otherwise, the file will be stored in the current working directory.</span></li>
-    </ul>
-</li>
-
-<li><span>Use the command </span><code>java -jar ip.jar</code><span> to launch MoneyGoWhere. If done correctly, you will see something like this on your first start up:</span><br>
-    <strong><span>#TODO: Add image</span></strong></li>
-
-<li><span>When you are done using the app, enter </span><code>bye</code><span> to shut the application down. This ensures that Duke will save your data, as saving data is only done during the shut-down process.</span></li>
-</ol>
-</details>
-
-## Our Style Guide
+### Our Style Guide
 
 <br>
 
-## Features
+### Features
 
-### Items
+#### Items
 
-#### Add an Item
+##### Add an Item
 
-#### Delete an Item
+##### Delete an Item
 
-#### List all Items
+##### List all Items
 
-#### Find an Item
-
-<br>
-
-### Orders
-
-#### Add an Order
-
-##### Single Item
-
-##### Multiple Items
-
-#### List all Orders
+##### Find an Item
 
 <br>
 
-### Exit
+#### Orders
+
+##### Add an Order
+
+###### Single Item
+
+###### Multiple Items
+
+##### List all Orders
 
 <br>
 
-## Save File
+#### Exit
 
 <br>
 
-## Command Summary
+### Save File
+
+<br>
+
+### Command Summary
+
+## Basic Guide
+To see the advanced version, [please click here](#Advanced-Guide).
+
+### Table of Contents
+1. Before installing and using Duke, do note that Java 11 is required. If you do not already have it installed, you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11).
+2. After installing Java 11, please download the `.jar` file [here](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it in a folder. Doing so ensures that the save-file will not be lost, allowing you to use data that you have previously entered. Click on `MoneyGoWhere.jar` to automatically download the file. Ensure that it is the latest version.
+   **#TODO: Add image**
+3. Move the jar file into a folder. This will allow you to view all data related to MoneyGoWhere easily, as all data files will be stored here.
+4. Open the command terminal and navigate to the folder where the `.jar` file is. If you are unsure of how to do so, follow steps 4 to 6.
+5. Right-click the file and select the "Copy as path" option.
+   #TODO: Add image
+6. Open a command terminal by entering `cmd` in your start menu.
+7. In the terminal, navigate to the location of the folder by doing `cd "FILE_PATH"`.
+    - This step is important as it ensures that the saved tasks file will be saved in the same directory. Otherwise, the file will be stored in the current working directory.
+8. Use the command `java -jar ip.jar` to launch MoneyGoWhere. If done correctly, you will see something like this on your first start up:
+   **#TODO: Add image**
+9. When you are done using the app, enter `bye` to shut the application down. This ensures that Duke will save your data, as saving data is only done during the shut-down process. 
