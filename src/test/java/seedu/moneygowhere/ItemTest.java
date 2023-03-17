@@ -11,10 +11,9 @@ import java.util.Scanner;
 
 class ItemTest {
     MoneyGoWhere moneyGoWhere;
-    Scanner sc;
+
     public ItemTest() {
         moneyGoWhere = new MoneyGoWhere();
-        sc = new Scanner(System.in);
     }
 
     public void runTest(String input, MoneyGoWhere moneyGoWhere) {
@@ -27,7 +26,7 @@ class ItemTest {
 
         Command command = new Command(userInput);
 
-        moneyGoWhere.handleCommand(command, sc);
+        moneyGoWhere.handleCommand(command);
 
     }
 

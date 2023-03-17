@@ -23,7 +23,7 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-    public void handleCommand(Command command, Scanner sc) {
+    public void handleCommand(Command command) {
         Ui ui = new Ui();
 
         try {
@@ -34,7 +34,7 @@ public class MoneyGoWhere {
 
             case "/additem":
                 MenuAssistant menuAssistant = new MenuAssistant();
-                boolean isCancelled = menuAssistant.addItem(command, menu, sc);
+                boolean isCancelled = menuAssistant.addItem(command, menu);
                 if (isCancelled) {
                     ui.printCommandCancelled(command.getCommand());
                 } else {
@@ -95,7 +95,7 @@ public class MoneyGoWhere {
 
             Command command = new Command(userInput);
 
-            handleCommand(command, sc);
+            handleCommand(command);
         }
 
         sc.close();

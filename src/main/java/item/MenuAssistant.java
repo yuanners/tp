@@ -8,11 +8,12 @@ import validation.item.AddItemValidation;
 import java.util.Scanner;
 
 public class MenuAssistant {
+    Scanner sc;
     public MenuAssistant() {
-
+        sc = new Scanner(System.in);
     }
 
-    private boolean getName(Command command, Menu menu, Scanner sc) {
+    private boolean getName(Command command, Menu menu) {
         String name = "";
         boolean isValidName = false;
         Ui ui = new Ui();
@@ -42,7 +43,7 @@ public class MenuAssistant {
         return false;
     }
 
-    private boolean getPrice(Command command, Menu menu, Scanner sc) {
+    private boolean getPrice(Command command, Menu menu) {
         String price = "";
         boolean isValidPrice = false;
         Ui ui = new Ui();
@@ -72,15 +73,15 @@ public class MenuAssistant {
         return false;
     }
 
-    public boolean addItem(Command command, Menu menu, Scanner sc) {
+    public boolean addItem(Command command, Menu menu) {
         boolean isCancelled = false;
-        isCancelled = getName(command, menu, sc);
+        isCancelled = getName(command, menu);
 
         if(isCancelled) {
             return true;
         }
 
-        isCancelled = getPrice(command, menu, sc);
+        isCancelled = getPrice(command, menu);
 
         if(isCancelled) {
             return true;
