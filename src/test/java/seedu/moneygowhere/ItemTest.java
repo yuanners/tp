@@ -33,19 +33,19 @@ class ItemTest {
     public void itemTest() {
 
         runTest("additem -p 20.1 -n \"chicken rice100\"", moneyGoWhere);
-        assertEquals("chicken rice100", moneyGoWhere.items.getItems().
-                get(moneyGoWhere.items.getItems().size() - 1).getName());
+        assertEquals("chicken rice100", moneyGoWhere.menu.getItems().
+                get(moneyGoWhere.menu.getItems().size() - 1).getName());
 
-        assert moneyGoWhere.items.getItems().
-                get(moneyGoWhere.items.getItems().size() - 1)
+        assert moneyGoWhere.menu.getItems().
+                get(moneyGoWhere.menu.getItems().size() - 1)
                 .getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
-        assertEquals(20.10, moneyGoWhere.items.getItems().
-                get(moneyGoWhere.items.getItems().size() - 1).getPrice());
+        assertEquals(20.10, moneyGoWhere.menu.getItems().
+                get(moneyGoWhere.menu.getItems().size() - 1).getPrice());
 
         runTest("listitem", moneyGoWhere);
 
-        runTest("deleteitem -i " + (moneyGoWhere.items.getItems().size()-1), moneyGoWhere);
+        runTest("deleteitem -i " + (moneyGoWhere.menu.getItems().size()-1), moneyGoWhere);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package validation.order;
 
 import app.Command;
+import exception.ItemException;
 import exception.OrderException;
 import item.Menu;
 import utility.Ui;
@@ -19,15 +20,37 @@ public class AddOrderValidation extends Validation {
      * @param arg user command
      * @throws OrderException custom exception for order validation
      */
-    public void validateCommand(Command arg) throws OrderException {
+    public Command validateCommand(Command arg) throws OrderException {
         try {
             checkValidFlag(arg);
             checkArgumentPresent(arg);
             checkValidFlagArgument(arg);
-            validateAddOrder(arg, menu);
-        } catch(OrderException o) {
+            checkValidItem(arg);
+            Command command = validateAddOrder(arg, menu);
+            return command;
+        } catch (OrderException | ItemException o) {
             throw new OrderException(o.getMessage());
         }
+    }
+
+    public void checkValidItem(Command arg) throws ItemException {
+
+        String item;
+
+        if (arg.getArgumentMap().get("i") != null) {
+            item = arg.getArgumentMap().get("i");
+        } else {
+            item = arg.getArgumentMap().get("item");
+        }
+
+        if (!isInteger(item)) {
+            if (menu.findMatchingItemNames(item, menu.getItems()).size() > 1) {
+                throw new ItemException(ui.getMultipleSimilarItemsFound());
+            } else if (menu.findMatchingItemNames(item, menu.getItems()).size() == 0) {
+                throw new ItemException(ui.getNoSuchItem());
+            }
+        }
+
     }
 
     /**
@@ -37,22 +60,34 @@ public class AddOrderValidation extends Validation {
      * @param menu itemlist
      * @throws OrderException custom exception for order validation
      */
-    public void validateAddOrder(Command arg, Menu menu) throws OrderException {
-        String itemIndex = "";
+    public Command validateAddOrder(Command arg, Menu menu) throws OrderException {
 
-        if(arg.getArgumentString().contains("-i")) {
-            itemIndex = arg.getArgumentMap().get("i").trim();
-        } else if(arg.getArgumentString().contains("--item")) {
-            itemIndex = arg.getArgumentMap().get("item").trim();
+        String item = "";
+        String newItem = "";
+
+        if (arg.getArgumentString().contains("-i")) {
+            item = arg.getArgumentMap().get("i").trim();
+        } else if (arg.getArgumentString().contains("--item")) {
+            item = arg.getArgumentMap().get("item").trim();
         }
 
-        if(!isValidIndex(itemIndex, menu)) {
+        if (!isInteger(item)) {
+            newItem = Integer.toString(menu.findItemIndex(item, menu.getItems()));
+            String newArgumentString = arg.getArgumentString().replace(item, newItem);
+            Command newCommand = new Command("addorder " + newArgumentString);
+            return newCommand;
+        }
+
+        if (!isValidIndex(item, menu)) {
             throw new OrderException(ui.getInvalidIndex());
         }
 
-        if(!(isValidQuantity(arg))) {
+        if (!(isValidQuantity(arg))) {
             throw new OrderException(ui.getInvalidOrderInteger());
         }
+
+
+        return arg;
     }
 
     /**
@@ -62,9 +97,10 @@ public class AddOrderValidation extends Validation {
      * @throws OrderException custom exception for order validation
      */
     public void checkValidFlagArgument(Command arg) throws OrderException {
-        if(arg.getArgumentMap().containsKey("i") || arg.getArgumentMap().containsKey("item")) {
-            if(!(isInteger(arg.getArgumentMap().get("i").trim()))
-                    || !(isInteger(arg.getArgumentMap().get("item").trim()))) {
+        if (arg.getArgumentMap().containsKey("i") || arg.getArgumentMap().containsKey("item")) {
+            if ((isInteger(arg.getArgumentMap().get("i").trim())
+                    || isInteger(arg.getArgumentMap().get("item").trim()))
+                    && Integer.parseInt(arg.getArgumentMap().get("i").trim()) > 0) {
                 throw new OrderException(ui.getInvalidOrderInteger());
             }
         }
@@ -78,7 +114,7 @@ public class AddOrderValidation extends Validation {
      */
     public void checkValidFlag(Command arg) throws OrderException {
 
-        if(arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
+        if (arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
 
         } else {
             throw new OrderException(ui.getMissingOrderFlag());
@@ -93,8 +129,8 @@ public class AddOrderValidation extends Validation {
      * @throws OrderException custom exception for order validation
      */
     public void checkArgumentPresent(Command arg) throws OrderException {
-        if(arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
-            if(arg.getArgumentMap().get("i").length() < 1) {
+        if (arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
+            if (arg.getArgumentMap().get("i").length() < 1) {
                 throw new OrderException(ui.getMissingOrderArgument());
             }
         }
@@ -110,7 +146,7 @@ public class AddOrderValidation extends Validation {
     public boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
-        } catch(NumberFormatException n) {
+        } catch (NumberFormatException n) {
             return false;
         }
 
@@ -125,16 +161,16 @@ public class AddOrderValidation extends Validation {
      */
     public boolean isValidQuantity(Command arg) throws OrderException {
         int quantity = 0;
-        if(arg.getArgumentString().contains("-q")) {
+        if (arg.getArgumentString().contains("-q")) {
 
-            if(!(isInteger(arg.getArgumentMap().get("q").trim()))) {
+            if (!(isInteger(arg.getArgumentMap().get("q").trim()))) {
                 throw new OrderException(ui.getInvalidOrderInteger());
             } else {
                 quantity = Integer.parseInt(arg.getArgumentMap().get("q").trim());
             }
 
-        } else if(arg.getArgumentString().contains("--quantity")) {
-            if(!(isInteger(arg.getArgumentMap().get("quantity").trim()))) {
+        } else if (arg.getArgumentString().contains("--quantity")) {
+            if (!(isInteger(arg.getArgumentMap().get("quantity").trim()))) {
                 throw new OrderException(ui.getInvalidOrderInteger());
             } else {
                 quantity = Integer.parseInt(arg.getArgumentMap().get("quantity").trim());
@@ -143,7 +179,7 @@ public class AddOrderValidation extends Validation {
             return true;
         }
 
-        if(quantity <= 0) {
+        if (quantity <= 0) {
             return false;
         }
         return true;
