@@ -3,6 +3,7 @@ package app;
 import exception.ItemException;
 import exception.OrderException;
 import item.Menu;
+import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import utility.Parser;
@@ -22,13 +23,23 @@ public class MoneyGoWhere {
         transactions = new Transaction();
     }
 
-    public void handleCommand(Command command) {
+    public void handleCommand(Command command, Scanner sc) {
         Ui ui = new Ui();
 
         try {
             switch (command.getCommand()) {
             case "listitem":
                 menu.displayList();
+                break;
+
+            case "/additem":
+                MenuAssistant menuAssistant = new MenuAssistant();
+                boolean isCancelled = menuAssistant.addItem(command, menu, sc);
+                if (isCancelled) {
+                    ui.printCommandCancelled(command.getCommand());
+                } else {
+                    ui.printCommandSuccess(command.getCommand());
+                }
                 break;
 
             case "additem":
@@ -84,7 +95,7 @@ public class MoneyGoWhere {
 
             Command command = new Command(userInput);
 
-            handleCommand(command);
+            handleCommand(command, sc);
         }
 
         sc.close();
