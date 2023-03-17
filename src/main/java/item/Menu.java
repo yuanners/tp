@@ -109,12 +109,17 @@ public class Menu {
         save();
     }
 
-    public void deleteItem(Command command, Menu items) throws ItemException {
+    public void deleteItem(Command command, Menu menu) throws ItemException {
+        if(menu.getItems().size() == 0) {
+            Ui ui = new Ui();
+            throw new ItemException(ui.getEmptyMenu());
+        }
+
         try {
             DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
             deleteItemValidation.validateFlags(command);
             command.mapArgumentAlias(deleteItemValidation.LONG_INDEX_FLAG, deleteItemValidation.SHORT_INDEX_FLAG);
-            deleteItemValidation.validateCommand(command, items);
+            deleteItemValidation.validateCommand(command, menu);
         } catch (ItemException e) {
             throw new ItemException(e.getMessage());
         }
