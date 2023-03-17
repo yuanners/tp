@@ -124,10 +124,22 @@ public class Menu {
         save();
     }
 
+    /**
+     * Finds the index of the first item in the provided ArrayList of Item objects
+     * whose name contains the specified itemName, case-insensitively.
+     *
+     * @param itemName the name of the item to search for, case-insensitively
+     * @param menu     the ArrayList of Item objects to search through
+     * @return the index of the first matching item if found, or -1 if no matching item is found
+     */
     public int findItemIndex(String itemName, ArrayList<Item> menu) {
 
         Ui ui = new Ui();
         itemName = itemName.toLowerCase();
+
+        if (itemName.contains("\"")) {
+            itemName = itemName.replace("\"", "");
+        }
 
         for (int i = 0; i < menu.size(); i++) {
             if (menu.get(i).getName().toLowerCase().contains(itemName)) {
@@ -140,6 +152,15 @@ public class Menu {
 
     }
 
+    /**
+     * Finds the indexes of all items in the provided ArrayList of Item objects
+     * whose names contain the specified itemName, case-insensitively.
+     * If itemName is an exact match for an item's name, only the index of that item is returned.
+     *
+     * @param itemName the name of the item to search for, case-insensitively
+     * @param menu     the ArrayList of Item objects to search through
+     * @return an ArrayList of integers containing the indexes of all matching items, or an empty list if no matching item is found
+     */
     public ArrayList<Integer> findMatchingItemNames(String itemName, ArrayList<Item> menu) {
 
         ArrayList<Integer> itemIndexes = new ArrayList<>();
@@ -159,12 +180,24 @@ public class Menu {
         return itemIndexes;
     }
 
+    /**
+     * Displays a header followed by the names and prices of all items
+     * in the provided ArrayList of Item objects whose names contain
+     * the search term specified in the provided Command object.
+     *
+     * @param command the Command object containing the search term
+     * @param menu    the ArrayList of Item objects to search through
+     */
     public void showResultsOfFind(Command command, ArrayList<Item> menu) {
 
         Ui ui = new Ui();
         ui.printMenuHeader();
 
         String itemName = command.getArgumentString();
+
+        if (itemName.contains("\"")) {
+            itemName = itemName.replace("\"", "");
+        }
 
         for (int i = 0; i < menu.size(); i++) {
             if (menu.get(i).getName().contains(itemName)) {
