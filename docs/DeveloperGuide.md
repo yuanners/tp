@@ -1,7 +1,15 @@
 # Developer Guide
 
 ## Table of Contents
-[TOC]
+* [Acknowledgements](#acknowledgements)
+* [Introduction](#introduction)
+* [Design](#design)
+* [Implementation](#implementation)
+* [Appendix: Requirements](#appendix--requirements)
+  * [Project Scope](#project-scope)
+  * [User Stories](#user-stories)
+  * [Non-functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
 
 ## Acknowledgements
 
