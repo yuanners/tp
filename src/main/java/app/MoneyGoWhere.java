@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public Menu menu;
-    MenuAssistant menuAssistant;
+    public MenuAssistant menuAssistant;
     public Transaction transactions;
     private Parser parser = new Parser();
 
