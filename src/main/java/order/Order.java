@@ -16,6 +16,7 @@ public class Order implements OrderInterface {
     private String orderId;
     private LocalDateTime dateTime;
     private ArrayList<OrderEntry> orderEntries;
+    private enum status = 
 
     /**
      * Constructs an Order object with a unique ID,

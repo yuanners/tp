@@ -10,6 +10,9 @@ import java.util.ArrayList;
  * All print command will be done through here.
  */
 public class Ui {
+    private String MISSING_ORDER_ID = "Please enter the order ID to refund.";
+    private String INVALID_ORDER_ID = "Please enter a valid order ID to refund.";
+    private String INVALID_REFUND_STATUS = "Order is already refunded.";
     private String NULL_MESSAGE = "Input is empty. Please enter something.";
     private String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
@@ -39,6 +42,15 @@ public class Ui {
      * General print statements
      * Prompts user for input
      */
+    public String printMissingOrderID(){
+        return MISSING_ORDER_ID;
+    }
+    public String printInvalidRefundStatus(){
+        return INVALID_REFUND_STATUS;
+    }
+    public String printInvalidOrderID(){
+        return INVALID_ORDER_ID;
+    }
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
     }
