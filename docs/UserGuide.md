@@ -13,26 +13,26 @@ low-cost and adaptability.
 This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
 
 ## Advanced Guide
-To see the beginner's version, [please click here](#Basic-Guide).
+To see the beginner's version, [please click here](#basic-guide).
 
 ### Table of Contents
 
-1. [Introduction](#Introduction)
-2. [Quick Start](#Quick-Start)
-3. [Input Formatting](#Input-Formatting)
-4. [Features](#Features)
-    1. [Items](#Items)
-        * [Add Items](#Add-an-Item)
-        * [Delete Items](#Delete-an-Item)
-        * [List Items](#List-all-Items)
-        * [Find Items](#Find-an-Item)
-    2. [Orders](#Orders)
-        * [Add Order](#Add-an-Order)
-            * [Single Item](#Single-Item)
-            * [Multiple Items](#Multiple-Items)
-        * [List all Orders](#List-all-Orders)
-    3. [Exit](#Exit)
-5. [Save File](#Save-File)
+1. [Introduction](#introduction)
+2. [Quick Start](#quick-start)
+3. [Input Formatting](#input-formatting)
+4. [Features](#features)
+    1. [Items](#items)
+        * [Add Items](#add-an-item)
+        * [Delete Items](#delete-an-item)
+        * [List Items](#list-all-items)
+        * [Find Items](#find-an-item)
+    2. [Orders](#orders)
+        * [Add Order](#add-an-order)
+            * [Single Item](#single-item)
+            * [Multiple Items](#multiple-items)
+        * [List all Orders](#list-all-orders)
+    3. [Exit](#exit)
+5. [Save File](#save-file)
 
 ### Quick Setup
 
@@ -81,8 +81,12 @@ To see the beginner's version, [please click here](#Basic-Guide).
 
 ### Command Summary
 
+<br>
+<hr>
+<br>
+
 ## Basic Guide
-To see the advanced version, [please click here](#Advanced-Guide).
+To see the advanced version, [please click here](#advanced-guide).
 
 ### Table of Contents
 1. Before installing and using Duke, do note that Java 11 is required. If you do not already have it installed, you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11).
