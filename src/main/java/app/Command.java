@@ -22,7 +22,7 @@ public class Command {
      */
     public Command(String userInput) {
         assert !userInput.isBlank() : "Command is empty";
-        
+
         Parser parser = new Parser();
         String[] userInputs = parser.formatInput(userInput);
 
@@ -41,7 +41,7 @@ public class Command {
      * @param shortAlias the short alias of the argument
      */
     public void mapArgumentAlias(String longAlias, String shortAlias) {
-        if(argumentMap.containsKey(shortAlias)) {
+        if (argumentMap.containsKey(shortAlias)) {
             argumentMap.put(longAlias, argumentMap.get(shortAlias));
         }
 
