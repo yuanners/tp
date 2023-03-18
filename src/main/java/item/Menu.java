@@ -68,15 +68,6 @@ public class Menu {
         this.items = items;
     }
 
-    public void save() {
-        try {
-            store.save(items);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (NullPointerException e) {
-        }
-    }
-
     /**
      * Adds an item and its price onto the menu.
      *
@@ -209,6 +200,14 @@ public class Menu {
             if (menu.get(i).getName().contains(itemName)) {
                 ui.printFindItem(i, menu);
             }
+        }
+    }
+
+    public void save() {
+        try {
+            store.save(items);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
