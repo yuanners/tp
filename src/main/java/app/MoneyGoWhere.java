@@ -21,9 +21,9 @@ public class MoneyGoWhere {
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
-        menu = new Menu("menu.json");
+        menu = new Menu();
         menuAssistant = new MenuAssistant();
-        transactions = new Transaction("orders.json");
+        transactions = new Transaction();
     }
 
     public void handleCommand(Command command) {

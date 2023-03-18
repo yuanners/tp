@@ -19,8 +19,8 @@ public class Menu {
     private ArrayList<Item> items;
     private Store store;
 
-    public Menu(String fileName) {
-        this.store = new Store(fileName);
+    public Menu() {
+        this.store = new Store("menu.json");
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
 
@@ -38,7 +38,7 @@ public class Menu {
         }
     }
 
-    public Menu(){
+    public Menu(boolean isTest){
         this.items = new ArrayList<>();
     }
 

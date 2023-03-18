@@ -21,7 +21,7 @@ class StatisticTest {
 
     public void createItem(Command c) {
         try {
-            menu.addItem(c, menu);
+            menu.addItem(c);
         } catch (ItemException e) {
             System.out.println(e);
         }
@@ -66,8 +66,8 @@ class StatisticTest {
 
     @Test
     void totalRevenue() {
-        this.menu = new Menu();
-        this.transactions = new Transaction();
+        this.menu = new Menu(true);
+        this.transactions = new Transaction(true);
 
         generateTestData();
 

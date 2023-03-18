@@ -24,8 +24,8 @@ public class Transaction {
      */
     private Store store;
 
-    public Transaction(String fileName) {
-        this.store = new Store(fileName);
+    public Transaction() {
+        this.store = new Store("orders.json");
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
 
@@ -43,7 +43,7 @@ public class Transaction {
         }
     }
 
-    public Transaction() {
+    public Transaction(boolean isTest) {
         this.transactions = new ArrayList<>();
     }
 
