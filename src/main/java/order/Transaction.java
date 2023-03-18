@@ -83,7 +83,6 @@ public class Transaction {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (NullPointerException e) {
-            System.out.println("Store not initialized...");
         }
     }
 
