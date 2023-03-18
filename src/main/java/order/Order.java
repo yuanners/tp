@@ -3,6 +3,7 @@ package order;
 import app.Command;
 import exception.OrderException;
 import item.Menu;
+import utility.Ui;
 import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
@@ -154,7 +155,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the item is selected
      */
-    public void addSingleOrder(Command command, Menu listOfItems) {
+    public void addSingleOrder(Command command, Menu listOfItems) throws OrderException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -185,12 +186,20 @@ public class Order implements OrderInterface {
      * @param command User input command
      * @return quantity
      */
-    public int handleQuantity(Command command) {
+    public int handleQuantity(Command command) throws OrderException {
+
+        Ui ui = new Ui();
+
         int quantity;
+        boolean isQuantityANumber = isInteger(command.getArgumentMap().get("quantity"));
 
         if (command.getArgumentMap().get("quantity") != null) {
+            if (!isQuantityANumber){
+                throw new OrderException(ui.getInvalidOrderInteger());
+            }
             quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
-        } else {
+        }
+        else {
             quantity = 1;
         }
 
@@ -227,5 +236,15 @@ public class Order implements OrderInterface {
             this.orderEntries.add(orderEntry);
         }
 
+    }
+
+    private boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException n) {
+            return false;
+        }
+
+        return true;
     }
 }
