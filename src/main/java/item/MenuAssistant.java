@@ -20,6 +20,14 @@ public class MenuAssistant {
         deleteItemValidation = new DeleteItemValidation();
     }
 
+    /**
+     * Prints the result of the operation depending on whether
+     * the operation has completed execution successfully or
+     * cancelled by the user.
+     *
+     * @param command the Command object containing the search term
+     * @param isCancelled the boolean variable indicating if operation was cancelled
+     */
     public void printResult(Command command, boolean isCancelled) {
         if (isCancelled) {
             ui.printCommandCancelled(command.getCommand());
@@ -28,6 +36,13 @@ public class MenuAssistant {
         }
     }
 
+    /**
+     * Get the name of the item.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
     private boolean getName(Command command, Menu menu) {
         String name = "";
         boolean isValidName = false;
@@ -55,6 +70,13 @@ public class MenuAssistant {
         return false;
     }
 
+    /**
+     * Get the price of the item.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
     private boolean getPrice(Command command, Menu menu) {
         String price = "";
         boolean isValidPrice = false;
@@ -82,6 +104,13 @@ public class MenuAssistant {
         return false;
     }
 
+    /**
+     * Assisted mode for user to add items to the menu iteratively.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
     public boolean addItem(Command command, Menu menu) {
         boolean isCancelled = false;
         isCancelled = getName(command, menu);
@@ -104,6 +133,13 @@ public class MenuAssistant {
         return false;
     }
 
+    /**
+     * Get the index of the item.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
     private boolean getIndex(Command command, Menu menu) {
         String index = "";
         boolean isValidIndex = false;
@@ -129,6 +165,14 @@ public class MenuAssistant {
         }
         return false;
     }
+
+    /**
+     * Assisted mode for user to delete items from the menu iteratively.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
     public boolean deleteItem(Command command, Menu menu) {
         if(menu.getItems().size() == 0) {
             ui.println(ui.getEmptyMenu());
@@ -149,6 +193,13 @@ public class MenuAssistant {
         return false;
     }
 
+    /**
+     * Get the keyword to search for.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
     private boolean getKeyword(Command command, Menu menu) {
         String keyword = "";
         boolean isRunning = false;
@@ -163,11 +214,18 @@ public class MenuAssistant {
         command.setArgumentString(keyword);
         menu.showResultsOfFind(command, menu.getItems());
 
-
         return false;
     }
+
+    /**
+     * Assisted mode for user to search for items from the menu iteratively.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
     public boolean showResultsOfFind(Command command, Menu menu) {
-        boolean isCancelled = false;
+        boolean isCancelled;
         isCancelled = getKeyword(command, menu);
 
         return isCancelled;

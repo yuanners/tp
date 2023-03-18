@@ -13,6 +13,7 @@ public class DeleteItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param c Given command
+     * @throws ItemException If any required flag is not given
      */
     public void validateFlags(Command c) throws ItemException {
         String args = c.getArgumentString();
@@ -22,6 +23,13 @@ public class DeleteItemValidation extends ItemValidation {
         }
     }
 
+    /**
+     * Calls all validation methods to check all parts of the given command
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     * @throws ItemException If any validation fails
+     */
     public void validateCommand(Command c, Menu menu) throws ItemException {
         try {
             validateArgument(c);
@@ -33,6 +41,13 @@ public class DeleteItemValidation extends ItemValidation {
         }
     }
 
+    /**
+     * Checks if the given input for index is valid
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     * @throws ItemException If index given is invalid
+     */
     public void validateIndex(Command c, Menu menu) throws ItemException {
         int result = isInteger(c.getArgumentMap().get(LONG_INDEX_FLAG));
         if(result == 1) {

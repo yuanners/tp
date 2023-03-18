@@ -91,13 +91,20 @@ public class Menu {
         }
     }
 
-    public void addItem(Command command, Menu items) throws ItemException {
+    /**
+     * Adds an item and its price onto the menu.
+     *
+     * @param command the Command object containing the search term
+     * @param menu    the ArrayList of Item objects to search through
+     * @throws ItemException if the command format, name or price is invalid
+     */
+    public void addItem(Command command, Menu menu) throws ItemException {
         try {
             AddItemValidation addItemValidation = new AddItemValidation();
             addItemValidation.validateFlags(command);
             command.mapArgumentAlias(addItemValidation.LONG_NAME_FLAG, addItemValidation.SHORT_NAME_FLAG);
             command.mapArgumentAlias(addItemValidation.LONG_PRICE_FLAG, addItemValidation.SHORT_PRICE_FLAG);
-            addItemValidation.validateCommand(command, items);
+            addItemValidation.validateCommand(command, menu);
         } catch (ItemException e) {
             throw new ItemException(e.getMessage());
         }
@@ -109,6 +116,14 @@ public class Menu {
         save();
     }
 
+    /**
+     * Deletes a specified item on the menu by its given index.
+     *
+     * @param command the Command object containing the search term
+     * @param menu    the ArrayList of Item objects to search through
+     * @throws ItemException if the command format is invalid
+     *                       or index does not exist
+     */
     public void deleteItem(Command command, Menu menu) throws ItemException {
         if(menu.getItems().size() == 0) {
             Ui ui = new Ui();
