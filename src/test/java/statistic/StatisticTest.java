@@ -10,6 +10,7 @@ import order.Transaction;
 import org.junit.jupiter.api.Test;
 import utility.Parser;
 
+import java.text.ParseException;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,9 +51,10 @@ class StatisticTest {
         createItem(c);
         c = new Command("additem -n \"Rojak\" -p 2.00");
         createItem(c);
+        c = new Command("additem -n \"Roti Prata\" -p 1.20");
+        createItem(c);
 
         c = new Command("addorder -i 0 -q 2");
-        System.out.println(c.getArgumentMap());
         createOrder(c);
         c = new Command("addorder -i 1 -q 3");
         createOrder(c);
@@ -71,8 +73,17 @@ class StatisticTest {
 
         generateTestData();
 
-        menu.displayList();
         transactions.displayList();
+
+        try{
+            Statistic s = new Statistic("15/03/2023");
+            double sales = s.salesReport(transactions);
+
+            System.out.println(sales);
+
+        } catch(ParseException e){
+            System.out.println("Date not in correct format");
+        }
 
     }
 }
