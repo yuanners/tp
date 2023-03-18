@@ -21,6 +21,7 @@ public class Command {
      * @param userInput the input string entered by the user
      */
     public Command(String userInput) {
+        assert !userInput.isBlank() : "Command is empty";
 
         Parser parser = new Parser();
         String[] userInputs = parser.formatInput(userInput);
