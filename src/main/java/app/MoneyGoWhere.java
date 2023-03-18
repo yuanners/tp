@@ -44,7 +44,7 @@ public class MoneyGoWhere {
                 break;
 
             case "/additem":
-                menu.addItem(command, menu);
+                menu.addItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
@@ -54,7 +54,7 @@ public class MoneyGoWhere {
                 break;
 
             case "/finditem":
-                menu.showResultsOfFind(command, menu.getItems());
+                menu.showResultsOfFind(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
@@ -64,7 +64,7 @@ public class MoneyGoWhere {
                 break;
 
             case "/deleteitem":
-                menu.deleteItem(command, menu);
+                menu.deleteItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 

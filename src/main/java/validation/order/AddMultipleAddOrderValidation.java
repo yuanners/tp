@@ -56,7 +56,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
 
             if (!isInteger(elements[0])) {
-                index = Integer.toString(menu.findItemIndex(elements[0], menu.getItems()));
+                index = Integer.toString(menu.findItemIndex(elements[0]));
                 elements[0] = index;
             }
 

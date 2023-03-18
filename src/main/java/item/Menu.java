@@ -83,24 +83,25 @@ public class Menu {
      * Adds an item and its price onto the menu.
      *
      * @param command the Command object containing the search term
-     * @param menu    the ArrayList of Item objects to search through
      * @throws ItemException if the command format, name or price is invalid
      */
-    public void addItem(Command command, Menu menu) throws ItemException {
+    public void addItem(Command command) throws ItemException {
+        AddItemValidation addItemValidation = new AddItemValidation();
         try {
-            AddItemValidation addItemValidation = new AddItemValidation();
             addItemValidation.validateFlags(command);
             command.mapArgumentAlias(addItemValidation.LONG_NAME_FLAG, addItemValidation.SHORT_NAME_FLAG);
             command.mapArgumentAlias(addItemValidation.LONG_PRICE_FLAG, addItemValidation.SHORT_PRICE_FLAG);
-            addItemValidation.validateCommand(command, menu);
+            addItemValidation.validateCommand(command, this);
         } catch (ItemException e) {
             throw new ItemException(e.getMessage());
         }
 
-        String name = command.getArgumentMap().get("name");
-        Double price = Double.valueOf(command.getArgumentMap().get("price"));
+        String name = command.getArgumentMap().get(addItemValidation.LONG_NAME_FLAG);
+        Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
         Item item = new Item(name, price);
         appendItem(item);
+        assert this.getItem(this.getItems().size()-1).getName() == item.getName()
+                : "Item failed to append";
         save();
     }
 
@@ -108,26 +109,25 @@ public class Menu {
      * Deletes a specified item on the menu by its given index.
      *
      * @param command the Command object containing the search term
-     * @param menu    the ArrayList of Item objects to search through
      * @throws ItemException if the command format is invalid
      *                       or index does not exist
      */
-    public void deleteItem(Command command, Menu menu) throws ItemException {
-        if(menu.getItems().size() == 0) {
+    public void deleteItem(Command command) throws ItemException {
+        if(this.getItems().size() == 0) {
             Ui ui = new Ui();
             throw new ItemException(ui.getEmptyMenu());
         }
 
+        DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
         try {
-            DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
             deleteItemValidation.validateFlags(command);
             command.mapArgumentAlias(deleteItemValidation.LONG_INDEX_FLAG, deleteItemValidation.SHORT_INDEX_FLAG);
-            deleteItemValidation.validateCommand(command, menu);
+            deleteItemValidation.validateCommand(command, this);
         } catch (ItemException e) {
             throw new ItemException(e.getMessage());
         }
 
-        int index = Integer.parseInt(command.getArgumentMap().get("index"));
+        int index = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
         removeItem(index);
         save();
     }
@@ -137,12 +137,12 @@ public class Menu {
      * whose name contains the specified itemName, case-insensitively.
      *
      * @param itemName the name of the item to search for, case-insensitively
-     * @param menu     the ArrayList of Item objects to search through
      * @return the index of the first matching item if found, or -1 if no matching item is found
      */
-    public int findItemIndex(String itemName, ArrayList<Item> menu) {
+    public int findItemIndex(String itemName) {
 
         Ui ui = new Ui();
+        ArrayList<Item> menu = this.getItems();
         itemName = itemName.toLowerCase();
 
         if (itemName.contains("\"")) {
@@ -166,13 +166,13 @@ public class Menu {
      * If itemName is an exact match for an item's name, only the index of that item is returned.
      *
      * @param itemName the name of the item to search for, case-insensitively
-     * @param menu     the ArrayList of Item objects to search through
      * @return an ArrayList of integers containing the indexes of all matching items,
      *         or an empty list if no matching item is found
      */
-    public ArrayList<Integer> findMatchingItemNames(String itemName, ArrayList<Item> menu) {
+    public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
         ArrayList<Integer> itemIndexes = new ArrayList<>();
+        ArrayList<Item> menu = this.getItems();
         itemName = itemName.toLowerCase();
 
         for (int i = 0; i < menu.size(); i++) {
@@ -195,13 +195,12 @@ public class Menu {
      * the search term specified in the provided Command object.
      *
      * @param command the Command object containing the search term
-     * @param menu    the ArrayList of Item objects to search through
      */
-    public void showResultsOfFind(Command command, ArrayList<Item> menu) {
+    public void showResultsOfFind(Command command) {
 
         Ui ui = new Ui();
         ui.printMenuHeader();
-
+        ArrayList<Item> menu = this.getItems();
         String itemName = command.getArgumentString();
 
         if (itemName.contains("\"")) {
