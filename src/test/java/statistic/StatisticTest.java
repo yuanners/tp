@@ -4,17 +4,13 @@ import app.Command;
 import exception.ItemException;
 import exception.OrderException;
 import item.Menu;
-import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import org.junit.jupiter.api.Test;
-import utility.Parser;
 
 import java.text.ParseException;
-import java.util.Map;
 import java.util.PriorityQueue;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class StatisticTest {
 
@@ -43,18 +39,18 @@ class StatisticTest {
     public void generateTestData() {
         Command c;
 
-//        c = new Command("/additem -n \"Chicken rice\" -p 3.00");
-//        createItem(c);
-//        c = new Command("/additem -n \"Fish ball noodle\" -p 2.50");
-//        createItem(c);
-//        c = new Command("/additem -n \"Mee Rubus\" -p 3.50");
-//        createItem(c);
-//        c = new Command("/additem -n \"Fish soup\" -p 5.00");
-//        createItem(c);
-//        c = new Command("/additem -n \"Rojak\" -p 2.00");
-//        createItem(c);
-//        c = new Command("/additem -n \"Roti Prata\" -p 1.20");
-//        createItem(c);
+        c = new Command("/additem -n \"Chicken rice\" -p 3.00");
+        createItem(c);
+        c = new Command("/additem -n \"Fish ball noodle\" -p 2.50");
+        createItem(c);
+        c = new Command("/additem -n \"Mee Rubus\" -p 3.50");
+        createItem(c);
+        c = new Command("/additem -n \"Fish soup\" -p 5.00");
+        createItem(c);
+        c = new Command("/additem -n \"Rojak\" -p 2.00");
+        createItem(c);
+        c = new Command("/additem -n \"Roti Prata\" -p 1.20");
+        createItem(c);
 
         c = new Command("addorder -i 0 -q 2");
         createOrder(c);
@@ -106,7 +102,7 @@ class StatisticTest {
             }
 
         } catch (ParseException e) {
-            System.out.println("Date not in correct format");
+            System.out.println("Incorrect date format");
         }
     }
 
