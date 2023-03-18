@@ -74,6 +74,8 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 
 ##### Advanced Mode Find an Item
 
+#### Find an Item
+
 <br>
 
 #### Advanced Mode Orders

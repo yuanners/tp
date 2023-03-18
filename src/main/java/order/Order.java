@@ -7,8 +7,10 @@ import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 public class Order implements OrderInterface {
@@ -71,6 +73,14 @@ public class Order implements OrderInterface {
         return dateTime.format(FORMATTER);
     }
 
+    public Date getDate(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        ZoneId zoneId = ZoneId.systemDefault();
+        Date date = Date.from(localDateTime.atZone(zoneId).toInstant());
+
+        return date;
+    }
+
     /**
      * Gets the ArrayList of OrderEntry objects of the Order.
      *
@@ -127,7 +137,7 @@ public class Order implements OrderInterface {
                 command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
             } else if(command.getArgumentMap().get("items") != null) {
-                addMultipleOrderValidation.validateAddMultipleOrder(command);
+                command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
             }else{
                 addOrderValidation.checkValidFlag(command);

@@ -44,9 +44,9 @@ public class AddOrderValidation extends Validation {
         }
 
         if (!isInteger(item)) {
-            if (menu.findMatchingItemNames(item, menu.getItems()).size() > 1) {
+            if (menu.findMatchingItemNames(item).size() > 1) {
                 throw new ItemException(ui.getMultipleSimilarItemsFound());
-            } else if (menu.findMatchingItemNames(item, menu.getItems()).size() == 0) {
+            } else if (menu.findMatchingItemNames(item).size() == 0) {
                 throw new ItemException(ui.getNoSuchItem());
             }
         }
@@ -72,7 +72,7 @@ public class AddOrderValidation extends Validation {
         }
 
         if (!isInteger(item)) {
-            newItem = Integer.toString(menu.findItemIndex(item, menu.getItems()));
+            newItem = Integer.toString(menu.findItemIndex(item));
             String newArgumentString = arg.getArgumentString().replace(item, newItem);
             Command newCommand = new Command("addorder " + newArgumentString);
             return newCommand;
@@ -100,7 +100,7 @@ public class AddOrderValidation extends Validation {
         if (arg.getArgumentMap().containsKey("i") || arg.getArgumentMap().containsKey("item")) {
             if ((isInteger(arg.getArgumentMap().get("i").trim())
                     || isInteger(arg.getArgumentMap().get("item").trim()))
-                    && Integer.parseInt(arg.getArgumentMap().get("i").trim()) > 0) {
+                    && Integer.parseInt(arg.getArgumentMap().get("i").trim()) < 0) {
                 throw new OrderException(ui.getInvalidOrderInteger());
             }
         }

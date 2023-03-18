@@ -34,6 +34,7 @@ public class Ui {
     private String NO_SUCH_ITEM = "No such item exists.";
     private String MULTIPLE_SIMILAR_ITEMS = "Your input referenced multiple similar items. " +
             "Please try again with a more specific item name.";
+    private String EMPTY_MENU = "There are no items on the menu.";
 
     /**
      * General print statements
@@ -55,6 +56,20 @@ public class Ui {
      */
     public void promptItemPrice() {
         System.out.println("Please enter the item's price: ");
+    }
+
+    /**
+     * Prompts user for item index when in assistance mode
+     */
+    public void promptItemIndex() {
+        System.out.println("Please enter the item's index: ");
+    }
+
+    /**
+     * Prompts user for item keyword when in assistance mode
+     */
+    public void promptItemKeyword() {
+        System.out.println("Please enter the keyword to search for: ");
     }
 
     /**
@@ -101,6 +116,10 @@ public class Ui {
     }
 
     /*** Getter Methods to retrieve error messages ***/
+    public String getEmptyMenu() {
+        return EMPTY_MENU;
+    }
+
     public String getNullMessage() {
         return NULL_MESSAGE;
     }
