@@ -19,8 +19,8 @@ public class Menu {
     private ArrayList<Item> items;
     private Store store;
 
-    public Menu() {
-        this.store = new Store("menu.json");
+    public Menu(String fileName) {
+        this.store = new Store(fileName);
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
 
@@ -38,23 +38,8 @@ public class Menu {
         }
     }
 
-    public Menu(Store store) {
-        this.store = store;
-        Type type = new TypeToken<ArrayList<Item>>() {
-        }.getType();
-
-        try {
-            this.items = store.load(type);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (JsonParseException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        }
+    public Menu(){
+        this.items = new ArrayList<>();
     }
 
     public void displayList() {
@@ -88,6 +73,9 @@ public class Menu {
             store.save(items);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+        catch(NullPointerException e){
+            System.out.println("Store not initialized...");
         }
     }
 

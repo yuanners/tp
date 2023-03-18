@@ -24,11 +24,8 @@ public class Transaction {
      */
     private Store store;
 
-    /**
-     * Constructs an empty order list.
-     */
-    public Transaction() {
-        this.store = new Store("orders.json");
+    public Transaction(String fileName) {
+        this.store = new Store(fileName);
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
 
@@ -44,6 +41,10 @@ public class Transaction {
             System.out.println(e.getMessage());
             this.transactions = new ArrayList<>();
         }
+    }
+
+    public Transaction() {
+        this.transactions = new ArrayList<>();
     }
 
     /**
@@ -81,6 +82,8 @@ public class Transaction {
             store.save(transactions);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Store not initialized...");
         }
     }
 

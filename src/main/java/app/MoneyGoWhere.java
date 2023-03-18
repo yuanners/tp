@@ -6,6 +6,7 @@ import item.Menu;
 import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
+import statistic.Statistic;
 import utility.Parser;
 import utility.Ui;
 
@@ -20,9 +21,9 @@ public class MoneyGoWhere {
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
-        menu = new Menu();
+        menu = new Menu("menu.json");
         menuAssistant = new MenuAssistant();
-        transactions = new Transaction();
+        transactions = new Transaction("orders.json");
     }
 
     public void handleCommand(Command command) {
