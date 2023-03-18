@@ -106,7 +106,7 @@ class StatisticTest {
             }
 
         } catch (ParseException e) {
-            System.out.println("Date not in correct format");
+            System.out.println("Incorrect date format");
         }
     }
 
