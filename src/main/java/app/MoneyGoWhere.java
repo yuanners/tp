@@ -6,7 +6,6 @@ import item.Menu;
 import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
-import statistic.Statistic;
 import utility.Parser;
 import utility.Ui;
 

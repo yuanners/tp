@@ -82,7 +82,6 @@ public class Transaction {
             store.save(transactions);
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        } catch (NullPointerException e) {
         }
     }
 
