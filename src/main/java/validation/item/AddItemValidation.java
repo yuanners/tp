@@ -17,6 +17,7 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param c Given command
+     * @throws ItemException If any required flag is not given
      */
     public void validateFlags(Command c) throws ItemException{
         String args = c.getArgumentString();
@@ -30,6 +31,13 @@ public class AddItemValidation extends ItemValidation {
         }
     }
 
+    /**
+     * Calls all validation methods to check all parts of the given command
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     * @throws ItemException If any validation fails
+     */
     public void validateCommand(Command c, Menu menu) throws ItemException {
         try {
             validateArgument(c);
@@ -42,6 +50,13 @@ public class AddItemValidation extends ItemValidation {
         }
     }
 
+    /**
+     * Checks if the given input for name is valid
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     * @throws ItemException If name is invalid
+     */
     public void validateName(Command c, Menu menu) throws ItemException {
         if(c.getArgumentMap().get(LONG_NAME_FLAG) == null) {
             throw new ItemException(ui.getItemNameMinLengthError());
@@ -69,6 +84,7 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the given input for price is valid
      *
      * @param c Given command
+     * @throws ItemException If price is invalid
      */
     public void validatePrice(Command c) throws ItemException {
         if(c.getArgumentMap().get(LONG_PRICE_FLAG) == null) {

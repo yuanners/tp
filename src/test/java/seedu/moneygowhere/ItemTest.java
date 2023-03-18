@@ -31,7 +31,7 @@ class ItemTest {
     @Test
     public void itemTest() {
 
-        runTest("additem -p 20.1 -n \"chicken rice100\"", moneyGoWhere);
+        runTest("/additem -p 20.1 -n \"chicken rice100\"", moneyGoWhere);
         assertEquals("chicken rice100", moneyGoWhere.menu.getItems().
                 get(moneyGoWhere.menu.getItems().size() - 1).getName());
 
@@ -46,7 +46,7 @@ class ItemTest {
 
     @Test
     public void itemTest2() {
-        runTest("additem -p 2kuku0.01 -n \"chicken rice3\"", moneyGoWhere);
+        runTest("/additem -p 2kuku0.01 -n \"chicken rice3\"", moneyGoWhere);
         assert moneyGoWhere.menu.getItems().
                 get(moneyGoWhere.menu.getItems().size() - 1)
                 .getName().equals("chicken rice100"): "Item name should be chicken rice100";
@@ -56,7 +56,7 @@ class ItemTest {
     @Test
     public void itemTest3() {
         // max 2dp error
-        runTest("additem -p 20.0001 -n \"chicken rice4\"", moneyGoWhere);
+        runTest("/additem -p 20.0001 -n \"chicken rice4\"", moneyGoWhere);
         assert moneyGoWhere.menu.getItems().
                 get(moneyGoWhere.menu.getItems().size() - 1)
                 .getName().equals("chicken rice100"): "Item name should be chicken rice100";
@@ -68,7 +68,7 @@ class ItemTest {
 
         runTest("listitem", moneyGoWhere);
 
-        runTest("deleteitem -i " + (moneyGoWhere.menu.getItems().size()-1), moneyGoWhere);
+        runTest("/deleteitem -i " + (moneyGoWhere.menu.getItems().size()-1), moneyGoWhere);
 
         runTest("listitem", moneyGoWhere);
     }
