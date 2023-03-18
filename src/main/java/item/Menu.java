@@ -13,6 +13,7 @@ import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
+import validation.item.UpdateItemValidation;
 
 public class Menu {
 
@@ -102,6 +103,44 @@ public class Menu {
         appendItem(item);
         assert this.getItem(this.getItems().size()-1).getName() == item.getName()
                 : "Item failed to append";
+        save();
+    }
+
+    /**
+     * Updates a specified item on the menu by its given index.
+     *
+     * @param command the Command object containing the search term
+     * @throws ItemException if the command format is invalid
+     *                       or index does not exist
+     */
+    public void updateItem(Command command) throws ItemException {
+        if(this.getItems().size() == 0) {
+            Ui ui = new Ui();
+            throw new ItemException(ui.getEmptyMenu());
+        }
+
+        UpdateItemValidation updateItemValidation = new UpdateItemValidation();
+
+        try {
+            updateItemValidation.validateFlags(command);
+            command.mapArgumentAlias(updateItemValidation.LONG_INDEX_FLAG, updateItemValidation.SHORT_INDEX_FLAG);
+            command.mapArgumentAlias(updateItemValidation.LONG_NAME_FLAG, updateItemValidation.SHORT_NAME_FLAG);
+            command.mapArgumentAlias(updateItemValidation.LONG_PRICE_FLAG, updateItemValidation.SHORT_PRICE_FLAG);
+            updateItemValidation.validateCommand(command, this);
+        } catch (ItemException e) {
+            throw new ItemException(e.getMessage());
+        }
+
+        int index = Integer.parseInt(command.getArgumentMap().get(updateItemValidation.LONG_INDEX_FLAG));
+
+        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
+            this.getItem(index).setName(command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG));
+        }
+
+        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
+            Double price = Double.valueOf(command.getArgumentMap().get(updateItemValidation.LONG_PRICE_FLAG));
+            this.getItem(index).setPrice(price);
+        }
         save();
     }
 
