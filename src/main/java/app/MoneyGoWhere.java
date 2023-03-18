@@ -33,7 +33,7 @@ public class MoneyGoWhere {
             switch (command.getCommand()) {
             case "/listitem":
                 // Fallthrough
-                
+
             case "listitem":
                 menu.displayList();
                 break;

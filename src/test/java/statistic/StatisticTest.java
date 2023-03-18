@@ -12,6 +12,7 @@ import utility.Parser;
 
 import java.text.ParseException;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +29,8 @@ class StatisticTest {
         }
 
     }
-    public void createOrder(Command c){
+
+    public void createOrder(Command c) {
         try {
             Order order = new Order();
             order.addOrder(c, menu);
@@ -38,52 +40,92 @@ class StatisticTest {
         }
     }
 
-    public void generateTestData(){
+    public void generateTestData() {
         Command c;
 
-        c = new Command("additem -n \"Chicken rice\" -p 3.00");
-        createItem(c);
-        c = new Command("additem -n \"Fish ball noodle\" -p 2.50");
-        createItem(c);
-        c = new Command("additem -n \"Mee Rubus\" -p 3.50");
-        createItem(c);
-        c = new Command("additem -n \"Fish soup\" -p 5.00");
-        createItem(c);
-        c = new Command("additem -n \"Rojak\" -p 2.00");
-        createItem(c);
-        c = new Command("additem -n \"Roti Prata\" -p 1.20");
-        createItem(c);
+//        c = new Command("/additem -n \"Chicken rice\" -p 3.00");
+//        createItem(c);
+//        c = new Command("/additem -n \"Fish ball noodle\" -p 2.50");
+//        createItem(c);
+//        c = new Command("/additem -n \"Mee Rubus\" -p 3.50");
+//        createItem(c);
+//        c = new Command("/additem -n \"Fish soup\" -p 5.00");
+//        createItem(c);
+//        c = new Command("/additem -n \"Rojak\" -p 2.00");
+//        createItem(c);
+//        c = new Command("/additem -n \"Roti Prata\" -p 1.20");
+//        createItem(c);
 
         c = new Command("addorder -i 0 -q 2");
         createOrder(c);
         c = new Command("addorder -i 1 -q 3");
         createOrder(c);
-        c = new Command("addorder -i 2 -q 1");
+        c = new Command("addorder -i 2 -q 30");
         createOrder(c);
         c = new Command("addorder -i 3 -q 4");
         createOrder(c);
-        c = new Command("addorder -i 4 -q 10");
+        c = new Command("addorder -i 3 -q 10");
+        createOrder(c);
+        c = new Command("addorder -i 3 -q 10");
+        createOrder(c);
+        c = new Command("addorder -i 4 -q 4");
+        createOrder(c);
+        c = new Command("addorder -i 5 -q 4");
         createOrder(c);
     }
 
     @Test
-    void totalRevenue() {
-        this.menu = new Menu(true);
-        this.transactions = new Transaction(true);
+    void salesReport() {
+        this.menu = new Menu();
+        this.transactions = new Transaction();
 
-        generateTestData();
-
-        transactions.displayList();
-
-        try{
+        try {
             Statistic s = new Statistic("15/03/2023");
             double sales = s.salesReport(transactions);
 
             System.out.println(sales);
 
-        } catch(ParseException e){
+        } catch (ParseException e) {
             System.out.println("Date not in correct format");
         }
+    }
 
+    @Test
+    void rankByPopularity() {
+        this.menu = new Menu();
+        this.transactions = new Transaction();
+
+
+        try {
+            Statistic s = new Statistic("15/03/2023");
+            PriorityQueue<ItemRank> rank = s.rankByPopularity(transactions, menu);
+
+            while (!rank.isEmpty()) {
+                ItemRank element = rank.poll();
+                System.out.println(element.getItemName() + ": " + element.getQuantity());
+            }
+
+        } catch (ParseException e) {
+            System.out.println("Date not in correct format");
+        }
+    }
+
+    @Test
+    void rankBySales() {
+        this.menu = new Menu();
+        this.transactions = new Transaction();
+
+        try {
+            Statistic s = new Statistic("15/03/2023");
+            PriorityQueue<ItemRank> rank = s.rankBySales(transactions, menu);
+
+            while (!rank.isEmpty()) {
+                ItemRank element = rank.poll();
+                System.out.println(element.getItemName() + ": " + element.getSales());
+            }
+
+        } catch (ParseException e) {
+            System.out.println("Date not in correct format");
+        }
     }
 }
