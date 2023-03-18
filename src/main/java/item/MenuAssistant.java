@@ -212,7 +212,7 @@ public class MenuAssistant {
         }
 
         command.setArgumentString(keyword);
-        menu.showResultsOfFind(command, menu.getItems());
+        menu.showResultsOfFind(command);
 
         return false;
     }
