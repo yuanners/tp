@@ -3,6 +3,7 @@ package order;
 import app.Command;
 import exception.OrderException;
 import item.Menu;
+import utility.Ui;
 import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
@@ -73,7 +74,7 @@ public class Order implements OrderInterface {
         return dateTime.format(FORMATTER);
     }
 
-    public Date getDate(){
+    public Date getDate() {
         LocalDateTime localDateTime = LocalDateTime.now();
         ZoneId zoneId = ZoneId.systemDefault();
         Date date = Date.from(localDateTime.atZone(zoneId).toInstant());
@@ -127,22 +128,22 @@ public class Order implements OrderInterface {
     public void addOrder(Command command, Menu listOfItems)
             throws OrderException {
 
-        try{
+        try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
             AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation();
             command.mapArgumentAlias("item", "i");
             command.mapArgumentAlias("items", "I");
 
-            if(command.getArgumentMap().get("item") != null) {
+            if (command.getArgumentMap().get("item") != null) {
                 command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
-            } else if(command.getArgumentMap().get("items") != null) {
+            } else if (command.getArgumentMap().get("items") != null) {
                 command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
-            }else{
+            } else {
                 addOrderValidation.checkValidFlag(command);
             }
-        } catch(OrderException o) {
+        } catch (OrderException o) {
             throw new OrderException(o.getMessage());
         }
 
@@ -154,7 +155,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the item is selected
      */
-    public void addSingleOrder(Command command, Menu listOfItems) {
+    public void addSingleOrder(Command command, Menu listOfItems) throws OrderException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -169,7 +170,7 @@ public class Order implements OrderInterface {
     /**
      * Get the item index from user input
      *
-     * @param command     user input command
+     * @param command user input command
      * @return item index
      */
     public int handleOrderIndex(Command command) {
@@ -185,12 +186,20 @@ public class Order implements OrderInterface {
      * @param command User input command
      * @return quantity
      */
-    public int handleQuantity(Command command) {
+    public int handleQuantity(Command command) throws OrderException {
+
+        Ui ui = new Ui();
+
         int quantity;
+        boolean isQuantityANumber = isInteger(command.getArgumentMap().get("quantity"));
 
         if (command.getArgumentMap().get("quantity") != null) {
+            if (!isQuantityANumber){
+                throw new OrderException(ui.getInvalidOrderInteger());
+            }
             quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
-        } else {
+        }
+        else {
             quantity = 1;
         }
 
@@ -227,5 +236,15 @@ public class Order implements OrderInterface {
             this.orderEntries.add(orderEntry);
         }
 
+    }
+
+    private boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException n) {
+            return false;
+        }
+
+        return true;
     }
 }
