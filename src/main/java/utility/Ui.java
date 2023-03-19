@@ -30,6 +30,7 @@ public class Ui {
     private String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
     private String INVALID_PRICE_ERROR = "Price must be a number.";
     private String REQUIRE_INTEGER = "This input requires a whole number!";
+    private String REQUIRE_VALID_ITEM_INDEX = "This input requires a valid item index!";
     private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
     private String NO_SUCH_ITEM = "No such item exists.";
     private String MULTIPLE_SIMILAR_ITEMS = "Your input referenced multiple similar items. " +
@@ -196,6 +197,10 @@ public class Ui {
 
     public String getRequireInteger() {
         return REQUIRE_INTEGER;
+    }
+
+    public String getRequireValidItemIndex() {
+        return REQUIRE_VALID_ITEM_INDEX;
     }
 
     public String getExitMessage() {

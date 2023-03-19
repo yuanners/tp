@@ -13,6 +13,7 @@ import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
+import validation.item.UpdateItemValidation;
 
 public class Menu {
 
@@ -38,23 +39,8 @@ public class Menu {
         }
     }
 
-    public Menu(Store store) {
-        this.store = store;
-        Type type = new TypeToken<ArrayList<Item>>() {
-        }.getType();
-
-        try {
-            this.items = store.load(type);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (JsonParseException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        }
+    public Menu(boolean isTest) {
+        this.items = new ArrayList<>();
     }
 
     public void displayList() {
@@ -83,14 +69,6 @@ public class Menu {
         this.items = items;
     }
 
-    public void save() {
-        try {
-            store.save(items);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     /**
      * Adds an item and its price onto the menu.
      *
@@ -112,8 +90,46 @@ public class Menu {
         Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
         Item item = new Item(name, price);
         appendItem(item);
-        assert this.getItem(this.getItems().size()-1).getName() == item.getName()
+        assert this.getItem(this.getItems().size() - 1).getName() == item.getName()
                 : "Item failed to append";
+        save();
+    }
+
+    /**
+     * Updates a specified item on the menu by its given index.
+     *
+     * @param command the Command object containing the search term
+     * @throws ItemException if the command format is invalid
+     *                       or index does not exist
+     */
+    public void updateItem(Command command) throws ItemException {
+        if(this.getItems().size() == 0) {
+            Ui ui = new Ui();
+            throw new ItemException(ui.getEmptyMenu());
+        }
+
+        UpdateItemValidation updateItemValidation = new UpdateItemValidation();
+
+        try {
+            updateItemValidation.validateFlags(command);
+            command.mapArgumentAlias(updateItemValidation.LONG_INDEX_FLAG, updateItemValidation.SHORT_INDEX_FLAG);
+            command.mapArgumentAlias(updateItemValidation.LONG_NAME_FLAG, updateItemValidation.SHORT_NAME_FLAG);
+            command.mapArgumentAlias(updateItemValidation.LONG_PRICE_FLAG, updateItemValidation.SHORT_PRICE_FLAG);
+            updateItemValidation.validateCommand(command, this);
+        } catch (ItemException e) {
+            throw new ItemException(e.getMessage());
+        }
+
+        int index = Integer.parseInt(command.getArgumentMap().get(updateItemValidation.LONG_INDEX_FLAG));
+
+        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
+            this.getItem(index).setName(command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG));
+        }
+
+        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
+            Double price = Double.valueOf(command.getArgumentMap().get(updateItemValidation.LONG_PRICE_FLAG));
+            this.getItem(index).setPrice(price);
+        }
         save();
     }
 
@@ -125,7 +141,7 @@ public class Menu {
      *                       or index does not exist
      */
     public void deleteItem(Command command) throws ItemException {
-        if(this.getItems().size() == 0) {
+        if (this.getItems().size() == 0) {
             Ui ui = new Ui();
             throw new ItemException(ui.getEmptyMenu());
         }
@@ -179,7 +195,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     *         or an empty list if no matching item is found
+     *     or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
@@ -223,6 +239,14 @@ public class Menu {
             if (menu.get(i).getName().contains(itemName)) {
                 ui.printFindItem(i, menu);
             }
+        }
+    }
+
+    public void save() {
+        try {
+            store.save(items);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

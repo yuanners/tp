@@ -59,7 +59,8 @@ public class MenuAssistant {
             command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
 
             try {
-                addItemValidation.validateName(command, menu);
+                addItemValidation.validateName(command);
+                addItemValidation.validateDuplicateName(command, menu);
                 isValidName = true;
             } catch(ItemException e) {
                 ui.println(e.getMessage());

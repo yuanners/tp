@@ -100,7 +100,7 @@ public class AddOrderValidation extends Validation {
         if (arg.getArgumentMap().containsKey("i") || arg.getArgumentMap().containsKey("item")) {
             if ((isInteger(arg.getArgumentMap().get("i").trim())
                     || isInteger(arg.getArgumentMap().get("item").trim()))
-                    && Integer.parseInt(arg.getArgumentMap().get("i").trim()) > 0) {
+                    && Integer.parseInt(arg.getArgumentMap().get("i").trim()) < 0) {
                 throw new OrderException(ui.getInvalidOrderInteger());
             }
         }

@@ -7,10 +7,7 @@ import item.Menu;
 import utility.Ui;
 
 public class AddItemValidation extends ItemValidation {
-    public final String SHORT_NAME_FLAG = "n";
-    public final String LONG_NAME_FLAG = "name";
-    public final String SHORT_PRICE_FLAG = "p";
-    public final String LONG_PRICE_FLAG = "price";
+
     private Ui ui = new Ui();
 
     /**
@@ -41,7 +38,8 @@ public class AddItemValidation extends ItemValidation {
     public void validateCommand(Command c, Menu menu) throws ItemException {
         try {
             validateArgument(c);
-            validateName(c, menu);
+            validateName(c);
+            validateDuplicateName(c, menu);
             validatePrice(c);
         } catch (ItemException e) {
             throw new ItemException(e.getMessage());
@@ -54,10 +52,9 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the given input for name is valid
      *
      * @param c Given command
-     * @param menu The list of items on the menu
      * @throws ItemException If name is invalid
      */
-    public void validateName(Command c, Menu menu) throws ItemException {
+    public void validateName(Command c) throws ItemException {
         if(c.getArgumentMap().get(LONG_NAME_FLAG) == null) {
             throw new ItemException(ui.getItemNameMinLengthError());
         }
@@ -70,6 +67,16 @@ public class AddItemValidation extends ItemValidation {
             throw new ItemException(ui.getItemNameMinLengthError());
         }
 
+    }
+
+    /**
+     * Checks if the given input for name exists in the menu
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     * @throws ItemException If name is invalid
+     */
+    public void validateDuplicateName(Command c, Menu menu) throws ItemException {
         String newItemName = c.getArgumentMap().get(LONG_NAME_FLAG);
         int menuSize = menu.getItems().size();
         for(int i = 0; i<menuSize; i++) {

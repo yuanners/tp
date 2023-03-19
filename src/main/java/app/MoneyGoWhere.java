@@ -32,7 +32,7 @@ public class MoneyGoWhere {
             switch (command.getCommand()) {
             case "/listitem":
                 // Fallthrough
-                
+
             case "listitem":
                 menu.displayList();
                 break;
@@ -44,6 +44,11 @@ public class MoneyGoWhere {
 
             case "/additem":
                 menu.addItem(command);
+                ui.printCommandSuccess(command.getCommand());
+                break;
+
+            case "/updateitem":
+                menu.updateItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
