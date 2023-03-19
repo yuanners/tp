@@ -21,16 +21,9 @@ public class Order implements OrderInterface {
     private ArrayList<OrderEntry> orderEntries;
     private String status;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     /**
-     * Constructs an Order object with a unique ID,
+     * Constructs an Order object with a unique ID, default transaction status as COMPLETED
      * the current date and time and an empty ArrayList of
      * OrderEntry objects.
      */
@@ -90,6 +83,14 @@ public class Order implements OrderInterface {
         Date date = Date.from(localDateTime.atZone(zoneId).toInstant());
 
         return date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     /**
@@ -204,12 +205,11 @@ public class Order implements OrderInterface {
         boolean isQuantityANumber = isInteger(command.getArgumentMap().get("quantity"));
 
         if (command.getArgumentMap().get("quantity") != null) {
-            if (!isQuantityANumber){
+            if (!isQuantityANumber) {
                 throw new OrderException(ui.getInvalidOrderInteger());
             }
             quantity = Integer.parseInt(command.getArgumentMap().get("quantity").trim());
-        }
-        else {
+        } else {
             quantity = 1;
         }
 
