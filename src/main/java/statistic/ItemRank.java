@@ -1,42 +1,27 @@
 package statistic;
 
 public class ItemRank {
-    private String itemName;
-    private int quantity;
+    private String name;
+    private double value;
 
-    private double sales;
-
-    public ItemRank(String itemName, int quantity) {
-        this.itemName = itemName;
-        this.quantity = quantity;
+    public ItemRank(String name, double value) {
+        this.name = name;
+        this.value = value;
     }
 
-    public ItemRank(String itemName, double sales) {
-        this.itemName = itemName;
-        this.sales = sales;
+    public String getName() {
+        return name;
     }
 
-    public String getItemName() {
-        return itemName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public double getValue() {
+        return value;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getSales() {
-        return sales;
-    }
-
-    public void setSales(double sales) {
-        this.sales = sales;
+    public void setValue(double value) {
+        this.value = value;
     }
 }
