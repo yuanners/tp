@@ -74,7 +74,7 @@ public class AddOrderValidation extends Validation {
         if (!isInteger(item)) {
             newItem = Integer.toString(menu.findItemIndex(item));
             String newArgumentString = arg.getArgumentString().replace(item, newItem);
-            Command newCommand = new Command("addorder " + newArgumentString);
+            Command newCommand = new Command("/addorder " + newArgumentString);
             return newCommand;
         }
 
