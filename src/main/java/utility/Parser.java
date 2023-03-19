@@ -1,6 +1,8 @@
 package utility;
 
 import java.io.FileReader;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.Type;
@@ -105,6 +107,9 @@ public class Parser {
         return gson.fromJson(fr, type);
     }
 
+    public double roundToTwoDecimalPlaces(double value) {
+        return Math.round(value * 100.0) / 100.0;
+    }
 }
 
 

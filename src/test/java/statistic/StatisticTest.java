@@ -8,7 +8,8 @@ import order.Order;
 import order.Transaction;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 
@@ -75,15 +76,10 @@ class StatisticTest {
         this.menu = new Menu();
         this.transactions = new Transaction();
 
-        try {
-            Statistic s = new Statistic("15/03/2023");
-            double sales = s.salesReport(transactions);
 
-            System.out.println(sales);
+        SalesReport s = new SalesReport("01/03/2023", "19/03/2023");
+        double sales = s.totalSales(transactions);
 
-        } catch (ParseException e) {
-            System.out.println("Date not in correct format");
-        }
     }
 
     @Test
@@ -92,18 +88,11 @@ class StatisticTest {
         this.transactions = new Transaction();
 
 
-        try {
-            Statistic s = new Statistic("15/03/2023");
-            PriorityQueue<ItemRank> rank = s.rankByPopularity(transactions, menu);
+        RankReport r = new RankReport("19/03/2023", "19/03/2023");
+        PriorityQueue<ItemRank> rank = r.rankByPopularity(transactions, menu);
 
-            while (!rank.isEmpty()) {
-                ItemRank element = rank.poll();
-                System.out.println(element.getItemName() + ": " + element.getQuantity());
-            }
-
-        } catch (ParseException e) {
-            System.out.println("Incorrect date format");
-        }
+        Chart c = new Chart();
+        c.rankByPopularityTable(rank);
     }
 
     @Test
@@ -111,17 +100,42 @@ class StatisticTest {
         this.menu = new Menu();
         this.transactions = new Transaction();
 
-        try {
-            Statistic s = new Statistic("15/03/2023");
-            PriorityQueue<ItemRank> rank = s.rankBySales(transactions, menu);
 
-            while (!rank.isEmpty()) {
-                ItemRank element = rank.poll();
-                System.out.println(element.getItemName() + ": " + element.getSales());
-            }
+        RankReport r = new RankReport("01/03/2023", "19/03/2023");
+        PriorityQueue<ItemRank> rank = r.rankBySales(transactions, menu);
 
-        } catch (ParseException e) {
-            System.out.println("Date not in correct format");
-        }
+        Chart c = new Chart();
+        c.rankBySalesTable(rank);
+    }
+
+    @Test
+    void dailySalesReport() {
+        this.menu = new Menu();
+        this.transactions = new Transaction();
+
+        String strStartDate = "07/03/2023";
+        String strEndDate = "15/03/2023";
+
+        SalesReport s = new SalesReport(strStartDate, strEndDate);
+        Map<LocalDateTime, Double> dailySalesMap = s.dailySales(transactions);
+        System.out.println(dailySalesMap);
+
+        Chart c = new Chart();
+        c.dailySalesChart(dailySalesMap, strStartDate, strEndDate);
+    }
+
+    @Test
+    void annualSalesReport() {
+        this.menu = new Menu();
+        this.transactions = new Transaction();
+
+        int year = 2023;
+
+        SalesReport s = new SalesReport(year);
+        Map<LocalDateTime, Double> monthlySalesMap = s.monthlySales(transactions);
+        System.out.println(monthlySalesMap);
+
+        Chart c = new Chart();
+        c.monthlySalesChart(monthlySalesMap, year);
     }
 }

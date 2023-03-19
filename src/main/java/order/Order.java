@@ -68,10 +68,14 @@ public class Order implements OrderInterface {
      *
      * @return String dateTime
      */
-    public String getDateTime() {
+    public String getFormatDateTime() {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         ;
         return dateTime.format(FORMATTER);
+    }
+
+    public LocalDateTime getDateTime(){
+        return dateTime;
     }
 
     public Date getDate() {
