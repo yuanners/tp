@@ -4,7 +4,6 @@ import item.Item;
 import order.Order;
 import order.OrderEntry;
 import org.junit.jupiter.api.Test;
-import payment.Payment;
 
 import java.util.ArrayList;
 
