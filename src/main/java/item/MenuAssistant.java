@@ -14,8 +14,8 @@ public class MenuAssistant {
     private final String CANCEL = "/cancel";
     private final String YES = "yes";
     private final String NO = "no";
-    AddItemValidation addItemValidation;
-    DeleteItemValidation deleteItemValidation;
+    private AddItemValidation addItemValidation;
+    private DeleteItemValidation deleteItemValidation;
     public MenuAssistant() {
         ui = new Ui();
         sc = new Scanner(System.in);
