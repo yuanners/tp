@@ -33,6 +33,7 @@ public class Ui {
     private String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
     private String INVALID_PRICE_ERROR = "Price must be a number.";
     private String REQUIRE_INTEGER = "This input requires a whole number!";
+    private String REQUIRE_VALID_ITEM_INDEX = "This input requires a valid item index!";
     private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
     private String NO_SUCH_ITEM = "No such item exists.";
     private String MULTIPLE_SIMILAR_ITEMS = "Your input referenced multiple similar items. " +
@@ -56,10 +57,47 @@ public class Ui {
     }
 
     /**
+     * Prompts user if they would like to update item name
+     */
+    public void promptItemNameChange() {
+        System.out.println("Would you like to update item name? (yes/no)");
+    }
+
+    /**
+     * Prompts user if they answer is not recognised
+     */
+    public void promptUpdateItemUnrecognisedAnswer() {
+        System.out.println("Sorry your input was not recognised."
+                + " Please answer with \"yes\" or \"no\".");
+    }
+
+
+    /**
+     * Prompts user for the new item name when in assistance mode
+     */
+    public void promptNewItemName() {
+        System.out.println("Please enter the new name: ");
+    }
+
+    /**
      * Prompts user for item price when in assistance mode
      */
     public void promptItemPrice() {
         System.out.println("Please enter the item's price: ");
+    }
+
+    /**
+     * Prompts user if they would like to update item price
+     */
+    public void promptItemPriceChange() {
+        System.out.println("Would you like to update item price? (yes/no)");
+    }
+
+    /**
+     * Prompts user for the new item price when in assistance mode
+     */
+    public void promptNewItemPrice() {
+        System.out.println("Please enter the new price: ");
     }
 
     /**
@@ -191,7 +229,7 @@ public class Ui {
         return INTEGER_OVERFLOW;
     }
 
-    public String getInvalidAdditemFormat() {
+    public String getInvalidAddItemFormat() {
         return INVALID_ADDITEM_FORMAT;
     }
 
@@ -213,6 +251,10 @@ public class Ui {
 
     public String getRequireInteger() {
         return REQUIRE_INTEGER;
+    }
+
+    public String getRequireValidItemIndex() {
+        return REQUIRE_VALID_ITEM_INDEX;
     }
 
     public String getExitMessage() {
