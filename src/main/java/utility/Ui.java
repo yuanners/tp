@@ -15,7 +15,7 @@ public class Ui {
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
     private String MISSING_ORDER_FLAG = "Please use correctly formatted flags to add order.";
     private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags.";
-    private String INVALID_ORDER_INTEGER = "Quantity must be a positive number.";
+    private String INVALID_ORDER_INTEGER = "Quantity must be more than 0.";
     private String INVALID_MULTIPLE_ORDER_FORMAT = "Wrong format to add multiple orders.";
     private String INVALID_MULTIPLE_ORDER_INTEGER = "Please enter positive numbers only.";
     private String MISSING_ORDER_ID = "Please enter the order ID to refund.";

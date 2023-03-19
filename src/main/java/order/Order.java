@@ -23,7 +23,8 @@ public class Order implements OrderInterface {
 
 
     /**
-     * Constructs an Order object with a unique ID, default transaction status as COMPLETED
+     * Constructs an Order object with a unique ID
+     * default transaction status as COMPLETED
      * the current date and time and an empty ArrayList of
      * OrderEntry objects.
      */
@@ -35,7 +36,8 @@ public class Order implements OrderInterface {
     }
 
     /**
-     * Constructs an Order object with a unique ID,
+     * Constructs an Order object with a unique ID
+     * default transaction status as COMPLETED
      * the current date and time and an ArrayList of
      * OrderEntry objects.
      *
@@ -43,6 +45,7 @@ public class Order implements OrderInterface {
      */
     public Order(ArrayList<OrderEntry> orderEntries) {
         this.orderId = UUID.randomUUID().toString();
+        this.status = "COMPLETED";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = orderEntries;
     }
@@ -85,9 +88,20 @@ public class Order implements OrderInterface {
         return date;
     }
 
+    /**
+     * Get the status
+     *
+     * @return the status of the transaction
+     */
     public String getStatus() {
         return status;
     }
+
+    /**
+     * Set the status
+     *
+     * @param status expected to be REFUNDED
+     */
 
     public void setStatus(String status) {
         this.status = status;
