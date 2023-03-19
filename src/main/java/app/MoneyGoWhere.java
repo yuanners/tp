@@ -48,6 +48,16 @@ public class MoneyGoWhere {
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
+            case "updateitem":
+                isCancelled = menuAssistant.updateItem(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+
+            case "/updateitem":
+                menu.updateItem(command);
+                ui.printCommandSuccess(command.getCommand());
+                break;
+
             case "finditem":
                 isCancelled = menuAssistant.showResultsOfFind(command, menu);
                 menuAssistant.printResult(command, isCancelled);

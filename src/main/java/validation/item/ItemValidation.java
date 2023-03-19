@@ -4,6 +4,14 @@ import utility.Ui;
 import validation.Validation;
 
 public class ItemValidation extends Validation {
+    public final String SHORT_NAME_FLAG = "n";
+    public final String LONG_NAME_FLAG = "name";
+    public final String SHORT_PRICE_FLAG = "p";
+    public final String LONG_PRICE_FLAG = "price";
+    public final String SHORT_INDEX_FLAG = "i";
+    public final String LONG_INDEX_FLAG = "index";
+    public final String SHORT_DESC_FLAG = "d";
+    public final String LONG_DESC_FLAG = "description";
     Ui ui = new Ui();
 
     /**
@@ -30,12 +38,9 @@ public class ItemValidation extends Validation {
      */
     public int isInteger(String input) {
         try {
-            if (!input.matches("^\\d+$")) {
-                return 1;
-            }
             Integer.parseInt(input);
         } catch (NumberFormatException n) {
-            return 2;
+            return 1;
         }
         return 0;
     }
