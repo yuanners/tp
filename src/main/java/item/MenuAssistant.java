@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class MenuAssistant {
     Ui ui;
     Scanner sc;
+    private final String CANCEL = "/cancel";
+    private final String YES = "yes";
+    private final String NO = "no";
     AddItemValidation addItemValidation;
     DeleteItemValidation deleteItemValidation;
     public MenuAssistant() {
@@ -51,7 +54,7 @@ public class MenuAssistant {
             ui.promptItemName();
             name = sc.nextLine();
 
-            if(name.equals("/cancel")) {
+            if(name.equals(CANCEL)) {
                 return true;
             }
 
@@ -86,7 +89,7 @@ public class MenuAssistant {
             ui.promptItemPrice();
             price = sc.nextLine();
 
-            if(price.equals("/cancel")) {
+            if(price.equals(CANCEL)) {
                 return true;
             }
 
@@ -126,10 +129,96 @@ public class MenuAssistant {
             return true;
         }
 
-        String name = command.getArgumentMap().get("name");
-        Double price = Double.valueOf(command.getArgumentMap().get("price"));
+        String name = command.getArgumentMap().get(addItemValidation.LONG_NAME_FLAG);
+        Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
         Item item = new Item(name, price);
         menu.appendItem(item);
+        menu.save();
+        return false;
+    }
+
+    /**
+     * Assisted mode for user to update items in the menu iteratively.
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @return boolean variable indicating if operation was cancelled
+     */
+    public boolean updateItem(Command command, Menu menu) {
+        if(menu.getItems().size() == 0) {
+            ui.println(ui.getEmptyMenu());
+            return true;
+        }
+
+        boolean isCancelled = false;
+        boolean isValidResponse = false;
+        String toUpdateName = "";
+        String toUpdatePrice = "";
+
+        isCancelled = getIndex(command, menu);
+        if(isCancelled) {
+            return true;
+        }
+        int index = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
+
+        while (!isValidResponse) {
+            ui.promptItemNameChange();
+            toUpdateName = sc.nextLine();
+            if(toUpdateName.equals(CANCEL)) {
+                return true;
+            }
+            toUpdateName = toUpdateName.toLowerCase().trim();
+            if(toUpdateName.equals(NO) ||
+                    toUpdateName.equals(YES)) {
+                isValidResponse = true;
+            }
+            if(!isValidResponse) {
+                ui.promptUpdateItemUnrecognisedAnswer();
+            }
+        }
+
+        isValidResponse = false;
+
+        if(toUpdateName.equals(YES)) {
+            isCancelled = getName(command, menu);
+            if(isCancelled) {
+                return true;
+            }
+        }
+
+        while (!isValidResponse) {
+            ui.promptItemPriceChange();
+            toUpdatePrice = sc.nextLine();
+            if(toUpdatePrice.equals(CANCEL)) {
+                return true;
+            }
+            toUpdatePrice = toUpdatePrice.toLowerCase().trim();
+            if(toUpdatePrice.equals(NO) ||
+                    toUpdatePrice.equals(YES)) {
+                isValidResponse = true;
+            }
+            if(!isValidResponse) {
+                ui.promptUpdateItemUnrecognisedAnswer();
+            }
+        }
+
+        if(toUpdatePrice.equals(YES)) {
+            isCancelled = getPrice(command, menu);
+            if(isCancelled) {
+                return true;
+            }
+        }
+
+        if(toUpdateName.equals(YES)) {
+            String name = command.getArgumentMap().get(addItemValidation.LONG_NAME_FLAG);
+            menu.getItem(index).setName(name);
+        }
+
+        if(toUpdatePrice.equals(YES)) {
+            Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
+            menu.getItem(index).setPrice(price);
+        }
+
         menu.save();
         return false;
     }
@@ -149,7 +238,7 @@ public class MenuAssistant {
             ui.promptItemIndex();
             index = sc.nextLine();
 
-            if(index.equals("/cancel")) {
+            if(index.equals(CANCEL)) {
                 return true;
             }
 
@@ -187,7 +276,7 @@ public class MenuAssistant {
             return true;
         }
 
-        int index = Integer.parseInt(command.getArgumentMap().get("index"));
+        int index = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
         menu.removeItem(index);
         menu.save();
 
@@ -208,7 +297,7 @@ public class MenuAssistant {
         ui.promptItemKeyword();
         keyword = sc.nextLine();
 
-        if(keyword.equals("/cancel")) {
+        if(keyword.equals(CANCEL)) {
             return true;
         }
 
