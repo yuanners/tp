@@ -88,8 +88,6 @@ public class Parser {
     public String jsonStringify(Object object) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(object);
-
-
     }
 
     /**
@@ -105,6 +103,9 @@ public class Parser {
         return gson.fromJson(fr, type);
     }
 
+    public double roundToTwoDecimalPlaces(double value) {
+        return Math.round(value * 100.0) / 100.0;
+    }
 }
 
 

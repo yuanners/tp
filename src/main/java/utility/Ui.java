@@ -355,9 +355,13 @@ public class Ui {
 
             System.out.println("Order " + (i + 1));
             System.out.println("Order ID: " + orders.get(i).getOrderId());
+<<<<<<< HEAD
             System.out.println("Order time: " + orders.get(i).getDateTime());
             System.out.println("Order status: " + orders.get(i).getStatus());
             System.out.println("Payment type: " + orders.get(i).getPaymentType());
+=======
+            System.out.println("Order time: " + orders.get(i).getFormatDateTime());
+>>>>>>> 12e2c11c4c39f18b6d705ab5be0b2a9ad60c0e53
 
             for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
                 System.out.println((j + 1) + ". "
