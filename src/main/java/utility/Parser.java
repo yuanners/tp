@@ -1,8 +1,6 @@
 package utility;
 
 import java.io.FileReader;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.Type;
@@ -90,8 +88,6 @@ public class Parser {
     public String jsonStringify(Object object) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(object);
-
-
     }
 
     /**
