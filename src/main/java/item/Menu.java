@@ -69,15 +69,6 @@ public class Menu {
         this.items = items;
     }
 
-    public void save() {
-        try {
-            store.save(items);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (NullPointerException e) {
-        }
-    }
-
     /**
      * Adds an item and its price onto the menu.
      *
@@ -204,7 +195,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     * or an empty list if no matching item is found
+     *     or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
@@ -248,6 +239,14 @@ public class Menu {
             if (menu.get(i).getName().contains(itemName)) {
                 ui.printFindItem(i, menu);
             }
+        }
+    }
+
+    public void save() {
+        try {
+            store.save(items);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -1,7 +1,5 @@
 package statistic;
 
-import item.Item;
-
 public class ItemRank {
     private String itemName;
     private int quantity;
