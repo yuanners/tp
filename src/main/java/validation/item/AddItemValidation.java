@@ -17,6 +17,7 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param c Given command
+     * @throws ItemException If any required flag is not given
      */
     public void validateFlags(Command c) throws ItemException{
         String args = c.getArgumentString();
@@ -30,10 +31,17 @@ public class AddItemValidation extends ItemValidation {
         }
     }
 
-    public void validateCommand(Command c, Menu items) throws ItemException {
+    /**
+     * Calls all validation methods to check all parts of the given command
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     * @throws ItemException If any validation fails
+     */
+    public void validateCommand(Command c, Menu menu) throws ItemException {
         try {
             validateArgument(c);
-            validateName(c, items);
+            validateName(c, menu);
             validatePrice(c);
         } catch (ItemException e) {
             throw new ItemException(e.getMessage());
@@ -42,7 +50,14 @@ public class AddItemValidation extends ItemValidation {
         }
     }
 
-    public void validateName(Command c, Menu items) throws ItemException {
+    /**
+     * Checks if the given input for name is valid
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     * @throws ItemException If name is invalid
+     */
+    public void validateName(Command c, Menu menu) throws ItemException {
         if(c.getArgumentMap().get(LONG_NAME_FLAG) == null) {
             throw new ItemException(ui.getItemNameMinLengthError());
         }
@@ -56,9 +71,9 @@ public class AddItemValidation extends ItemValidation {
         }
 
         String newItemName = c.getArgumentMap().get(LONG_NAME_FLAG);
-        int menuSize = items.getItems().size();
+        int menuSize = menu.getItems().size();
         for(int i = 0; i<menuSize; i++) {
-            if(newItemName.toLowerCase().equals(items.getItem(i).getName().toLowerCase())) {
+            if(newItemName.toLowerCase().equals(menu.getItem(i).getName().toLowerCase())) {
                 throw new ItemException(ui.getItemDuplicateNameError());
             }
         }
@@ -69,6 +84,7 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the given input for price is valid
      *
      * @param c Given command
+     * @throws ItemException If price is invalid
      */
     public void validatePrice(Command c) throws ItemException {
         if(c.getArgumentMap().get(LONG_PRICE_FLAG) == null) {
@@ -95,6 +111,8 @@ public class AddItemValidation extends ItemValidation {
         if (tempPrice < 0.00) {
             throw new ItemException(ui.getItemPriceNegativeError());
         }
+
+        if(!price.contains(".")) { return; }
 
         int numOfDecimalPoint = price.length() - price.indexOf('.') - 1;
 

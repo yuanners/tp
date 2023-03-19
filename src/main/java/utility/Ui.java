@@ -37,6 +37,7 @@ public class Ui {
     private String NO_SUCH_ITEM = "No such item exists.";
     private String MULTIPLE_SIMILAR_ITEMS = "Your input referenced multiple similar items. " +
             "Please try again with a more specific item name.";
+    private String EMPTY_MENU = "There are no items on the menu.";
 
     /**
      * General print statements
@@ -59,6 +60,34 @@ public class Ui {
     }
 
     /**
+     * Prompts user for item name when in assistance mode
+     */
+    public void promptItemName() {
+        System.out.println("Please enter the item's name: ");
+    }
+
+    /**
+     * Prompts user for item price when in assistance mode
+     */
+    public void promptItemPrice() {
+        System.out.println("Please enter the item's price: ");
+    }
+
+    /**
+     * Prompts user for item index when in assistance mode
+     */
+    public void promptItemIndex() {
+        System.out.println("Please enter the item's index: ");
+    }
+
+    /**
+     * Prompts user for item keyword when in assistance mode
+     */
+    public void promptItemKeyword() {
+        System.out.println("Please enter the keyword to search for: ");
+    }
+
+    /**
      * Prints an error message with the wrong command.
      *
      * @param command The extracted command word
@@ -68,10 +97,17 @@ public class Ui {
     }
 
     /**
-     * Prints error message informing user to input a whole number
+     * Prints error message informing user that command has executed successfully
      */
     public void printCommandSuccess(String command) {
         System.out.println("The command: " + command + " was successfully executed!");
+    }
+
+    /**
+     * Prints error message informing user to input a whole number
+     */
+    public void printCommandCancelled(String command) {
+        System.out.println("The command: " + command + " has been cancelled.");
     }
 
 
@@ -95,6 +131,10 @@ public class Ui {
     }
 
     /*** Getter Methods to retrieve error messages ***/
+    public String getEmptyMenu() {
+        return EMPTY_MENU;
+    }
+
     public String getNullMessage() {
         return NULL_MESSAGE;
     }

@@ -1,0 +1,2 @@
+Please enter a command: 
+Thank you for using MoneyGoWhere. Goodbye!

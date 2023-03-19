@@ -1,38 +1,36 @@
 # Developer Guide
 
+## Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Introduction](#introduction)
+* [Design](#design)
+* [Implementation](#implementation)
+* [Requirements](#requirements)
+  * [Project Scope](#project-scope)
+  * [User Stories](#user-stories)
+  * [Non-functional Requirements](#non-functional-requirements)
+  * [Glossary](#glossary)
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+## Introduction
+The aim of this guide is to provide a comprehensive explanation of the internal mechanisms of MoneyGoWhere. 
+This will enable upcoming software engineers to acquire a detailed understanding of the application's implementation, making it easier for them to work on the project.
 
-## Design & implementation
+## Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+## Implementation
 
+## Requirements
 
-## Product scope
-### Target user profile
+### Project Scope
 
-{Describe the target user profile}
+### User Stories
 
-### Value proposition
+### Non-functional Requirements
+1. The application should be able to run on any operating system with `Java 11` installed.
+2. The application should be responsive.
+3. The application should be simple enough for a novice who is not familiar with a Command Line Interface (CLI) to use.
+4. The application should be easily adaptable to people who are already well-versed in using a traditional Point-of-Sale (POS) system.
 
-{Describe the value proposition: what problem does it solve?}
-
-## User Stories
-
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
-
-## Non-Functional Requirements
-
-{Give non-functional requirements}
-
-## Glossary
-
-* *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Glossary

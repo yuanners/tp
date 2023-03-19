@@ -24,9 +24,6 @@ public class Transaction {
      */
     private Store store;
 
-    /**
-     * Constructs an empty order list.
-     */
     public Transaction() {
         this.store = new Store("orders.json");
         Type type = new TypeToken<ArrayList<Order>>() {
@@ -44,6 +41,10 @@ public class Transaction {
             System.out.println(e.getMessage());
             this.transactions = new ArrayList<>();
         }
+    }
+
+    public Transaction(boolean isTest) {
+        this.transactions = new ArrayList<>();
     }
 
     /**

@@ -3,6 +3,7 @@ package app;
 import exception.ItemException;
 import exception.OrderException;
 import item.Menu;
+import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import payment.Refund;
@@ -15,35 +16,55 @@ import java.util.Scanner;
 public class MoneyGoWhere {
 
     public Menu menu;
+    public MenuAssistant menuAssistant;
     public Transaction transactions;
     private Parser parser = new Parser();
 
     public MoneyGoWhere() {
         menu = new Menu();
+        menuAssistant = new MenuAssistant();
         transactions = new Transaction();
     }
 
     public void handleCommand(Command command) {
         Ui ui = new Ui();
-
+        boolean isCancelled;
         try {
             switch (command.getCommand()) {
+            case "/listitem":
+                // Fallthrough
+
             case "listitem":
                 menu.displayList();
                 break;
 
             case "additem":
-                menu.addItem(command, menu);
+                isCancelled = menuAssistant.addItem(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+
+            case "/additem":
+                menu.addItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
             case "finditem":
-                menu.showResultsOfFind(command, menu.getItems());
+                isCancelled = menuAssistant.showResultsOfFind(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+
+            case "/finditem":
+                menu.showResultsOfFind(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
             case "deleteitem":
-                menu.deleteItem(command, menu);
+                isCancelled = menuAssistant.deleteItem(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+
+            case "/deleteitem":
+                menu.deleteItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
