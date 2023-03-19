@@ -6,6 +6,7 @@ import item.Menu;
 import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
+import payment.Refund;
 import utility.Parser;
 import utility.Ui;
 
@@ -76,18 +77,24 @@ public class MoneyGoWhere {
                 menu.deleteItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
-
             case "listorder":
+                //Fall through
+
+            case "/listorder":
                 transactions.displayList();
                 break;
 
-            case "addorder":
+            case "/addorder":
                 Order order = new Order();
                 order.addOrder(command, menu);
                 transactions.appendOrder(order);
                 ui.printCommandSuccess(command.getCommand());
                 break;
-
+            case "/refundorder":
+                Refund refund = new Refund();
+                refund.refundTransaction(command, transactions);
+                ui.printCommandSuccess(command.getCommand());
+                break;
             default:
                 ui.printInvalidCommand(command.getCommand());
             }
