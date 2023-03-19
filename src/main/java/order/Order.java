@@ -73,7 +73,7 @@ public class Order implements OrderInterface {
         return dateTime.format(FORMATTER);
     }
 
-    public Date getDate(){
+    public Date getDate() {
         LocalDateTime localDateTime = LocalDateTime.now();
         ZoneId zoneId = ZoneId.systemDefault();
         Date date = Date.from(localDateTime.atZone(zoneId).toInstant());
@@ -127,22 +127,22 @@ public class Order implements OrderInterface {
     public void addOrder(Command command, Menu listOfItems)
             throws OrderException {
 
-        try{
+        try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
             AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation();
             command.mapArgumentAlias("item", "i");
             command.mapArgumentAlias("items", "I");
 
-            if(command.getArgumentMap().get("item") != null) {
+            if (command.getArgumentMap().get("item") != null) {
                 command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
-            } else if(command.getArgumentMap().get("items") != null) {
+            } else if (command.getArgumentMap().get("items") != null) {
                 command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
-            }else{
+            } else {
                 addOrderValidation.checkValidFlag(command);
             }
-        } catch(OrderException o) {
+        } catch (OrderException o) {
             throw new OrderException(o.getMessage());
         }
 
@@ -169,7 +169,7 @@ public class Order implements OrderInterface {
     /**
      * Get the item index from user input
      *
-     * @param command     user input command
+     * @param command user input command
      * @return item index
      */
     public int handleOrderIndex(Command command) {

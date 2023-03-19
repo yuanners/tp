@@ -39,7 +39,7 @@ public class Menu {
         }
     }
 
-    public Menu(boolean isTest){
+    public Menu(boolean isTest) {
         this.items = new ArrayList<>();
     }
 
@@ -74,9 +74,7 @@ public class Menu {
             store.save(items);
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }
-        catch(NullPointerException e){
-            System.out.println("Store not initialized...");
+        } catch (NullPointerException e) {
         }
     }
 
@@ -101,7 +99,7 @@ public class Menu {
         Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
         Item item = new Item(name, price);
         appendItem(item);
-        assert this.getItem(this.getItems().size()-1).getName() == item.getName()
+        assert this.getItem(this.getItems().size() - 1).getName() == item.getName()
                 : "Item failed to append";
         save();
     }
@@ -152,7 +150,7 @@ public class Menu {
      *                       or index does not exist
      */
     public void deleteItem(Command command) throws ItemException {
-        if(this.getItems().size() == 0) {
+        if (this.getItems().size() == 0) {
             Ui ui = new Ui();
             throw new ItemException(ui.getEmptyMenu());
         }
@@ -206,7 +204,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     *         or an empty list if no matching item is found
+     * or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
