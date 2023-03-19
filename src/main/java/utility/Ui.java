@@ -10,9 +10,6 @@ import java.util.ArrayList;
  * All print command will be done through here.
  */
 public class Ui {
-    private String MISSING_ORDER_ID = "Please enter the order ID to refund.";
-    private String INVALID_ORDER_ID = "Please enter a valid order ID to refund.";
-    private String INVALID_REFUND_STATUS = "Order is already refunded.";
     private String NULL_MESSAGE = "Input is empty. Please enter something.";
     private String DOUBLE_OVERFLOW = "Double overflow! Please enter a double within the valid range.";
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
@@ -21,6 +18,9 @@ public class Ui {
     private String INVALID_ORDER_INTEGER = "Quantity must be a positive number.";
     private String INVALID_MULTIPLE_ORDER_FORMAT = "Wrong format to add multiple orders.";
     private String INVALID_MULTIPLE_ORDER_INTEGER = "Please enter positive numbers only.";
+    private String MISSING_ORDER_ID = "Please enter the order ID to refund.";
+    private String INVALID_ORDER_ID = "Please enter a valid order ID to refund.";
+    private String INVALID_REFUND_STATUS = "Order is already refunded.";
     private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
     private String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
     private String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
@@ -43,17 +43,6 @@ public class Ui {
      * General print statements
      * Prompts user for input
      */
-    public String printMissingOrderID() {
-        return MISSING_ORDER_ID;
-    }
-
-    public String printInvalidRefundStatus() {
-        return INVALID_REFUND_STATUS;
-    }
-
-    public String printInvalidOrderID() {
-        return INVALID_ORDER_ID;
-    }
 
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
@@ -165,6 +154,17 @@ public class Ui {
 
     public String getInvalidMultipleOrderInteger() {
         return INVALID_MULTIPLE_ORDER_INTEGER;
+    }
+    public String printMissingOrderID() {
+        return MISSING_ORDER_ID;
+    }
+
+    public String printInvalidRefundStatus() {
+        return INVALID_REFUND_STATUS;
+    }
+
+    public String printInvalidOrderID() {
+        return INVALID_ORDER_ID;
     }
 
     public String getItemDuplicateNameError() {
