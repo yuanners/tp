@@ -21,6 +21,12 @@ public class Ui {
     private String MISSING_ORDER_ID = "Please enter the order ID to refund.";
     private String INVALID_ORDER_ID = "Please enter a valid order ID to refund.";
     private String INVALID_REFUND_STATUS = "Order is already refunded.";
+    private String INVALID_PAYMENT = "Invalid payment command.";
+    private String MISSING_PAYMENT_FLAG = "Please use correctly formatted flags to add payment.";
+    private String MISSING_PAYMENT_ARGUMENT = "Please enter both the payment type and amount received.";
+    private String INVALID_PAYMENT_AMOUNT = "Please enter the correct amount up to 2 decimal points only.";
+    private String INSUFFICIENT_AMOUNT = "Insufficient amount. Payment amount must be more than or equals to subtotal.";
+    private String INVALID_PAYMENT_TYPE = "Please enter a valid payment type (Card/Cash/Others).";
     private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
     private String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
     private String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
@@ -141,6 +147,12 @@ public class Ui {
         System.out.println("The command: " + command + " has been cancelled.");
     }
 
+    /**
+     * Prompt user to use /pay to add payment
+     */
+    public void promptPayment() {
+        System.out.println("Please use /pay command to add payment for the order.");
+    }
 
     /**
      * Prints string to user and moves the cursor to a new line.
@@ -208,6 +220,27 @@ public class Ui {
 
     public String printInvalidOrderID() {
         return INVALID_ORDER_ID;
+    }
+
+    public String printInvalidPayment() {
+        return INVALID_PAYMENT;
+    }
+
+    public String printMissingPaymentFlag() {
+        return MISSING_PAYMENT_FLAG;
+    }
+
+    public String printMissingPaymentArgument() {
+        return MISSING_PAYMENT_ARGUMENT;
+    }
+
+    public String printInvalidPaymentAmount() {
+        return INVALID_PAYMENT_AMOUNT;
+    }
+    public String printInsufficientAmount(){return INSUFFICIENT_AMOUNT;}
+
+    public String printInvalidPaymentType() {
+        return INVALID_PAYMENT_TYPE;
     }
 
     public String getItemDuplicateNameError() {
@@ -322,6 +355,8 @@ public class Ui {
 
             System.out.println("Order " + (i + 1));
             System.out.println("Order ID: " + orders.get(i).getOrderId());
+            System.out.println("Order time: " + orders.get(i).getDateTime());
+            System.out.println("Order status: " + orders.get(i).getStatus());
             System.out.println("Order time: " + orders.get(i).getFormatDateTime());
 
             for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
@@ -335,6 +370,10 @@ public class Ui {
             System.out.println("================================================");
 
         }
+    }
+
+    public void printChangeGiven(Double change) {
+        System.out.println("The calculated change is $" + change + ".");
     }
 
     public void printItemNotFound() {
