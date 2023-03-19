@@ -20,9 +20,9 @@ public class PaymentValidation extends Validation {
             try {
                 checkCommand(arg);
                 checkFlag(arg);
-                checkAmount(arg,order);
+                checkAmount(arg, order);
                 checkType(arg);
-                isValid=true;
+                isValid = true;
             } catch (OrderException o) {
                 throw new OrderException(o.getMessage());
             }
@@ -52,7 +52,7 @@ public class PaymentValidation extends Validation {
     public void checkType(Command arg) throws OrderException {
         String type = arg.getArgumentMap().get("t").trim();
         if (type.equalsIgnoreCase("cash") || type.equalsIgnoreCase("card")
-        || type.equalsIgnoreCase("others")){
+                || type.equalsIgnoreCase("others")) {
 
         } else {
             throw new OrderException(ui.printInvalidPaymentType());
@@ -69,7 +69,7 @@ public class PaymentValidation extends Validation {
             if (amountPaid < 0.00) {
                 throw new OrderException(ui.printInvalidPaymentAmount());
             }
-            if(amountPaid < order.getSubTotal()){
+            if (amountPaid < order.getSubTotal()) {
                 throw new OrderException(ui.printInsufficientAmount());
             }
             if (amount.contains(".")) {
