@@ -14,6 +14,13 @@ public class Refund {
 
     }
 
+    /**
+     * Refund entire order based on order ID given
+     *
+     * @param arg          user input
+     * @param transactions whole transaction list
+     * @throws OrderException custom exception for order related commands
+     */
     public void refundTransaction(Command arg, Transaction transactions) throws OrderException {
         String orderID = arg.getArgumentString();
         Order refundOrder = new Order();
