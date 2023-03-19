@@ -4,7 +4,6 @@ import item.Item;
 import order.Order;
 import order.OrderEntry;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,6 +44,21 @@ public class OrderTest {
 
         assertEquals(2, order.getOrderEntries().get(0).getItem().getPrice());
         assertEquals(5, order.getOrderEntries().get(1).getItem().getPrice());
+
+    }
+
+    @Test
+    void refundOrderTest() {
+
+        Item item1 = new Item("chicken rice", 2.00);
+
+        OrderEntry orderEntry1 = new OrderEntry(item1, 10);
+
+        ArrayList<OrderEntry> orderEntries = new ArrayList<>();
+        orderEntries.add(orderEntry1);
+        Order order = new Order(orderEntries);
+
+        assertEquals("COMPLETED", order.getStatus());
 
     }
 

@@ -16,8 +16,9 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
     public Command validateAddMultipleOrder(Command arg) throws OrderException {
 
         String input = arg.getUserInput();
-        String regex = "^addorder\\s+-I\\s+\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
+        String regex = "^\\/addorder\\s+-I\\s+\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
                 "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
+
 
         if (input.matches(regex)) {
             return validateAddMultipleOrder2(input);
@@ -28,8 +29,8 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
     }
 
     private Command validateAddMultipleOrder2(String input) throws OrderException {
-
-        String orderPairsString = input.substring(13);
+        int startOfArgumentsIndex = 14;
+        String orderPairsString = input.substring(startOfArgumentsIndex);
         orderPairsString = orderPairsString.substring(0, orderPairsString.length() - 1);
 
         String[] orderPairs;
@@ -37,7 +38,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         if (orderPairsString.contains(",")) {
             orderPairs = orderPairsString.split(",\\s*");
         } else {
-            orderPairs = new String[]{orderPairsString};
+            orderPairs = new String[] {orderPairsString};
         }
 
         return validateAddMultipleOrder3(orderPairs);
@@ -54,7 +55,6 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
             String[] elements = order.trim().split(":");
 
 
-
             if (!isInteger(elements[0])) {
                 index = Integer.toString(menu.findItemIndex(elements[0]));
                 elements[0] = index;
@@ -66,6 +66,10 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
                 if (!(isValidIndex(itemIndex, menu))) {
                     throw new OrderException(ui.getInvalidIndex());
+                }
+
+                if (Integer.parseInt(elements[1]) <= 0) {
+                    throw new OrderException(ui.getInvalidOrderInteger());
                 }
 
                 finalCommandString += elements[0] + ":" + elements[1] + ",";
@@ -80,7 +84,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
         assert true : "This is true";
 
-        return new Command("addorder -I [" + finalCommandString + "]");
+        return new Command("/addorder -I [" + finalCommandString + "]");
 
     }
 

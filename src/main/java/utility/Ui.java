@@ -15,9 +15,12 @@ public class Ui {
     private String ERROR_MESSAGE = "Please do not use special characters such as ';' and ':'.";
     private String MISSING_ORDER_FLAG = "Please use correctly formatted flags to add order.";
     private String MISSING_ORDER_ARGUMENT = "Please enter item index or quantity after flags.";
-    private String INVALID_ORDER_INTEGER = "Quantity must be a positive number.";
+    private String INVALID_ORDER_INTEGER = "Quantity must be more than 0.";
     private String INVALID_MULTIPLE_ORDER_FORMAT = "Wrong format to add multiple orders.";
     private String INVALID_MULTIPLE_ORDER_INTEGER = "Please enter positive numbers only.";
+    private String MISSING_ORDER_ID = "Please enter the order ID to refund.";
+    private String INVALID_ORDER_ID = "Please enter a valid order ID to refund.";
+    private String INVALID_REFUND_STATUS = "Order is already refunded.";
     private String ITEM_DUPLICATE_NAME_ERROR = "Item name already exists.";
     private String ITEM_NAME_MIN_LENGTH_ERROR = "Name cannot be empty.";
     private String ITEM_NAME_MAX_LENGTH_ERROR = "Name exceeds the 25 character limit.";
@@ -30,6 +33,7 @@ public class Ui {
     private String PRICE_DECIMAL_ERROR = "Price must have at most 2 decimal points.";
     private String INVALID_PRICE_ERROR = "Price must be a number.";
     private String REQUIRE_INTEGER = "This input requires a whole number!";
+    private String REQUIRE_VALID_ITEM_INDEX = "This input requires a valid item index!";
     private String EXIT_MESSAGE = "Thank you for using MoneyGoWhere. Goodbye!";
     private String NO_SUCH_ITEM = "No such item exists.";
     private String MULTIPLE_SIMILAR_ITEMS = "Your input referenced multiple similar items. " +
@@ -40,6 +44,7 @@ public class Ui {
      * General print statements
      * Prompts user for input
      */
+
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
     }
@@ -52,10 +57,47 @@ public class Ui {
     }
 
     /**
+     * Prompts user if they would like to update item name
+     */
+    public void promptItemNameChange() {
+        System.out.println("Would you like to update item name? (yes/no)");
+    }
+
+    /**
+     * Prompts user if they answer is not recognised
+     */
+    public void promptUpdateItemUnrecognisedAnswer() {
+        System.out.println("Sorry your input was not recognised."
+                + " Please answer with \"yes\" or \"no\".");
+    }
+
+
+    /**
+     * Prompts user for the new item name when in assistance mode
+     */
+    public void promptNewItemName() {
+        System.out.println("Please enter the new name: ");
+    }
+
+    /**
      * Prompts user for item price when in assistance mode
      */
     public void promptItemPrice() {
         System.out.println("Please enter the item's price: ");
+    }
+
+    /**
+     * Prompts user if they would like to update item price
+     */
+    public void promptItemPriceChange() {
+        System.out.println("Would you like to update item price? (yes/no)");
+    }
+
+    /**
+     * Prompts user for the new item price when in assistance mode
+     */
+    public void promptNewItemPrice() {
+        System.out.println("Please enter the new price: ");
     }
 
     /**
@@ -86,6 +128,10 @@ public class Ui {
      */
     public void printCommandSuccess(String command) {
         System.out.println("The command: " + command + " was successfully executed!");
+    }
+
+    public void printOrderAdded(Double total) {
+        System.out.println("Order has been added successfully. Total amount: $" + total + ".");
     }
 
     /**
@@ -152,6 +198,18 @@ public class Ui {
         return INVALID_MULTIPLE_ORDER_INTEGER;
     }
 
+    public String printMissingOrderID() {
+        return MISSING_ORDER_ID;
+    }
+
+    public String printInvalidRefundStatus() {
+        return INVALID_REFUND_STATUS;
+    }
+
+    public String printInvalidOrderID() {
+        return INVALID_ORDER_ID;
+    }
+
     public String getItemDuplicateNameError() {
         return ITEM_DUPLICATE_NAME_ERROR;
     }
@@ -176,7 +234,7 @@ public class Ui {
         return INTEGER_OVERFLOW;
     }
 
-    public String getInvalidAdditemFormat() {
+    public String getInvalidAddItemFormat() {
         return INVALID_ADDITEM_FORMAT;
     }
 
@@ -198,6 +256,10 @@ public class Ui {
 
     public String getRequireInteger() {
         return REQUIRE_INTEGER;
+    }
+
+    public String getRequireValidItemIndex() {
+        return REQUIRE_VALID_ITEM_INDEX;
     }
 
     public String getExitMessage() {

@@ -6,8 +6,6 @@ import exception.ItemException;
 import item.Menu;
 
 public class DeleteItemValidation extends ItemValidation {
-    public final String SHORT_INDEX_FLAG = "i";
-    public final String LONG_INDEX_FLAG = "index";
 
     /**
      * Checks if the required flag is given
@@ -51,7 +49,7 @@ public class DeleteItemValidation extends ItemValidation {
     public void validateIndex(Command c, Menu menu) throws ItemException {
         int result = isInteger(c.getArgumentMap().get(LONG_INDEX_FLAG));
         if(result == 1) {
-            throw new ItemException(ui.getRequireInteger());
+            throw new ItemException(ui.getRequireValidItemIndex());
         }
         if(result == 2) {
             throw new ItemException(ui.getIntegerOverflow());
