@@ -130,6 +130,10 @@ public class Ui {
         System.out.println("The command: " + command + " was successfully executed!");
     }
 
+    public void printOrderAdded(Double total) {
+        System.out.println("Order has been added successfully. Total amount: $" + total + ".");
+    }
+
     /**
      * Prints error message informing user to input a whole number
      */
@@ -193,6 +197,7 @@ public class Ui {
     public String getInvalidMultipleOrderInteger() {
         return INVALID_MULTIPLE_ORDER_INTEGER;
     }
+
     public String printMissingOrderID() {
         return MISSING_ORDER_ID;
     }

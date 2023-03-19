@@ -88,7 +88,7 @@ public class MoneyGoWhere {
                 Order order = new Order();
                 order.addOrder(command, menu);
                 transactions.appendOrder(order);
-                ui.printCommandSuccess(command.getCommand());
+                ui.printOrderAdded(order.getSubTotal());
                 break;
             case "/refundorder":
                 Refund refund = new Refund();
