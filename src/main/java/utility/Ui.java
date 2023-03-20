@@ -136,9 +136,6 @@ public class Ui {
         System.out.println("The command: " + command + " was successfully executed!");
     }
 
-    public void printOrderAdded(Double total) {
-        System.out.println("Order has been added successfully. Total amount: $" + total + ".");
-    }
 
     /**
      * Prints error message informing user to input a whole number
@@ -237,7 +234,10 @@ public class Ui {
     public String printInvalidPaymentAmount() {
         return INVALID_PAYMENT_AMOUNT;
     }
-    public String printInsufficientAmount(){return INSUFFICIENT_AMOUNT;}
+
+    public String printInsufficientAmount() {
+        return INSUFFICIENT_AMOUNT;
+    }
 
     public String printInvalidPaymentType() {
         return INVALID_PAYMENT_TYPE;
@@ -307,6 +307,10 @@ public class Ui {
         return MULTIPLE_SIMILAR_ITEMS;
     }
 
+    public void printNoItemsFound(String input) {
+        System.out.println("No menu items matching " + input + " were found!");
+    }
+
     /**
      * Prints table header for menu
      */
@@ -355,7 +359,6 @@ public class Ui {
 
             System.out.println("Order " + (i + 1));
             System.out.println("Order ID: " + orders.get(i).getOrderId());
-            System.out.println("Order time: " + orders.get(i).getDateTime());
             System.out.println("Order status: " + orders.get(i).getStatus());
             System.out.println("Order time: " + orders.get(i).getFormatDateTime());
 
@@ -372,11 +375,43 @@ public class Ui {
         }
     }
 
+    /**
+     * Print subtotal for whole order
+     *
+     * @param total total amount to pay
+     */
+    public void printOrderAdded(Double total) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String subtotal = df.format(total);
+        System.out.println("\nSubtotal: $" + subtotal);
+        System.out.println("Order has been added successfully. Total amount: $" + subtotal);
+    }
+
+    /**
+     * Print the amount of change to give based on the amount user paid
+     *
+     * @param change change to give
+     */
     public void printChangeGiven(Double change) {
-        System.out.println("The calculated change is $" + change + ".");
+        System.out.printf("The calculated change is $%.2f.\n", change);
     }
 
     public void printItemNotFound() {
         System.out.println("The entered item cannot be found.");
+    }
+
+    public void printHelp() {
+        System.out.println(
+                "There are 8 commands you can use in MoneyGoWhere. " +
+                        "For more details, please refer to the user guide.\n" +
+                        "1. additem\n" +
+                        "2. deleteitem\n" +
+                        "3. listitem\n" +
+                        "4. updateitem\n" +
+                        "5. finditem\n" +
+                        "6. addorder\n" +
+                        "7. listorder\n" +
+                        "8. refundorder"
+        );
     }
 }

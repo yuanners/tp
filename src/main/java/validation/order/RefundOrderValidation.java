@@ -18,6 +18,12 @@ public class RefundOrderValidation extends Validation {
 
     }
 
+    /**
+     * Try catch block to catch all the exceptions thrown and display the error message accordingly
+     *
+     * @param arg user input command
+     * @throws OrderException custom exception for order validation
+     */
     public void validateRefundOrder(Command arg) throws OrderException {
         try {
             checkArgument(arg);
@@ -28,12 +34,24 @@ public class RefundOrderValidation extends Validation {
 
     }
 
+    /**
+     * Check if argument is present
+     *
+     * @param arg user input command
+     * @throws OrderException custom exception for order validation
+     */
     public void checkArgument(Command arg) throws OrderException {
         if (arg.getArgumentString().length() < 1) {
             throw new OrderException(ui.printMissingOrderID());
         }
     }
 
+    /**
+     * Check if the order ID given/refund status is valid
+     *
+     * @param arg user input command
+     * @throws OrderException custom exception for order validation
+     */
     public void checkOrder(Command arg) throws OrderException {
         boolean isValidID = false;
         String orderID = arg.getArgumentString();
