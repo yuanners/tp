@@ -307,6 +307,10 @@ public class Ui {
         return MULTIPLE_SIMILAR_ITEMS;
     }
 
+    public void printNoItemsFound(String input) {
+        System.out.println("No manu items matching " + input + " were found!");
+    }
+
     /**
      * Prints table header for menu
      */

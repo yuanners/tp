@@ -13,6 +13,7 @@ import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
+import validation.item.FindItemValidation;
 import validation.item.UpdateItemValidation;
 
 public class Menu {
@@ -103,7 +104,7 @@ public class Menu {
      *                       or index does not exist
      */
     public void updateItem(Command command) throws ItemException {
-        if(this.getItems().size() == 0) {
+        if (this.getItems().size() == 0) {
             Ui ui = new Ui();
             throw new ItemException(ui.getEmptyMenu());
         }
@@ -122,11 +123,11 @@ public class Menu {
 
         int index = Integer.parseInt(command.getArgumentMap().get(updateItemValidation.LONG_INDEX_FLAG));
 
-        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
+        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
             this.getItem(index).setName(command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG));
         }
 
-        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
+        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
             Double price = Double.valueOf(command.getArgumentMap().get(updateItemValidation.LONG_PRICE_FLAG));
             this.getItem(index).setPrice(price);
         }
@@ -195,7 +196,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     *     or an empty list if no matching item is found
+     * or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
@@ -224,12 +225,19 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void showResultsOfFind(Command command) {
+    public void showResultsOfFind(Command command) throws ItemException {
 
         Ui ui = new Ui();
-        ui.printMenuHeader();
+        FindItemValidation findItemValidation = new FindItemValidation();
+
         ArrayList<Item> menu = this.getItems();
-        String itemName = command.getArgumentString();
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        String itemName = command.getArgumentString().trim();
+
+        if (!findItemValidation.validateName(itemName)) {
+            return;
+        }
 
         if (itemName.contains("\"")) {
             itemName = itemName.replace("\"", "");
@@ -237,8 +245,18 @@ public class Menu {
 
         for (int i = 0; i < menu.size(); i++) {
             if (menu.get(i).getName().contains(itemName)) {
-                ui.printFindItem(i, menu);
+                indexes.add(i);
             }
+        }
+
+        if (indexes.size() == 0) {
+            ui.printNoItemsFound(itemName);
+            return;
+        }
+
+        ui.printMenuHeader();
+        for (int i = 0; i < indexes.size(); i++) {
+            ui.printFindItem(indexes.get(i), menu);
         }
     }
 
