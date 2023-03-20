@@ -26,6 +26,13 @@ This will enable upcoming software engineers to acquire a detailed understanding
 ### Project Scope
 
 ### User Stories
+| Version | As a...            | I want to...                         | So that I can...                                                                 |
+| ------- | ------------------ | ------------------------------------ | -------------------------------------------------------------------------------- |
+| v1.0    | Hawker Store Owner | Add an item                          | Add it to an order in the future                                                 |
+| v1.0    | Hawker Store Owner | Delete an item                       | Remove it from the menu                                                          |
+| v1.0    | Hawker Store Owner | List all items                       | View all items in the menu, including its index and price                        |
+| v1.0    | Hawker Store Owner | Add an item to an order              | Track what customers order and calculate its total cost                          |
+| v1.0    | Hawker Store Owner | Add multiple items to an order       | Save time by combining multiple items from a single customer into one order      |
 
 ### Non-functional Requirements
 1. The application should be able to run on any operating system with `Java 11` installed.
