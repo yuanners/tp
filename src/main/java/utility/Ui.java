@@ -52,7 +52,7 @@ public class Ui {
      */
 
     public void promptUserInput() {
-        System.out.println("Please enter a command. Use 'help' for a list of commands: ");
+        System.out.println("Please enter a command: ");
     }
 
     /**
