@@ -402,7 +402,7 @@ public class Ui {
 
     public void printHelp() {
         System.out.println(
-                "There are 8 commands you can use in MoneyGoWhere:\n" +
+                "There are 8 commands you can use in MoneyGoWhere. For more details, please refer to the user guide.\n" +
                         "1. additem\n" +
                         "2. deleteitem\n" +
                         "3. listitem\n" +
