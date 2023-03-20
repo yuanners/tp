@@ -30,59 +30,76 @@ public class MoneyGoWhere {
         boolean isCancelled;
         try {
             switch (command.getCommand()) {
-            case "/listitem":
-                // Fallthrough
-
-            case "listitem":
-                menu.displayList();
+            case "help":
+                ui.printHelp();
                 break;
 
+            case "1":
+                // Fallthrough
+            case "1.":
+                // Fallthrough
             case "additem":
                 isCancelled = menuAssistant.addItem(command, menu);
                 menuAssistant.printResult(command, isCancelled);
                 break;
-
             case "/additem":
                 menu.addItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
+            case "2":
+                // Fallthrough
+            case "2.":
+                // Fallthrough
+            case "deleteitem":
+                isCancelled = menuAssistant.deleteItem(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+            case "/deleteitem":
+                menu.deleteItem(command);
+                ui.printCommandSuccess(command.getCommand());
+                break;
+
+            case "3":
+                // Fallthrough
+            case "3:":
+                // Fallthrough
+            case "/listitem":
+                // Fallthrough
+            case "listitem":
+                menu.displayList();
+                break;
+
+            case "4":
+                // Fallthrough
+            case "4.":
+                // Fallthrough
             case "updateitem":
                 isCancelled = menuAssistant.updateItem(command, menu);
                 menuAssistant.printResult(command, isCancelled);
                 break;
-
             case "/updateitem":
                 menu.updateItem(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
+            case "5":
+                // Fallthrough
+            case "5.":
+                // Fallthrough
             case "finditem":
                 isCancelled = menuAssistant.showResultsOfFind(command, menu);
                 menuAssistant.printResult(command, isCancelled);
                 break;
-
             case "/finditem":
                 menu.showResultsOfFind(command);
                 ui.printCommandSuccess(command.getCommand());
                 break;
 
-            case "deleteitem":
-                isCancelled = menuAssistant.deleteItem(command, menu);
-                menuAssistant.printResult(command, isCancelled);
+            case "6":
+                // Fallthrough
+            case "6.":
                 break;
-
-            case "/deleteitem":
-                menu.deleteItem(command);
-                ui.printCommandSuccess(command.getCommand());
-                break;
-            case "listorder":
-                //Fall through
-
-            case "/listorder":
-                transactions.displayList();
-                break;
-
             case "/addorder":
                 Order order = new Order();
                 order.addOrder(command, menu);
@@ -90,6 +107,21 @@ public class MoneyGoWhere {
                 ui.printOrderAdded(order.getSubTotal());
                 payment.makePayment(order);
                 transactions.appendOrder(order);
+                break;
+
+            case "7":
+                // Fallthrough
+            case "7.":
+                // Fallthrough
+            case "listorder":
+                //Fall through
+            case "/listorder":
+                transactions.displayList();
+                break;
+
+            case "8":
+                // Fallthrough
+            case "8.":
                 break;
             case "/refundorder":
                 Refund refund = new Refund();
@@ -99,10 +131,8 @@ public class MoneyGoWhere {
             default:
                 ui.printInvalidCommand(command.getCommand());
             }
-        } catch (ItemException e) {
+        } catch (ItemException | OrderException e) {
             ui.println(e.getMessage());
-        } catch (OrderException o) {
-            ui.println(o.getMessage());
         }
 
     }

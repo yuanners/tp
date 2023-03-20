@@ -9,6 +9,7 @@ import app.Command;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
 import exception.ItemException;
+import org.apache.commons.lang3.StringUtils;
 import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
@@ -28,13 +29,7 @@ public class Menu {
 
         try {
             this.items = store.load(type);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (JsonParseException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (NumberFormatException e) {
+        } catch (IOException | JsonParseException | NumberFormatException e) {
             System.out.println(e.getMessage());
             this.items = new ArrayList<>();
         }
@@ -91,7 +86,7 @@ public class Menu {
         Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
         Item item = new Item(name, price);
         appendItem(item);
-        assert this.getItem(this.getItems().size() - 1).getName() == item.getName()
+        assert this.getItem(this.getItems().size() - 1).getName().equals(item.getName())
                 : "Item failed to append";
         save();
     }
@@ -244,7 +239,7 @@ public class Menu {
         }
 
         for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getName().contains(itemName)) {
+            if (StringUtils.containsIgnoreCase(menu.get(i).getName(), itemName)) {
                 indexes.add(i);
             }
         }
