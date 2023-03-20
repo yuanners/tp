@@ -15,6 +15,12 @@ public class Payment {
     public Payment() {
     }
 
+    /**
+     * Display prompt to pay immediately after an order is added
+     *
+     * @param order list of order entries added
+     * @throws OrderException custom exception for order related validation
+     */
     public void makePayment(Order order) throws OrderException {
         boolean isValidPayment = false;
         Scanner sc = new Scanner(System.in);
@@ -39,6 +45,13 @@ public class Payment {
         }
     }
 
+    /**
+     * Compute the change to be given
+     *
+     * @param amount amount paid
+     * @param order  list of order entries
+     * @return change to give
+     */
     public double calculateChange(Double amount, Order order) {
         return amount - order.getSubTotal();
     }

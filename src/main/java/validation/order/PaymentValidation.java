@@ -9,11 +9,23 @@ import validation.Validation;
 public class PaymentValidation extends Validation {
     private Ui ui = new Ui();
 
+    /**
+     * Map the argument for convenience when the class is initialised
+     *
+     * @param arg user input command
+     */
     public PaymentValidation(Command arg) {
         arg.mapArgumentAlias("a", "amount");
         arg.mapArgumentAlias("t", "type");
     }
 
+    /**
+     * Loop the try-catch block until the /pay command is validated
+     *
+     * @param arg   user input command
+     * @param order list of order entries added
+     * @throws OrderException custom exception for order validation
+     */
     public void validatePayment(Command arg, Order order) throws OrderException {
         boolean isValid = false;
         while (!isValid) {
@@ -30,12 +42,24 @@ public class PaymentValidation extends Validation {
 
     }
 
+    /**
+     * Check if the user input contains the required command
+     *
+     * @param arg user input
+     * @throws OrderException custom exception for order validation
+     */
     public void checkCommand(Command arg) throws OrderException {
         if (!(arg.getUserInput().contains("/pay"))) {
             throw new OrderException(ui.printInvalidPayment());
         }
     }
 
+    /**
+     * Check if the required flags are present in the user input
+     *
+     * @param arg user input command
+     * @throws OrderException custom exception for order validation
+     */
     public void checkFlag(Command arg) throws OrderException {
         if (arg.getArgumentString().contains("-t") || arg.getArgumentString().contains("-a")
                 || arg.getArgumentString().contains("--type") || arg.getArgumentString().contains("--amount")) {
@@ -49,6 +73,12 @@ public class PaymentValidation extends Validation {
         }
     }
 
+    /**
+     * Check if the user input type is one the these: cash/card/others
+     *
+     * @param arg user input command
+     * @throws OrderException custom exception for order validation
+     */
     public void checkType(Command arg) throws OrderException {
         String type = arg.getArgumentMap().get("t").trim();
         if (type.equalsIgnoreCase("cash") || type.equalsIgnoreCase("card")
@@ -59,6 +89,13 @@ public class PaymentValidation extends Validation {
         }
     }
 
+    /**
+     * Check the user input amount is a double with 2 d.p., more than or equals to the amount to be paid
+     *
+     * @param arg   user input argument
+     * @param order list of order entries
+     * @throws OrderException custom exception for order validation
+     */
     public void checkAmount(Command arg, Order order) throws OrderException {
         String amount = arg.getArgumentMap().get("a").trim();
         if (!isDouble(amount)) {
@@ -83,6 +120,12 @@ public class PaymentValidation extends Validation {
         }
     }
 
+    /**
+     * Check if the user input is a double
+     *
+     * @param input user input
+     * @return validation outcome(true/false)
+     */
     public boolean isDouble(String input) {
         try {
             Double.valueOf(input);
