@@ -343,7 +343,12 @@ public class MenuAssistant {
         }
 
         command.setArgumentString(keyword);
-        menu.showResultsOfFind(command);
+
+        try {
+            menu.showResultsOfFind(command);
+        } catch (ItemException e) {
+            throw new RuntimeException(e);
+        }
 
         return false;
     }
