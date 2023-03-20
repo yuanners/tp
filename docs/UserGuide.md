@@ -1,6 +1,15 @@
 # User Guide
 
-# Introduction
+## General Table of Contents
+
+* [Introduction](#introduction)
+* [Advanced Guide](#advanced-guide)
+* [Basic Guide](#basic-guide)
+* [Statistics](#statistics)
+* [Save File](#save-file)
+* [Glossary](#glossary)
+
+## Introduction
 
 Thank you for your interest in MoneyGoWhere! This user guide aims to show off the features of the application and how to
 use it.
@@ -29,6 +38,7 @@ the mode used.
         * [Delete Items](#advanced-mode-delete-an-item)
         * [List Items](#advanced-mode-list-all-items)
         * [Find Items](#advanced-mode-find-an-item)
+        * [Update Items](#advanced-mode-update-an-item)
     2. [Orders](#advanced-mode-orders)
         * [Add Order](#advanced-mode-add-an-order)
             * [Single Item](#advanced-mode-single-item)
@@ -63,6 +73,8 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 * Note that all command options have multiple methods of input. For example, the option for name when adding an item can
   be signified by `-n` or `--name`. More details are given in each command.
     * All of these command options are **case-sensitive**.
+* In advanced mode, all commands are prefixed with `/`, to distinguish them from the basic commands. Without the
+  inclusion of this character, commands will be interpreted as a [basic command](#basic-commands).
 
 #### Advanced Mode Items
 
@@ -74,7 +86,7 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 
 ##### Advanced Mode Find an Item
 
-#### Find an Item
+##### Advanced Mode Update an Item
 
 <br>
 
@@ -107,8 +119,15 @@ of the mode used.
 1. [Setting up MoneyGoWhere](#setting-up-moneygowhere)
 2. [Basic Mode Style Guide](#basic-mode-style-guide)
 3. [Basic Commands](#basic-commands)
-   1. [Items](#basic-mode-items)
-   2. [Orders](#basic-mode-orders)
+    1. [Items](#basic-mode-items)
+        * [Add Items](#basic-mode-add-an-item)
+        * [Delete Items](#basic-mode-delete-an-item)
+        * [List all Items](#basic-mode-list-all-items)
+        * [Find an Item](#basic-mode-find-an-item)
+        * [Update an Item](#basic-mode-update-an-item)
+    2. [Orders](#basic-mode-orders)
+       * [Add an Order](#basic-mode-add-an-order)
+       * [List all Orders](#basic-mode-list-all-orders)
 4. [Save File](#save-file)
 5. [Glossary](#glossary)
 
@@ -125,7 +144,7 @@ of the mode used.
    files will be stored here.
 4. Open the command terminal and navigate to the folder where the `.jar` file is. If you are unsure of how to do so,
    follow steps 5 to 7.
-5. Right-click the file and select the "Properties" option. Then, copy the text under "Location". 
+5. Right-click the file and select the "Properties" option. Then, copy the text under "Location".
    ![image](images/userGuide/findFileLocation.png)
 6. Open a command terminal by entering `cmd` in your start menu.
 7. In the terminal, navigate to the location of the folder by doing `cd "<file path>"`.
@@ -143,10 +162,28 @@ of the mode used.
 
 #### Basic Mode Items
 
+##### Basic Mode Add an Item
+
+##### Basic Mode Delete an Item
+
+##### Basic Mode List all Items
+
+##### Basic Mode Find an Item
+
+##### Basic Mode Update an Item
+
 #### Basic Mode Orders
+
+##### Basic Mode Add an Order
+
+##### Basic Mode List all Orders
 
 <br>
 <hr>
+
+### Basic Mode Command Summary
+
+## Statistics
 
 ## Save File
 
