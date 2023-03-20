@@ -75,6 +75,46 @@ public class MenuAssistant {
     }
 
     /**
+     * Overloads getName() method above.
+     * Get the name of the item to be updated.
+     * Additionally, checks if the new name is equal to the current name (case-insensitive).
+     *
+     * @param command the Command object containing the search term
+     * @param menu the ArrayList of Item objects to search through
+     * @param currentName the current name of the item being updated in all lower case
+     * @return boolean variable indicating if operation was cancelled
+     */
+    private boolean getName(Command command, Menu menu, String currentName) {
+        String name = "";
+        boolean isValidName = false;
+
+        while (!isValidName) {
+            ui.promptItemName();
+            name = sc.nextLine();
+
+            if(name.equals(CANCEL)) {
+                return true;
+            }
+
+            command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG, name);
+            command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
+
+            try {
+                addItemValidation.validateName(command);
+                if(!name.toLowerCase().equals(currentName)) {
+                    addItemValidation.validateDuplicateName(command, menu);
+                }
+                isValidName = true;
+            } catch(ItemException e) {
+                ui.println(e.getMessage());
+            }
+
+        }
+
+        return false;
+    }
+
+    /**
      * Get the price of the item.
      *
      * @param command the Command object containing the search term
@@ -178,9 +218,10 @@ public class MenuAssistant {
         }
 
         isValidResponse = false;
+        String currentName = menu.getItem(index).getName().toLowerCase();
 
         if(toUpdateName.equals(YES)) {
-            isCancelled = getName(command, menu);
+            isCancelled = getName(command, menu, currentName);
             if(isCancelled) {
                 return true;
             }
