@@ -136,9 +136,6 @@ public class Ui {
         System.out.println("The command: " + command + " was successfully executed!");
     }
 
-    public void printOrderAdded(Double total) {
-        System.out.println("Order has been added successfully. Total amount: $" + total + ".");
-    }
 
     /**
      * Prints error message informing user to input a whole number
@@ -237,7 +234,10 @@ public class Ui {
     public String printInvalidPaymentAmount() {
         return INVALID_PAYMENT_AMOUNT;
     }
-    public String printInsufficientAmount(){return INSUFFICIENT_AMOUNT;}
+
+    public String printInsufficientAmount() {
+        return INSUFFICIENT_AMOUNT;
+    }
 
     public String printInvalidPaymentType() {
         return INVALID_PAYMENT_TYPE;
@@ -372,8 +372,25 @@ public class Ui {
         }
     }
 
+    /**
+     * Print subtotal for whole order
+     *
+     * @param total total amount to pay
+     */
+    public void printOrderAdded(Double total) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String subtotal = df.format(total);
+        System.out.println("\nSubtotal: $" + subtotal);
+        System.out.println("Order has been added successfully. Total amount: $" + subtotal);
+    }
+
+    /**
+     * Print the amount of change to give based on the amount user paid
+     *
+     * @param change change to give
+     */
     public void printChangeGiven(Double change) {
-        System.out.println("The calculated change is $" + change + ".");
+        System.out.printf("The calculated change is $%.2f.\n", change);
     }
 
     public void printItemNotFound() {
