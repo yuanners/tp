@@ -52,7 +52,7 @@ public class Ui {
      */
 
     public void promptUserInput() {
-        System.out.println("Please enter a command: ");
+        System.out.println("Please enter a command. Use 'help' for a list of commands: ");
     }
 
     /**
@@ -308,7 +308,7 @@ public class Ui {
     }
 
     public void printNoItemsFound(String input) {
-        System.out.println("No manu items matching " + input + " were found!");
+        System.out.println("No menu items matching " + input + " were found!");
     }
 
     /**
@@ -398,5 +398,19 @@ public class Ui {
 
     public void printItemNotFound() {
         System.out.println("The entered item cannot be found.");
+    }
+
+    public void printHelp() {
+        System.out.println(
+                "There are 8 commands you can use in MoneyGoWhere:\n" +
+                        "1. additem\n" +
+                        "2. deleteitem\n" +
+                        "3. listitem\n" +
+                        "4. updateitem\n" +
+                        "5. finditem\n" +
+                        "6. addorder\n" +
+                        "7. listorder\n" +
+                        "8. refundorder"
+        );
     }
 }
