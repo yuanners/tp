@@ -90,6 +90,12 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 
 <br>
 
+#### Add an Order
+
+##### Single Item
+
+##### Multiple Items
+
 #### Advanced Mode Orders
 
 ##### Advanced Mode Add an Order
