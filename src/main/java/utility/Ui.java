@@ -355,7 +355,6 @@ public class Ui {
 
             System.out.println("Order " + (i + 1));
             System.out.println("Order ID: " + orders.get(i).getOrderId());
-            System.out.println("Order time: " + orders.get(i).getDateTime());
             System.out.println("Order status: " + orders.get(i).getStatus());
             System.out.println("Order time: " + orders.get(i).getFormatDateTime());
 
