@@ -33,17 +33,19 @@ the mode used.
 1. [Quick Setup](#quick-setup)
 2. [Advanced Mode Style Guide](#advanced-mode-style-guide)
 3. [Features](#advanced-commands)
-    1. [Items](#advanced-mode-items)
+    1. [Help](#advanced-help)
+    2. [Items](#advanced-mode-items)
         * [Add Items](#advanced-mode-add-an-item)
         * [Delete Items](#advanced-mode-delete-an-item)
         * [List Items](#advanced-mode-list-all-items)
         * [Find Items](#advanced-mode-find-an-item)
         * [Update Items](#advanced-mode-update-an-item)
-    2. [Orders](#advanced-mode-orders)
+    3. [Orders](#advanced-mode-orders)
         * [Add Order](#advanced-mode-add-an-order)
             * [Single Item](#advanced-mode-single-item)
             * [Multiple Items](#advanced-mode-multiple-items)
         * [List all Orders](#advanced-mode-list-all-orders)
+        * [Refund an Order](#advanced-mode-refund-an-order)
 4. [Save File](#save-file)
 5. [Glossary](#glossary)
 
@@ -65,20 +67,91 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 * Any text in `this format` are examples of commands.
     * Any words in `<this format>` are parameters that you can fill in and change according to your needs.
 * Parameters wrapped in `{}` is optional.
+* In the examples, normal text is _italicised_ to signify the options that will be used as the command.
 
 <br>
 
 ### Advanced Commands
 
 * Note that all command options have multiple methods of input. For example, the option for name when adding an item can
-  be signified by `-n` or `--name`. More details are given in each command.
+  be signified by the flag `-n` or `--name`. More details are given in each command.
     * All of these command options are **case-sensitive**.
+    * All examples will be given with the short-form flag, as it is the preferred method of input. However, the longer
+      version will also be provided.
+* All options are signified by `<example>`, which means you can change it according to what you need.
+* In all the examples, the use of `>` signifies a user input.
 * In advanced mode, all commands are prefixed with `/`, to distinguish them from the basic commands. Without the
   inclusion of this character, commands will be interpreted as a [basic command](#basic-commands).
 
+#### Advanced Help
+
+Entering this command will show you a list of all available commands.
+
+Note that it is possible to use the given index as an command input, but doing so will execute commands as if you were
+using the [basic mode](#basic-guide). To use these commands as in advanced mode, append a `/` at the beginning of the
+command, along with the proper flags, as explained in the next few sections.
+
+Format: `help`
+
+The output of running the `help` command is as follows:
+
+```text
+Please enter a command: 
+> help
+There are 8 commands you can use in MoneyGoWhere. For more details, please refer to the user guide.
+1. additem
+2. deleteitem
+3. listitem
+4. updateitem
+5. finditem
+6. addorder
+7. listorder
+8. refundorder
+```
+
 #### Advanced Mode Items
 
+There are five different commands you can run for items.
+
+* [Add an Item](#advanced-mode-add-an-item)
+* [Delete an Item](#advanced-mode-delete-an-item)
+* [List all Items](#advanced-mode-list-all-items)
+* [Find an Item](#advanced-mode-find-an-item)
+* [Update an Item](#advanced-mode-update-an-item)
+
 ##### Advanced Mode Add an Item
+
+This adds a new item to the menu. New items must have a name and price.
+
+Format: `/additem -n "<name>" -p <price>` or `/additem --name "<name>" --price <price>`
+
+* Name refers to the name of the item
+    * It is case-sensitive
+    * It has an upper limit of 25 characters
+    * Names are unique, regardless of how the words are capitalized. `Chicken` and `chicken` will count as the same
+      word.
+* Price refers to the price of the item
+    * It can have up to two decimal points (`2`, `2.1`, `2.22` are all valid inputs).
+
+**Examples of Usage**
+
+* You want to add a new item, _Chicken Rice_, which costs _$3.55_. To do so, use the
+  command `/additem -n "Chicken Rice" -p 3.55`.
+
+```text
+Please enter a command: 
+> /additem -n "Chicken Rice" -p 3.55
+The command: /additem was successfully executed!
+```
+
+* You want to add a new item, _Egg_, which costs _$0.80_. To do so, use the command `/additem -n "Egg" -p 0.8`,
+  or `/additem -n "Egg" -p 0.80`.
+
+```text
+Please enter a command: 
+> /additem -n "Egg" -p 0.8
+The command: /additem was successfully executed!
+```
 
 ##### Advanced Mode Delete an Item
 
@@ -132,8 +205,8 @@ of the mode used.
         * [Find an Item](#basic-mode-find-an-item)
         * [Update an Item](#basic-mode-update-an-item)
     2. [Orders](#basic-mode-orders)
-       * [Add an Order](#basic-mode-add-an-order)
-       * [List all Orders](#basic-mode-list-all-orders)
+        * [Add an Order](#basic-mode-add-an-order)
+        * [List all Orders](#basic-mode-list-all-orders)
 4. [Save File](#save-file)
 5. [Glossary](#glossary)
 
