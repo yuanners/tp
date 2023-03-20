@@ -20,11 +20,13 @@ public class Order implements OrderInterface {
     private LocalDateTime dateTime;
     private ArrayList<OrderEntry> orderEntries;
     private String status;
+    private String paymentType;
 
 
     /**
      * Constructs an Order object with a unique ID
      * default transaction status as COMPLETED
+     * payment type as null
      * the current date and time and an empty ArrayList of
      * OrderEntry objects.
      */
@@ -33,11 +35,13 @@ public class Order implements OrderInterface {
         this.status = "COMPLETED";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
+        this.paymentType = "";
     }
 
     /**
      * Constructs an Order object with a unique ID
      * default transaction status as COMPLETED
+     * payment type as null
      * the current date and time and an ArrayList of
      * OrderEntry objects.
      *
@@ -48,6 +52,7 @@ public class Order implements OrderInterface {
         this.status = "COMPLETED";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = orderEntries;
+        this.paymentType = "";
     }
 
     /**
@@ -69,15 +74,36 @@ public class Order implements OrderInterface {
     }
 
     /**
+     * Get the payment type of the order: only accept card, cash or others
+     *
+     * @return payment type
+     */
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    /**
+     * Set the payment type of the order
+     *
+     * @param paymentType user input payment type
+     */
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    /**
      * Gets the date and time of the Order in the format
      * yyyy-MM-dd HH:mm:ss.
      *
      * @return String dateTime
      */
-    public String getDateTime() {
+    public String getFormatDateTime() {
         DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        ;
         return dateTime.format(FORMATTER);
+    }
+
+    public LocalDateTime getDateTime(){
+        return dateTime;
     }
 
     public Date getDate() {

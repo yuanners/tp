@@ -6,8 +6,8 @@ import item.Menu;
 import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
+import payment.Payment;
 import payment.Refund;
-import utility.Parser;
 import utility.Ui;
 
 import java.util.Scanner;
@@ -18,7 +18,6 @@ public class MoneyGoWhere {
     public Menu menu;
     public MenuAssistant menuAssistant;
     public Transaction transactions;
-    private Parser parser = new Parser();
 
     public MoneyGoWhere() {
         menu = new Menu();
@@ -87,8 +86,10 @@ public class MoneyGoWhere {
             case "/addorder":
                 Order order = new Order();
                 order.addOrder(command, menu);
+                Payment payment = new Payment();
+                ui.printOrderAdded(order.getSubTotal());
+                payment.makePayment(order);
                 transactions.appendOrder(order);
-                ui.printCommandSuccess(command.getCommand());
                 break;
             case "/refundorder":
                 Refund refund = new Refund();
