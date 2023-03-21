@@ -103,12 +103,7 @@ public class MoneyGoWhere {
             case "6.":
                 // Fallthrough
             case "/addorder":
-                Order order = new Order();
-                order.addOrder(command, menu);
-                Payment payment = new Payment();
-                ui.printOrderAdded(order.getSubTotal());
-                payment.makePayment(order);
-                transactions.appendOrder(order);
+                Order order = new Order(command, menu, transactions);
                 break;
 
             case "7":
