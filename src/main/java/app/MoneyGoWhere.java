@@ -30,6 +30,8 @@ public class MoneyGoWhere {
         boolean isCancelled;
         try {
             switch (command.getCommand()) {
+            case "/help":
+                // Fallthrough
             case "help":
                 ui.printHelp();
                 break;
@@ -62,7 +64,7 @@ public class MoneyGoWhere {
 
             case "3":
                 // Fallthrough
-            case "3:":
+            case "3.":
                 // Fallthrough
             case "/listitem":
                 // Fallthrough
@@ -99,7 +101,7 @@ public class MoneyGoWhere {
             case "6":
                 // Fallthrough
             case "6.":
-                break;
+                // Fallthrough
             case "/addorder":
                 Order order = new Order();
                 order.addOrder(command, menu);
@@ -122,7 +124,7 @@ public class MoneyGoWhere {
             case "8":
                 // Fallthrough
             case "8.":
-                break;
+                // Fallthrough
             case "/refundorder":
                 Refund refund = new Refund();
                 refund.refundTransaction(command, transactions);

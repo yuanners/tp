@@ -43,7 +43,10 @@ public class UpdateItemValidation extends ItemValidation {
             int indexOfItem = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
             if(command.getArgumentMap().containsKey(LONG_NAME_FLAG)) {
                 addItemValidation.validateName(command);
-                if(!command.getArgumentMap().get(LONG_NAME_FLAG).equals(menu.getItem(indexOfItem).getName())) {
+
+                String newName = command.getArgumentMap().get(LONG_NAME_FLAG).toLowerCase();
+                String currentName = menu.getItem(indexOfItem).getName().toLowerCase();
+                if(!newName.equals(currentName)) {
                     addItemValidation.validateDuplicateName(command, menu);
                 }
             }
