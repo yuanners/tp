@@ -5,8 +5,8 @@ import exception.OrderException;
 import item.Menu;
 import item.MenuAssistant;
 import order.Order;
+import order.OrderAssistant;
 import order.Transaction;
-import payment.Payment;
 import payment.Refund;
 import utility.Ui;
 
@@ -17,11 +17,13 @@ public class MoneyGoWhere {
 
     public Menu menu;
     public MenuAssistant menuAssistant;
+    public OrderAssistant orderAssistant;
     public Transaction transactions;
 
     public MoneyGoWhere() {
         menu = new Menu();
         menuAssistant = new MenuAssistant();
+        orderAssistant = new OrderAssistant();
         transactions = new Transaction();
     }
 
@@ -102,6 +104,10 @@ public class MoneyGoWhere {
                 // Fallthrough
             case "6.":
                 // Fallthrough
+            case "addorder":
+                isCancelled = orderAssistant.addOrder(menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
             case "/addorder":
                 Order order = new Order(command, menu, transactions);
                 break;
