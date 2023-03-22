@@ -9,10 +9,12 @@ import app.Command;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
 import exception.ItemException;
+import org.apache.commons.lang3.StringUtils;
 import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
+import validation.item.FindItemValidation;
 import validation.item.UpdateItemValidation;
 
 public class Menu {
@@ -27,13 +29,7 @@ public class Menu {
 
         try {
             this.items = store.load(type);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (JsonParseException e) {
-            System.out.println(e.getMessage());
-            this.items = new ArrayList<>();
-        } catch (NumberFormatException e) {
+        } catch (IOException | JsonParseException | NumberFormatException e) {
             System.out.println(e.getMessage());
             this.items = new ArrayList<>();
         }
@@ -90,7 +86,7 @@ public class Menu {
         Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
         Item item = new Item(name, price);
         appendItem(item);
-        assert this.getItem(this.getItems().size() - 1).getName() == item.getName()
+        assert this.getItem(this.getItems().size() - 1).getName().equals(item.getName())
                 : "Item failed to append";
         save();
     }
@@ -103,7 +99,7 @@ public class Menu {
      *                       or index does not exist
      */
     public void updateItem(Command command) throws ItemException {
-        if(this.getItems().size() == 0) {
+        if (this.getItems().size() == 0) {
             Ui ui = new Ui();
             throw new ItemException(ui.getEmptyMenu());
         }
@@ -122,11 +118,11 @@ public class Menu {
 
         int index = Integer.parseInt(command.getArgumentMap().get(updateItemValidation.LONG_INDEX_FLAG));
 
-        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
+        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
             this.getItem(index).setName(command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG));
         }
 
-        if(command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
+        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
             Double price = Double.valueOf(command.getArgumentMap().get(updateItemValidation.LONG_PRICE_FLAG));
             this.getItem(index).setPrice(price);
         }
@@ -224,21 +220,38 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void showResultsOfFind(Command command) {
+    public void showResultsOfFind(Command command) throws ItemException {
 
         Ui ui = new Ui();
-        ui.printMenuHeader();
+        FindItemValidation findItemValidation = new FindItemValidation();
+
         ArrayList<Item> menu = this.getItems();
-        String itemName = command.getArgumentString();
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        String itemName = command.getArgumentString().trim();
+
+        if (!findItemValidation.validateName(itemName)) {
+            return;
+        }
 
         if (itemName.contains("\"")) {
             itemName = itemName.replace("\"", "");
         }
 
         for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getName().contains(itemName)) {
-                ui.printFindItem(i, menu);
+            if (StringUtils.containsIgnoreCase(menu.get(i).getName(), itemName)) {
+                indexes.add(i);
             }
+        }
+
+        if (indexes.size() == 0) {
+            ui.printNoItemsFound(itemName);
+            return;
+        }
+
+        ui.printMenuHeader();
+        for (int i = 0; i < indexes.size(); i++) {
+            ui.printFindItem(indexes.get(i), menu);
         }
     }
 

@@ -120,6 +120,14 @@ public class Ui {
         System.out.println("Please enter the keyword to search for: ");
     }
 
+    public void promptItemQuantity() {
+        System.out.println("Please enter the quantity of the item: ");
+    }
+
+    public void promptMoreOrderEntries() {
+        System.out.println("Do you have more items to add? (yes/no/cancel)");
+    }
+
     /**
      * Prints an error message with the wrong command.
      *
@@ -307,6 +315,10 @@ public class Ui {
         return MULTIPLE_SIMILAR_ITEMS;
     }
 
+    public void printNoItemsFound(String input) {
+        System.out.println("No menu items matching " + input + " were found!");
+    }
+
     /**
      * Prints table header for menu
      */
@@ -395,4 +407,21 @@ public class Ui {
     public void printItemNotFound() {
         System.out.println("The entered item cannot be found.");
     }
+
+    public void printHelp() {
+        System.out.println(
+                "There are 8 commands you can use in MoneyGoWhere. " +
+                        "For more details, please refer to the user guide.\n" +
+                        "1. additem\n" +
+                        "2. deleteitem\n" +
+                        "3. listitem\n" +
+                        "4. updateitem\n" +
+                        "5. finditem\n" +
+                        "6. addorder\n" +
+                        "7. listorder\n" +
+                        "8. refundorder"
+        );
+    }
+
+
 }

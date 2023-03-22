@@ -1,13 +1,7 @@
 package app;
 
-import exception.ItemException;
-import exception.OrderException;
 import item.Menu;
-import item.MenuAssistant;
-import order.Order;
 import order.Transaction;
-import payment.Payment;
-import payment.Refund;
 import utility.Ui;
 
 import java.util.Scanner;
@@ -15,102 +9,25 @@ import java.util.Scanner;
 
 public class MoneyGoWhere {
 
-    public Menu menu;
-    public MenuAssistant menuAssistant;
-    public Transaction transactions;
+    private Menu menu;
+    private Transaction transactions;
+
 
     public MoneyGoWhere() {
         menu = new Menu();
-        menuAssistant = new MenuAssistant();
         transactions = new Transaction();
     }
 
-    public void handleCommand(Command command) {
-        Ui ui = new Ui();
-        boolean isCancelled;
-        try {
-            switch (command.getCommand()) {
-            case "/listitem":
-                // Fallthrough
-
-            case "listitem":
-                menu.displayList();
-                break;
-
-            case "additem":
-                isCancelled = menuAssistant.addItem(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-
-            case "/additem":
-                menu.addItem(command);
-                ui.printCommandSuccess(command.getCommand());
-                break;
-
-            case "updateitem":
-                isCancelled = menuAssistant.updateItem(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-
-            case "/updateitem":
-                menu.updateItem(command);
-                ui.printCommandSuccess(command.getCommand());
-                break;
-
-            case "finditem":
-                isCancelled = menuAssistant.showResultsOfFind(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-
-            case "/finditem":
-                menu.showResultsOfFind(command);
-                ui.printCommandSuccess(command.getCommand());
-                break;
-
-            case "deleteitem":
-                isCancelled = menuAssistant.deleteItem(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-
-            case "/deleteitem":
-                menu.deleteItem(command);
-                ui.printCommandSuccess(command.getCommand());
-                break;
-            case "listorder":
-                //Fall through
-
-            case "/listorder":
-                transactions.displayList();
-                break;
-
-            case "/addorder":
-                Order order = new Order();
-                order.addOrder(command, menu);
-                Payment payment = new Payment();
-                ui.printOrderAdded(order.getSubTotal());
-                payment.makePayment(order);
-                transactions.appendOrder(order);
-                break;
-            case "/refundorder":
-                Refund refund = new Refund();
-                refund.refundTransaction(command, transactions);
-                ui.printCommandSuccess(command.getCommand());
-                break;
-            default:
-                ui.printInvalidCommand(command.getCommand());
-            }
-        } catch (ItemException e) {
-            ui.println(e.getMessage());
-        } catch (OrderException o) {
-            ui.println(o.getMessage());
-        }
-
-    }
-
+    /**
+     * Runs the MoneyGoWhere application. This method prompts the user for input using the Ui class, creates a Command
+     * object based on the user input, and passes the Command object to the Router to process the command.
+     * The loop continues until the user types "exit" to exit the application.
+     */
     public void run() {
 
         Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
+        Router router = new Router(menu, transactions, ui);
 
         while (true) {
             ui.promptUserInput();
@@ -122,8 +39,7 @@ public class MoneyGoWhere {
             }
 
             Command command = new Command(userInput);
-
-            handleCommand(command);
+            router.handleRoute(command);
         }
 
         sc.close();

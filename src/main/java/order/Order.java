@@ -3,6 +3,7 @@ package order;
 import app.Command;
 import exception.OrderException;
 import item.Menu;
+import payment.Payment;
 import utility.Ui;
 import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
@@ -36,6 +37,30 @@ public class Order implements OrderInterface {
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
+    }
+
+    /**
+     * Constructs a new Order object.
+     *
+     * @param command      The command given by the customer to place the order.
+     * @param menu         The menu from which the customer chooses items for the order.
+     * @param transactions The transaction object to which the order will be appended.
+     * @throws OrderException If there is an error creating the order.
+     */
+    public Order(Command command, Menu menu, Transaction transactions) throws OrderException {
+        this.orderId = UUID.randomUUID().toString();
+        this.status = "COMPLETED";
+        this.dateTime = LocalDateTime.now();
+        this.orderEntries = new ArrayList<>();
+        this.paymentType = "";
+
+        Ui ui = new Ui();
+
+        this.addOrder(command, menu);
+        Payment payment = new Payment();
+        ui.printOrderAdded(this.getSubTotal());
+        payment.makePayment(this);
+        transactions.appendOrder(this);
     }
 
     /**
@@ -102,7 +127,7 @@ public class Order implements OrderInterface {
         return dateTime.format(FORMATTER);
     }
 
-    public LocalDateTime getDateTime(){
+    public LocalDateTime getDateTime() {
         return dateTime;
     }
 
