@@ -41,11 +41,10 @@ public class OrderAssistant {
         sc = new Scanner(System.in);
     }
 
-    public boolean assistedAddOrder(Menu menu) throws OrderException {
+    public boolean assistedAddOrder(Menu menu, Transaction transaction) throws OrderException {
 
         Order order;
         Command command;
-        Transaction transaction = new Transaction();
         String commandString = "";
 
         boolean hasMoreOrderEntry = true;
