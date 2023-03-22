@@ -1,5 +1,7 @@
 package order;
 
+import app.Command;
+import exception.OrderException;
 import item.Menu;
 import utility.Ui;
 
@@ -10,6 +12,7 @@ public class OrderAssistant {
 
     Ui ui;
     Scanner sc;
+
     private final ArrayList<String> CANCEL = new ArrayList<>() {
         {
             add("/cancel");
@@ -38,9 +41,12 @@ public class OrderAssistant {
         sc = new Scanner(System.in);
     }
 
-    public boolean addOrder(Menu menu) {
+    public boolean assistedAddOrder(Menu menu) throws OrderException {
 
-        Order order = new Order();
+        Order order;
+        Command command;
+        Transaction transaction = new Transaction();
+        String commandString = "";
 
         boolean hasMoreOrderEntry = true;
 
@@ -56,7 +62,23 @@ public class OrderAssistant {
                 return true;
             }
 
+            String hasMoreOrderEntryString = askIfGotMoreOrderEntries();
+            if (YES.contains(hasMoreOrderEntryString)) {
+                hasMoreOrderEntry = true;
+            } else if (NO.contains(hasMoreOrderEntryString)) {
+                hasMoreOrderEntry = false;
+            } else if (CANCEL.contains(hasMoreOrderEntryString)) {
+                return true;
+            }
+
+            // Append to final command string
+            commandString += "\"" + itemName + "\":" + quantity + ",";
+
         }
+
+        commandString = formatCommandStringForOrders(commandString);
+        command = new Command(commandString);
+        order = new Order(command, menu, transaction);
 
         // Returns false when there are no more orderEntries to add
         return false;
@@ -81,6 +103,26 @@ public class OrderAssistant {
         quantity = sc.nextLine();
 
         return quantity;
+    }
+
+    private String askIfGotMoreOrderEntries() {
+
+        String response = "";
+
+        ui.promptMoreOrderEntries();
+        response = sc.nextLine();
+
+        return response;
+    }
+
+    private String formatCommandStringForOrders(String ordersString) {
+
+        // Remove trailing ,
+        ordersString = ordersString.substring(0, ordersString.length() - 1);
+
+        ordersString = "/addorder -I [" + ordersString + "]";
+        return ordersString;
+
     }
 
 }

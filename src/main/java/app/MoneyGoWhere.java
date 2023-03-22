@@ -105,7 +105,7 @@ public class MoneyGoWhere {
             case "6.":
                 // Fallthrough
             case "addorder":
-                isCancelled = orderAssistant.addOrder(menu);
+                isCancelled = orderAssistant.assistedAddOrder(menu);
                 menuAssistant.printResult(command, isCancelled);
                 break;
             case "/addorder":

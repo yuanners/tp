@@ -124,6 +124,10 @@ public class Ui {
         System.out.println("Please enter the quantity of the item: ");
     }
 
+    public void promptMoreOrderEntries() {
+        System.out.println("Do you have more items to add? (yes/no/cancel)");
+    }
+
     /**
      * Prints an error message with the wrong command.
      *
