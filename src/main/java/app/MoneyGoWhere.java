@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class MoneyGoWhere {
 
-    private Menu menu;
-    private Transaction transactions;
+    public Menu menu;
+    public Transaction transactions;
 
 
     public MoneyGoWhere() {
