@@ -120,6 +120,14 @@ public class Ui {
         System.out.println("Please enter the keyword to search for: ");
     }
 
+    public void promptItemQuantity() {
+        System.out.println("Please enter the quantity of the item: ");
+    }
+
+    public void promptMoreOrderEntries() {
+        System.out.println("Do you have more items to add? (yes/no/cancel)");
+    }
+
     /**
      * Prints an error message with the wrong command.
      *
@@ -414,4 +422,6 @@ public class Ui {
                         "8. refundorder"
         );
     }
+
+
 }

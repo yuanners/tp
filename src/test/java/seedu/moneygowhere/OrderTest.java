@@ -49,6 +49,33 @@ public class OrderTest {
     }
 
     @Test
+    void orderTest2() {
+
+        Item item1 = new Item("earl grey milk tea avocado pudding jelly more pearls less ice 50% sugar",
+                29.0);
+        Item item2 = new Item("teh", 0.5);
+
+        OrderEntry orderEntry1 = new OrderEntry(item1, 1);
+        OrderEntry orderEntry2 = new OrderEntry(item2, 69);
+
+        ArrayList<OrderEntry> orderEntries = new ArrayList<>();
+        orderEntries.add(orderEntry1);
+        orderEntries.add(orderEntry2);
+
+        Order order = new Order(orderEntries);
+
+        assertEquals(63.5, order.getSubTotal());
+
+        assertEquals("earl grey milk tea avocado pudding jelly more pearls less ice 50% sugar",
+                order.getOrderEntries().get(0).getItem().getName());
+        assertEquals("teh", order.getOrderEntries().get(1).getItem().getName());
+
+        assertEquals(29, order.getOrderEntries().get(0).getItem().getPrice());
+        assertEquals(0.5, order.getOrderEntries().get(1).getItem().getPrice());
+
+    }
+
+    @Test
     void refundOrderTest() {
 
         Item item1 = new Item("chicken rice", 2.00);
