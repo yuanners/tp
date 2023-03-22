@@ -214,6 +214,35 @@ The general workflow of `listorder` is as follows:
    the `transactions` object that was initialized alongside `MoneyGoWhere`.
 4. The transactions will be printed onto the console.
 
+<hr>
+
+#### Refund an Order
+##### Advanced Mode
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `/refundorder`.
+
+The general workflow of `/refundorder` is as follows:
+1. User input is passed to `MoneyGoWhere`. `MoneyGoWhere` then passes it to the `Command` class, which instantiates a new `parser` object to extract the command as `/refundorder`.
+3. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the user input.
+4. `Router#handleRoute` is then invoked to process the command. It calls the `Router#proRoute` for the advanced mode commands.
+5. The obtained command `refundorder` is then passed back to `MoneyGoWhere`, which instantiates a new `Refund` object and calls the `Refund#refundTransaction` method.
+6. `REfund#refundTransaction` then instantiates the validation class `refundOrderValidation`. The method `refundOrderValidation#validateRefundOrder` is invoked to validate the arguments provided.
+    * `refundOrderValidation#checkArgument` checks if the required argument is present. The expected argument is the `Order.UUID`.
+    * `refundOrderValidation#checkOrder` first check if the argument is indeed a valid `Order.UUID` then checks the `Order.status`.
+        * If the `Order.status` is already `refunded`, then the command would be invalid.
+          7.If the command passes all the validation checks, control is given back to `Refund` class and the `Order.status` will be updated to `refunded` and is saved to the `orders.json` file using the `Transaction.save` method.
+8. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to print a message indicating that the command has executed successfully.
+
+<hr>
+
+##### Basic Mode
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `refundorder`.
+
+The workflow is the same if the user input is `8` or `8.`
+
+The general workflow of `refundorder` is as follows:
+1. User input is passed to `MoneyGoWhere`.
+2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command as `refundorder`.
+3. The obtained command is then passed back to `MoneyGoWhere`, which calls the `Menu` object.
 
 ## Requirements
 
