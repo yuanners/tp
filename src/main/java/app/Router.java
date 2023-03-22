@@ -16,9 +16,9 @@ import utility.Ui;
  * classes for execution.
  */
 public class Router {
-    private Ui ui;
-    private Menu menu;
-    private Transaction transactions;
+    public Ui ui;
+    public Menu menu;
+    public Transaction transactions;
 
     /**
      * Constructs a new Router object with the specified menu and transactions.
