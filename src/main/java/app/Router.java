@@ -74,7 +74,10 @@ public class Router {
                 refund.refundTransaction(command, transactions);
                 ui.printCommandSuccess(command.getCommand());
                 break;
+            default:
+                ui.printInvalidCommand(command.getCommand());
             }
+
         } catch (ItemException | OrderException e) {
             ui.println(e.getMessage());
         }
@@ -131,6 +134,8 @@ public class Router {
             case "listorder":
                 transactions.displayList();
                 break;
+            default:
+                ui.printInvalidCommand(command.getCommand());
             }
         } catch (OrderException e) {
             ui.println(e.getMessage());
