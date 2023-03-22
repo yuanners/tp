@@ -13,26 +13,36 @@ public class OrderAssistant {
     Ui ui;
     Scanner sc;
 
-    private final ArrayList<String> CANCEL = new ArrayList<>() {
+    private final ArrayList<String> CANCELS = new ArrayList<>() {
         {
             add("/cancel");
             add("cancel");
+            add("CANCEL");
+            add("/CANCEL");
         }
     };
-    private final ArrayList<String> YES = new ArrayList<>() {
+    private final ArrayList<String> YESES = new ArrayList<>() {
         {
             add("yes");
             add("y");
             add("YES");
             add("Y");
+            add("/yes");
+            add("/y");
+            add("/YES");
+            add("/Y");
         }
     };
-    private final ArrayList<String> NO = new ArrayList<>() {
+    private final ArrayList<String> NOS = new ArrayList<>() {
         {
             add("no");
             add("n");
             add("NO");
             add("N");
+            add("/no");
+            add("/n");
+            add("/NO");
+            add("/N");
         }
     };
 
@@ -52,21 +62,21 @@ public class OrderAssistant {
         while (hasMoreOrderEntry) {
 
             String itemName = getItem();
-            if (CANCEL.contains(itemName)) {
+            if (CANCELS.contains(itemName)) {
                 return true;
             }
 
             String quantity = getQuantity();
-            if (CANCEL.contains(quantity)) {
+            if (CANCELS.contains(quantity)) {
                 return true;
             }
 
             String hasMoreOrderEntryString = askIfGotMoreOrderEntries();
-            if (YES.contains(hasMoreOrderEntryString)) {
+            if (YESES.contains(hasMoreOrderEntryString)) {
                 hasMoreOrderEntry = true;
-            } else if (NO.contains(hasMoreOrderEntryString)) {
+            } else if (NOS.contains(hasMoreOrderEntryString)) {
                 hasMoreOrderEntry = false;
-            } else if (CANCEL.contains(hasMoreOrderEntryString)) {
+            } else if (CANCELS.contains(hasMoreOrderEntryString)) {
                 return true;
             }
 
