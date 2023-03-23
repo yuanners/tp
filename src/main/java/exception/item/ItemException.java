@@ -1,4 +1,4 @@
-package exception;
+package exception.item;
 
 /**
  * Custom exception to handle item validation

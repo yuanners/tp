@@ -2,7 +2,7 @@ package validation.item;
 
 import app.Command;
 import exception.InvalidArgumentException;
-import exception.ItemException;
+import exception.item.ItemException;
 import item.Menu;
 
 public class DeleteItemValidation extends ItemValidation {
