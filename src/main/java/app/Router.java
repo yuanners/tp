@@ -10,6 +10,7 @@ import order.Transaction;
 import payment.Refund;
 import ui.Flags;
 import ui.MenuUi;
+import ui.TransactionUi;
 import utility.Ui;
 
 /**
@@ -19,6 +20,8 @@ import utility.Ui;
  */
 public class Router {
     public Ui ui;
+    public MenuUi menuUi;
+    public TransactionUi transactionUi;
     public Menu menu;
     public Transaction transactions;
 
@@ -48,33 +51,35 @@ public class Router {
                 break;
             case "/additem":
                 menu.addItem(command);
-                ui.printCommandSuccess(command.getCommand());
+                menuUi.printSuccessfulAddItem();
                 break;
             case "/deleteitem":
                 menu.deleteItem(command);
-                ui.printCommandSuccess(command.getCommand());
+                menuUi.printSuccessfulDeleteItem();
                 break;
             case "/listitem":
                 menu.displayList();
                 break;
             case "/updateitem":
                 menu.updateItem(command);
-                ui.printCommandSuccess(command.getCommand());
+                menuUi.printSuccessfulUpdateItem();
                 break;
             case "/finditem":
                 menu.showResultsOfFind(command);
-                ui.printCommandSuccess(command.getCommand());
+                menuUi.printFindItemComplete();
                 break;
             case "/addorder":
                 Order order = new Order(command, menu, transactions);
+                transactionUi.printSuccessfulAddOrder();
                 break;
             case "/listorder":
                 transactions.displayList();
+                transactionUi.printSuccessfulListOrder();
                 break;
             case "/refundorder":
                 Refund refund = new Refund();
                 refund.refundTransaction(command, transactions);
-                ui.printCommandSuccess(command.getCommand());
+                transactionUi.printSuccessfulRefundOrder();
                 break;
             default:
                 ui.printInvalidCommand(command.getCommand());

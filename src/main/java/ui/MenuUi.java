@@ -2,7 +2,6 @@ package ui;
 
 import item.Item;
 
-import javax.lang.model.type.ErrorType;
 import java.util.ArrayList;
 
 public class MenuUi extends Ui {
@@ -117,6 +116,26 @@ public class MenuUi extends Ui {
 
     public void printNoItemFound(String input) {
         System.out.println("No menu items matching " + input + " were found!");
+    }
+
+    public void printSuccessfulListItem() {
+        System.out.println("All items in the menu have been listed!");
+    }
+
+    public void printSuccessfulAddItem() {
+        System.out.println("Item added successfully!");
+    }
+
+    public void printSuccessfulDeleteItem() {
+        System.out.println("Item deleted successfully!");
+    }
+
+    public void printSuccessfulUpdateItem() {
+        System.out.println("Item updated successfully!");
+    }
+
+    public void printFindItemComplete() {
+        System.out.println("finditem completed!");
     }
 
     @Override

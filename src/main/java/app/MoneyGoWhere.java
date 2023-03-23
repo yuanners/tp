@@ -29,6 +29,8 @@ public class MoneyGoWhere {
         Scanner sc = new Scanner(System.in);
         Router router = new Router(menu, transactions, ui);
 
+        ui.printWelcomeMessage();
+
         while (true) {
             ui.promptUserInput();
             String userInput = sc.nextLine();
