@@ -244,6 +244,16 @@ The general workflow of `refundorder` is as follows:
 2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command as `refundorder`.
 3. The obtained command is then passed back to `MoneyGoWhere`, which calls the `Menu` object.
 
+<hr>
+
+### Report Commands
+
+#### Overview
+* [Generate Sales Report](#add-an-item)
+* [Generate Ranking Report](#delete-an-item)
+
+<hr>
+
 ## Requirements
 
 ### Project Scope
