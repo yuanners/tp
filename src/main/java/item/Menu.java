@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
 import exception.ItemException;
 import org.apache.commons.lang3.StringUtils;
+import ui.MenuUi;
 import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
@@ -40,9 +41,9 @@ public class Menu {
     }
 
     public void displayList() {
-        Ui ui = new Ui();
+        MenuUi ui = new MenuUi();
         ui.printMenu(items);
-        ui.printCommandSuccess("listitem");
+        ui.printSuccessfulListItem();
     }
 
     public void appendItem(Item item) {
