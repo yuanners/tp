@@ -71,60 +71,95 @@ public class MenuUi extends Ui {
         }
     }
 
-    public void printEmptyMenuError(){
-        System.out.println("There are no items on the menu.");
-    }
+//    public void printEmptyMenuError() {
+//        System.out.println("There are no items on the menu.");
+//    }
+//
+//    public void printDuplcateItemNameError() {
+//        System.out.println("Please enter a valid payment type (Card/Cash/Others).");
+//    }
+//
+//    public void printEmptyNameError() {
+//        System.out.println("Name cannot be empty.");
+//    }
+//
+//    public void printExceedNameLengthError() {
+//        System.out.println("Name exceeds the 25 character limit.");
+//    }
+//
+//    public void printEmptyPriceError() {
+//        System.out.println("Price cannot be empty.");
+//    }
+//
+//    public void printNegativePriceError() {
+//        System.out.println("Price cannot be negative.");
+//    }
+//
+//    public void printInvalidAddItemCommand() {
+//        System.out.println("additem command format is invalid.");
+//    }
+//
+//    public void printInvalidDeleteItemCommand() {
+//        System.out.println("deleteitem command format is invalid.");
+//    }
+//
+//    public void printPriceDecimalError() {
+//        System.out.println("Price must have at most 2 decimal points.");
+//    }
+//
+//    public void printPriceNotNumberError() {
+//        System.out.println("Price must be a number.");
+//    }
+//
+//    public void printInvalidItemIndexError() {
+//        System.out.println("This input requires a valid item index!");
+//    }
 
-    public void printDuplcateItemNameError(){
-        System.out.println("Please enter a valid payment type (Card/Cash/Others).");
-    }
-
-    public void printEmptyNameError(){
-        System.out.println("Name cannot be empty.");
-    }
-
-    public void printExceedNameLengthError(){
-        System.out.println("Name exceeds the 25 character limit.");
-    }
-
-    public void printEmptyPriceError(){
-        System.out.println("Price cannot be empty.");
-    }
-
-    public void printNegativePriceError(){
-        System.out.println("Price cannot be negative.");
-    }
-
-    public void printInvalidAddItemCommand(){
-        System.out.println("additem command format is invalid.");
-    }
-
-    public void printInvalidDeleteItemCommand(){
-        System.out.println("deleteitem command format is invalid.");
-    }
-
-    public void printPriceDecimalError(){
-        System.out.println("Price must have at most 2 decimal points.");
-    }
-
-    public void printPriceNotNumberError(){
-        System.out.println("Price must be a number.");
-    }
-
-    public void printInvalidItemIndexError(){
-        System.out.println("This input requires a valid item index!");
-    }
-
-    public void printNoItemsFoundError(String input) {
+    public void printNoItemFound(String input) {
         System.out.println("No menu items matching " + input + " were found!");
     }
-    public void printMenuError(MenuErrorType error){
-        System.out.println(error);
-        switch(error){
 
+    @Override
+    public void printError(Flags.Error error) {
+        switch (error) {
+        case INPUT_EMPTY:
+            System.out.println("Input is empty. Please enter something.");
+            break;
+        case DOUBLE_OVERFLOW:
+            System.out.println("Double overflow! Please enter a double within the valid range.");
+            break;
+        case INTEGER_OVERFLOW:
+            System.out.println("Integer overflow! Please enter an integer within the valid range.");
+            break;
+        case ADDITEM_FORMAT_INVALID:
+            System.out.println("additem command format is invalid.");
+            break;
+        case DELETEITEM_FORMAT_INVALID:
+            System.out.println("deleteitem command format is invalid.");
+            break;
+        case ITEM_NAME_EMPTY:
+            System.out.println("Name cannot be empty.");
+            break;
+        case ITEM_NAME_TOO_LONG:
+            System.out.println("Name exceeds the 25 character limit.");
+            break;
+        case ITEM_PRICE_EMPTY:
+            System.out.println("Price cannot be empty.");
+            break;
+        case ITEM_PRICE_NEGATIVE:
+            System.out.println("Price cannot be negative.");
+            break;
+        case ITEM_PRICE_INVALID_DECIMAL_PLACE:
+            System.out.println("Price must have at most 2 decimal points.");
+            break;
+        case ITEM_INDEX_INVALID:
+            System.out.println("This input requires a valid item index!");
+            break;
+        case ITEM_PRICE_NOT_A_NUMBER:
+            System.out.println("Price must be a number.");
+            break;
         }
     }
-
 
 
 }

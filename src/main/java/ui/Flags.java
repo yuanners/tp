@@ -1,10 +1,9 @@
 package ui;
 
-public class UiFlag {
-    enum ErrorFlag {
-        NULL_MESSAGE,
+public class Flags {
+    enum Error {
+        EMPTY_INPUT,
         DOUBLE_OVERFLOW,
-        ERROR_MESSAGE,
         INTEGER_OVERFLOW,
         INVALID_INDEX,
         REQUIRE_INTEGER,
@@ -35,6 +34,5 @@ public class UiFlag {
         INVALID_PAYMENT_AMOUNT,
         INSUFFICIENT_AMOUNT,
         INVALID_PAYMENT_TYPE,
-
     }
 }
