@@ -1,6 +1,6 @@
 package validation.item;
 
-import exception.ItemException;
+import exception.item.ItemException;
 
 public class FindItemValidation extends ItemValidation {
 

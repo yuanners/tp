@@ -1,11 +1,16 @@
 package validation.item;
 
 import app.Command;
-import exception.InvalidArgumentException;
-import exception.ItemException;
+import exception.item.*;
 import item.Menu;
+import ui.MenuUi;
 
 public class DeleteItemValidation extends ItemValidation {
+    MenuUi menuUi;
+
+    public DeleteItemValidation() {
+        menuUi = new MenuUi();
+    }
 
     /**
      * Checks if the required flag is given
@@ -13,29 +18,11 @@ public class DeleteItemValidation extends ItemValidation {
      * @param c Given command
      * @throws ItemException If any required flag is not given
      */
-    public void validateFlags(Command c) throws ItemException {
+    public void validateFlags(Command c) throws MissingIndexFlagException {
         String args = c.getArgumentString();
 
         if (!(args.contains(SHORT_INDEX_FLAG) || args.contains(LONG_INDEX_FLAG))) {
-            throw new ItemException(ui.printInvalidFlags(c.getCommand()));
-        }
-    }
-
-    /**
-     * Calls all validation methods to check all parts of the given command
-     *
-     * @param c Given command
-     * @param menu The list of items on the menu
-     * @throws ItemException If any validation fails
-     */
-    public void validateCommand(Command c, Menu menu) throws ItemException {
-        try {
-            validateArgument(c);
-            validateIndex(c, menu);
-        } catch (ItemException e) {
-            throw new ItemException(e.getMessage());
-        } catch (InvalidArgumentException e) {
-            throw new ItemException(e.getMessage());
+            throw new MissingIndexFlagException();
         }
     }
 
@@ -46,16 +33,17 @@ public class DeleteItemValidation extends ItemValidation {
      * @param menu The list of items on the menu
      * @throws ItemException If index given is invalid
      */
-    public void validateIndex(Command c, Menu menu) throws ItemException {
+    public void validateIndex(Command c, Menu menu) throws
+            IndexInvalidNumberFormatException, IndexOverflowException, IndexOutOfBoundException {
         int result = isInteger(c.getArgumentMap().get(LONG_INDEX_FLAG));
         if(result == 1) {
-            throw new ItemException(ui.getRequireValidItemIndex());
+            throw new IndexInvalidNumberFormatException();
         }
         if(result == 2) {
-            throw new ItemException(ui.getIntegerOverflow());
+            throw new IndexOverflowException();
         }
         if(!isValidIndex(c.getArgumentMap().get(LONG_INDEX_FLAG), menu)) {
-            throw new ItemException(ui.getInvalidIndex());
+            throw new IndexOutOfBoundException();
         }
     }
 }
