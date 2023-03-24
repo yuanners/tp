@@ -19,11 +19,9 @@ class StatisticTest {
     public Transaction transactions;
 
     public void createItem(Command c) {
-        try {
-            menu.addItem(c);
-        } catch (ItemException e) {
-            System.out.println(e);
-        }
+
+        menu.addItem(c);
+
 
     }
 

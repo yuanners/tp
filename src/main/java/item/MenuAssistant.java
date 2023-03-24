@@ -1,7 +1,9 @@
 package item;
 
 import app.Command;
-import exception.item.ItemException;
+import exception.item.*;
+import ui.Flags;
+import ui.MenuUi;
 import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 
 public class MenuAssistant {
     Ui ui;
+    MenuUi menuUi;
     Scanner sc;
     private final String CANCEL = "/cancel";
     private final String YES = "yes";
@@ -18,6 +21,7 @@ public class MenuAssistant {
     private DeleteItemValidation deleteItemValidation;
     public MenuAssistant() {
         ui = new Ui();
+        menuUi = new MenuUi();
         sc = new Scanner(System.in);
         addItemValidation = new AddItemValidation();
         deleteItemValidation = new DeleteItemValidation();
@@ -33,9 +37,9 @@ public class MenuAssistant {
      */
     public void printResult(Command command, boolean isCancelled) {
         if (isCancelled) {
-            ui.printCommandCancelled(command.getCommand());
+            menuUi.printCommandCancelled(command.getCommand());
         } else {
-            ui.printCommandSuccess(command.getCommand());
+            menuUi.printCommandSuccess(command.getCommand());
         }
     }
 
@@ -65,8 +69,12 @@ public class MenuAssistant {
                 addItemValidation.validateName(command);
                 addItemValidation.validateDuplicateName(command, menu);
                 isValidName = true;
-            } catch(ItemException e) {
-                ui.println(e.getMessage());
+            } catch (NameMinimumLengthException e) {
+                menuUi.printError(Flags.Error.ITEM_NAME_MIN_LENGTH_ERROR);
+            } catch (NameMaximumLengthException e) {
+                menuUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
+            } catch (DuplicateNameException e) {
+                menuUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
             }
 
         }
@@ -105,8 +113,12 @@ public class MenuAssistant {
                     addItemValidation.validateDuplicateName(command, menu);
                 }
                 isValidName = true;
-            } catch(ItemException e) {
-                ui.println(e.getMessage());
+            } catch (NameMinimumLengthException e) {
+                menuUi.printError(Flags.Error.ITEM_NAME_MIN_LENGTH_ERROR);
+            } catch (NameMaximumLengthException e) {
+                menuUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
+            } catch (DuplicateNameException e) {
+                menuUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
             }
 
         }
@@ -139,8 +151,16 @@ public class MenuAssistant {
             try {
                 addItemValidation.validatePrice(command);
                 isValidPrice = true;
-            } catch(ItemException e) {
-                ui.println(e.getMessage());
+            } catch (PriceMinimumLengthException e) {
+                menuUi.printError(Flags.Error.ITEM_PRICE_MIN_LENGTH_ERROR);
+            } catch (PriceInvalidNumberException e) {
+                menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_FORMAT_ERROR);
+            } catch (PriceOverflowException e) {
+                menuUi.printError(Flags.Error.ITEM_PRICE_OVERFLOW_ERROR);
+            } catch (PriceNegativeException e) {
+                menuUi.printError(Flags.Error.ITEM_PRICE_NEGATIVE_ERROR);
+            } catch (PriceInvalidDecimalPlaceException e) {
+                menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_DECIMAL_PLACE_ERROR);
             }
 
         }
@@ -289,8 +309,12 @@ public class MenuAssistant {
             try {
                 deleteItemValidation.validateIndex(command, menu);
                 isValidIndex = true;
-            } catch(ItemException e) {
-                ui.println(e.getMessage());
+            } catch (IndexInvalidNumberFormatException e) {
+                menuUi.printError(Flags.Error.ITEM_INDEX_INVALID_FORMAT_ERROR);
+            } catch (IndexOverflowException e) {
+                menuUi.printError(Flags.Error.ITEM_INDEX_OVERFLOW_ERROR);
+            } catch (IndexOutOfBoundException e) {
+                menuUi.printError(Flags.Error.ITEM_INDEX_OUT_OF_BOUND_ERROR);
             }
 
         }
