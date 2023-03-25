@@ -90,7 +90,8 @@ public class StatisticUi extends Ui {
      * @param startDate a LocalDateTime object representing the start date of the date range
      * @param endDate   a LocalDateTime object representing the end date of the date range
      */
-    public void printPopularityRankingTable(PriorityQueue<ItemRank> rank, LocalDateTime startDate, LocalDateTime endDate) {
+    public void printPopularityRankingTable(PriorityQueue<ItemRank> rank,
+                                            LocalDateTime startDate, LocalDateTime endDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         System.out.println("| " + "-".repeat(41) + " |");

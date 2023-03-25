@@ -2,7 +2,17 @@ package validation.item;
 
 import app.Command;
 import exception.InvalidArgumentException;
-import exception.item.*;
+import exception.item.MissingNameAndPriceFlag;
+import exception.item.MissingNameFlagException;
+import exception.item.MissingPriceFlagException;
+import exception.item.NameMinimumLengthException;
+import exception.item.NameMaximumLengthException;
+import exception.item.DuplicateNameException;
+import exception.item.PriceMinimumLengthException;
+import exception.item.PriceInvalidNumberException;
+import exception.item.PriceOverflowException;
+import exception.item.PriceNegativeException;
+import exception.item.PriceInvalidDecimalPlaceException;
 import item.Menu;
 import ui.Flags;
 import ui.MenuUi;
@@ -38,7 +48,6 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param command Given command
-     * @throws ItemException If any required flag is not given
      */
     private void checkFlags(Command command) throws
             MissingNameFlagException, MissingPriceFlagException, MissingNameAndPriceFlag {
@@ -100,7 +109,6 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the given input for name is valid
      *
      * @param c Given command
-     * @throws ItemException If name is invalid
      */
     public void validateName(Command c) throws NameMinimumLengthException, NameMaximumLengthException {
         // TODO : Refactor callers
@@ -123,7 +131,6 @@ public class AddItemValidation extends ItemValidation {
      *
      * @param c Given command
      * @param menu The list of items on the menu
-     * @throws ItemException If name is invalid
      */
     public void validateDuplicateName(Command c, Menu menu) throws DuplicateNameException {
         String newItemName = c.getArgumentMap().get(LONG_NAME_FLAG);
@@ -140,7 +147,6 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the given input for price is valid
      *
      * @param c Given command
-     * @throws ItemException If price is invalid
      */
     public void validatePrice(Command c) throws
             PriceMinimumLengthException, PriceOverflowException, PriceInvalidNumberException,

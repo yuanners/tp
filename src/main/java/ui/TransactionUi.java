@@ -100,6 +100,7 @@ public class TransactionUi extends Ui {
             break;
         case NEGATIVE_ORDER_ITEM_INDEX:
             System.out.println("Index cannot be negative.");
+            break;
         case INVALID_ORDER_ITEM_INDEX_OUT_OF_BOUNDS:
             System.out.println("Index does not exist.");
             break;
@@ -172,6 +173,8 @@ public class TransactionUi extends Ui {
         case INVALID_REFUND_ORDER_TYPE:
             System.out.println("Order is already refunded.");
             break;
+        default:
+            // Fallthrough
         }
     }
 }
