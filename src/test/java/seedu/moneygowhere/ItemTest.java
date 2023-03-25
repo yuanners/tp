@@ -19,7 +19,7 @@ class ItemTest {
         ui = new Ui();
         menu = new Menu();
         transaction = new Transaction();
-        router = new Router(menu, transaction, ui);
+        router = new Router(menu, transaction);
         runTest("/additem -p 2.50 -n \"chicken rice\"", router);
     }
 
