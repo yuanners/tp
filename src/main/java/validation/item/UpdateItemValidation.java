@@ -1,7 +1,8 @@
 package validation.item;
 
 import app.Command;
-import exception.item.*;
+import exception.item.MissingIndexFlagException;
+import exception.item.MissingNameOrPriceFlagException;
 import ui.MenuUi;
 
 public class UpdateItemValidation extends ItemValidation {
@@ -15,7 +16,8 @@ public class UpdateItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param c Given command
-     * @throws ItemException If any required flag is not given
+     * @throws MissingIndexFlagException If Index is missing
+     * @throws MissingNameOrPriceFlagException If Name or Price is missing
      */
     public void validateFlags(Command c) throws
             MissingIndexFlagException, MissingNameOrPriceFlagException {
