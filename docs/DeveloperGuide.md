@@ -24,15 +24,23 @@ making it easier for them to work on the project.
 
 ## Implementation
 
-
 ### Item Commands
 
 #### Overview
+
 * [Add an Item](#add-an-item)
+  * [Advanced Mode](#advanced-mode-add-an-item)
+  * [Basic Mode](#basic-mode-add-an-item)
 * [Delete an Item](#delete-an-item)
+  * [Advanced Mode](#advanced-mode-delete-an-item)
+  * [Basic Mode](#basic-mode-delete-an-item)
 * [List all Items](#list-all-items)
 * [Update an Item](#update-an-item)
+    * [Advanced Mode](#advanced-mode-update-an-item)
+    * [Basic Mode](#basic-mode-update-an-item)
 * [Find an Item](#find-an-item)
+  * [Advanced Mode](#advanced-mode-find-an-item)
+  * [Basic Mode](#basic-mode-find-an-item)
 
 <hr>
 
@@ -41,71 +49,121 @@ making it easier for them to work on the project.
 There are two ways to add an order into MoneyGoWhere.
 
 1. By adding an item into the menu
-1. By using Basic Mode to add an item into the menu
+2. By using Basic Mode to add an item into the menu
 
-##### Advanced
+##### Advanced Mode Add an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
 - `/additem -n <item_name> -p <price>`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `/additem`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
+command `/additem`.
 
 The general workflow of `/additem` is as follows:
-1. User input is passed to `MoneyGoWhere`.
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes `Menu#addItem` method to run the `/additem` command.
-1. Once the command runs, `Menu#addItem` invokes `AddItemValidation#validateFlags` to check if all the required flags have been given.
-   * If there are missing flags, a message indicating that the usage is invalid will be printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-1. `Menu#addItem` then invokes `AddItemValidation#validateCommand` which in turn, calls all of the following validation method to check the arguments provided.
-   * `AddItemValidation#validateArgument` checks if the user input `String` is empty
-     * If the user input is empty, a message indicating that the input is empty is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-   * `AddItemValidation#validateName` checks if the given name is empty or exceeds the limit of 25 characters
-     * If the name violates these naming constraints, a message indicating that the name is too short or too long is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-   * `AddItemValidation#validateDuplicateName` checks if the given name already exists in the `ArrayList<Item> items` of `Menu`.
-     * If the name already exists, a message indicating that the item name already exists is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-   * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative or has more than 2 decimal points
-     * If any of the above is true, a message indicating the constraint that it has violated is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-1. A new `Item` object is then created using the name and price given
-1. `Menu#appendItem` is invoked on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`.
-1. The, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router` object then calls `Ui#printCommandSuccess` to print a message indicating that the item has been successfully added to the menu.
 
-##### Basic
+1. User input is passed to `MoneyGoWhere`.
+2. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor
+   invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+3. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes `Menu#addItem`
+   method to run the `/additem` command. 
+4. Once the command runs, `Menu#addItem` invokes `AddItemValidation#validateFlags` to check if all the required flags
+   have been given.
+    * If there are missing flags, a message indicating that the usage is invalid will be printed using `Ui#println` and
+      control is given back to `MoneyGoWhere`.
+5. `Menu#addItem` then invokes `AddItemValidation#validateCommand` which in turn, calls all of the following validation
+   method to check the arguments provided.
+    * `AddItemValidation#validateArgument` checks if the user input `String` is empty
+        * If the user input is empty, a message indicating that the input is empty is printed using `Ui#println` and
+          control is given back to `MoneyGoWhere`.
+    * `AddItemValidation#validateName` checks if the given name is empty or exceeds the limit of 25 characters
+        * If the name violates these naming constraints, a message indicating that the name is too short or too long is
+          printed using `Ui#println` and control is given back to `MoneyGoWhere`.
+    * `AddItemValidation#validateDuplicateName` checks if the given name already exists in the `ArrayList<Item> items`
+      of `Menu`.
+        * If the name already exists, a message indicating that the item name already exists is printed
+          using `Ui#println` and control is given back to `MoneyGoWhere`.
+    * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative or has more
+      than 2 decimal points
+        * If any of the above is true, a message indicating the constraint that it has violated is printed
+          using `Ui#println` and control is given back to `MoneyGoWhere`. 
+6. A new `Item` object is then created using the name and price given
+7. `Menu#appendItem` is invoked on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`. 
+8. The, `Menu#save` is invoked to save the changes to the local storage file.
+9. `Router` object then calls `Ui#printCommandSuccess` to print a message indicating that the item has been successfully
+   added to the menu.
+
+##### Basic Mode Add an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
 - `additem`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `additem`.
-
-The workflow is the same if the user input is `1` or `1.`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
+command `additem` or `1`.
 
 The general workflow of `additem` is as follows:
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes `MenuAssistant#addItem` method to run the `additem` command.
-1. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
-1. `MenuAssistant#addItem` invokes `MenuAssistant#getName` to get the name of the item to be added.
-1. `MenuAssistant#getName` gets the name from the user and invokes `AddItemValidation#validateName` to check if the given name is empty or exceeds the limit of 25 characters and `AddItemValidation#validateDuplicateName` to check if the given name already exists in the `ArrayList<Item> items` of `Menu`
-   * If the name violates these naming constraints, a message indicating that the name is too short or too long is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-   * If the name already exists, a message indicating that the item name already exists is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-1. `MenuAssistant#addItem` then invokes `MenuAssistant#getPrice` to get the price of the item to be added.
-1. `MenuAssistant#getPrice` gets the name from the user and invokes `AddItemValidation#validatePrice` to check if the given price is empty, is not a number, is negative or has more than 2 decimal points
-   * If any of the above is true, a message indicating the constraint that it has violated is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-1. A new `Item` object is then created using the name and price given
-1. `Menu#appendItem` is invoked on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`.
-1. The, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router` object then calls `Ui#printCommandSuccess` to print a message indicating that if the item has been successfully added to the menu or if the user has cancelled the command accordingly.
+
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor
+   invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+2. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which
+   invokes `MenuAssistant#addItem` method to run the `additem` command. 
+3. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
+4. `MenuAssistant#addItem` invokes `MenuAssistant#getName` to get the name of the item to be added.
+5. `MenuAssistant#getName` gets the name from the user and invokes `AddItemValidation#validateName` to check if the
+   given name is empty or exceeds the limit of 25 characters and `AddItemValidation#validateDuplicateName` to check if
+   the given name already exists in the `ArrayList<Item> items` of `Menu`
+    * If the name violates these naming constraints, a message indicating that the name is too short or too long is
+      printed using `Ui#println` and control is given back to `MoneyGoWhere`.
+    * If the name already exists, a message indicating that the item name already exists is printed using `Ui#println`
+      and control is given back to `MoneyGoWhere`.
+6. `MenuAssistant#addItem` then invokes `MenuAssistant#getPrice` to get the price of the item to be added.
+7. `MenuAssistant#getPrice` gets the name from the user and invokes `AddItemValidation#validatePrice` to check if the
+   given price is empty, is not a number, is negative or has more than 2 decimal points
+    * If any of the above is true, a message indicating the constraint that it has violated is printed
+      using `Ui#println` and control is given back to `MoneyGoWhere`.
+8. A new `Item` object is then created using the name and price given
+9. `Menu#appendItem` is invoked on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`.
+10. The, `Menu#save` is invoked to save the changes to the local storage file.
+11. `Router` object then calls `Ui#printCommandSuccess` to print a message indicating that if the item has been
+   successfully added to the menu or if the user has cancelled the command accordingly.
 
 <hr>
+
+#### Delete an Item
+
+##### Advanced Mode Delete an Item
+
+##### Basic Mode Delete an Item
+
+#### List all Items
+
+#### Update an Item
+
+##### Advanced Mode Update an Item
+
+##### Basic Mode Update an Item
+
+#### Find an Item
+
+##### Advanced Mode Find an Item
+
+##### Basic Mode Find an Item
+
+<hr> 
 
 ### Order Commands
 
 #### Overview
 
 * [Add an Order](#add-an-order)
+    * [Add a Single Item](#add-only-one-menu-item-into-an-order)
+    * [Add Multiple Items](#add-multiple-menu-items-into-an-order)
+    * [Basic Mode](#basic-mode-add-an-order)
 * [List all Orders](#list-all-orders)
 * [Refund an Order](#refund-an-order)
+    * [Advanced Mode](#advanced-mode-refund-an-order)
+    * [Basic Mode](#basic-mode-refund-an-order)
 
 <hr>
 
@@ -121,7 +179,7 @@ Both ways work similarly, but are parsed differently.
 The next section will describe exactly how the inputs are parsed into the `addorder` command through each of the
 described ways.
 
-#### Add only one menu item into an order
+##### Add only one menu item into an order
 
 The expected inputs to add only one menu item into an order is as such:
 
@@ -140,11 +198,11 @@ The general workflow of this `/addorder` command is as follows:
    as `/addorder`.
 3. The `/addorder` command gets passed back to `MoneyGoWhere` to check which function it should call.
 4. `MoneyGoWhere` passes the user input to the `Order` class to create an `Order`.
-6. The `Order` class passes the user input to the `AddOrderValidation` class for input validation.
-7. If the input is invalid, the user will be shown an error message about the mistake made, and the correct format to
+5. The `Order` class passes the user input to the `AddOrderValidation` class for input validation.
+6. If the input is invalid, the user will be shown an error message about the mistake made, and the correct format to
    enter the command will be shown.
-8. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
-9. Once payment is made, the `Order` will be passed to the `Transactions` class, where this `Order` will be appended to
+7. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
+8. Once payment is made, the `Order` will be passed to the `Transactions` class, where this `Order` will be appended to
    the list of `Transactions`.
 
 <hr>
@@ -176,10 +234,10 @@ The general workflow of the `/addorder` command is as follows:
 
 <hr>
 
-##### Basic Mode
+##### Basic Mode Add an Order
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
-command `addorder`, `6`, or `6.`.
+command `addorder` or `6`.
 
 The general workflow of `addorder` is as follows:
 
@@ -200,12 +258,11 @@ The general workflow of `addorder` is as follows:
 #### List all Orders
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
-command `listorder`.
+command `/listorder`.
 
-Note that the work flow for both Basic and Advanced Mode is the same, and if the user input is `7`, `7.`, `listitem`,
-or `/listitem`.
+Note that the work flow for both Basic and Advanced Mode is the same, and if the user input is `7` or `listorder`.
 
-The general workflow of `listorder` is as follows:
+The general workflow of `/listorder` is as follows:
 
 1. User input is passed to `MoneyGoWhere`.
 2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command
@@ -217,31 +274,47 @@ The general workflow of `listorder` is as follows:
 <hr>
 
 #### Refund an Order
-##### Advanced Mode
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `/refundorder`.
+
+##### Advanced Mode Refund an Order
+
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
+command `/refundorder`.
 
 The general workflow of `/refundorder` is as follows:
-1. User input is passed to `MoneyGoWhere`. `MoneyGoWhere` then passes it to the `Command` class, which instantiates a new `parser` object to extract the command as `/refundorder`.
-3. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the user input.
-4. `Router#handleRoute` is then invoked to process the command. It calls the `Router#proRoute` for the advanced mode commands.
-5. The obtained command `refundorder` is then passed back to `MoneyGoWhere`, which instantiates a new `Refund` object and calls the `Refund#refundTransaction` method.
-6. `REfund#refundTransaction` then instantiates the validation class `refundOrderValidation`. The method `refundOrderValidation#validateRefundOrder` is invoked to validate the arguments provided.
-    * `refundOrderValidation#checkArgument` checks if the required argument is present. The expected argument is the `Order.UUID`.
-    * `refundOrderValidation#checkOrder` first check if the argument is indeed a valid `Order.UUID` then checks the `Order.status`.
+
+1. User input is passed to `MoneyGoWhere`. `MoneyGoWhere` then passes it to the `Command` class, which instantiates a
+   new `parser` object to extract the command as `/refundorder`.
+2. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the
+   user input.
+3. `Router#handleRoute` is then invoked to process the command. It calls the `Router#proRoute` for the advanced mode
+   commands.
+4. The obtained command `refundorder` is then passed back to `MoneyGoWhere`, which instantiates a new `Refund` object
+   and calls the `Refund#refundTransaction` method.
+5. `Refund#refundTransaction` then instantiates the validation class `refundOrderValidation`. The
+   method `refundOrderValidation#validateRefundOrder` is invoked to validate the arguments provided.
+    * `refundOrderValidation#checkArgument` checks if the required argument is present. The expected argument is
+      the `Order.UUID`.
+    * `refundOrderValidation#checkOrder` first check if the argument is indeed a valid `Order.UUID` then checks
+      the `Order.status`.
         * If the `Order.status` is already `refunded`, then the command would be invalid.
-          7.If the command passes all the validation checks, control is given back to `Refund` class and the `Order.status` will be updated to `refunded` and is saved to the `orders.json` file using the `Transaction.save` method.
-8. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to print a message indicating that the command has executed successfully.
+          7.If the command passes all the validation checks, control is given back to `Refund` class and
+          the `Order.status` will be updated to `refunded` and is saved to the `orders.json` file using
+          the `Transaction.save` method. 
+6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to
+   print a message indicating that the command has executed successfully.
 
 <hr>
 
-##### Basic Mode
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `refundorder`.
+##### Basic Mode Refund an Order
 
-The workflow is the same if the user input is `8` or `8.`
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
+command `refundorder` or `8`.
 
 The general workflow of `refundorder` is as follows:
+
 1. User input is passed to `MoneyGoWhere`.
-2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command as `refundorder`.
+2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command
+   as `refundorder`.
 3. The obtained command is then passed back to `MoneyGoWhere`, which calls the `Menu` object.
 
 <hr>
@@ -249,6 +322,7 @@ The general workflow of `refundorder` is as follows:
 ### Report Commands
 
 #### Overview
+
 * [Generate Sales Report](#add-an-item)
 * [Generate Ranking Report](#delete-an-item)
 
@@ -260,13 +334,23 @@ The general workflow of `refundorder` is as follows:
 
 ### User Stories
 
-| Version | As a...            | I want to...                   | So that I can...                                                            |
-|---------|--------------------|--------------------------------|-----------------------------------------------------------------------------|
-| v1.0    | Hawker Store Owner | Add an item                    | Add it to an order in the future                                            |
-| v1.0    | Hawker Store Owner | Delete an item                 | Remove it from the menu                                                     |
-| v1.0    | Hawker Store Owner | List all items                 | View all items in the menu, including its index and price                   |
-| v1.0    | Hawker Store Owner | Add an item to an order        | Track what customers order and calculate its total cost                     |
-| v1.0    | Hawker Store Owner | Add multiple items to an order | Save time by combining multiple items from a single customer into one order |
+| Version | As a...            | I want to...                                     | So that I can...                                                                 |
+|---------|--------------------|--------------------------------------------------|----------------------------------------------------------------------------------|
+| v1.0    | Hawker Store Owner | Add an item                                      | Add it to an order in the future                                                 |
+| v1.0    | Hawker Store Owner | Delete an item                                   | Remove it from the menu                                                          |
+| v1.0    | Hawker Store Owner | List all items                                   | View all items in the menu, including its index and price                        |
+| v1.0    | Hawker Store Owner | Add an item to an order                          | Track what customers order and calculate its total cost                          |
+| v1.0    | Hawker Store Owner | Add multiple items to an order                   | Save time by combining multiple items from a single customer into one order      |
+| v1.0    | Hawker Store Owner | List orders                                      | See all orders, including the total cost of each other                           |
+| v1.0    | Returning User     | Save menu items                                  | Save time by using the same menu, without entering each item over again each day |
+| v1.0    | Returning User     | Save transactions from previous days             | Keep track of all orders easily, even across multiple days                       |
+| v1.1    | Hawker Store Owner | Search for an item                               | Check its index or price                                                         |
+| v1.1    | Hawker Store Owner | Add items to an order by name                    | Add items without remembering its index                                          |
+| v2.0    | Hawker Store Owner | Void an order                                    | Provide refunds or ignore orders with wrong inputs                               |
+| v2.0    | New User           | Add an item step-by-step                         | Get used to the new system                                                       |
+| v2.0    | New user           | Delete an item step-by-step                      | Get used to the new system                                                       |
+| v2.0    | New User           | Add an item(s) to an order step-by-step          | Get used to the new system                                                       |
+| v2.0    | Returning User     | See statistics on based on previous transactions | **TBC**                                                                          |
 
 ### Non-functional Requirements
 
