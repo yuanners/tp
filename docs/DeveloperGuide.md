@@ -66,9 +66,7 @@ The general workflow of `/additem` is as follows:
      * If the name already exists, a message indicating that the item name already exists is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
    * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative or has more than 2 decimal points
      * If any of the above is true, a message indicating the constraint that it has violated is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-1. A new `Item` object is then created using the name and price given
-1. `Menu#appendItem` is invoked on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`.
-1. The, `Menu#save` is invoked to save the changes to the local storage file.
+1. `Menu#processAddItem` is then invoked and it creates a new`Item` object using the name and price given. It then calls `Menu#appendItem` on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`. Then, `Menu#save` is invoked to save the changes to the local storage file.
 1. `Router` object then calls `Ui#printCommandSuccess` to print a message indicating that the item has been successfully added to the menu.
 
 ##### Basic
