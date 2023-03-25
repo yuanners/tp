@@ -79,7 +79,6 @@ public class OrderAssistant {
 
             // Append to final command string
             commandString += "\"" + itemName + "\":" + quantity + ",";
-
         }
 
         commandString = formatCommandStringForOrders(commandString);

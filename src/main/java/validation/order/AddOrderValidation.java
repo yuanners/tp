@@ -125,8 +125,10 @@ public class AddOrderValidation extends Validation {
 
     public void validateIndex(Command arg, Menu menu)
             throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
+
         arg.mapArgumentAlias("i", "item");
-        if (isInteger(arg.getArgumentMap().get("i").trim())) {
+
+        if (!isInteger(arg.getArgumentMap().get("i").trim())) {
             throw new InvalidIndexNumberFormatException();
         } else {
             int index = Integer.parseInt(arg.getArgumentMap().get("i").trim());
@@ -140,9 +142,11 @@ public class AddOrderValidation extends Validation {
 
     public void validateQuantity(Command arg)
             throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
+
         arg.mapArgumentAlias("q", "quantity");
+
         if (arg.getArgumentMap().get("q").length() > 0) {
-            if (isInteger(arg.getArgumentMap().get("q").trim())) {
+            if (!isInteger(arg.getArgumentMap().get("q").trim())) {
                 throw new InvalidQuantityNumberFormatException();
             } else {
                 int quantity = Integer.parseInt(arg.getArgumentMap().get("q").trim());
