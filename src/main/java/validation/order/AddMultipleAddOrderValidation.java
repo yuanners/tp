@@ -5,7 +5,7 @@ import exception.order.*;
 import item.Menu;
 
 public class AddMultipleAddOrderValidation extends AddOrderValidation {
-    private Menu;
+    private Menu menu;
 
     public AddMultipleAddOrderValidation() {
         menu = new Menu();

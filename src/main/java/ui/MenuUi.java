@@ -159,6 +159,11 @@ public class MenuUi extends Ui {
             System.out.println("There are no items on the menu.");
             break;
 
+        /** Item name in find item **/
+        case MISSING_FIND_ITEM_DESCRIPTION:
+            System.out.println("Please specify the keyword to search for.");
+            break;
+
 
         /** Item Name **/
         case MISSING_ITEM_NAME_FLAG:
