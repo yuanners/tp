@@ -4,8 +4,6 @@ import app.Command;
 import exception.item.MissingIndexFlagException;
 import exception.item.MissingNameOrPriceFlagException;
 import exception.InvalidArgumentException;
-import exception.item.MissingIndexFlagException;
-import exception.item.MissingNameOrPriceFlagException;
 import exception.item.NameMinimumLengthException;
 import exception.item.NameMaximumLengthException;
 import exception.item.DuplicateNameException;

@@ -56,8 +56,6 @@ public class TransactionUi extends Ui {
         System.out.println("The order's status is now refunded!");
     }
 
-    public void printError(String message) {System.out.println(message); }
-
     public void printOrderAdded(Double total) {
         DecimalFormat df = new DecimalFormat("#.00");
         String subtotal = df.format(total);
@@ -78,6 +76,8 @@ public class TransactionUi extends Ui {
     public void helpAddOder() {
         System.out.println("/addorder -i <number> -q <number>");
     }
+
+    public void printError(String message) {System.out.println(message); }
 
     @Override
     public void printError(Flags.Error error) {
