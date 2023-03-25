@@ -22,7 +22,7 @@ public class Menu {
 
     private ArrayList<Item> items;
     private Store store;
-    private MenuUi menuUi;
+    private MenuUi menuUi = new MenuUi();
 
     public Menu() {
         menuUi = new MenuUi();
@@ -43,9 +43,13 @@ public class Menu {
     }
 
     public void displayList() {
-        MenuUi ui = new MenuUi();
-        ui.printMenu(items);
-        ui.printSuccessfulListItem();
+        MenuUi menuUi = new MenuUi();
+        if (this.items.size() != 0) {
+            menuUi.printMenu(items);
+            menuUi.printSuccessfulListItem();
+        } else {
+            menuUi.printEmptyMenu();
+        }
     }
 
     public void appendItem(Item item) {
@@ -74,6 +78,7 @@ public class Menu {
      * @param command the Command object containing the search term
      */
     public void addItem(Command command) {
+
         AddItemValidation addItemValidation = new AddItemValidation();
         boolean isValid = true;
 
@@ -87,6 +92,7 @@ public class Menu {
         if(!isValid) { return; }
 
         processAddItem(command, addItemValidation);
+        menuUi.printSuccessfulAddItem();
     }
 
     private void processAddItem(Command command, AddItemValidation addItemValidation) {
@@ -122,6 +128,7 @@ public class Menu {
         if(!isValid) { return; }
 
         processUpdateItem(command, updateItemValidation);
+        menuUi.printSuccessfulUpdateItem();
 
     }
 
@@ -130,6 +137,7 @@ public class Menu {
 
         if (command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
             this.getItem(index).setName(command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG));
+
         }
 
         if (command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
@@ -160,6 +168,7 @@ public class Menu {
         if(!isValid) { return; }
 
         processDeleteItem(command, deleteItemValidation);
+        menuUi.printSuccessfulDeleteItem();
     }
 
     private void processDeleteItem(Command command, DeleteItemValidation deleteItemValidation) {
@@ -234,7 +243,6 @@ public class Menu {
      */
     public void showResultsOfFind(Command command) {
 
-        Ui ui = new Ui();
         FindItemValidation findItemValidation = new FindItemValidation();
 
         ArrayList<Item> menu = this.getItems();
@@ -260,14 +268,17 @@ public class Menu {
         }
 
         if (indexes.size() == 0) {
-            ui.printNoItemsFound(itemName);
+            menuUi.printNoItemFound(itemName);
             return;
         }
 
-        ui.printMenuHeader();
+        menuUi.printMenuHeader();
         for (int i = 0; i < indexes.size(); i++) {
-            ui.printFindItem(indexes.get(i), menu);
+            menuUi.printFindItem(indexes.get(i), menu);
         }
+
+        menuUi.printFindItemComplete();
+
     }
 
     public void save() {

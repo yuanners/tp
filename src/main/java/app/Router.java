@@ -32,10 +32,10 @@ public class Router {
      */
     public Router(Menu menu, Transaction transactions) {
         this.ui = new Ui();
-        this.menuUi = new MenuUi();
-        this.transactionUi = new TransactionUi();
         this.menu = menu;
         this.transactions = transactions;
+        this.menuUi = menuUi;
+        this.transactionUi = transactionUi;
     }
 
     /**
@@ -45,42 +45,34 @@ public class Router {
      * @param command the Command object containing the professional command to process
      */
     private void proRoute(Command command) {
-
         switch (command.getCommand()) {
         case "/help":
             ui.printHelp();
             break;
         case "/additem":
             menu.addItem(command);
-            menuUi.printSuccessfulAddItem();
             break;
         case "/deleteitem":
             menu.deleteItem(command);
-            menuUi.printSuccessfulDeleteItem();
             break;
         case "/listitem":
             menu.displayList();
             break;
         case "/updateitem":
             menu.updateItem(command);
-            menuUi.printSuccessfulUpdateItem();
             break;
         case "/finditem":
             menu.showResultsOfFind(command);
-            menuUi.printFindItemComplete();
             break;
         case "/addorder":
             Order order = new Order(command, menu, transactions);
-            transactionUi.printSuccessfulAddOrder();
             break;
         case "/listorder":
             transactions.displayList();
-            transactionUi.printSuccessfulListOrder();
             break;
         case "/refundorder":
             Refund refund = new Refund();
             refund.refundTransaction(command, transactions);
-            transactionUi.printSuccessfulRefundOrder();
             break;
         case "/report":
             //Validate if type is a valid string

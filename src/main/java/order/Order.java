@@ -34,8 +34,7 @@ public class Order implements OrderInterface {
     private ArrayList<OrderEntry> orderEntries;
     private String status;
     private String paymentType;
-
-    private TransactionUi transactionUi;
+    private TransactionUi transactionUi = new TransactionUi();
 
 
     /**
@@ -247,7 +246,6 @@ public class Order implements OrderInterface {
         } catch (InvalidMultipleOrderFormatException e) {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
         }
-
     }
 
     /**
@@ -266,6 +264,7 @@ public class Order implements OrderInterface {
 
         OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
         this.orderEntries.add(orderEntry);
+        transactionUi.printSuccessfulAddOrder();
     }
 
     /**
@@ -335,7 +334,7 @@ public class Order implements OrderInterface {
             OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
             this.orderEntries.add(orderEntry);
         }
-
+        transactionUi.printSuccessfulAddOrder();
     }
 
     private boolean isInteger(String input) {
