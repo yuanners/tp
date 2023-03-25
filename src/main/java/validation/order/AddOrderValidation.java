@@ -4,6 +4,8 @@ import app.Command;
 import exception.item.ItemException;
 import exception.order.*;
 import item.Menu;
+import ui.Flags;
+import ui.TransactionUi;
 import utility.Ui;
 import validation.Validation;
 
@@ -13,63 +15,92 @@ import validation.Validation;
 public class AddOrderValidation extends Validation {
     private Ui ui = new Ui();
     private Menu menu = new Menu();
+    private TransactionUi transactionUi = new TransactionUi();
 
 
-    public void checkValidItem(Command arg) throws ItemException {
+//    public void checkValidItem(Command arg) throws ItemException {
+//
+//        String item;
+//
+//        if (arg.getArgumentMap().get("i") != null) {
+//            item = arg.getArgumentMap().get("i");
+//        } else {
+//            item = arg.getArgumentMap().get("item");
+//        }
+//
+//        if (!isInteger(item)) {
+//            if (menu.findMatchingItemNames(item).size() > 1) {
+//                throw new ItemException(ui.getMultipleSimilarItemsFound());
+//            } else if (menu.findMatchingItemNames(item).size() == 0) {
+//                throw new ItemException(ui.getNoSuchItem());
+//            }
+//        }
+//
+//    }
 
-        String item;
+    public boolean checkValidItemName(String itemName) {
 
-        if (arg.getArgumentMap().get("i") != null) {
-            item = arg.getArgumentMap().get("i");
-        } else {
-            item = arg.getArgumentMap().get("item");
-        }
-
-        if (!isInteger(item)) {
-            if (menu.findMatchingItemNames(item).size() > 1) {
-                throw new ItemException(ui.getMultipleSimilarItemsFound());
-            } else if (menu.findMatchingItemNames(item).size() == 0) {
-                throw new ItemException(ui.getNoSuchItem());
+        if (!isInteger(itemName)) {
+            if (menu.findMatchingItemNames(itemName).size() > 1) {
+                transactionUi.printError(Flags.Error.MULTIPLE_SIMILAR_ITEMS);
+            } else if (menu.findMatchingItemNames(itemName).size() == 0) {
+                transactionUi.printError(Flags.Error.NO_SUCH_ITEM);
+                return false;
             }
         }
 
+        return true;
     }
 
-    /**
-     * Validate the item index and quantity
-     *
-     * @param arg  user command
-     * @param menu itemlist
-     * @throws OrderException custom exception for order validation
-     */
-    public Command validateAddOrder(Command arg, Menu menu) throws OrderException {
-
-        String item = "";
-        String newItem = "";
-
-        if (arg.getArgumentString().contains("-i")) {
-            item = arg.getArgumentMap().get("i").trim();
-        } else if (arg.getArgumentString().contains("--item")) {
-            item = arg.getArgumentMap().get("item").trim();
+    public boolean checkValidQuantity(String quantity) {
+        if (!isInteger(quantity)) {
+            transactionUi.printError(Flags.Error.INVALID_QUANTITY_FORMAT);
+            return false;
         }
 
-        if (!isInteger(item)) {
-            newItem = Integer.toString(menu.findItemIndex(item));
-            String newArgumentString = arg.getArgumentString().replace(item, newItem);
-            Command newCommand = new Command("/addorder " + newArgumentString);
-            return newCommand;
+        if (Integer.parseInt(quantity) < 0) {
+            transactionUi.printError(Flags.Error.INVALID_NEGATIVE_QUANTITY);
         }
 
-
-        if (!(isValidQuantity(arg))) {
-            throw new OrderException(ui.getInvalidOrderInteger());
-        }
-
-
-        return arg;
+        return true;
     }
 
-    public void validateFlag(Command arg) throws MissingOrderFlagException, MissingOrderArgumentException, MissingQuantityArgumentException {
+//    /**
+//     * Validate the item index and quantity
+//     *
+//     * @param arg  user command
+//     * @param menu itemlist
+//     * @throws OrderException custom exception for order validation
+//     */
+//    public Command validateAddOrder(Command arg, Menu menu) throws OrderException {
+//
+//        String item = "";
+//        String newItem = "";
+//
+//        if (arg.getArgumentString().contains("-i")) {
+//            item = arg.getArgumentMap().get("i").trim();
+//        } else if (arg.getArgumentString().contains("--item")) {
+//            item = arg.getArgumentMap().get("item").trim();
+//        }
+//
+//        if (!isInteger(item)) {
+//            newItem = Integer.toString(menu.findItemIndex(item));
+//            String newArgumentString = arg.getArgumentString().replace(item, newItem);
+//            Command newCommand = new Command("/addorder " + newArgumentString);
+//            return newCommand;
+//        }
+//
+//
+//        if (!(isValidQuantity(arg))) {
+//            throw new OrderException(ui.getInvalidOrderInteger());
+//        }
+//
+//
+//        return arg;
+//    }
+
+    public void validateFlag(Command arg)
+            throws MissingOrderFlagException, MissingOrderArgumentException, MissingQuantityArgumentException {
         if (arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
             if (arg.getArgumentMap().get("i").length() < 1 && arg.getArgumentMap().get("item").length() < 1) {
                 throw new MissingOrderArgumentException();
@@ -86,7 +117,8 @@ public class AddOrderValidation extends Validation {
         }
     }
 
-    public void validateIndex(Command arg, Menu menu) throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
+    public void validateIndex(Command arg, Menu menu)
+            throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
         arg.mapArgumentAlias("i", "item");
         if (isInteger(arg.getArgumentMap().get("i").trim())) {
             throw new InvalidIndexNumberFormatException();
@@ -100,7 +132,8 @@ public class AddOrderValidation extends Validation {
         }
     }
 
-    public void validateQuantity(Command arg) throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
+    public void validateQuantity(Command arg)
+            throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
         arg.mapArgumentAlias("q", "quantity");
         if (arg.getArgumentMap().get("q").length() > 0) {
             if (isInteger(arg.getArgumentMap().get("q").trim())) {

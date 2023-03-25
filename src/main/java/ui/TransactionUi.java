@@ -1,5 +1,6 @@
 package ui;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import order.Order;
 
 import java.text.DecimalFormat;
@@ -14,6 +15,7 @@ public class TransactionUi extends Ui {
     public void promptPayment() {
         System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
     }
+
     public void printChangeGiven(Double change) {
         System.out.printf("The calculated change is $%.2f.\n", change);
     }
@@ -40,7 +42,6 @@ public class TransactionUi extends Ui {
             String subtotal = df.format(orders.get(i).getSubTotal());
             System.out.println("\nSubtotal: $" + subtotal);
             System.out.println("================================================");
-
         }
     }
 
@@ -109,6 +110,12 @@ public class TransactionUi extends Ui {
         case INVALID_NEGATIVE_QUANTITY:
             System.out.println("Quantity must be more than 0.");
             break;
+        case NO_SUCH_ITEM:
+            System.out.println("No such item exists.");
+            break;
+        case MULTIPLE_SIMILAR_ITEMS:
+            System.out.println("Multiple items with similar names found. Please enter a more specific item name!");
+            break;
         //add multiple order flags
         case INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION:
             System.out.println("Please use the correct format: /addorder -I [index:quantity].");
@@ -153,7 +160,7 @@ public class TransactionUi extends Ui {
         case MISSING_PAY_COMMAND:
             System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
             break;
-            //refund flags
+        //refund flags
         case MISSING_REFUND_ORDER_FLAG:
             System.out.println("Please include the order ID using -i or --id <order id>.");
             break;
