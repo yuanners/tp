@@ -4,6 +4,7 @@ import app.Command;
 import exception.OrderException;
 import item.Menu;
 import payment.Payment;
+import ui.TransactionUi;
 import utility.Ui;
 import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
@@ -22,6 +23,8 @@ public class Order implements OrderInterface {
     private ArrayList<OrderEntry> orderEntries;
     private String status;
     private String paymentType;
+
+    private TransactionUi transactionUi = new TransactionUi();
 
 
     /**
@@ -219,6 +222,8 @@ public class Order implements OrderInterface {
             } else {
                 addOrderValidation.checkValidFlag(command);
             }
+
+            transactionUi.printSuccessfulAddOrder();
         } catch (OrderException o) {
             throw new OrderException(o.getMessage());
         }

@@ -30,10 +30,12 @@ public class Router {
      * @param menu         the menu object to use for item-related commands
      * @param transactions the transactions object to use for order-related commands
      */
-    public Router(Menu menu, Transaction transactions, Ui ui) {
+    public Router(Menu menu, Transaction transactions, Ui ui, MenuUi menuUi, TransactionUi transactionUi) {
         this.ui = ui;
         this.menu = menu;
         this.transactions = transactions;
+        this.menuUi = menuUi;
+        this.transactionUi = transactionUi;
     }
 
     /**
@@ -50,35 +52,28 @@ public class Router {
                 break;
             case "/additem":
                 menu.addItem(command);
-                menuUi.printSuccessfulAddItem();
                 break;
             case "/deleteitem":
                 menu.deleteItem(command);
-                menuUi.printSuccessfulDeleteItem();
                 break;
             case "/listitem":
                 menu.displayList();
                 break;
             case "/updateitem":
                 menu.updateItem(command);
-                menuUi.printSuccessfulUpdateItem();
                 break;
             case "/finditem":
                 menu.showResultsOfFind(command);
-                menuUi.printFindItemComplete();
                 break;
             case "/addorder":
                 Order order = new Order(command, menu, transactions);
-                transactionUi.printSuccessfulAddOrder();
                 break;
             case "/listorder":
                 transactions.displayList();
-                transactionUi.printSuccessfulListOrder();
                 break;
             case "/refundorder":
                 Refund refund = new Refund();
                 refund.refundTransaction(command, transactions);
-                transactionUi.printSuccessfulRefundOrder();
                 break;
             default:
                 ui.printInvalidCommand(command.getCommand());

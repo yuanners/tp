@@ -3,6 +3,7 @@ package payment;
 import app.Command;
 import exception.OrderException;
 import order.Order;
+import ui.TransactionUi;
 import utility.Ui;
 import validation.order.PaymentValidation;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 
 public class Payment {
-    private Ui ui = new Ui();
+    private TransactionUi transactionUi = new TransactionUi();
 
     public Payment() {
     }
@@ -24,7 +25,7 @@ public class Payment {
     public void makePayment(Order order) throws OrderException {
         boolean isValidPayment = false;
         Scanner sc = new Scanner(System.in);
-        ui.promptPayment();
+        transactionUi.promptPayment();
         while (!isValidPayment) {
             String userInput = sc.nextLine();
             Command arg = new Command(userInput);
@@ -36,11 +37,12 @@ public class Payment {
                 arg.mapArgumentAlias("t", "type");
                 order.setPaymentType(arg.getArgumentMap().get("t").trim());
                 double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
-                ui.printChangeGiven(calculateChange(amount, order));
-                ui.printCommandSuccess(arg.getCommand());
+                transactionUi.printChangeGiven(calculateChange(amount, order));
+                transactionUi.printSuccessfulPayment();
+
             } catch (OrderException o) {
-                ui.println(o.getMessage());
-                ui.promptPayment();
+                transactionUi.printError(o.getMessage());
+                transactionUi.promptPayment();
             }
         }
     }

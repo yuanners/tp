@@ -2,6 +2,8 @@ package app;
 
 import item.Menu;
 import order.Transaction;
+import ui.MenuUi;
+import ui.TransactionUi;
 import utility.Ui;
 
 import java.util.Scanner;
@@ -26,8 +28,10 @@ public class MoneyGoWhere {
     public void run() {
 
         Ui ui = new Ui();
+        MenuUi menuUi = new MenuUi();
+        TransactionUi transactionUi = new TransactionUi();
         Scanner sc = new Scanner(System.in);
-        Router router = new Router(menu, transactions, ui);
+        Router router = new Router(menu, transactions, ui, menuUi, transactionUi);
 
         ui.printWelcomeMessage();
 

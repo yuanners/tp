@@ -94,6 +94,8 @@ public class MenuUi extends Ui {
         System.out.println("finditem completed!");
     }
 
+    public void printEmptyMenu() {System.out.println("No items in menu!"); }
+
     @Override
     public void printCommandCancelled(String cmd) {
         switch (cmd) {

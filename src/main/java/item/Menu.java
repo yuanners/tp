@@ -24,7 +24,7 @@ public class Menu {
 
     private ArrayList<Item> items;
     private Store store;
-    private MenuUi menuUi;
+    private MenuUi menuUi = new MenuUi();
 
     public Menu() {
         menuUi = new MenuUi();
@@ -45,9 +45,13 @@ public class Menu {
     }
 
     public void displayList() {
-        MenuUi ui = new MenuUi();
-        ui.printMenu(items);
-        ui.printSuccessfulListItem();
+        MenuUi menuUi = new MenuUi();
+        if (this.items.size() != 0) {
+            menuUi.printMenu(items);
+            menuUi.printSuccessfulListItem();
+        } else {
+            menuUi.printEmptyMenu();
+        }
     }
 
     public void appendItem(Item item) {
@@ -77,6 +81,7 @@ public class Menu {
      * @throws ItemException if the command format, name or price is invalid
      */
     public void addItem(Command command) {
+
         AddItemValidation addItemValidation = new AddItemValidation();
         try {
             addItemValidation.validateFlags(command);
@@ -95,6 +100,8 @@ public class Menu {
             assert this.getItem(this.getItems().size() - 1).getName().equals(item.getName())
                     : "Item failed to append";
             save();
+            menuUi.printSuccessfulAddItem();
+
         } catch (InvalidArgumentException e) {
             menuUi.printError(Flags.Error.EMPTY_INPUT);
         } catch (MissingNameAndPriceFlag e) {
@@ -175,6 +182,7 @@ public class Menu {
                 this.getItem(index).setPrice(price);
             }
             save();
+            menuUi.printSuccessfulUpdateItem();
         } catch (MissingIndexFlagException e) {
             menuUi.printError(Flags.Error.MISSING_ITEM_INDEX_FLAG);
         } catch (MissingNameOrPriceFlagException e) {
@@ -231,6 +239,8 @@ public class Menu {
             int index = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
             removeItem(index);
             save();
+
+            menuUi.printSuccessfulDeleteItem();
         } catch (MissingIndexFlagException e) {
             menuUi.printError(Flags.Error.MISSING_ITEM_INDEX_FLAG);
         }catch (IndexInvalidNumberFormatException e) {
@@ -311,7 +321,6 @@ public class Menu {
      */
     public void showResultsOfFind(Command command) throws ItemException {
 
-        Ui ui = new Ui();
         FindItemValidation findItemValidation = new FindItemValidation();
 
         ArrayList<Item> menu = this.getItems();
@@ -334,14 +343,17 @@ public class Menu {
         }
 
         if (indexes.size() == 0) {
-            ui.printNoItemsFound(itemName);
+            menuUi.printNoItemFound(itemName);
             return;
         }
 
-        ui.printMenuHeader();
+        menuUi.printMenuHeader();
         for (int i = 0; i < indexes.size(); i++) {
-            ui.printFindItem(indexes.get(i), menu);
+            menuUi.printFindItem(indexes.get(i), menu);
         }
+
+        menuUi.printFindItemComplete();
+
     }
 
     public void save() {

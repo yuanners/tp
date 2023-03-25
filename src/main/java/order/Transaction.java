@@ -3,6 +3,7 @@ package order;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import ui.TransactionUi;
 import utility.Store;
 import utility.Ui;
 
@@ -23,6 +24,8 @@ public class Transaction {
      * The store used to load and save the order list.
      */
     private Store store;
+
+    private TransactionUi transactionUi;
 
     public Transaction() {
         this.store = new Store("orders.json");
@@ -71,7 +74,10 @@ public class Transaction {
      */
     public void displayList() {
         Ui ui = new Ui();
+        TransactionUi transactionUi1 = new TransactionUi();
         ui.printOrderList(this.transactions);
+        transactionUi1.printSuccessfulListOrder();
+
     }
 
     /**

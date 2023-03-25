@@ -4,11 +4,14 @@ import app.Command;
 import exception.OrderException;
 import order.Order;
 import order.Transaction;
+import ui.TransactionUi;
 import validation.order.RefundOrderValidation;
 
 import java.util.ArrayList;
 
 public class Refund {
+
+    private TransactionUi transactionUi = new TransactionUi();
 
     public Refund() {
 
@@ -37,6 +40,7 @@ public class Refund {
             }
             refundOrder.setStatus("REFUNDED");
             transactions.save();
+            transactionUi.printSuccessfulRefundOrder();
 
         } catch (OrderException o) {
             throw new OrderException(o.getMessage());
