@@ -55,6 +55,13 @@ public class Ui {
         System.out.println("Please enter a command: ");
     }
 
+    public void printWelcomeMessage() {
+        System.out.println("░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀\n" +
+                           "░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀\n" +
+                           "░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀");
+                System.out.println("Welcome to MoneyGoWhere!\n");
+    }
+
     /**
      * Prompts user for item name when in assistance mode
      */
@@ -136,14 +143,6 @@ public class Ui {
     public void printInvalidCommand(String command) {
         System.out.println("The command: " + command + " is not a valid command.");
     }
-
-    /**
-     * Prints error message informing user that command has executed successfully
-     */
-    public void printCommandSuccess(String command) {
-        System.out.println("The command: " + command + " was successfully executed!");
-    }
-
 
     /**
      * Prints error message informing user to input a whole number

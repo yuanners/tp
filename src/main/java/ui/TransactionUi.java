@@ -53,6 +53,18 @@ public class TransactionUi extends Ui {
         }
     }
 
+    public void printSuccessfulAddOrder() {
+        System.out.println("Order added successfully!");
+    }
+
+    public void printSuccessfulListOrder() {
+        System.out.println("All transactions have been listed!");
+    }
+
+    public void printSuccessfulRefundOrder() {
+        System.out.println("The order's status is now refunded!");
+    }
+
     public void printOrderAdded(Double total) {
         DecimalFormat df = new DecimalFormat("#.00");
         String subtotal = df.format(total);

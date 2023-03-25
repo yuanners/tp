@@ -1,7 +1,7 @@
 package statistic;
 
 import app.Command;
-import exception.ItemException;
+import exception.item.ItemException;
 import exception.OrderException;
 import item.Menu;
 import order.Order;
@@ -19,11 +19,9 @@ class StatisticTest {
     public Transaction transactions;
 
     public void createItem(Command c) {
-        try {
-            menu.addItem(c);
-        } catch (ItemException e) {
-            System.out.println(e);
-        }
+
+        menu.addItem(c);
+
 
     }
 

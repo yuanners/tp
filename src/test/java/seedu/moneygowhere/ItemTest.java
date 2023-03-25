@@ -3,173 +3,232 @@ package seedu.moneygowhere;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import app.Command;
-import order.Transaction;
+import item.MenuAssistant;
 import org.junit.jupiter.api.Test;
-import utility.Ui;
-import app.Router;
+import ui.MenuUi;
 import item.Menu;
 
 class ItemTest {
-    Ui ui;
     Menu menu;
-    Router router;
-    Transaction transaction;
+    MenuUi menuUi;
+    MenuAssistant menuAssistant;
 
     public ItemTest() {
-        ui = new Ui();
+
         menu = new Menu();
-        transaction = new Transaction();
-        router = new Router(menu, transaction, ui);
-        runTest("/additem -p 2.50 -n \"chicken rice\"", router);
-    }
-
-    public void runTest(String input, Router router) {
-
-        Ui ui = new Ui();
-
-
-        ui.promptUserInput();
-        String userInput = input;
-
-        Command command = new Command(userInput);
-
-        router.handleRoute(command);
-
+        menuUi = new MenuUi();
+        menuAssistant = new MenuAssistant();
     }
 
     @Test
     public void itemTest() {
+        Command command = new Command("/additem -p 2.50 -n \"chicken rice\"");
+        menu.addItem(command);
 
-        runTest("/additem -p 20.1 -n \"chicken rice100\"", router);
-        assertEquals("chicken rice100", router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getName());
+        Command command2 = new Command("/additem -p 20.1 -n \"chicken rice100\"");
+        menu.addItem(command2);
 
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1)
+        assertEquals("chicken rice100", menu.getItems().
+                get(menu.getItems().size() - 1).getName());
+
+        assertEquals(20.10, menu.getItem(menu.getItems().size() - 1).getPrice());
+        assert menu.getItems().
+                get(menu.getItems().size() - 1)
                 .getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
-        assertEquals(20.10, router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice());
+        assertEquals(20.10, menu.getItem(menu.getItems().size() - 1).getPrice());
 
+        itemTest2();
+        itemTest3();
+        itemTest4();
+        itemTest5();
+        itemTest6();
+        itemTest7();
+        itemTest8();
+        itemTest9();
+        itemTest10();
+        itemTest11();
+        itemTest12();
     }
 
-    @Test
     public void itemTest2() {
-        runTest("/additem -p 2kuku0.01 -n \"chicken rice3\"", router);
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1)
+        Command command = new Command("/additem -p 2kuku0.01 -n \"chicken rice3\"");
+        menu.addItem(command);
+
+        assert menu.getItems().
+                get(menu.getItems().size() - 1)
                 .getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
-        assertEquals("chicken rice100", router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getName());
+        assertEquals("chicken rice100", menu.getItems().
+                get(menu.getItems().size() - 1).getName());
 
     }
 
-    @Test
     public void itemTest3() {
         // max 2dp error
-        runTest("/additem -p 20.0001 -n \"chicken rice4\"", router);
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1)
+        Command command = new Command("/additem -p 20.0001 -n \"chicken rice4\"");
+        menu.addItem(command);
+
+        assert menu.getItems().
+                get(menu.getItems().size() - 1)
                 .getName().equals("chicken rice100"): "Item name should be chicken rice100";
 
-        assertEquals("chicken rice100", router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getName());
+        assertEquals("chicken rice100", menu.getItems().
+                get(menu.getItems().size() - 1).getName());
     }
 
-    @Test
     public void itemTest4() {
-        int index = router.menu.getItems().size() - 1;
+        int index = menu.getItems().size() - 1;
 
-        runTest("/updateitem -i " + index + " -n \"chicken rice1000\"", router);
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1)
+        Command command = new Command("/updateitem -i " + index + " -n \"chicken rice1000\"");
+        menu.updateItem(command);
+
+        assert menu.getItems().
+                get(index)
                 .getName().equals("chicken rice1000"): "Item name should be changed to chicken rice1000";
 
-        assertEquals("chicken rice1000", router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getName());
+        assertEquals("chicken rice1000", menu.getItems().
+                get(index).getName());
     }
 
-    @Test
     public void itemTest5() {
-        int index = router.menu.getItems().size() - 1;
+        int index = menu.getItems().size() - 1;
 
-        runTest("/updateitem -i " + index + " -p 2000.001", router);
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice() == 20.1:
+        Command command = new Command("/updateitem -i " + index + " -p 2000.001");
+        menu.updateItem(command);
+        assert menu.getItems().
+                get(index).getPrice() == 20.1:
                 "Item price should be 20.10";
 
-        assertEquals(20.10, router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice());
+        assertEquals(20.10, menu.getItems().
+                get(index).getPrice());
     }
 
-    @Test
     public void itemTest6() {
-        int index = router.menu.getItems().size() - 1;
+        int index = menu.getItems().size() - 1;
 
-        runTest("/updateitem -i " + index + " -p 123.45", router);
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice() == 123.45:
+        Command command = new Command("/updateitem -i " + index + " -p 123.45");
+        menu.updateItem(command);
+        assert menu.getItems().
+                get(index).getPrice() == 123.45:
                 "Item price should be 123.45";
 
-        assertEquals(123.45, router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice());
+        assertEquals(123.45, menu.getItems().
+                get(index).getPrice());
     }
 
-    @Test
     public void itemTest7() {
-        int index = router.menu.getItems().size() - 1;
+        int index = menu.getItems().size() - 1;
 
-        runTest("/updateitem -i " + index + " -p 987.65 -n \"itemTest7 name 1 2 3\"", router);
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1)
+        Command command = new Command("/updateitem -i " + index + " -p 987.65 -n \"itemTest7 name 1 2 3\"");
+        menu.updateItem(command);
+        assert menu.getItems().
+                get(index)
                 .getName().equals("itemTest7 name 1 2 3"): "Item name should be changed to itemTest7 name 1 2 3";
 
-        assertEquals("itemTest7 name 1 2 3", router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getName());
+        assertEquals("itemTest7 name 1 2 3", menu.getItems().
+                get(index).getName());
 
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice() == 987.65:
+        assert menu.getItems().
+                get(index).getPrice() == 987.65:
                 "Item price should be 987.65";
 
-        assertEquals(987.65, router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice());
+        assertEquals(987.65, menu.getItems().
+                get(index).getPrice());
     }
 
-    @Test
     public void itemTest8() {
-        int index = router.menu.getItems().size() - 1;
-        String newName = router.menu.getItems().
+        int index = menu.getItems().size() - 1;
+        String newName = menu.getItems().
                 get(0).getName();
-        String currName = router.menu.getItems().
+        String currName = menu.getItems().
                 get(index).getName();
-        Double currPrice = router.menu.getItems().
+        Double currPrice = menu.getItems().
                 get(index).getPrice();
 
-        runTest("/updateitem -i " + index + " -p 1.23 -n \"" + newName + "\"", router);
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1)
+        Command command = new Command("/updateitem -i " + index + " -p 1.23 -n \"" + newName + "\"");
+        menu.updateItem(command);
+        assert menu.getItems().
+                get(index)
                 .getName().equals(currName): "Item name should not change due to duplicate.";
 
-        assertEquals(currName, router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getName());
+        assertEquals(currName, menu.getItems().
+                get(index).getName());
 
-        assert router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice() == currPrice:
+        assert menu.getItems().
+                get(index).getPrice() == currPrice:
                 "Item price should not change as name was duplicate.";
 
-        assertEquals(currPrice, router.menu.getItems().
-                get(router.menu.getItems().size() - 1).getPrice());
+        assertEquals(currPrice, menu.getItems().
+                get(index).getPrice());
     }
 
-    @Test
     public void itemTest9() {
+        Command command = new Command("/deleteitem -i 1as.sdf");
+        menu.deleteItem(command);
 
-        runTest("listitem", router);
+        int index = menu.getItems().size() - 1;
 
-        runTest("/deleteitem -i " + (router.menu.getItems().size()-1), router);
+        assert menu.getItems().
+                get(index)
+                .getName().equals("itemTest7 name 1 2 3"): "Item name should be changed to itemTest7 name 1 2 3";
 
-        runTest("listitem", router);
+        assertEquals("itemTest7 name 1 2 3", menu.getItems().
+                get(index).getName());
+
+        assert menu.getItems().
+                get(index).getPrice() == 987.65:
+                "Item price should be 987.65";
+
+        assertEquals(987.65, menu.getItems().
+                get(index).getPrice());
+
+    }
+
+    public void itemTest10() {
+        Command command = new Command("/deleteitem -i -1.0");
+        menu.deleteItem(command);
+
+        int index = menu.getItems().size() - 1;
+
+        assert menu.getItems().
+                get(index)
+                .getName().equals("itemTest7 name 1 2 3"): "Item name should be changed to itemTest7 name 1 2 3";
+
+        assertEquals("itemTest7 name 1 2 3", menu.getItems().
+                get(index).getName());
+
+        assert menu.getItems().
+                get(index).getPrice() == 987.65:
+                "Item price should be 987.65";
+    }
+
+    public void itemTest11() {
+        Command command = new Command("/deleteitem -i 2.3");
+        menu.deleteItem(command);
+
+        int index = menu.getItems().size() - 1;
+
+        assert menu.getItems().
+                get(index)
+                .getName().equals("itemTest7 name 1 2 3"): "Item name should be changed to itemTest7 name 1 2 3";
+
+        assertEquals("itemTest7 name 1 2 3", menu.getItems().
+                get(index).getName());
+
+        assert menu.getItems().
+                get(index).getPrice() == 987.65:
+                "Item price should be 987.65";
+    }
+
+    public void itemTest12() {
+
+        menu.displayList();
+
+        Command command = new Command("/deleteitem -i " + (menu.getItems().size()-1));
+        menu.deleteItem(command);
+
+        menu.displayList();
     }
 
 }

@@ -8,8 +8,11 @@ import java.lang.reflect.Type;
 import app.Command;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
-import exception.ItemException;
+import exception.InvalidArgumentException;
+import exception.item.*;
 import org.apache.commons.lang3.StringUtils;
+import ui.Flags;
+import ui.MenuUi;
 import utility.Store;
 import utility.Ui;
 import validation.item.AddItemValidation;
@@ -21,8 +24,10 @@ public class Menu {
 
     private ArrayList<Item> items;
     private Store store;
+    private MenuUi menuUi;
 
     public Menu() {
+        menuUi = new MenuUi();
         this.store = new Store("menu.json");
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
@@ -40,9 +45,9 @@ public class Menu {
     }
 
     public void displayList() {
-        Ui ui = new Ui();
+        MenuUi ui = new MenuUi();
         ui.printMenu(items);
-        ui.printCommandSuccess("listitem");
+        ui.printSuccessfulListItem();
     }
 
     public void appendItem(Item item) {
@@ -71,24 +76,51 @@ public class Menu {
      * @param command the Command object containing the search term
      * @throws ItemException if the command format, name or price is invalid
      */
-    public void addItem(Command command) throws ItemException {
+    public void addItem(Command command) {
         AddItemValidation addItemValidation = new AddItemValidation();
         try {
             addItemValidation.validateFlags(command);
             command.mapArgumentAlias(addItemValidation.LONG_NAME_FLAG, addItemValidation.SHORT_NAME_FLAG);
             command.mapArgumentAlias(addItemValidation.LONG_PRICE_FLAG, addItemValidation.SHORT_PRICE_FLAG);
-            addItemValidation.validateCommand(command, this);
-        } catch (ItemException e) {
-            throw new ItemException(e.getMessage());
+
+            addItemValidation.validateArgument(command);
+            addItemValidation.validateName(command);
+            addItemValidation.validateDuplicateName(command, this);
+            addItemValidation.validatePrice(command);
+
+            String name = command.getArgumentMap().get(addItemValidation.LONG_NAME_FLAG);
+            Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
+            Item item = new Item(name, price);
+            appendItem(item);
+            assert this.getItem(this.getItems().size() - 1).getName().equals(item.getName())
+                    : "Item failed to append";
+            save();
+        } catch (InvalidArgumentException e) {
+            menuUi.printError(Flags.Error.EMPTY_INPUT);
+        } catch (MissingNameAndPriceFlag e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_NAME_AND_PRICE_FLAG);
+        } catch (MissingNameFlagException e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_NAME_FLAG);
+        } catch (MissingPriceFlagException e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_PRICE_FLAG);
+        } catch (NameMinimumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_MIN_LENGTH_ERROR);
+        } catch (NameMaximumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
+        } catch (DuplicateNameException e) {
+            menuUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
+        } catch (PriceMinimumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_MIN_LENGTH_ERROR);
+        } catch (PriceInvalidNumberException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_FORMAT_ERROR);
+        } catch (PriceOverflowException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_OVERFLOW_ERROR);
+        } catch (PriceNegativeException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_NEGATIVE_ERROR);
+        } catch (PriceInvalidDecimalPlaceException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_DECIMAL_PLACE_ERROR);
         }
 
-        String name = command.getArgumentMap().get(addItemValidation.LONG_NAME_FLAG);
-        Double price = Double.valueOf(command.getArgumentMap().get(addItemValidation.LONG_PRICE_FLAG));
-        Item item = new Item(name, price);
-        appendItem(item);
-        assert this.getItem(this.getItems().size() - 1).getName().equals(item.getName())
-                : "Item failed to append";
-        save();
     }
 
     /**
@@ -98,35 +130,81 @@ public class Menu {
      * @throws ItemException if the command format is invalid
      *                       or index does not exist
      */
-    public void updateItem(Command command) throws ItemException {
+    public void updateItem(Command command) {
         if (this.getItems().size() == 0) {
-            Ui ui = new Ui();
-            throw new ItemException(ui.getEmptyMenu());
+            menuUi.printError(Flags.Error.EMPTY_MENU);
+            return;
         }
 
         UpdateItemValidation updateItemValidation = new UpdateItemValidation();
+        AddItemValidation addItemValidation = new AddItemValidation();
+        DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
 
         try {
             updateItemValidation.validateFlags(command);
             command.mapArgumentAlias(updateItemValidation.LONG_INDEX_FLAG, updateItemValidation.SHORT_INDEX_FLAG);
             command.mapArgumentAlias(updateItemValidation.LONG_NAME_FLAG, updateItemValidation.SHORT_NAME_FLAG);
             command.mapArgumentAlias(updateItemValidation.LONG_PRICE_FLAG, updateItemValidation.SHORT_PRICE_FLAG);
-            updateItemValidation.validateCommand(command, this);
-        } catch (ItemException e) {
-            throw new ItemException(e.getMessage());
+
+            updateItemValidation.validateArgument(command);
+            deleteItemValidation.validateIndex(command, this);
+
+            int indexOfItem = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
+            if(command.getArgumentMap().containsKey( updateItemValidation.LONG_NAME_FLAG)) {
+                addItemValidation.validateName(command);
+
+                String newName = command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG).toLowerCase();
+                String currentName = this.getItem(indexOfItem).getName().toLowerCase();
+                if(!newName.equals(currentName)) {
+                    addItemValidation.validateDuplicateName(command, this);
+                }
+            }
+
+            if(command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
+                addItemValidation.validatePrice(command);
+            }
+
+            int index = Integer.parseInt(command.getArgumentMap().get(updateItemValidation.LONG_INDEX_FLAG));
+
+            if (command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
+                this.getItem(index).setName(command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG));
+            }
+
+            if (command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
+                Double price = Double.valueOf(command.getArgumentMap().get(updateItemValidation.LONG_PRICE_FLAG));
+                this.getItem(index).setPrice(price);
+            }
+            save();
+        } catch (MissingIndexFlagException e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_INDEX_FLAG);
+        } catch (MissingNameOrPriceFlagException e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_NAME_OR_PRICE_FLAG);
+        }catch (InvalidArgumentException e) {
+            menuUi.printError(Flags.Error.EMPTY_INPUT);
+        } catch (NameMinimumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_MIN_LENGTH_ERROR);
+        } catch (NameMaximumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
+        } catch (DuplicateNameException e) {
+            menuUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
+        } catch (PriceMinimumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_MIN_LENGTH_ERROR);
+        } catch (PriceInvalidNumberException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_FORMAT_ERROR);
+        } catch (PriceOverflowException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_OVERFLOW_ERROR);
+        } catch (PriceNegativeException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_NEGATIVE_ERROR);
+        } catch (PriceInvalidDecimalPlaceException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_DECIMAL_PLACE_ERROR);
+        } catch (IndexInvalidNumberFormatException e) {
+            menuUi.printError(Flags.Error.ITEM_INDEX_INVALID_FORMAT_ERROR);
+        } catch (IndexOverflowException e) {
+            menuUi.printError(Flags.Error.ITEM_INDEX_OVERFLOW_ERROR);
+        } catch (IndexOutOfBoundException e) {
+            menuUi.printError(Flags.Error.ITEM_INDEX_OUT_OF_BOUND_ERROR);
         }
 
-        int index = Integer.parseInt(command.getArgumentMap().get(updateItemValidation.LONG_INDEX_FLAG));
-
-        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
-            this.getItem(index).setName(command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG));
-        }
-
-        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_PRICE_FLAG)) {
-            Double price = Double.valueOf(command.getArgumentMap().get(updateItemValidation.LONG_PRICE_FLAG));
-            this.getItem(index).setPrice(price);
-        }
-        save();
     }
 
     /**
@@ -136,24 +214,35 @@ public class Menu {
      * @throws ItemException if the command format is invalid
      *                       or index does not exist
      */
-    public void deleteItem(Command command) throws ItemException {
+    public void deleteItem(Command command) {
         if (this.getItems().size() == 0) {
-            Ui ui = new Ui();
-            throw new ItemException(ui.getEmptyMenu());
+            menuUi.printError(Flags.Error.EMPTY_MENU);
+            return;
         }
 
         DeleteItemValidation deleteItemValidation = new DeleteItemValidation();
         try {
             deleteItemValidation.validateFlags(command);
             command.mapArgumentAlias(deleteItemValidation.LONG_INDEX_FLAG, deleteItemValidation.SHORT_INDEX_FLAG);
-            deleteItemValidation.validateCommand(command, this);
-        } catch (ItemException e) {
-            throw new ItemException(e.getMessage());
+
+            deleteItemValidation.validateArgument(command);
+            deleteItemValidation.validateIndex(command, this);
+
+            int index = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
+            removeItem(index);
+            save();
+        } catch (MissingIndexFlagException e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_INDEX_FLAG);
+        }catch (IndexInvalidNumberFormatException e) {
+            menuUi.printError(Flags.Error.ITEM_INDEX_INVALID_FORMAT_ERROR);
+        } catch (IndexOverflowException e) {
+            menuUi.printError(Flags.Error.ITEM_INDEX_OVERFLOW_ERROR);
+        } catch (IndexOutOfBoundException e) {
+            menuUi.printError(Flags.Error.ITEM_INDEX_OUT_OF_BOUND_ERROR);
+        } catch (InvalidArgumentException e) {
+            menuUi.printError(Flags.Error.EMPTY_INPUT);
         }
 
-        int index = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
-        removeItem(index);
-        save();
     }
 
     /**
