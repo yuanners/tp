@@ -14,8 +14,8 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
     public void validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
             MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException {
         String input = arg.getUserInput();
-        String regex = "^\\/addorder\\s+-I\\s+\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
-                "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
+        String regex = "^\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
+                "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$\n";
         if (!input.matches(regex)) {
             if (arg.getArgumentString().contains("-I") || arg.getArgumentString().contains("--items")) {
                 if (arg.getArgumentMap().get("I").length() < 1 && arg.getArgumentMap().get("items").length() < 1) {
@@ -66,7 +66,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         }
     }
 
-
+/*
     public Command validateAddMultipleOrder(Command arg) throws OrderException {
 
         String input = arg.getUserInput();
@@ -141,5 +141,5 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         return new Command("/addorder -I [" + finalCommandString + "]");
 
     }
-
+*/
 }
