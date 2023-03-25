@@ -1,58 +1,49 @@
 package validation.order;
 
 import app.Command;
-import exception.OrderException;
-import order.Transaction;
+import exception.order.InvalidRefundOrderID;
+import exception.order.InvalidRefundOrderType;
+import exception.order.MissingRefundOrderArgument;
+import exception.order.MissingRefundOrderFlag;
 import order.Order;
-import utility.Ui;
+import order.Transaction;
 import validation.Validation;
 
 import java.util.ArrayList;
 
 public class RefundOrderValidation extends Validation {
-    private Transaction transaction = new Transaction();
     private Order refundOrder = new Order();
-    private Ui ui = new Ui();
 
     public RefundOrderValidation() {
-
     }
 
     /**
-     * Try catch block to catch all the exceptions thrown and display the error message accordingly
+     * Check if flags and arguments are present
      *
-     * @param arg user input command
-     * @throws OrderException custom exception for order validation
+     * @param arg user input
+     * @throws MissingRefundOrderFlag     no -i/--id flag in user input
+     * @throws MissingRefundOrderArgument no argument for -i/--id flag in user input
      */
-    public void validateRefundOrder(Command arg) throws OrderException {
-        try {
-            checkArgument(arg);
-            checkOrder(arg);
-        } catch (OrderException o) {
-            throw new OrderException(o.getMessage());
-        }
-
-    }
-
-    /**
-     * Check if argument is present
-     *
-     * @param arg user input command
-     * @throws OrderException custom exception for order validation
-     */
-    public void checkArgument(Command arg) throws OrderException {
-        if (arg.getArgumentString().length() < 1) {
-            throw new OrderException(ui.printMissingOrderID());
+    public void validateFlag(Command arg) throws MissingRefundOrderFlag, MissingRefundOrderArgument {
+        arg.mapArgumentAlias("i", "id");
+        if (arg.getArgumentString().contains("-i")) {
+            if (arg.getArgumentMap().get("i").length() < 1) {
+                throw new MissingRefundOrderArgument();
+            }
+        } else {
+            throw new MissingRefundOrderFlag();
         }
     }
 
     /**
      * Check if the order ID given/refund status is valid
      *
-     * @param arg user input command
-     * @throws OrderException custom exception for order validation
+     * @param arg user input
+     * @throws InvalidRefundOrderType order is already refunded
+     * @throws InvalidRefundOrderID   invalid order ID
      */
-    public void checkOrder(Command arg) throws OrderException {
+    public void validateRefund(Command arg, Transaction transaction) throws
+            InvalidRefundOrderType, InvalidRefundOrderID {
         boolean isValidID = false;
         String orderID = arg.getArgumentString();
         ArrayList<Order> orderList = transaction.getOrderList();
@@ -67,10 +58,10 @@ public class RefundOrderValidation extends Validation {
 
         if (isValidID) {
             if (refundOrder.getStatus().equals("REFUNDED")) {
-                throw new OrderException(ui.printInvalidRefundStatus());
+                throw new InvalidRefundOrderType();
             }
         } else {
-            throw new OrderException(ui.printInvalidOrderID());
+            throw new InvalidRefundOrderID();
         }
     }
 }
