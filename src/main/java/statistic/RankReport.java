@@ -18,11 +18,13 @@ import java.util.PriorityQueue;
 
 /**
  * This class generates a rank report which includes two priority queues sorted by popularity and sales respectively.
- * It extends the Statistic class and uses its start and end date parameters to generate the report for a specific date range.
+ * It extends the Statistic class and uses its start and
+ *      end date parameters to generate the report for a specific date range.
  */
 public class RankReport extends Statistic {
     /**
-     * Constructor for the RankReport class. It generates two priority queues sorted by popularity and sales respectively.
+     * Constructor for the RankReport class.
+     * It generates two priority queues sorted by popularity and sales respectively.
      * It also prints out the result tables using the StatisticUi class.
      *
      * @param command     a Command object containing the start and end date range for the report
