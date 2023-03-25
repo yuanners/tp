@@ -1,14 +1,13 @@
 package validation.item;
 
-import exception.item.ItemException;
+import exception.item.MissingFindItemDescriptionException;
 
 public class FindItemValidation extends ItemValidation {
 
-    public boolean validateName(String input) throws ItemException {
+    public void validateName(String input) throws MissingFindItemDescriptionException {
         if(input == null || input == "") {
-            throw new ItemException(ui.getItemNameMinLengthError());
+            throw new MissingFindItemDescriptionException();
         }
-        return true;
     }
 
 }

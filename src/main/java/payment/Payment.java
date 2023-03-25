@@ -1,7 +1,6 @@
 package payment;
 
 import app.Command;
-import exception.OrderException;
 import order.Order;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
@@ -19,9 +18,8 @@ public class Payment {
      * Display prompt to pay immediately after an order is added
      *
      * @param order list of order entries added
-     * @throws OrderException custom exception for order related validation
      */
-    public void makePayment(Order order) throws OrderException {
+    public void makePayment(Order order) {
         boolean isValidPayment = false;
         Scanner sc = new Scanner(System.in);
         transactionUi.promptPayment();
@@ -29,20 +27,16 @@ public class Payment {
             String userInput = sc.nextLine();
             Command arg = new Command(userInput);
             PaymentValidation paymentValidation = new PaymentValidation(arg);
-            try {
-                paymentValidation.validatePayment(arg, order);
-                isValidPayment = true;
-                arg.mapArgumentAlias("a", "amount");
-                arg.mapArgumentAlias("t", "type");
-                order.setPaymentType(arg.getArgumentMap().get("t").trim());
-                double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
+            paymentValidation.validatePayment(arg, order);
+            isValidPayment = true;
+            arg.mapArgumentAlias("a", "amount");
+            arg.mapArgumentAlias("t", "type");
+            order.setPaymentType(arg.getArgumentMap().get("t").trim());
+            double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
+            if (amount != order.getSubTotal()) {
                 transactionUi.printChangeGiven(calculateChange(amount, order));
-                transactionUi.printSuccessfulPayment();
-
-            } catch (OrderException o) {
-                transactionUi.printError(o.getMessage());
-                transactionUi.promptPayment();
             }
+            transactionUi.printSuccessfulPayment();
         }
     }
 

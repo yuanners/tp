@@ -1,13 +1,13 @@
 package app;
 
-import exception.item.ItemException;
-import exception.OrderException;
 import item.Menu;
 import item.MenuAssistant;
 import order.Order;
 import order.OrderAssistant;
 import order.Transaction;
 import payment.Refund;
+import statistic.RankReport;
+import statistic.SalesReport;
 import ui.MenuUi;
 import ui.TransactionUi;
 import utility.Ui;
@@ -30,8 +30,8 @@ public class Router {
      * @param menu         the menu object to use for item-related commands
      * @param transactions the transactions object to use for order-related commands
      */
-    public Router(Menu menu, Transaction transactions, Ui ui, MenuUi menuUi, TransactionUi transactionUi) {
-        this.ui = ui;
+    public Router(Menu menu, Transaction transactions) {
+        this.ui = new Ui();
         this.menu = menu;
         this.transactions = transactions;
         this.menuUi = menuUi;
@@ -45,42 +45,41 @@ public class Router {
      * @param command the Command object containing the professional command to process
      */
     private void proRoute(Command command) {
-        try {
-            switch (command.getCommand()) {
-            case "/help":
-                ui.printHelp();
-                break;
-            case "/additem":
-                menu.addItem(command);
-                break;
-            case "/deleteitem":
-                menu.deleteItem(command);
-                break;
-            case "/listitem":
-                menu.displayList();
-                break;
-            case "/updateitem":
-                menu.updateItem(command);
-                break;
-            case "/finditem":
-                menu.showResultsOfFind(command);
-                break;
-            case "/addorder":
-                Order order = new Order(command, menu, transactions);
-                break;
-            case "/listorder":
-                transactions.displayList();
-                break;
-            case "/refundorder":
-                Refund refund = new Refund();
-                refund.refundTransaction(command, transactions);
-                break;
-            default:
-                ui.printInvalidCommand(command.getCommand());
-            }
-
-        } catch (ItemException | OrderException e) {
-            ui.println(e.getMessage());
+        switch (command.getCommand()) {
+        case "/help":
+            ui.printHelp();
+            break;
+        case "/additem":
+            menu.addItem(command);
+            break;
+        case "/deleteitem":
+            menu.deleteItem(command);
+            break;
+        case "/listitem":
+            menu.displayList();
+            break;
+        case "/updateitem":
+            menu.updateItem(command);
+            break;
+        case "/finditem":
+            menu.showResultsOfFind(command);
+            break;
+        case "/addorder":
+            Order order = new Order(command, menu, transactions);
+            break;
+        case "/listorder":
+            transactions.displayList();
+            break;
+        case "/refundorder":
+            Refund refund = new Refund();
+            refund.refundTransaction(command, transactions);
+            break;
+        case "/report":
+            //Validate if type is a valid string
+            handleStatisticRoute(command);
+            break;
+        default:
+            ui.printInvalidCommand(command.getCommand());
         }
     }
 
@@ -96,51 +95,58 @@ public class Router {
         OrderAssistant orderAssistant = new OrderAssistant();
         boolean isCancelled;
 
-        try {
-            switch (command.getCommand()) {
-            case "?":
-            case "help":
-                ui.printHelp();
-                break;
-            case "1":
-            case "additem":
-                isCancelled = menuAssistant.addItem(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-            case "2":
-            case "deleteitem":
-                isCancelled = menuAssistant.deleteItem(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-            case "3":
-            case "listitem":
-                menu.displayList();
-                break;
-            case "4":
-            case "updateitem":
-                isCancelled = menuAssistant.updateItem(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-            case "5":
-            case "finditem":
-                isCancelled = menuAssistant.showResultsOfFind(command, menu);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-            case "6":
-            case "addorder":
-                isCancelled = orderAssistant.assistedAddOrder(menu, transactions);
-                menuAssistant.printResult(command, isCancelled);
-                break;
-            case "7":
-            case "listorder":
-                transactions.displayList();
-                break;
-            default:
-                ui.printInvalidCommand(command.getCommand());
-            }
-        } catch (OrderException e) {
-        // new MenuUi().printError(Flags.Error.);
-            ui.println(e.getMessage());
+        switch (command.getCommand()) {
+        case "?":
+        case "help":
+            ui.printHelp();
+            break;
+        case "1":
+        case "additem":
+            isCancelled = menuAssistant.addItem(command, menu);
+            menuAssistant.printResult(command, isCancelled);
+            break;
+        case "2":
+        case "deleteitem":
+            isCancelled = menuAssistant.deleteItem(command, menu);
+            menuAssistant.printResult(command, isCancelled);
+            break;
+        case "3":
+        case "listitem":
+            menu.displayList();
+            break;
+        case "4":
+        case "updateitem":
+            isCancelled = menuAssistant.updateItem(command, menu);
+            menuAssistant.printResult(command, isCancelled);
+            break;
+        case "5":
+        case "finditem":
+            isCancelled = menuAssistant.showResultsOfFind(command, menu);
+            menuAssistant.printResult(command, isCancelled);
+            break;
+        case "6":
+        case "addorder":
+            isCancelled = orderAssistant.assistedAddOrder(menu, transactions);
+            menuAssistant.printResult(command, isCancelled);
+            break;
+        case "7":
+        case "listorder":
+            transactions.displayList();
+            break;
+        default:
+            ui.printInvalidCommand(command.getCommand());
+        }
+    }
+
+    private void handleStatisticRoute(Command command) {
+        command.mapArgumentAlias("sales", "s");
+        command.mapArgumentAlias("rank", "r");
+        if (command.getArgumentMap().containsKey("sales")) {
+            new SalesReport(command, transactions);
+        }
+
+        if (command.getArgumentMap().containsKey("rank")) {
+            new RankReport(command, transactions, menu);
         }
     }
 

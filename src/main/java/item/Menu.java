@@ -319,7 +319,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void showResultsOfFind(Command command) throws ItemException {
+    public void showResultsOfFind(Command command) {
 
         FindItemValidation findItemValidation = new FindItemValidation();
 
