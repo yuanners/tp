@@ -4,7 +4,6 @@ import app.Command;
 import exception.OrderException;
 import order.Order;
 import ui.TransactionUi;
-import utility.Ui;
 import validation.order.PaymentValidation;
 
 import java.util.Scanner;
