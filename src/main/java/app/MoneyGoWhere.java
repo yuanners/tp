@@ -27,7 +27,7 @@ public class MoneyGoWhere {
 
         Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
-        Router router = new Router(menu, transactions, ui);
+        Router router = new Router(menu, transactions);
 
         ui.printWelcomeMessage();
 
@@ -39,9 +39,13 @@ public class MoneyGoWhere {
                 ui.println(ui.getExitMessage());
                 break;
             }
-
-            Command command = new Command(userInput);
-            router.handleRoute(command);
+            if(!userInput.isBlank()){
+                Command command = new Command(userInput);
+                router.handleRoute(command);
+            }
+            else{
+                System.out.println("INPUT IS BLANK");
+            }
         }
 
         sc.close();

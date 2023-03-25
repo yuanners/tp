@@ -6,6 +6,8 @@ import order.Order;
 import order.OrderAssistant;
 import order.Transaction;
 import payment.Refund;
+import statistic.RankReport;
+import statistic.SalesReport;
 import ui.MenuUi;
 import ui.TransactionUi;
 import utility.Ui;
@@ -28,8 +30,10 @@ public class Router {
      * @param menu         the menu object to use for item-related commands
      * @param transactions the transactions object to use for order-related commands
      */
-    public Router(Menu menu, Transaction transactions, Ui ui) {
-        this.ui = ui;
+    public Router(Menu menu, Transaction transactions) {
+        this.ui = new Ui();
+        this.menuUi = new MenuUi();
+        this.transactionUi = new TransactionUi();
         this.menu = menu;
         this.transactions = transactions;
     }
@@ -77,6 +81,10 @@ public class Router {
                 Refund refund = new Refund();
                 refund.refundTransaction(command, transactions);
                 transactionUi.printSuccessfulRefundOrder();
+                break;
+            case "/report":
+                //Validate if type is a valid string
+                handleStatisticRoute(command);
                 break;
             default:
                 ui.printInvalidCommand(command.getCommand());
@@ -139,6 +147,18 @@ public class Router {
             default:
                 ui.printInvalidCommand(command.getCommand());
             }
+        }
+    }
+
+    private void handleStatisticRoute(Command command) {
+        command.mapArgumentAlias("sales", "s");
+        command.mapArgumentAlias("rank", "r");
+        if (command.getArgumentMap().containsKey("sales")) {
+            new SalesReport(command, transactions);
+        }
+
+        if (command.getArgumentMap().containsKey("rank")) {
+            new RankReport(command, transactions, menu);
         }
     }
 

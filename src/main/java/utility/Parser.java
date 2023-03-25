@@ -1,6 +1,8 @@
 package utility;
 
 import java.io.FileReader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.Type;
@@ -36,47 +38,45 @@ public class Parser {
      * @param argString the argument string
      * @return a map of argument key-value pairs
      */
-
     public Map<String, String> formatArguments(String argString) {
 
 
-        String regex = "(?:^|\\s)(?:--|-)(\\w+)(?:\\s+(-?[\\d.]+" +
-                "\\w+)|\\s+'([^']*)'|\\s+\"([^\"]*)\"|\\s*([^\\s-]" +
-                "[^\\s]*)|\\s*(?=--|-|$))?";
-
+        String regex = "(\"[^\"]*\")|(\\S+)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(argString);
 
-        Map<String, String> argMap = new HashMap<>();
+        ArrayList<String> words = new ArrayList<>();
 
         while (matcher.find()) {
-            String flag = matcher.group(1);
-            String value = "";
-            if (matcher.group(2) != null) {
-                value = matcher.group(2);
-            } else if (matcher.group(3) != null) {
-                value = matcher.group(3);
-            } else if (matcher.group(4) != null) {
-                value = matcher.group(4);
-            } else if (matcher.group(5) != null) {
-                value = matcher.group(5);
+            words.add(matcher.group());
+        }
+
+        String regex2 = "^(-{1,2}(?!\\d)\\D*)$";
+        Pattern pattern2 = Pattern.compile(regex2);
+
+        Map<String, String> argMap = new HashMap<>();
+
+        String flag = null;
+        for (int i = 0; i < words.size(); i++) {
+            boolean isFlag = pattern2.matcher(words.get(i)).matches();
+            if (isFlag) {
+                flag = words.get(i).replaceFirst("^-+", "");
+
+                if (i + 1 < words.size() && !pattern2.matcher(words.get(i + 1)).matches()) {
+                    argMap.put(flag, words.get(i + 1).replaceAll("^\"|\"$", ""));
+                    i++;
+                } else {
+                    argMap.put(flag, null);
+                }
             }
-            argMap.put(flag, value);
+            else{
+                System.out.println("COMMAND FORMAT INCORRECT: " + flag);
+            }
         }
 
+        System.out.println(argMap);
         return argMap;
-    }
-
-
-    public String extractStringWithinBraces(String input) {
-        int startIndex = input.indexOf('{');
-        int endIndex = input.indexOf('}');
-        if (startIndex != -1 && endIndex != -1 && endIndex > startIndex) {
-            return input.substring(startIndex + 1, endIndex);
-        } else {
-            return null;
-        }
     }
 
     /**
