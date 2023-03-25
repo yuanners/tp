@@ -1,16 +1,15 @@
 package payment;
 
 import app.Command;
-import exception.OrderException;
 import order.Order;
-import utility.Ui;
+import ui.TransactionUi;
 import validation.order.PaymentValidation;
 
 import java.util.Scanner;
 
 
 public class Payment {
-    private Ui ui = new Ui();
+    private TransactionUi transactionUi = new TransactionUi();
 
     public Payment() {
     }
@@ -19,29 +18,25 @@ public class Payment {
      * Display prompt to pay immediately after an order is added
      *
      * @param order list of order entries added
-     * @throws OrderException custom exception for order related validation
      */
-    public void makePayment(Order order) throws OrderException {
+    public void makePayment(Order order) {
         boolean isValidPayment = false;
         Scanner sc = new Scanner(System.in);
-        ui.promptPayment();
+        transactionUi.promptPayment();
         while (!isValidPayment) {
             String userInput = sc.nextLine();
             Command arg = new Command(userInput);
             PaymentValidation paymentValidation = new PaymentValidation(arg);
-            try {
-                paymentValidation.validatePayment(arg, order);
-                isValidPayment = true;
-                arg.mapArgumentAlias("a", "amount");
-                arg.mapArgumentAlias("t", "type");
-                order.setPaymentType(arg.getArgumentMap().get("t").trim());
-                double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
-                ui.printChangeGiven(calculateChange(amount, order));
-                ui.printCommandSuccess(arg.getCommand());
-            } catch (OrderException o) {
-                ui.println(o.getMessage());
-                ui.promptPayment();
+            paymentValidation.validatePayment(arg, order);
+            isValidPayment = true;
+            arg.mapArgumentAlias("a", "amount");
+            arg.mapArgumentAlias("t", "type");
+            order.setPaymentType(arg.getArgumentMap().get("t").trim());
+            double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
+            if (amount != order.getSubTotal()) {
+                transactionUi.printChangeGiven(calculateChange(amount, order));
             }
+            transactionUi.printSuccessfulPayment();
         }
     }
 

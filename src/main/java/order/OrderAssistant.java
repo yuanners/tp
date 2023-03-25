@@ -1,7 +1,6 @@
 package order;
 
 import app.Command;
-import exception.OrderException;
 import item.Menu;
 import utility.Ui;
 

@@ -1,8 +1,6 @@
 package statistic;
 
 import app.Command;
-import exception.item.ItemException;
-import exception.OrderException;
 import item.Menu;
 import order.Order;
 import order.Transaction;

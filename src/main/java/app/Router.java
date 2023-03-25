@@ -1,7 +1,5 @@
 package app;
 
-import exception.item.ItemException;
-import exception.OrderException;
 import item.Menu;
 import item.MenuAssistant;
 import order.Order;
@@ -84,8 +82,6 @@ public class Router {
                 ui.printInvalidCommand(command.getCommand());
             }
 
-        } catch (ItemException | OrderException e) {
-            ui.println(e.getMessage());
         }
     }
 
@@ -143,9 +139,6 @@ public class Router {
             default:
                 ui.printInvalidCommand(command.getCommand());
             }
-        } catch (OrderException e) {
-//            new MenuUi().printError(Flags.Error.);
-            ui.println(e.getMessage());
         }
     }
 
