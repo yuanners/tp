@@ -81,6 +81,7 @@ public class Router {
         default:
             ui.printInvalidCommand(command.getCommand());
         }
+
     }
 
     /**
@@ -136,6 +137,7 @@ public class Router {
         default:
             ui.printInvalidCommand(command.getCommand());
         }
+
     }
 
     private void handleStatisticRoute(Command command) {

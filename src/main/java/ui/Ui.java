@@ -55,6 +55,8 @@ public class Ui {
         case INVALID_INDEX:
             System.out.println("Please enter a valid index!");
             break;
+        default:
+            // Fallthrough
         }
     }
 

@@ -61,6 +61,25 @@ This sequence diagram models the interaction between various components in Money
 command `/additem`.
 
 The general workflow of `/additem` is as follows:
+<<<<<<< HEAD
+=======
+1. User input is passed to `MoneyGoWhere`.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes `Menu#addItem` method to run the `/additem` command.
+1. Once the command runs, `Menu#addItem` invokes `AddItemValidation#validateFlags` to check if all the required flags have been given.
+   * If there are missing flags, a message indicating that the usage is invalid will be printed using `Ui#println` and control is given back to `MoneyGoWhere`.
+1. `Menu#addItem` then invokes `AddItemValidation#validateCommand` which in turn, calls all of the following validation method to check the arguments provided.
+   * `AddItemValidation#validateArgument` checks if the user input `String` is empty
+     * If the user input is empty, a message indicating that the input is empty is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
+   * `AddItemValidation#validateName` checks if the given name is empty or exceeds the limit of 25 characters
+     * If the name violates these naming constraints, a message indicating that the name is too short or too long is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
+   * `AddItemValidation#validateDuplicateName` checks if the given name already exists in the `ArrayList<Item> items` of `Menu`.
+     * If the name already exists, a message indicating that the item name already exists is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
+   * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative or has more than 2 decimal points
+     * If any of the above is true, a message indicating the constraint that it has violated is printed using `Ui#println` and control is given back to `MoneyGoWhere`.
+1. `Menu#processAddItem` is then invoked and it creates a new`Item` object using the name and price given. It then calls `Menu#appendItem` on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`. Then, `Menu#save` is invoked to save the changes to the local storage file.
+1. `Router` object then calls `Ui#printCommandSuccess` to print a message indicating that the item has been successfully added to the menu.
+>>>>>>> 453e0d2cde4ec44293292403fe87f41f24a758a2
 
 1. User input is passed to `MoneyGoWhere`.
 2. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor

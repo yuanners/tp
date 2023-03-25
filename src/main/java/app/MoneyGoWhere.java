@@ -46,8 +46,7 @@ public class MoneyGoWhere {
             if(!userInput.isBlank()){
                 Command command = new Command(userInput);
                 router.handleRoute(command);
-            }
-            else{
+            } else {
                 System.out.println("INPUT IS BLANK");
             }
         }

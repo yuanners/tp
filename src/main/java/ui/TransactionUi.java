@@ -66,14 +66,14 @@ public class TransactionUi extends Ui {
     }
 
 
-//    public void printItemNotExistError() {
-//        System.out.println("No such item exists.");
-//    }
-//
-//    public void printSimilarItemError() {
-//        System.out.println("Your input referenced multiple similar items. " +
-//                "Please try again with a more specific item name.");
-//    }
+    //    public void printItemNotExistError() {
+    //        System.out.println("No such item exists.");
+    //    }
+    //
+    //    public void printSimilarItemError() {
+    //        System.out.println("Your input referenced multiple similar items. " +
+    //                "Please try again with a more specific item name.");
+    //    }
 
     public void helpAddOder() {
         System.out.println("/addorder -i <number> -q <number>");
@@ -98,6 +98,7 @@ public class TransactionUi extends Ui {
             break;
         case NEGATIVE_ORDER_ITEM_INDEX:
             System.out.println("Index cannot be negative.");
+            break;
         case INVALID_ORDER_ITEM_INDEX_OUT_OF_BOUNDS:
             System.out.println("Index does not exist.");
             break;
@@ -170,6 +171,8 @@ public class TransactionUi extends Ui {
         case INVALID_REFUND_ORDER_TYPE:
             System.out.println("Order is already refunded.");
             break;
+        default:
+            // Fallthrough
         }
     }
 }
