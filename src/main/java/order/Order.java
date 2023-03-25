@@ -209,7 +209,7 @@ public class Order implements OrderInterface {
             } else if (command.getArgumentMap().get("items") != null) {
                 addMultipleOrderValidation.validateFormat(command);
                 addMultipleOrderValidation.validateArguments(command, listOfItems);
-                command = addMultipleOrderValidation.validateAddMultipleOrder(command);
+                //command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
             } else {
                 addOrderValidation.validateFlag(command);
