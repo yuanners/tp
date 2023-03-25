@@ -14,45 +14,59 @@ import item.Menu;
 public class AddMultipleAddOrderValidation extends AddOrderValidation {
     private Menu menu;
 
-    public AddMultipleAddOrderValidation() {
-        menu = new Menu();
+    public AddMultipleAddOrderValidation(Menu menu) {
+        this.menu = menu;
     }
 
-    public void validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
-            MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException {
+    public Command validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
+            MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException,
+            InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException {
+
         String input = arg.getUserInput();
-        String regex = "^\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
-                "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$\n";
+        String regex = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
+                "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
+
         if (!input.matches(regex)) {
+
             if (arg.getArgumentString().contains("-I") || arg.getArgumentString().contains("--items")) {
-                if (arg.getArgumentMap().get("I").length() < 1 && arg.getArgumentMap().get("items").length() < 1) {
+
+                String itemsArg = arg.getArgumentMap().get("I");
+
+                if (itemsArg.isEmpty()) {
+                    itemsArg = arg.getArgumentMap().get("items");
+                }
+
+                if (itemsArg == null || itemsArg.isEmpty()) {
                     throw new MissingMultipleOrderArgumentException();
                 } else {
                     throw new InvalidMultipleOrderFormatException();
                 }
+
             } else {
                 throw new MissingMultpleOrderFlagException();
             }
         } else {
-            if (arg.getArgumentMap().get("I").length() < 1 && arg.getArgumentMap().get("items").length() < 1) {
-                throw new MissingMultipleOrderArgumentException();
-            }
+            return validateFormat2(input);
         }
     }
 
     public void validateArguments(Command arg, Menu items) throws InvalidIndexNegativeException,
             InvalidIndexNumberFormatException, InvalidIndexOutOfBoundsException,
             InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
+
         String input = arg.getUserInput();
         String orderPairsString = input.replaceAll("[^\\d\\s,:]", "");
         String[] orderPairs;
+
         if (orderPairsString.contains(",")) {
             orderPairs = orderPairsString.split(",\\s*");
         } else {
-            orderPairs = new String[] {orderPairsString};
+            orderPairs = new String[]{orderPairsString};
         }
+
         for (String order : orderPairs) {
-            String[] numbers = order.trim().split("\\s+");
+            String[] numbers = order.trim().split(":");
+
             if (isInteger(numbers[0])) {
                 if (Integer.parseInt(numbers[0]) < 0) {
                     throw new InvalidIndexNegativeException();
@@ -71,82 +85,77 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
                 throw new InvalidQuantityNumberFormatException();
             }
         }
+
     }
 
-    /*
-        public Command validateAddMultipleOrder(Command arg) throws OrderException {
+    private Command validateFormat2(String input)
+            throws InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
+            InvalidMultipleOrderFormatException {
 
-            String input = arg.getUserInput();
-            String regex = "^\\/addorder\\s+-I\\s+\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
-                    "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
+        int startOfArgumentsIndex = 14;
+        String orderPairsString = input.substring(startOfArgumentsIndex);
+        orderPairsString = orderPairsString.substring(0, orderPairsString.length() - 1);
 
+        String[] orderPairs;
 
-            if (input.matches(regex)) {
-                return validateAddMultipleOrder2(input);
-            } else {
-                throw new OrderException(ui.getInvalidMultipleOrderFormat());
-            }
-
+        if (orderPairsString.contains(",")) {
+            orderPairs = orderPairsString.split(",\\s*");
+        } else {
+            orderPairs = new String[]{orderPairsString};
         }
 
-        private Command validateAddMultipleOrder2(String input) throws OrderException {
-            int startOfArgumentsIndex = 14;
-            String orderPairsString = input.substring(startOfArgumentsIndex);
-            orderPairsString = orderPairsString.substring(0, orderPairsString.length() - 1);
+        return validateFormat3(orderPairs);
 
-            String[] orderPairs;
+    }
 
-            if (orderPairsString.contains(",")) {
-                orderPairs = orderPairsString.split(",\\s*");
-            } else {
-                orderPairs = new String[] {orderPairsString};
+    private Command validateFormat3(String[] orderPairs)
+            throws InvalidIndexOutOfBoundsException, InvalidQuantityNumberFormatException,
+            InvalidMultipleOrderFormatException {
+
+        String index;
+        String finalCommandString = "";
+
+        for (String order : orderPairs) {
+
+            String[] elements = order.trim().split(":");
+
+            if (elements[0].contains("\"")) {
+                elements[0] = elements[0].replace("\"", "");
             }
 
-            return validateAddMultipleOrder3(orderPairs);
+            if (!isInteger(elements[0])) {
+                index = Integer.toString(menu.findItemIndex(elements[0]));
+                elements[0] = index;
+            }
 
-        }
+            if (elements.length == 2 && isInteger(elements[0]) && isInteger(elements[1])) {
 
-        private Command validateAddMultipleOrder3(String[] orderPairs) throws OrderException {
+                String itemIndex = elements[0];
+                System.out.println("Item index: " + itemIndex);
+                System.out.println("Index is valid?: " + isValidIndex(itemIndex, menu));
 
-            String index;
-            String finalCommandString = "";
-
-            for (String order : orderPairs) {
-
-                String[] elements = order.trim().split(":");
-
-
-                if (!isInteger(elements[0])) {
-                    index = Integer.toString(menu.findItemIndex(elements[0]));
-                    elements[0] = index;
+                if (!(isValidIndex(itemIndex, menu))) {
+                    throw new InvalidIndexOutOfBoundsException();
                 }
 
-                if (elements.length == 2 && isInteger(elements[0]) && isInteger(elements[1])) {
-
-                    String itemIndex = elements[0];
-
-                    if (!(isValidIndex(itemIndex, menu))) {
-                        throw new OrderException(ui.getInvalidIndex());
-                    }
-
-                    if (Integer.parseInt(elements[1]) <= 0) {
-                        throw new OrderException(ui.getInvalidOrderInteger());
-                    }
-
-                    finalCommandString += elements[0] + ":" + elements[1] + ",";
-
-                } else {
-                    throw new OrderException(ui.getInvalidMultipleOrderInteger());
+                if (Integer.parseInt(elements[1]) <= 0) {
+                    throw new InvalidQuantityNumberFormatException();
                 }
 
+                finalCommandString += elements[0] + ":" + elements[1] + ",";
+
+            } else {
+                throw new InvalidMultipleOrderFormatException();
             }
 
-            finalCommandString = finalCommandString.substring(0, finalCommandString.length() - 1);
-
-            assert true : "This is true";
-
-            return new Command("/addorder -I [" + finalCommandString + "]");
-
         }
-    */
+
+        finalCommandString = finalCommandString.substring(0, finalCommandString.length() - 1);
+
+        assert true : "This is true";
+
+        return new Command("/addorder -I [" + finalCommandString + "]");
+
+    }
+
 }
