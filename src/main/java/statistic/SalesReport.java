@@ -1,5 +1,6 @@
 package statistic;
 
+import app.Command;
 import order.Order;
 import order.Transaction;
 import utility.DateUtils;
@@ -9,24 +10,52 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The SalesReport class represents a sales report statistic.
+ * It extends the Statistic class and provides methods to calculate the total sales,
+ * daily sales and monthly sales based on a given transaction and date range.
+ */
 public class SalesReport extends Statistic {
-    public SalesReport(int year) {
-        super(year);
+
+    /**
+     * Constructs a SalesReport object based on a given command and transaction.
+     *
+     * @param command     the command to be used for generating the sales report.
+     * @param transaction the transaction to be used for generating the sales report.
+     */
+    public SalesReport(Command command, Transaction transaction) {
+        super(command);
+        double totalSales = totalSales(transaction);
+        switch (command.getArgumentMap().get("mode")) {
+        case "daily":
+            Map<LocalDateTime, Double> dailySalesMap = dailySales(transaction);
+            new Chart().dailySalesChart(dailySalesMap, super.getStartDate(), super.getEndDate(), totalSales);
+            break;
+        case "monthly":
+            Map<LocalDateTime, Double> monthlySalesMap = monthlySales(transaction);
+            new Chart().monthlySalesChart(monthlySalesMap, super.getYear(), totalSales);
+            break;
+        default:
+            break;
+        }
     }
 
-    public SalesReport(String strStartDate, String strEndDate) {
-        super(strStartDate, strEndDate);
-    }
-
+    /**
+     * Calculates the total sales within a given date range based on a given transaction.
+     *
+     * @param transaction the transaction to be used for calculating the total sales.
+     * @return the total sales within the given date range.
+     */
     public double totalSales(Transaction transaction) {
         double totalSales = 0;
 
         for (Order order : transaction.getOrderList()) {
             LocalDateTime orderDate = order.getDateTime();
 
-            Boolean isWithinRange = DateUtils.isBetween(orderDate, startDate, endDate);
+            Boolean isWithinRange = DateUtils.isBetween(orderDate, super.getStartDate(), super.getEndDate());
+            Boolean isComplete = order.getStatus().equals("COMPLETED");
 
-            if (isWithinRange) {
+            if (isWithinRange && isComplete) {
                 totalSales += order.getSubTotal();
             }
         }
@@ -35,15 +64,23 @@ public class SalesReport extends Statistic {
         return parser.roundToTwoDecimalPlaces(totalSales);
     }
 
+    /**
+     * Calculates the daily sales within a given date range based on a given transaction.
+     *
+     * @param transaction the transaction to be used for calculating the daily sales.
+     * @return a Map with LocalDateTime keys representing the start of each day within the date range,
+     * and Double values representing the total sales for each day.
+     */
     public Map<LocalDateTime, Double> dailySales(Transaction transaction) {
         Map<LocalDateTime, Double> dailySalesMap = new HashMap<>();
 
         for (Order order : transaction.getOrderList()) {
             LocalDateTime orderDate = order.getDateTime();
 
-            Boolean isWithinDateRange = DateUtils.isBetween(orderDate, startDate, endDate);
+            Boolean isWithinDateRange = DateUtils.isBetween(orderDate, super.getStartDate(), super.getEndDate());
+            Boolean isComplete = order.getStatus().equals("COMPLETED");
 
-            if (isWithinDateRange) {
+            if (isWithinDateRange && isComplete) {
                 LocalDateTime startOrderDate = orderDate.toLocalDate().atStartOfDay();
                 double currentTotal = dailySalesMap.getOrDefault(startOrderDate, 0.0);
                 dailySalesMap.put(startOrderDate, currentTotal + order.getSubTotal());
@@ -53,15 +90,23 @@ public class SalesReport extends Statistic {
         return dailySalesMap;
     }
 
+    /**
+     * Calculates the monthly sales within a given date range based on a given transaction.
+     *
+     * @param transaction the transaction to be used for calculating the monthly sales.
+     * @return a Map with LocalDateTime keys representing the start of each month within the date range,
+     * and Double values representing the total sales for each month.
+     */
     public Map<LocalDateTime, Double> monthlySales(Transaction transaction) {
         Map<LocalDateTime, Double> monthlySalesMap = new HashMap<>();
 
         for (Order order : transaction.getOrderList()) {
             LocalDateTime orderDate = order.getDateTime();
 
-            Boolean isWithinDateRange = DateUtils.isBetween(orderDate, startDate, endDate);
+            Boolean isWithinDateRange = DateUtils.isBetween(orderDate, super.getStartDate(), super.getEndDate());
+            Boolean isComplete = order.getStatus().equals("COMPLETED");
 
-            if (isWithinDateRange) {
+            if (isWithinDateRange && isComplete) {
                 LocalDateTime orderMonth = DateUtils.getStartOfMonth(orderDate);
                 double currentTotal = monthlySalesMap.getOrDefault(orderMonth, 0.0);
                 monthlySalesMap.put(orderMonth, currentTotal + order.getSubTotal());
