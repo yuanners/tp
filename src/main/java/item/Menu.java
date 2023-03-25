@@ -309,7 +309,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void showResultsOfFind(Command command) throws ItemException {
+    public void showResultsOfFind(Command command) {
 
         Ui ui = new Ui();
         FindItemValidation findItemValidation = new FindItemValidation();
@@ -319,7 +319,10 @@ public class Menu {
 
         String itemName = command.getArgumentString().trim();
 
-        if (!findItemValidation.validateName(itemName)) {
+        try {
+            findItemValidation.validateName(itemName);
+        } catch (MissingFindItemDescriptionException e) {
+            menuUi.printError(Flags.Error.MISSING_FIND_ITEM_DESCRIPTION);
             return;
         }
 

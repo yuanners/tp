@@ -1,5 +1,6 @@
 package ui;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import order.Order;
 
 import java.text.DecimalFormat;
@@ -7,20 +8,12 @@ import java.util.ArrayList;
 
 public class TransactionUi extends Ui {
 
-    public void promptItemQuantity() {
-        System.out.println("Please enter the quantity of the item: ");
-    }
-
     public void promptMoreOrderEntries() {
         System.out.println("Do you have more items to add? (yes/no/cancel)");
     }
 
     public void promptPayment() {
-        System.out.println("Please use /pay command to add payment for the order.");
-    }
-
-    public void printItemNotFound() {
-        System.out.println("The entered item cannot be found.");
+        System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
     }
 
     public void printChangeGiven(Double change) {
@@ -49,12 +42,15 @@ public class TransactionUi extends Ui {
             String subtotal = df.format(orders.get(i).getSubTotal());
             System.out.println("\nSubtotal: $" + subtotal);
             System.out.println("================================================");
-
         }
     }
 
     public void printSuccessfulAddOrder() {
         System.out.println("Order added successfully!");
+    }
+
+    public void printSuccessfulPayment() {
+        System.out.println("Order has been paid!");
     }
 
     public void printSuccessfulListOrder() {
@@ -73,58 +69,6 @@ public class TransactionUi extends Ui {
     }
 
 
-//    public void printMissingOrderArgumentError() {
-//        System.out.println("Please enter item index or quantity after flags.");
-//    }
-//
-//    public void printInvalidOrderFlagError() {
-//        System.out.println("Please use correctly formatted flags to add order.");
-//    }
-//
-//    public void printInvalidOrderQuantityError() {
-//        System.out.println("Quantity must be more than 0.");
-//    }
-//
-//    public void printInvalidMultipleFormatError() {
-//        System.out.println("Wrong format to add multiple orders.");
-//    }
-//
-//    public void printNegativeIntegerError() {
-//        System.out.println("Please enter positive numbers only.");
-//    }
-//
-//    public void printMissingOrderIdError() {
-//        System.out.println("Please enter the order ID to refund.");
-//    }
-//
-//    public void printInvalidOrderIdError() {
-//        System.out.println("Please enter a valid order ID to refund.");
-//    }
-//
-//    public void printDuplicateRefundRequestError() {
-//        System.out.println("Order is already refunded.");
-//    }
-//
-//    public void printInvalidPaymentError() {
-//        System.out.println("Invalid payment command");
-//    }
-//
-//    public void printMissingPaymentFlagError() {
-//        System.out.println("Please use correctly formatted flags to add payment.");
-//    }
-//
-//    public void printMissingPaymentArgumentError() {
-//        System.out.println("Please enter both the payment type and amount received.");
-//    }
-
-    public void printInsufficientAmountError() {
-        System.out.println("Insufficient amount. Payment amount must be more than or equals to subtotal.");
-    }
-
-//    public void printInvalidPaymentTypeError() {
-//        System.out.println("Please enter a valid payment type (Card/Cash/Others).");
-//    }
-//
 //    public void printItemNotExistError() {
 //        System.out.println("No such item exists.");
 //    }
@@ -134,7 +78,7 @@ public class TransactionUi extends Ui {
 //                "Please try again with a more specific item name.");
 //    }
 
-    public void helpAddOder(){
+    public void helpAddOder() {
         System.out.println("/addorder -i <number> -q <number>");
     }
 
@@ -142,54 +86,92 @@ public class TransactionUi extends Ui {
     public void printError(Flags.Error error) {
         System.out.print("Error: ");
         switch (error) {
-        case INPUT_EMPTY:
-            System.out.println("Input is empty. Please enter something.");
+        //addorder flags
+        case MISSING_ORDER_FLAG:
+            System.out.println("Please input the item's index using -i <index> or --item <index>");
             break;
-        case DOUBLE_OVERFLOW:
-            System.out.println("Double overflow! Please enter a double within the valid range.");
+        case MISSING_ORDER_FLAG_ARGUMENT:
+            System.out.println("Item index is empty. Please enter the item index.");
             break;
-        case INTEGER_OVERFLOW:
-            System.out.println("Integer overflow! Please enter an integer within the valid range.");
+        case MISSING_QUANTITY_FLAG_ARGUMENT:
+            System.out.println("Quantity is empty. Please enter the quantity.");
             break;
-        case ARGUMENT_NOT_FOUND:
-            System.out.println("Please enter item index or quantity after flags.");
+        case INVALID_ORDER_ITEM_INDEX_FORMAT:
+            System.out.println("Index must be a number.");
             break;
-        case ARGUMENT_INVLAID:
-            System.out.println("Please use correctly formatted flags to add order.");
+        case NEGATIVE_ORDER_ITEM_INDEX:
+            System.out.println("Index cannot be negative.");
+        case INVALID_ORDER_ITEM_INDEX_OUT_OF_BOUNDS:
+            System.out.println("Index does not exist.");
             break;
-        case QUANTITY_INVLAID:
+        case INVALID_QUANTITY_FORMAT:
+            System.out.println("Quantity must be a number.");
+            break;
+        case INVALID_NEGATIVE_QUANTITY:
             System.out.println("Quantity must be more than 0.");
             break;
-        case MULTIPLE_ORDER_FORMAT_INVALID:
-            System.out.println("Wrong format to add multiple orders.");
-            break;
-        case NOT_POSITIVE_INTEGER:
-            System.out.println("Please enter positive numbers only.");
-            break;
-        case ORDER_ID_NOT_FOUND:
-            System.out.println("Please enter the order ID to refund.");
-            break;
-        case DUPLICATE_REFUND_REQUEST:
-            System.out.println("Order is already refunded.");
-            break;
-        case PAYMENT_COMMAND_INVALID:
-            System.out.println("Invalid payment command");
-            break;
-        case PAYMENT_FLAG_NOT_FOUND:
-            System.out.println("Please use correctly formatted flags to add payment.");
-            break;
-        case PAYMENT_ARGUMENT_NOT_FOUND:
-            System.out.println("Please enter both the payment type and amount received.");
-            break;
-        case PAYMENT_TYPE_INVALID:
-            System.out.println("Please enter a valid payment type (Card/Cash/Others).");
-            break;
-        case ITEM_NOT_FOUND:
+        case NO_SUCH_ITEM:
             System.out.println("No such item exists.");
             break;
-        case DUPLICATE_ITEM_FOUND:
-            System.out.println("Your input referenced multiple similar items. " +
-                    "Please try again with a more specific item name.");
+        case MULTIPLE_SIMILAR_ITEMS:
+            System.out.println("Multiple items with similar names found. Please enter a more specific item name!");
+            break;
+        //add multiple order flags
+        case INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION:
+            System.out.println("Please use the correct format: /addorder -I [index:quantity].");
+            break;
+        case MISSING_MULTIPLE_ORDER_ARGUMENT_EXCEPTION:
+            System.out.println("Please specify the item index and quantity in [index:quantity] format after the flag.");
+            break;
+        case MISSING_MULTIPLE_ORDER_FLAG_EXCEPTION:
+            System.out.println("Please use -I or --items flag to add multiple orders.");
+            break;
+        //payment flags
+        case INVALID_PAY_TYPE:
+            System.out.println("Please enter a valid payment type (Card/Cash/Others).");
+            break;
+        case INVALID_PAYMENT_AMOUNT_FOR_CARD:
+            System.out.println("Please input exact amount for card payment.");
+            break;
+        case INVALID_PAY_AMOUNT_NEGATIVE:
+            System.out.println("Payment amount must be more than 0.");
+            break;
+        case INVALID_PAY_AMOUNT_FORMAT:
+            System.out.println("Payment amount must be a number.");
+            break;
+        case INVALID_PAY_AMOUNT_DECIMAL_PLACE:
+            System.out.println("Payment amount cannot have more than 2 decimal place.");
+            break;
+        case INSUFFICIENT_PAY_AMOUNT:
+            System.out.println("Insufficient amount. Payment amount must be more than or equals to subtotal.");
+            break;
+        case MISSING_PAY_TYPE_FLAG:
+            System.out.println("Please include the payment type using -t or --type <type>.");
+            break;
+        case MISSING_PAY_TYPE_ARGUMENT:
+            System.out.println("Payment type cannot be empty.");
+            break;
+        case MISSING_PAY_AMOUNT_FLAG:
+            System.out.println("Please include the payment amount using -a or --amount <amount>.");
+            break;
+        case MISSING_PAY_AMOUNT_ARGUMENT:
+            System.out.println("Payment amount cannot be empty.");
+            break;
+        case MISSING_PAY_COMMAND:
+            System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
+            break;
+        //refund flags
+        case MISSING_REFUND_ORDER_FLAG:
+            System.out.println("Please include the order ID using -i or --id <order id>.");
+            break;
+        case MISSING_REFUND_ORDER_ARGUMENT:
+            System.out.println("Order ID cannot be empty.");
+            break;
+        case INVALID_REFUND_ORDER_ID:
+            System.out.println("Invalid order ID.");
+            break;
+        case INVALID_REFUND_ORDER_TYPE:
+            System.out.println("Order is already refunded.");
             break;
         }
     }

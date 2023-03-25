@@ -152,13 +152,6 @@ public class Ui {
     }
 
     /**
-     * Prompt user to use /pay to add payment
-     */
-    public void promptPayment() {
-        System.out.println("Please use /pay command to add payment for the order.");
-    }
-
-    /**
      * Prints string to user and moves the cursor to a new line.
      */
     public void println(Object string) {
