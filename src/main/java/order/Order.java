@@ -204,9 +204,11 @@ public class Order implements OrderInterface {
      * @param listOfItems ItemList object containing the available items
      */
     public void addOrder(Command command, Menu listOfItems) {
+
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
             AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation(listOfItems);
+
             command.mapArgumentAlias("item", "i");
             command.mapArgumentAlias("items", "I");
 
@@ -219,11 +221,11 @@ public class Order implements OrderInterface {
             } else if (command.getArgumentMap().get("items") != null) {
                 command = addMultipleOrderValidation.validateFormat(command);
                 addMultipleOrderValidation.validateArguments(command, listOfItems);
-                //command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
             } else {
                 addOrderValidation.validateFlag(command);
             }
+
         } catch (MissingQuantityArgumentException e) {
             transactionUi.printError(Flags.Error.MISSING_QUANTITY_FLAG_ARGUMENT);
         } catch (InvalidIndexNumberFormatException e) {

@@ -46,7 +46,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
                 throw new MissingMultpleOrderFlagException();
             }
         } else {
-            return validateFormat2(input);
+            return splitMultipleOrdersIntoArrayList(input);
         }
     }
 
@@ -88,7 +88,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
     }
 
-    private Command validateFormat2(String input)
+    private Command splitMultipleOrdersIntoArrayList(String input)
             throws InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
             InvalidMultipleOrderFormatException {
 
@@ -104,11 +104,11 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
             orderPairs = new String[]{orderPairsString};
         }
 
-        return validateFormat3(orderPairs);
+        return castIntoProCommandFormat(orderPairs);
 
     }
 
-    private Command validateFormat3(String[] orderPairs)
+    private Command castIntoProCommandFormat(String[] orderPairs)
             throws InvalidIndexOutOfBoundsException, InvalidQuantityNumberFormatException,
             InvalidMultipleOrderFormatException {
 
@@ -131,8 +131,6 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
             if (elements.length == 2 && isInteger(elements[0]) && isInteger(elements[1])) {
 
                 String itemIndex = elements[0];
-                System.out.println("Item index: " + itemIndex);
-                System.out.println("Index is valid?: " + isValidIndex(itemIndex, menu));
 
                 if (!(isValidIndex(itemIndex, menu))) {
                     throw new InvalidIndexOutOfBoundsException();
