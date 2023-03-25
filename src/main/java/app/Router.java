@@ -1,6 +1,6 @@
 package app;
 
-import exception.ItemException;
+import exception.item.ItemException;
 import exception.OrderException;
 import item.Menu;
 import item.MenuAssistant;

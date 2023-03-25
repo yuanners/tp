@@ -20,6 +20,7 @@ public class Validation {
     public void validateArgument(Command arg) throws InvalidArgumentException {
         assert arg.getUserInput() != null : "Null input should be handled";
         if (arg.getUserInput() == null) {
+            // TODO change to no inputs
             throw new InvalidArgumentException(ui.getNullMessage());
         }
     }
