@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import java.lang.reflect.Type;
-
+import exception.item.MissingFindItemDescriptionException;
 import app.Command;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
-import exception.InvalidArgumentException;
-import exception.item.*;
 import org.apache.commons.lang3.StringUtils;
 import ui.Flags;
 import ui.MenuUi;
@@ -105,8 +103,6 @@ public class Menu {
      * Updates a specified item on the menu by its given index.
      *
      * @param command the Command object containing the search term
-     * @throws ItemException if the command format is invalid
-     *                       or index does not exist
      */
     public void updateItem(Command command) {
         if (this.getItems().size() == 0) {
@@ -147,8 +143,6 @@ public class Menu {
      * Deletes a specified item on the menu by its given index.
      *
      * @param command the Command object containing the search term
-     * @throws ItemException if the command format is invalid
-     *                       or index does not exist
      */
     public void deleteItem(Command command) {
         if (this.getItems().size() == 0) {

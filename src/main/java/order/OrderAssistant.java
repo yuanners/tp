@@ -55,7 +55,7 @@ public class OrderAssistant {
         while (hasMoreOrderEntry) {
 
             do {
-                 itemName = getItem();
+                itemName = getItem();
                 if (CANCELS.contains(itemName)) {
                     return true;
                 }

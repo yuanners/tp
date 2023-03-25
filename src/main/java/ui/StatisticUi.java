@@ -7,7 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.PriorityQueue;
 
 /**
- * The StatisticUi class extends the Ui class and provides methods for displaying various statistical data in a user-friendly manner.
+ * The StatisticUi class extends the Ui class and provides
+ * methods for displaying various statistical data in a user-friendly manner.
  */
 public class StatisticUi extends Ui {
 
@@ -22,7 +23,8 @@ public class StatisticUi extends Ui {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         System.out.println("| " + "-".repeat(131) + " |");
-        System.out.printf("| %-131s |\n", "Daily statistic for the date range " + startDate.format(formatter) + " - " + endDate.format(formatter));
+        System.out.printf("| %-131s |\n", "Daily statistic for the date range "
+                            + startDate.format(formatter) + " - " + endDate.format(formatter));
         System.out.printf("| Total sales: $%-117.2f |\n", totalSales);
         System.out.println("| " + "-".repeat(131) + " |");
         System.out.printf("| %-12s | %-13s | %-100s |\n", "Date", "Sales($)", "Performance");
@@ -148,6 +150,8 @@ public class StatisticUi extends Ui {
         case INTEGER_OVERFLOW:
             System.out.println("Integer overflow! Please enter an integer within the valid range.");
             break;
+        default:
+            // Fallthrough
         }
     }
 }
