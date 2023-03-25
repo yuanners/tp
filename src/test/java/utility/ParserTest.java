@@ -17,9 +17,9 @@ class ParserTest {
 
         System.out.println(argMap);
 
-//        assertEquals("100", argMap.get("p"));
-//        assertEquals("200", argMap.get("positive"));
-//        assertEquals("a very long sentence", argMap.get("sentence"));
+        //        assertEquals("100", argMap.get("p"));
+        //        assertEquals("200", argMap.get("positive"));
+        //        assertEquals("a very long sentence", argMap.get("sentence"));
     }
 
     @Test

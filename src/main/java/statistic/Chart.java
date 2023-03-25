@@ -12,14 +12,15 @@ public class Chart {
 
     /**
      * This method generates a daily sales chart based on the given daily sales data,
-     * index date, end date, and total sales.
+     *      index date, end date, and total sales.
      *
      * @param dailySalesMap a map containing the daily sales data
      * @param indexDate     the start date for the chart
      * @param endDate       the end date for the chart
      * @param totalSales    the total sales for the given time period
      */
-    public void dailySalesChart(Map<LocalDateTime, Double> dailySalesMap, LocalDateTime indexDate, LocalDateTime endDate, double totalSales) {
+    public void dailySalesChart(Map<LocalDateTime,
+            Double> dailySalesMap, LocalDateTime indexDate, LocalDateTime endDate, double totalSales) {
 
         StatisticUi ui = new StatisticUi();
 
