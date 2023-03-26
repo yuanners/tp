@@ -447,10 +447,18 @@ command `refundorder` or `8`.
 
 The general workflow of `refundorder` is as follows:
 
-1. User input is passed to `MoneyGoWhere`.
-2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command
-   as `refundorder`.
-3. The obtained command is then passed back to `MoneyGoWhere`, which calls the `Menu` object.
+1. User input is passed to `MoneyGoWhere`. `MoneyGoWhere` then passes it to the `Command` class, which instantiates a
+   new `parser` object to extract the command as `refundorder`.
+2. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the
+   user input.
+3. `Router#handleRoute` is then invoked to process the command. It calls the `Router#assistRoute` for the basic mode
+   commands.
+4. Once the command runs, it can be aborted at any time when the user inputs /cancel.
+4. The obtained command `refundorder` is then passed back to `MoneyGoWhere`, which instantiates a new `RefundAssistant`object
+   and calls the `RefundAssistant#refundOrder` method.
+5. `RefundAssistant#refundOrder` invokes the `getID` method to get and validate the order ID to be refunded (same validation as advanced mode).
+6.  If the command passes all the validation checks, control is given back to `Refund` class and the `Order.status` will be updated to `refunded` and is saved to the `orders.json` file using the `Transaction.save` method.
+7. Router#assistRoute then calls MenuAssistant#printResult to print a message indicating that if the item has been successfully added to the menu or if the user has cancelled the command accordingly.
 
 <hr>
 
