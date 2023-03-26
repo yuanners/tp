@@ -42,13 +42,13 @@ public class Menu {
         this.items = new ArrayList<>();
     }
 
-    public void displayList() {
+    public void displayList(Command command) {
         MenuUi menuUi = new MenuUi();
         if (this.items.size() != 0) {
             menuUi.printMenu(items);
-            menuUi.printSuccessfulListItem();
+            menuUi.printCommandSuccess(command.getCommand());
         } else {
-            menuUi.printEmptyMenu();
+            menuUi.printError(Flags.Error.EMPTY_MENU);
         }
     }
 
@@ -92,7 +92,7 @@ public class Menu {
         if(!isValid) { return; }
 
         processAddItem(command, addItemValidation);
-        menuUi.printSuccessfulAddItem();
+        menuUi.printCommandSuccess(command.getCommand());
     }
 
     private void processAddItem(Command command, AddItemValidation addItemValidation) {
@@ -128,7 +128,7 @@ public class Menu {
         if(!isValid) { return; }
 
         processUpdateItem(command, updateItemValidation);
-        menuUi.printSuccessfulUpdateItem();
+        menuUi.printCommandSuccess(command.getCommand());
 
     }
 
@@ -168,7 +168,7 @@ public class Menu {
         if(!isValid) { return; }
 
         processDeleteItem(command, deleteItemValidation);
-        menuUi.printSuccessfulDeleteItem();
+        menuUi.printCommandSuccess(command.getCommand());
     }
 
     private void processDeleteItem(Command command, DeleteItemValidation deleteItemValidation) {
@@ -277,7 +277,7 @@ public class Menu {
             menuUi.printFindItem(indexes.get(i), menu);
         }
 
-        menuUi.printFindItemComplete();
+        menuUi.printCommandSuccess(command.getCommand());
 
     }
 
