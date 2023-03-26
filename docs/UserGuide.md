@@ -491,14 +491,14 @@ Assume your menu is as follows:
 
 A large group comes to your store and orders _2_ bowls of _Laksa_, _3_ plates of _Fried Rice_, and _2_ plates of Wanton
 Mee. At the last moment, your customer adds another _2_ bowls of _Laksa_. This customer uses a voucher to pay (an "
-_others_" mode of payment). To add this lengthy order, you can use the command `/addorder -I [1:2,2:3,2:4,1:2] `.
+_others_" mode of payment). To add this lengthy order, you can use the command `/addorder -I [1:2,2:3,2:4,1:2]`.
 
 ```text
 Please enter a command: 
 > /addorder -I [1:2,2:3,4:2,1:2]
-Order has been added successfully. Total amount: $42.2.
+Order has been added successfully. Total amount: $42.20.
 Please use /pay command to add payment for the order.
-> /pay -a 42.2 -t others
+> /pay -a 42.20 -t others
 The calculated change is $0.0.
 The command: /pay was successfully executed!
 ```
@@ -513,7 +513,8 @@ Forgot the index of an item? Fret not! You can also add an item to an order by s
 
 * For single items, use the command `/addorder -i "<name>" -q <quantity>`
 * For multiple items, use the command `/addorder -I ["<name>":q{,"<name>":q}]`
-    * As usual, it requires a minimum of one item, and different items are split by a comma.
+    * Like in the previous section, Advanced Mode Multiple Items, the command requires a minimum of one item and its corresponding quantity. 
+    * Different items are split by a comma.
 
 **Example of Usage**
 
