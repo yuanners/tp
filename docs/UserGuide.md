@@ -62,7 +62,14 @@ the mode used.
 2. Open the command terminal and navigate to the folder where the `.jar` file is, by doing `cd "<file path>"`.
 3. Use the command `java -jar moneygowhere.jar` to launch our application. If correct, you should see the following on
    startup:
-   **TODO: Insert Image**
+```text
+░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀
+░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀
+░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀
+Welcome to MoneyGoWhere!
+    
+Please enter a command:
+```
 4. When you are done using MoneyGoWhere, you can exit the application with the command `exit`.
 
 Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere)
@@ -190,7 +197,7 @@ The command: /deleteitem was successfully executed!
 
 ##### Advanced Mode List all Items
 
-This lists all items currently in the menu. 
+This lists all items currently in the menu.
 
 Do note that the index is important as it is the reference
 for [adding Orders](#advanced-mode-add-an-order).
@@ -514,7 +521,8 @@ Forgot the index of an item? Fret not! You can also add an item to an order by s
 
 * For single items, use the command `/addorder -i "<name>" -q <quantity>`
 * For multiple items, use the command `/addorder -I ["<name>":q{,"<name>":q}]`
-    * Like in the previous section, Advanced Mode Multiple Items, the command requires a minimum of one item and its corresponding quantity. 
+    * Like in the previous section, Advanced Mode Multiple Items, the command requires a minimum of one item and its
+      corresponding quantity.
     * Different items are split by a comma.
 
 **Example of Usage**
@@ -754,18 +762,23 @@ Item added successfully.
 
 ##### Basic Mode Delete an Item
 
-To delete an item from the menu, use the command `deleteitem` or `2`. You will then be prompted to input the index of the item
+To delete an item from the menu, use the command `deleteitem` or `2`. You will then be prompted to input the index of
+the item
 to be deleted.
 
 ###### Example of Usage
+
 Assume your menu currently looks like this.
+
 ```text
 | Index | Name                      | Price |
 | ----- | ------------------------- | ----- |
 | 0     | Chicken Rice              | 3.50  |
 ```
 
-You change your mind and decide you no longer want to sell Chicken Rice, which is at index _0_. To begin the process of deleting it from your menu, you can use the command `deleteitem`.
+You change your mind and decide you no longer want to sell Chicken Rice, which is at index _0_. To begin the process of
+deleting it from your menu, you can use the command `deleteitem`.
+
 ```text
 Please enter a command: 
 > deleteitem
@@ -781,6 +794,7 @@ Item deleted successfully.
 To list all items, use the command `listitem` or `3`.
 
 ###### Example of Usage
+
 ```text
 Please enter a command: 
 > listitem
@@ -797,12 +811,16 @@ All items in the menu have been listed!
 
 ##### Basic Mode Find an Item
 
-To find an item, use the command `finditem` or `5`. You will then be prompted to input a description. A list of all items in
+To find an item, use the command `finditem` or `5`. You will then be prompted to input a description. A list of all
+items in
 the menu matching that description will then be printed.
+
 * The input is case-insensitive.
 
 ###### Example of Usage
+
 Assume your menu looks like this.
+
 ```text
 | Index | Name                      | Price |
 | ----- | ------------------------- | ----- |
@@ -812,7 +830,9 @@ Assume your menu looks like this.
 | 3     | Fish Soup                 | 6.50  |
 ```
 
-You temporarily forget which items on your menu have "_rice_" in the name. To search for all of them, use the command `finditem`.
+You temporarily forget which items on your menu have "_rice_" in the name. To search for all of them, use the
+command `finditem`.
+
 ```text
 Please enter a command: 
 > finditem
@@ -829,11 +849,14 @@ finditem completed!
 
 ##### Basic Mode Update an Item
 
-To update an item, use the command `updateitem` or `4`. You will be prompted to enter the index, and then the option to change
+To update an item, use the command `updateitem` or `4`. You will be prompted to enter the index, and then the option to
+change
 the item's name or price.
 
 ###### Example of Usage
+
 To show all different ways of updating an item, assume your menu looks like this.
+
 ```text
 | Index | Name                      | Price |
 | ----- | ------------------------- | ----- |
@@ -841,7 +864,9 @@ To show all different ways of updating an item, assume your menu looks like this
 | 1     | Egg                       | 80.00 |
 | 2     | mEE gORENG                | 56.00 |
 ```
+
 You want to change 3 things:
+
 1. Change the name to "_Chicken Rice_" at Index _0_.
 2. Change the price to _$0.80_ at Index _1_.
 3. Change the name to "_Mee Goreng_" and change the price to _$5.60_ at Index _2_.
@@ -849,6 +874,7 @@ You want to change 3 things:
 To do so, use the command `updateitem`.
 
 **Example 1: Change the Name**
+
 ```text
 Please enter a command: 
 > updateitem
@@ -864,6 +890,7 @@ Item updated successfully.
 ```
 
 **Example 2: Change the Price**
+
 ```text
 Please enter a command: 
 > updateitem
@@ -879,6 +906,7 @@ Item updated successfully.
 ```
 
 **Example 3: Change Name and Price**
+
 ```text
 Please enter a command: 
 > updateitem
@@ -908,6 +936,20 @@ Item updated successfully.
 To add an order, use the command `addorder` or `6`.
 
 ###### Example of Usage
+Assume your menu looks like this:
+```text
+| Index | Name                      | Price |
+| ----- | ------------------------- | ----- |
+| 0     | Egg                       | 0.80  |
+| 1     | Laksa                     | 3.55  |
+| 2     | Fried Rice                | 4.00  |
+| 3     | Wanton Mee                | 4.00  |
+```
+
+A customer orders _2_ plates of _Fried Rice_ and _5_ bowls of _Wanton Mee_. Use the command `addorder` to add their order.
+```text
+
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
@@ -921,11 +963,14 @@ To add an order, use the command `listorder` or `7`.
 
 ##### Basic Mode Refund an Order
 
-To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be obtained from the
-`order.json` file. 
+To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be
+obtained from the
+`order.json` file.
 
 ###### Example of Usage
+
 Enter the unique order ID of the order you wan to refund.
+
 ```text
 Please enter a command: 
 > refundorder
