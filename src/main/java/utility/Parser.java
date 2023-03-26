@@ -1,7 +1,6 @@
 package utility;
 
 import java.io.FileReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -74,7 +73,6 @@ public class Parser {
                 System.out.println("COMMAND FORMAT INCORRECT: " + flag);
             }
         }
-
         return argMap;
     }
 

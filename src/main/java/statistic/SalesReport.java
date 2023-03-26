@@ -88,7 +88,7 @@ public class SalesReport extends Statistic {
      *
      * @param transaction the transaction to be used for calculating the daily sales.
      * @return a Map with LocalDateTime keys representing the start of each day within the date range,
-     * and Double values representing the total sales for each day.
+     *      and Double values representing the total sales for each day.
      */
     public Map<LocalDateTime, Double> dailySales(Transaction transaction) {
         Map<LocalDateTime, Double> dailySalesMap = new HashMap<>();
@@ -114,7 +114,7 @@ public class SalesReport extends Statistic {
      *
      * @param transaction the transaction to be used for calculating the monthly sales.
      * @return a Map with LocalDateTime keys representing the start of each month within the date range,
-     * and Double values representing the total sales for each month.
+     *      and Double values representing the total sales for each month.
      */
     public Map<LocalDateTime, Double> monthlySales(Transaction transaction) {
         Map<LocalDateTime, Double> monthlySalesMap = new HashMap<>();

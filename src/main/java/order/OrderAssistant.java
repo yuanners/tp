@@ -1,9 +1,9 @@
 package order;
 
 import app.Command;
-import exception.OrderException;
 import item.Menu;
 import utility.Ui;
+import validation.order.AddOrderValidation;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,37 +12,28 @@ public class OrderAssistant {
 
     Ui ui;
     Scanner sc;
+    AddOrderValidation addOrderValidation = new AddOrderValidation();
 
     private final ArrayList<String> CANCELS = new ArrayList<>() {
         {
             add("/cancel");
             add("cancel");
-            add("CANCEL");
-            add("/CANCEL");
         }
     };
     private final ArrayList<String> YESES = new ArrayList<>() {
         {
             add("yes");
             add("y");
-            add("YES");
-            add("Y");
             add("/yes");
             add("/y");
-            add("/YES");
-            add("/Y");
         }
     };
     private final ArrayList<String> NOS = new ArrayList<>() {
         {
             add("no");
             add("n");
-            add("NO");
-            add("N");
             add("/no");
             add("/n");
-            add("/NO");
-            add("/N");
         }
     };
 
@@ -51,25 +42,31 @@ public class OrderAssistant {
         sc = new Scanner(System.in);
     }
 
-    public boolean assistedAddOrder(Menu menu, Transaction transaction) throws OrderException {
+    public boolean assistedAddOrder(Menu menu, Transaction transaction) {
 
         Order order;
         Command command;
         String commandString = "";
+        String itemName = "";
+        String quantity = "";
 
         boolean hasMoreOrderEntry = true;
 
         while (hasMoreOrderEntry) {
 
-            String itemName = getItem();
-            if (CANCELS.contains(itemName)) {
-                return true;
-            }
+            do {
+                itemName = getItem();
+                if (CANCELS.contains(itemName)) {
+                    return true;
+                }
+            } while (!addOrderValidation.checkValidItemName(itemName));
 
-            String quantity = getQuantity();
-            if (CANCELS.contains(quantity)) {
-                return true;
-            }
+            do {
+                quantity = getQuantity();
+                if (CANCELS.contains(quantity)) {
+                    return true;
+                }
+            } while (!addOrderValidation.checkValidQuantity(quantity));
 
             String hasMoreOrderEntryString = askIfGotMoreOrderEntries();
             if (YESES.contains(hasMoreOrderEntryString)) {
@@ -82,7 +79,6 @@ public class OrderAssistant {
 
             // Append to final command string
             commandString += "\"" + itemName + "\":" + quantity + ",";
-
         }
 
         commandString = formatCommandStringForOrders(commandString);
@@ -99,6 +95,7 @@ public class OrderAssistant {
 
         ui.promptItemName();
         item = sc.nextLine();
+        item = item.toLowerCase();
 
         return item;
 
@@ -110,6 +107,7 @@ public class OrderAssistant {
 
         ui.promptItemQuantity();
         quantity = sc.nextLine();
+        quantity = quantity.toLowerCase();
 
         return quantity;
     }
@@ -120,6 +118,7 @@ public class OrderAssistant {
 
         ui.promptMoreOrderEntries();
         response = sc.nextLine();
+        response = response.toLowerCase();
 
         return response;
     }

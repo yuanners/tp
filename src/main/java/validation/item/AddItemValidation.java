@@ -1,23 +1,57 @@
 package validation.item;
 
 import app.Command;
-import exception.item.*;
+import exception.InvalidArgumentException;
+import exception.item.MissingNameAndPriceFlag;
+import exception.item.MissingNameFlagException;
+import exception.item.MissingPriceFlagException;
+import exception.item.NameMinimumLengthException;
+import exception.item.NameMaximumLengthException;
+import exception.item.DuplicateNameException;
+import exception.item.PriceMinimumLengthException;
+import exception.item.PriceInvalidNumberException;
+import exception.item.PriceOverflowException;
+import exception.item.PriceNegativeException;
+import exception.item.PriceInvalidDecimalPlaceException;
 import item.Menu;
+import ui.Flags;
+import ui.MenuUi;
 import utility.Ui;
 
 public class AddItemValidation extends ItemValidation {
 
-    private Ui ui = new Ui();
+    private Ui ui;
+    private MenuUi menuUi;
+
+    public AddItemValidation() {
+        ui = new Ui();
+        menuUi = new MenuUi();
+    }
+
+    public boolean validateFlags(Command command) {
+        boolean isValid = false;
+        try {
+            checkFlags(command);
+            isValid = true;
+        } catch (MissingNameAndPriceFlag e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_NAME_AND_PRICE_FLAG);
+        } catch (MissingNameFlagException e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_NAME_FLAG);
+        } catch (MissingPriceFlagException e) {
+            menuUi.printError(Flags.Error.MISSING_ITEM_PRICE_FLAG);
+        }
+
+        return isValid;
+    }
 
     /**
      * Checks if the required flag is given
      *
-     * @param c Given command
-     * @throws ItemException If any required flag is not given
+     * @param command Given command
      */
-    public void validateFlags(Command c) throws
+    private void checkFlags(Command command) throws
             MissingNameFlagException, MissingPriceFlagException, MissingNameAndPriceFlag {
-        String args = c.getArgumentString();
+        String args = command.getArgumentString();
 
         if(!args.contains(SHORT_NAME_FLAG) && !args.contains(LONG_NAME_FLAG)
                 && !args.contains(SHORT_PRICE_FLAG) && !args.contains(LONG_PRICE_FLAG)) {
@@ -34,10 +68,47 @@ public class AddItemValidation extends ItemValidation {
     }
 
     /**
+     * Calls all validation methods to check all parts of the given command
+     *
+     * @param c Given command
+     * @param menu The list of items on the menu
+     */
+    public boolean validateCommand(Command c, Menu menu) {
+        boolean isValid = false;
+
+        try {
+            validateArgument(c);
+            validateName(c);
+            validateDuplicateName(c, menu);
+            validatePrice(c);
+            isValid = true;
+        } catch (InvalidArgumentException e) {
+            menuUi.printError(Flags.Error.EMPTY_INPUT);
+        } catch (NameMinimumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_MIN_LENGTH_ERROR);
+        } catch (NameMaximumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
+        } catch (DuplicateNameException e) {
+            menuUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
+        } catch (PriceMinimumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_MIN_LENGTH_ERROR);
+        } catch (PriceInvalidNumberException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_FORMAT_ERROR);
+        } catch (PriceOverflowException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_OVERFLOW_ERROR);
+        } catch (PriceNegativeException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_NEGATIVE_ERROR);
+        } catch (PriceInvalidDecimalPlaceException e) {
+            menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_DECIMAL_PLACE_ERROR);
+        }
+
+        return isValid;
+    }
+
+    /**
      * Checks if the given input for name is valid
      *
      * @param c Given command
-     * @throws ItemException If name is invalid
      */
     public void validateName(Command c) throws NameMinimumLengthException, NameMaximumLengthException {
         // TODO : Refactor callers
@@ -60,7 +131,6 @@ public class AddItemValidation extends ItemValidation {
      *
      * @param c Given command
      * @param menu The list of items on the menu
-     * @throws ItemException If name is invalid
      */
     public void validateDuplicateName(Command c, Menu menu) throws DuplicateNameException {
         String newItemName = c.getArgumentMap().get(LONG_NAME_FLAG);
@@ -77,7 +147,6 @@ public class AddItemValidation extends ItemValidation {
      * Checks if the given input for price is valid
      *
      * @param c Given command
-     * @throws ItemException If price is invalid
      */
     public void validatePrice(Command c) throws
             PriceMinimumLengthException, PriceOverflowException, PriceInvalidNumberException,

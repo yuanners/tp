@@ -1,34 +1,97 @@
 package validation.order;
 
 import app.Command;
-import exception.OrderException;
+import exception.order.MissingMultipleOrderArgumentException;
+import exception.order.MissingMultpleOrderFlagException;
+import exception.order.InvalidMultipleOrderFormatException;
+import exception.order.InvalidIndexNegativeException;
+import exception.order.InvalidIndexNumberFormatException;
+import exception.order.InvalidIndexOutOfBoundsException;
+import exception.order.InvalidQuantityNumberFormatException;
+import exception.order.InvalidQuantityNegativeException;
 import item.Menu;
-import utility.Ui;
 
 public class AddMultipleAddOrderValidation extends AddOrderValidation {
-    private Menu menu = new Menu();
-    private Ui ui = new Ui();
+    private Menu menu;
 
-    public AddMultipleAddOrderValidation() {
-
+    public AddMultipleAddOrderValidation(Menu menu) {
+        this.menu = menu;
     }
 
-    public Command validateAddMultipleOrder(Command arg) throws OrderException {
+    public Command validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
+            MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException,
+            InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException {
 
         String input = arg.getUserInput();
-        String regex = "^\\/addorder\\s+-I\\s+\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
+        String regex = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
                 "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
 
+        if (!input.matches(regex)) {
 
-        if (input.matches(regex)) {
-            return validateAddMultipleOrder2(input);
+            if (arg.getArgumentString().contains("-I") || arg.getArgumentString().contains("--items")) {
+
+                String itemsArg = arg.getArgumentMap().get("I");
+
+                if (itemsArg.isEmpty()) {
+                    itemsArg = arg.getArgumentMap().get("items");
+                }
+
+                if (itemsArg == null || itemsArg.isEmpty()) {
+                    throw new MissingMultipleOrderArgumentException();
+                } else {
+                    throw new InvalidMultipleOrderFormatException();
+                }
+
+            } else {
+                throw new MissingMultpleOrderFlagException();
+            }
         } else {
-            throw new OrderException(ui.getInvalidMultipleOrderFormat());
+            return splitMultipleOrdersIntoArrayList(input);
+        }
+    }
+
+    public void validateArguments(Command arg, Menu items) throws InvalidIndexNegativeException,
+            InvalidIndexNumberFormatException, InvalidIndexOutOfBoundsException,
+            InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
+
+        String input = arg.getUserInput();
+        String orderPairsString = input.replaceAll("[^\\d\\s,:]", "");
+        String[] orderPairs;
+
+        if (orderPairsString.contains(",")) {
+            orderPairs = orderPairsString.split(",\\s*");
+        } else {
+            orderPairs = new String[]{orderPairsString};
+        }
+
+        for (String order : orderPairs) {
+            String[] numbers = order.trim().split(":");
+
+            if (isInteger(numbers[0])) {
+                if (Integer.parseInt(numbers[0]) < 0) {
+                    throw new InvalidIndexNegativeException();
+                }
+                if (!isValidIndex(numbers[0], items)) {
+                    throw new InvalidIndexOutOfBoundsException();
+                }
+            } else {
+                throw new InvalidIndexNumberFormatException();
+            }
+            if (isInteger(numbers[1])) {
+                if (Integer.parseInt(numbers[1]) <= 0) {
+                    throw new InvalidQuantityNegativeException();
+                }
+            } else {
+                throw new InvalidQuantityNumberFormatException();
+            }
         }
 
     }
 
-    private Command validateAddMultipleOrder2(String input) throws OrderException {
+    private Command splitMultipleOrdersIntoArrayList(String input)
+            throws InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
+            InvalidMultipleOrderFormatException {
+
         int startOfArgumentsIndex = 14;
         String orderPairsString = input.substring(startOfArgumentsIndex);
         orderPairsString = orderPairsString.substring(0, orderPairsString.length() - 1);
@@ -38,14 +101,16 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         if (orderPairsString.contains(",")) {
             orderPairs = orderPairsString.split(",\\s*");
         } else {
-            orderPairs = new String[] {orderPairsString};
+            orderPairs = new String[]{orderPairsString};
         }
 
-        return validateAddMultipleOrder3(orderPairs);
+        return castIntoProCommandFormat(orderPairs);
 
     }
 
-    private Command validateAddMultipleOrder3(String[] orderPairs) throws OrderException {
+    private Command castIntoProCommandFormat(String[] orderPairs)
+            throws InvalidIndexOutOfBoundsException, InvalidQuantityNumberFormatException,
+            InvalidMultipleOrderFormatException {
 
         String index;
         String finalCommandString = "";
@@ -54,6 +119,9 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
             String[] elements = order.trim().split(":");
 
+            if (elements[0].contains("\"")) {
+                elements[0] = elements[0].replace("\"", "");
+            }
 
             if (!isInteger(elements[0])) {
                 index = Integer.toString(menu.findItemIndex(elements[0]));
@@ -65,17 +133,17 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
                 String itemIndex = elements[0];
 
                 if (!(isValidIndex(itemIndex, menu))) {
-                    throw new OrderException(ui.getInvalidIndex());
+                    throw new InvalidIndexOutOfBoundsException();
                 }
 
                 if (Integer.parseInt(elements[1]) <= 0) {
-                    throw new OrderException(ui.getInvalidOrderInteger());
+                    throw new InvalidQuantityNumberFormatException();
                 }
 
                 finalCommandString += elements[0] + ":" + elements[1] + ",";
 
             } else {
-                throw new OrderException(ui.getInvalidMultipleOrderInteger());
+                throw new InvalidMultipleOrderFormatException();
             }
 
         }

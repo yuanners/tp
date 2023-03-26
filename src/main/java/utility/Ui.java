@@ -59,7 +59,7 @@ public class Ui {
         System.out.println("░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀\n" +
                            "░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀\n" +
                            "░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀");
-                System.out.println("Welcome to MoneyGoWhere!\n");
+        System.out.println("Welcome to MoneyGoWhere!\n");
     }
 
     /**
@@ -149,13 +149,6 @@ public class Ui {
      */
     public void printCommandCancelled(String command) {
         System.out.println("The command: " + command + " has been cancelled.");
-    }
-
-    /**
-     * Prompt user to use /pay to add payment
-     */
-    public void promptPayment() {
-        System.out.println("Please use /pay command to add payment for the order.");
     }
 
     /**

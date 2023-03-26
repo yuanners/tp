@@ -9,9 +9,6 @@ public class MenuUi extends Ui {
 
     }
 
-    /**
-     * Methods for prompting user input
-     */
 
     public void promptItemName() {
         System.out.println("Please enter the item's name: ");
@@ -21,14 +18,13 @@ public class MenuUi extends Ui {
         System.out.println("Would you like to update item name? (yes/no)");
     }
 
-    public void promptUpdateItemUnrecognisedAnswer() {
-        System.out.println("Sorry your input was not recognised.\nPlease answer with \"yes\" or \"no\".");
-    }
-
-    //TODO: To be removed - same as promptItemName()
     public void promptNewItemName() {
         System.out.println("Please enter the new name: ");
     }
+
+    /**
+     * Prompts for item price
+     **/
 
     public void promptItemPrice() {
         System.out.println("Please enter the item's price: ");
@@ -42,12 +38,27 @@ public class MenuUi extends Ui {
         System.out.println("Please enter the new price: ");
     }
 
+    /**
+     * Prompts for item index
+     **/
+
     public void promptItemIndex() {
         System.out.println("Please enter the item's index: ");
     }
 
+    /**
+     * Prompts for item keyword
+     **/
+
     public void promptItemKeyword() {
         System.out.println("Please enter the keyword to search for: ");
+    }
+
+    /**
+     * Misc
+     **/
+    public void promptUpdateItemUnrecognisedAnswer() {
+        System.out.println("Sorry your input was not recognised.\nPlease answer with \"yes\" or \"no\".");
     }
 
     /**
@@ -74,26 +85,6 @@ public class MenuUi extends Ui {
         System.out.println("No menu items matching " + input + " were found!");
     }
 
-    public void printSuccessfulListItem() {
-        System.out.println("All items in the menu have been listed!");
-    }
-
-    public void printSuccessfulAddItem() {
-        System.out.println("Item added successfully!");
-    }
-
-    public void printSuccessfulDeleteItem() {
-        System.out.println("Item deleted successfully!");
-    }
-
-    public void printSuccessfulUpdateItem() {
-        System.out.println("Item updated successfully!");
-    }
-
-    public void printFindItemComplete() {
-        System.out.println("finditem completed!");
-    }
-
     @Override
     public void printCommandCancelled(String cmd) {
         switch (cmd) {
@@ -118,6 +109,32 @@ public class MenuUi extends Ui {
         case "/deleteitem":
             System.out.println("Deletion of item has been cancelled. All changes are discarded.");
             break;
+        case "3":
+            // Fallthrough
+        case "listitem":
+            // Fallthrough
+        case "/listitem":
+            System.out.println("List item has been cancelled.");
+            break;
+        case "5":
+            // Fallthrough
+        case "finditem":
+            // Fallthrough
+        case "/finditem":
+            System.out.println("Find has been cancelled.");
+            break;
+        case "addorder":
+            //Fallthrough
+        case "/addorder":
+            System.out.println("Add order has been cancelled.");
+            break;
+        case "refundorder":
+            //Fallthrough
+        case "/refundorder":
+            System.out.println("Refund order has been cancelled.");
+            break;
+        default:
+            // Fallthrough
         }
     }
 
@@ -145,6 +162,32 @@ public class MenuUi extends Ui {
         case "/deleteitem":
             System.out.println("Item deleted successfully.");
             break;
+        case "3":
+            // Fallthrough
+        case "listitem":
+            // Fallthrough
+        case "/listitem":
+            System.out.println("All items in the menu have been listed!");
+            break;
+        case "5":
+            // Fallthrough
+        case "finditem":
+            // Fallthrough
+        case "/finditem":
+            System.out.println("finditem completed!");
+            break;
+        case "addorder":
+            //Fallthrough
+        case "/addorder":
+            System.out.println("Order is added!");
+            break;
+        case "refundorder":
+            //Fallthrough
+        case "/refundorder":
+            System.out.println("Order is refunded!");
+            break;
+        default:
+            // Fallthrough
         }
     }
 
@@ -159,8 +202,13 @@ public class MenuUi extends Ui {
             System.out.println("There are no items on the menu.");
             break;
 
+        // Item name in find item
+        case MISSING_FIND_ITEM_DESCRIPTION:
+            System.out.println("Please specify the keyword to search for.");
+            break;
 
-        /** Item Name **/
+
+        // Item Name
         case MISSING_ITEM_NAME_FLAG:
             System.out.println("Please include the item's name using: -n <name>");
             break;
@@ -174,7 +222,7 @@ public class MenuUi extends Ui {
             System.out.println("Name already exists. Please choose a different name.");
             break;
 
-        /** Item Price **/
+        // Item Price
         case MISSING_ITEM_PRICE_FLAG:
             System.out.println("Please include the item's price using: -p <price>");
             break;
@@ -194,7 +242,7 @@ public class MenuUi extends Ui {
             System.out.println("Price must be a number.");
             break;
 
-        /** Item Name and Price **/
+        // Item Name and Price
         case MISSING_ITEM_NAME_OR_PRICE_FLAG:
             System.out.println("Please include the item's name or price using: -n <name> OR -p <price>");
             break;
@@ -202,7 +250,7 @@ public class MenuUi extends Ui {
             System.out.println("Please include the item's name and price using: -n <name> -p <price>");
             break;
 
-        /** Item index **/
+        // Item index
         case MISSING_ITEM_INDEX_FLAG:
             System.out.println("Please include the item's index using: -i <index>");
             break;
@@ -214,6 +262,9 @@ public class MenuUi extends Ui {
         case ITEM_INDEX_OUT_OF_BOUND_ERROR:
             System.out.println("Index does not exist.");
             break;
+
+        default:
+            // Fallthrough
 
         }
 

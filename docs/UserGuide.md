@@ -292,7 +292,7 @@ You realize three things:
 Assuming the following examples are sequential. So, example 2 is completed after example 1, and example 3 is completed
 after example 1 and 2.
 
-**Example 1 - Updating the Price**
+**Example 1: Updating the Price**
 
 To fix the first issue, use the command `/updateitem -i 0 -p 0.80`.
 
@@ -314,7 +314,7 @@ Please enter a command:
 The command: listitem was successfully executed!
 ```
 
-**Example 2 - Updating the Name**
+**Example 2: Updating the Name**
 
 To fix the second issue, use the command `/updateitem -i 4 -n "Wanton Mee"`
 
@@ -336,7 +336,7 @@ Please enter a command:
 The command: listitem was successfully executed!
 ```
 
-**Example 3 - Updating the Name and Price**
+**Example 3: Updating the Name and Price**
 
 To fix the third issue, use the command `/updateitem -i 2 -n "Fried Rice" -p 4`
 
@@ -728,13 +728,24 @@ of the mode used.
 * [Find an Item](#basic-mode-find-an-item)
 * [Update an Item](#basic-mode-update-an-item)
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
-
 ##### Basic Mode Add an Item
 
 To add an item to the menu, use the command `additem`. You will then be prompted to input a name, and a price.
 
 ###### Example of Usage
+
+If you want to add _Chicken Rice_, which costs _$3.50_ to your menu, you can use `additem` to begin the process of
+adding it to your menu.
+
+```text
+Please enter a command: 
+> additem
+Please enter the item's name: 
+> Chicken Rice
+Please enter the item's price: 
+> 3.50
+Item added successfully.
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
@@ -744,6 +755,21 @@ To delete an item from the menu, use the command `deleteitem`. You will then be 
 to be deleted.
 
 ###### Example of Usage
+Assume your menu currently looks like this.
+```text
+| Index | Name                      | Price |
+| ----- | ------------------------- | ----- |
+| 0     | Chicken Rice              | 3.50  |
+```
+
+You change your mind and decide you no longer want to sell Chicken Rice, which is at index _0_. To begin the process of deleting it from your menu, you can use the command `deleteitem`.
+```text
+Please enter a command: 
+> deleteitem
+Please enter the item's index: 
+> 0
+Item deleted successfully.
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
@@ -752,6 +778,17 @@ to be deleted.
 To list all items, use the command `listitem`.
 
 ###### Example of Usage
+```text
+Please enter a command: 
+> listitem
+| Index | Name                      | Price |
+| ----- | ------------------------- | ----- |
+| 0     | Chicken Rice              | 3.50  |
+| 1     | Fried Rice                | 5.00  |
+| 2     | Mee Goreng                | 5.00  |
+| 3     | Fish Soup                 | 6.50  |
+All items in the menu have been listed!
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
@@ -759,8 +796,31 @@ To list all items, use the command `listitem`.
 
 To find an item, use the command `finditem`. You will then be prompted to input a description. A list of all items in
 the menu matching that description will then be printed.
+* The input is case-insensitive.
 
 ###### Example of Usage
+Assume your menu looks like this.
+```text
+| Index | Name                      | Price |
+| ----- | ------------------------- | ----- |
+| 0     | Chicken Rice              | 3.50  |
+| 1     | Fried Rice                | 5.00  |
+| 2     | Mee Goreng                | 5.00  |
+| 3     | Fish Soup                 | 6.50  |
+```
+
+You temporarily forget which items on your menu have "_rice_" in the name. To search for all of them, use the command `finditem`.
+```text
+Please enter a command: 
+> finditem
+Please enter the keyword to search for: 
+> rice
+| Index | Name                      | Price |
+| ----- | ------------------------- | ----- |
+| 0     | chicken Rice              | 3.50  |
+| 1     | Fried Rice                | 5.00  |
+finditem completed!
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
@@ -770,6 +830,67 @@ To update an item, use the command `updateitem`. You will be prompted to enter t
 the item's name or price.
 
 ###### Example of Usage
+To show all different ways of updating an item, assume your menu looks like this.
+```text
+| Index | Name                      | Price |
+| ----- | ------------------------- | ----- |
+| 0     | chicken Rice              | 3.50  |
+| 1     | Egg                       | 80.00 |
+| 2     | mEE gORENG                | 56.00 |
+```
+You want to change 3 things:
+1. Change the name to "_Chicken Rice_" at Index _0_.
+2. Change the price to _$0.80_ at Index _1_.
+3. Change the name to "_Mee Goreng_" and change the price to _$5.60_ at Index _2_.
+
+To do so, use the command `updateitem`.
+
+**Example 1: Change the Name**
+```text
+Please enter a command: 
+> updateitem
+Please enter the item's index: 
+> 0
+Would you like to update item name? (yes/no)
+> yes
+Please enter the item's name: 
+> Chicken Rice
+Would you like to update item price? (yes/no)
+> no
+Item updated successfully.
+```
+
+**Example 2: Change the Price**
+```text
+Please enter a command: 
+> updateitem
+Please enter the item's index: 
+> 1
+Would you like to update item name? (yes/no)
+> no
+Would you like to update item price? (yes/no)
+> yes
+Please enter the item's price: 
+> 0.80
+Item updated successfully.
+```
+
+**Example 3: Change Name and Price**
+```text
+Please enter a command: 
+> updateitem
+Please enter the item's index: 
+> 2
+Would you like to update item name? (yes/no)
+> yes
+Please enter the item's name: 
+> Mee Goreng
+Would you like to update item price? (yes/no)
+> yes
+Please enter the item's price: 
+> 5.60
+Item updated successfully.
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
