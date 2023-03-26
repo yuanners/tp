@@ -456,7 +456,6 @@ Next, you use the command `/pay -a 10.65 -t card` and obtain the following resul
 ```text
 Please use /pay command to add payment for the order.
 > /pay -a 10.65 -t card
-The calculated change is $0.0.
 The command: /pay was successfully executed!
 ```
 
@@ -683,6 +682,7 @@ of the mode used.
     2. [Orders](#basic-mode-orders)
         * [Add an Order](#basic-mode-add-an-order)
         * [List all Orders](#basic-mode-list-all-orders)
+        * [Refund an order](#basic-mode-refund-an-order)
 4. [Save File](#save-file)
 5. [Glossary](#glossary)
 
@@ -921,10 +921,18 @@ To add an order, use the command `listorder` or `7`.
 
 ##### Basic Mode Refund an Order
 
-To add an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be obtained
-by [listing all orders](#basic-mode-list-all-orders).
+To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be obtained from the
+`order.json` file. 
 
 ###### Example of Usage
+Enter the unique order ID of the order you wan to refund.
+```text
+Please enter a command: 
+> refundorder
+Please enter the order ID: 
+> 19fcc4fb-98b1-4344-a5cb-e6ff07ffd798
+Order is refunded successfully.
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
