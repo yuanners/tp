@@ -134,7 +134,7 @@ This adds a new item to the menu. New items must have a name and price.
 Format: `/additem -n "<name>" -p <price>` or `/additem --name "<name>" --price <price>`
 
 * Name refers to the name of the item
-    * It is case-sensitive
+    * It is case-insensitive
     * It has an upper limit of 25 characters
     * Names are unique, regardless of how the words are capitalized. `Chicken` and `chicken` will count as the same
       word.
@@ -171,7 +171,7 @@ This removes an item from the menu, identified by its index when [listing all it
 
 Format: `/deleteitem -i <index>` or `/deleteitem --index <index>`
 
-* The index must be a whole number, and a valid integer.
+* The index must be a valid number.
 
 **Example of Usage**
 
@@ -190,7 +190,9 @@ The command: /deleteitem was successfully executed!
 
 ##### Advanced Mode List all Items
 
-This lists all items currently in the menu. Do note that the index is important as it is the reference
+This lists all items currently in the menu. 
+
+Do note that the index is important as it is the reference
 for [adding Orders](#advanced-mode-add-an-order).
 
 As much as possible, it is recommended to avoid changing the index of all items as it may cause confusion for you and
@@ -731,7 +733,7 @@ of the mode used.
 
 ##### Basic Mode Add an Item
 
-To add an item to the menu, use the command `additem`. You will then be prompted to input a name, and a price.
+To add an item to the menu, use the command `additem` or `1`. You will then be prompted to input a name, and a price.
 
 ###### Example of Usage
 
@@ -752,7 +754,7 @@ Item added successfully.
 
 ##### Basic Mode Delete an Item
 
-To delete an item from the menu, use the command `deleteitem`. You will then be prompted to input the index of the item
+To delete an item from the menu, use the command `deleteitem` or `2`. You will then be prompted to input the index of the item
 to be deleted.
 
 ###### Example of Usage
@@ -776,7 +778,7 @@ Item deleted successfully.
 
 ##### Basic Mode List all Items
 
-To list all items, use the command `listitem`.
+To list all items, use the command `listitem` or `3`.
 
 ###### Example of Usage
 ```text
@@ -795,7 +797,7 @@ All items in the menu have been listed!
 
 ##### Basic Mode Find an Item
 
-To find an item, use the command `finditem`. You will then be prompted to input a description. A list of all items in
+To find an item, use the command `finditem` or `5`. You will then be prompted to input a description. A list of all items in
 the menu matching that description will then be printed.
 * The input is case-insensitive.
 
@@ -827,7 +829,7 @@ finditem completed!
 
 ##### Basic Mode Update an Item
 
-To update an item, use the command `updateitem`. You will be prompted to enter the index, and then the option to change
+To update an item, use the command `updateitem` or `4`. You will be prompted to enter the index, and then the option to change
 the item's name or price.
 
 ###### Example of Usage
@@ -903,7 +905,7 @@ Item updated successfully.
 
 ##### Basic Mode Add an Order
 
-To add an order, use the command `addorder`.
+To add an order, use the command `addorder` or `6`.
 
 ###### Example of Usage
 
@@ -911,7 +913,7 @@ To add an order, use the command `addorder`.
 
 ##### Basic Mode List all Orders
 
-To add an order, use the command `listorder`.
+To add an order, use the command `listorder` or `7`.
 
 ###### Example of Usage
 
@@ -919,7 +921,7 @@ To add an order, use the command `listorder`.
 
 ##### Basic Mode Refund an Order
 
-To add an order, use the command `refundorder`. You will be prompted to enter the order ID, which can be obtained
+To add an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be obtained
 by [listing all orders](#basic-mode-list-all-orders).
 
 ###### Example of Usage
