@@ -24,7 +24,7 @@ public class StatisticUi extends Ui {
 
         System.out.println("| " + "-".repeat(131) + " |");
         System.out.printf("| %-131s |\n", "Daily statistic for the date range "
-                            + startDate.format(formatter) + " - " + endDate.format(formatter));
+                + startDate.format(formatter) + " - " + endDate.format(formatter));
         System.out.printf("| Total sales: $%-117.2f |\n", totalSales);
         System.out.println("| " + "-".repeat(131) + " |");
         System.out.printf("| %-12s | %-13s | %-100s |\n", "Date", "Sales($)", "Performance");
@@ -43,7 +43,8 @@ public class StatisticUi extends Ui {
 
         String formattedDate = indexDate.format(formatter);
 
-        System.out.println("| " + "-".repeat(12) + " | " + "-".repeat(13) + " | " + "-".repeat(100) + " |");
+        System.out.println("| " + "-".repeat(12) + " | "
+                + "-".repeat(13) + " | " + "-".repeat(100) + " |");
         System.out.printf("| %-12s | %-13.2f | %-100s |\n", formattedDate, value, "|".repeat(numOfBars));
     }
 
@@ -77,7 +78,8 @@ public class StatisticUi extends Ui {
 
         String formattedDate = indexDate.format(formatter);
 
-        System.out.println("| " + "-".repeat(10) + " | " + "-".repeat(15) + " | " + "-".repeat(100) + " |");
+        System.out.println("| " + "-".repeat(10) + " | "
+                + "-".repeat(15) + " | " + "-".repeat(100) + " |");
         System.out.printf("| %-10s | %-15.2f | %-100s |\n", formattedDate, value, "|".repeat(numOfBars));
 
     }
@@ -99,7 +101,8 @@ public class StatisticUi extends Ui {
         System.out.printf("| %-41s |\n", "Date: " + startDate.format(formatter) + " - " + endDate.format(formatter));
         System.out.println("| " + "-".repeat(41) + " |");
         System.out.printf("| %-5s | %-25s | %-5s |\n", "Rank", "Name", "Count");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+        System.out.println("| " + "-".repeat(5) + " | "
+                + "-".repeat(25) + " | " + "-".repeat(5) + " |");
 
         int index = 1;
 
@@ -128,7 +131,8 @@ public class StatisticUi extends Ui {
         System.out.printf("| %-46s |\n", "Date: " + startDate.format(formatter) + " - " + endDate.format(formatter));
         System.out.println("| " + "-".repeat(46) + " |");
         System.out.printf("| %-5s | %-25s | %-10s |\n", "Rank", "Name", "Sales($)");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(10) + " |");
+        System.out.println("| " + "-".repeat(5) + " | "
+                + "-".repeat(25) + " | " + "-".repeat(10) + " |");
 
         int index = 1;
 
@@ -171,10 +175,12 @@ public class StatisticUi extends Ui {
             System.out.println("Use the [-y|--year] option instead");
             break;
         case TYPE_NOT_SPECIFIED:
-            System.out.println("Report type not specified, use [-r|--rank] or [-s|--sales] options follow by the <type>");
+            System.out.println("Report type not specified, " +
+                    "use [-r|--rank] or [-s|--sales] options follow by the <type>");
             break;
         case TYPE_NOT_FOUND:
             System.out.println("Report type specified in [-r|--rank] or [-s|--sales] options not recognised");
+            break;
         default:
             System.out.println("Error flag not recognised");
         }

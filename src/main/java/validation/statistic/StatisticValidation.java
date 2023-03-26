@@ -2,7 +2,6 @@ package validation.statistic;
 
 import app.Command;
 import exception.statistic.ConflictFlagException;
-import exception.statistic.MissingModeException;
 import exception.statistic.MissingRequiredFlagException;
 import exception.statistic.MissingYearException;
 
