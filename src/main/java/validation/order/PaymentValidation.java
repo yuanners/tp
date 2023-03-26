@@ -17,7 +17,7 @@ import ui.Flags;
 import ui.TransactionUi;
 import validation.Validation;
 
-import java.util.Scanner;
+
 
 public class PaymentValidation extends Validation {
     private TransactionUi transactionUi = new TransactionUi();

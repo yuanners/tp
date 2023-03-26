@@ -12,7 +12,6 @@ import exception.order.InvalidQuantityNegativeException;
 import item.Menu;
 import ui.Flags;
 import ui.TransactionUi;
-import utility.Ui;
 import validation.Validation;
 
 /**

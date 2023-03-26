@@ -46,7 +46,7 @@ public class Order implements OrderInterface {
      */
     public Order() {
         this.orderId = UUID.randomUUID().toString();
-        this.status = "COMPLETED";
+        this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
@@ -61,7 +61,7 @@ public class Order implements OrderInterface {
      */
     public Order(Command command, Menu menu, Transaction transactions) {
         this.orderId = UUID.randomUUID().toString();
-        this.status = "COMPLETED";
+        this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
