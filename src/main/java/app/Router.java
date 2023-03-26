@@ -8,9 +8,7 @@ import order.Transaction;
 import payment.Refund;
 import statistic.Statistic;
 import payment.RefundAssistant;
-import ui.MenuUi;
-import ui.TransactionUi;
-import utility.Ui;
+import ui.Ui;
 
 /**
  * The Router class handles the routing of commands, based on whether they start with a slash (/) or not.
@@ -19,8 +17,6 @@ import utility.Ui;
  */
 public class Router {
     public Ui ui;
-    public MenuUi menuUi;
-    public TransactionUi transactionUi;
     public Menu menu;
     public Transaction transactions;
 
@@ -34,8 +30,6 @@ public class Router {
         this.ui = new Ui();
         this.menu = menu;
         this.transactions = transactions;
-        this.menuUi = menuUi;
-        this.transactionUi = transactionUi;
     }
 
     /**

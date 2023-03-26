@@ -62,6 +62,10 @@ public class Ui {
         System.out.println("Welcome to MoneyGoWhere!\n");
     }
 
+    public void printExit() {
+        System.out.println("Thank you for using MoneyGoWhere. Goodbye!");
+    }
+
     /**
      * Prompts user for item name when in assistance mode
      */
