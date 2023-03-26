@@ -8,6 +8,7 @@ import order.Transaction;
 import payment.Refund;
 import statistic.Statistic;
 import payment.RefundAssistant;
+import statistic.StatisticAssistant;
 import ui.Ui;
 
 /**
@@ -132,6 +133,10 @@ public class Router {
         case "refundorder":
             isCancelled = refundAssistant.refundOrder(command, transactions);
             menuAssistant.printResult(command, isCancelled);
+            break;
+        case "9":
+        case "report":
+            new StatisticAssistant();
             break;
         default:
             ui.printInvalidCommand(command.getCommand());
