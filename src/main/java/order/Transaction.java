@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken;
 
 import ui.TransactionUi;
 import utility.Store;
-import utility.Ui;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -73,10 +72,9 @@ public class Transaction {
      * Displays the order list using the UI class.
      */
     public void displayList() {
-        Ui ui = new Ui();
-        TransactionUi transactionUi1 = new TransactionUi();
-        ui.printOrderList(this.transactions);
-        transactionUi1.printSuccessfulListOrder();
+        TransactionUi transactionUi = new TransactionUi();
+        transactionUi.printOrderList(this.transactions);
+        transactionUi.printSuccessfulListOrder();
     }
 
     /**
