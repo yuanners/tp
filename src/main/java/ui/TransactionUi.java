@@ -10,7 +10,7 @@ public class TransactionUi extends Ui {
     public void promptMoreOrderEntries() { System.out.println("Do you have more items to add? (yes/no/cancel)"); }
 
     public void promptPayment() {
-        System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
+        System.out.println("Please use /pay -a <amount> -t <type> or pay to make payment.");
     }
     public void promptOrderID(){
         System.out.println("Please enter order ID to refund order.");

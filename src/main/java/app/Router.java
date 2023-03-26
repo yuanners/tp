@@ -141,6 +141,7 @@ public class Router {
         case "refundorder":
             isCancelled = refundAssistant.refundOrder(command, transactions);
             menuAssistant.printResult(command, isCancelled);
+            break;
         default:
             ui.printInvalidCommand(command.getCommand());
         }

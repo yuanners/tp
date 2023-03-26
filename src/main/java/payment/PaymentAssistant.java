@@ -18,6 +18,8 @@ public class PaymentAssistant {
     private TransactionUi transactionUi = new TransactionUi();
     private Scanner scan = new Scanner(System.in);
     Payment payment = new Payment();
+    private String amount;
+    private String type;
     private PaymentValidation paymentValidation = new PaymentValidation();
 
     public boolean getAmount(Command command, Order order) {
@@ -25,11 +27,13 @@ public class PaymentAssistant {
         while (!isValidAmount) {
             transactionUi.promptPaymentAmount();
             String input = scan.nextLine();
+            Command arg = new Command(input);
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
             }
             try {
-                paymentValidation.validateAmount(command, order);
+                paymentValidation.validateAmount(arg, order);
+                amount = input;
                 isValidAmount = true;
             } catch (InsufficientPayAmountException e) {
                 transactionUi.printError(Flags.Error.INSUFFICIENT_PAY_AMOUNT);
@@ -51,11 +55,13 @@ public class PaymentAssistant {
         while (!isValidType) {
             transactionUi.promptPaymentType();
             String input = scan.nextLine();
+            Command arg = new Command(input);
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
             }
             try {
-                paymentValidation.validateType(command);
+                paymentValidation.validateType(arg);
+                type = input;
                 isValidType = true;
             } catch (InvalidPayTypeException e) {
                 transactionUi.printError(Flags.Error.INVALID_PAY_TYPE);
@@ -80,13 +86,12 @@ public class PaymentAssistant {
         Payment payment = new Payment();
         command.mapArgumentAlias("a", "amount");
         command.mapArgumentAlias("t", "type");
-        order.setPaymentType(command.getUserInput());
+        order.setPaymentType(type);
         order.setStatus("COMPLETED");
-        double amount = Double.parseDouble(command.getUserInput());
-        if (amount != order.getSubTotal()) {
-            transactionUi.printChangeGiven(payment.calculateChange(amount, order));
+        double amountToPay = Double.parseDouble(amount);
+        if (amountToPay != order.getSubTotal()) {
+            transactionUi.printChangeGiven(payment.calculateChange(amountToPay, order));
         }
-        transactionUi.printSuccessfulPayment();
         return false;
     }
 }

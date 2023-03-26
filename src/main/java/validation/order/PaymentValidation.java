@@ -173,9 +173,11 @@ public class PaymentValidation extends Validation {
                     throw new InvalidPayAmountDecimalPlaceException();
                 }
             }
-            if (arg.getArgumentMap().get("t").equalsIgnoreCase("card")) {
-                if (amountPaid != order.getSubTotal()) {
-                    throw new InvalidPaymentAmountForCardException();
+            if (arg.getArgumentMap().get("a") != null) {
+                if (arg.getArgumentMap().get("t").equalsIgnoreCase("card")) {
+                    if (amountPaid != order.getSubTotal()) {
+                        throw new InvalidPaymentAmountForCardException();
+                    }
                 }
             }
         }

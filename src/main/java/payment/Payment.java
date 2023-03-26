@@ -32,7 +32,7 @@ public class Payment {
                 PaymentAssistant paymentAssistant = new PaymentAssistant();
                 MenuAssistant menuAssistant = new MenuAssistant();
                 MenuUi menuUi = new MenuUi();
-                Command pay = new Command("pay");
+                Command pay = new Command("addorder");
                 boolean isCancelled = paymentAssistant.makePayment(arg, order);
                 menuAssistant.printResult(pay, isCancelled);
                 break;
