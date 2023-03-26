@@ -146,35 +146,36 @@ public class StatisticUi extends Ui {
         System.out.print("Error: ");
         switch (error) {
         case DOUBLE_OVERFLOW:
-            System.out.println("Double overflow! Please enter a double within the valid range.");
+            System.out.println("\tDouble overflow! Please enter a double within the valid range.");
             break;
         case INTEGER_OVERFLOW:
-            System.out.println("Integer overflow! Please enter an integer within the valid range.");
+            System.out.println("\tInteger overflow! Please enter an integer within the valid range.");
             break;
         case REQUIRED_FLAG_MISSING:
-            System.out.println("State the type of report to generate by using [-r|--rank] or [-s|--sales] options");
+            System.out.println("\tState the type of report to generate by using [-r|--rank] or [-s|--sales] options follow by the <type>");
+            System.out.println("\t\tState the date range by using [-y|--year] or [-f|--from] and [-t|--to] options");
             break;
         case CONFLICT_FLAG:
-            System.out.println("[-y|--year] option cannot work with [-f|--from] or [-t|--to] options");
-            System.out.println("[-r|--rank] option cannot work with [-s|--sales] option");
+            System.out.println("\t[-y|--year] option cannot work with [-f|--from] or [-t|--to] options");
+            System.out.println("\t\t[-r|--rank] option cannot work with [-s|--sales] option");
             break;
         case DATE_RANGE_INVALID:
-            System.out.println("Date specified in [-f|--from] is later than date specified in [-t|--to]");
+            System.out.println("\tDate specified in [-f|--from] is later than date specified in [-t|--to]");
             break;
         case INVALID_DATE_FORMAT:
-            System.out.println("Date format provided in [-f|--from] and/or [-t|--to] is/are not recognised");
+            System.out.println("\tDate format provided in [-f|--from] and/or [-t|--to] is/are not recognised");
             break;
         case INVALID_YEAR_FORMAT:
-            System.out.println("Year format provided in [-y|--year] is/are not recognised");
+            System.out.println("\tYear format provided in [-y|--year] is/are not recognised");
             break;
         case YEAR_NOT_FOUND:
-            System.out.println("Use the [-y|--year] option instead");
+            System.out.println("\tUse the [-y|--year] option instead of [-f|--from] and [-t|--to] for monthly sales report");
             break;
         case TYPE_NOT_SPECIFIED:
-            System.out.println("Report type not specified, use [-r|--rank] or [-s|--sales] options follow by the <type>");
+            System.out.println("\tReport type not specified, use [-r|--rank] or [-s|--sales] options follow by the <type>");
             break;
         case TYPE_NOT_FOUND:
-            System.out.println("Report type specified in [-r|--rank] or [-s|--sales] options not recognised");
+            System.out.println("\tReport type specified in [-r|--rank] or [-s|--sales] options not recognised");
         default:
             System.out.println("Error flag not recognised");
         }
