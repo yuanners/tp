@@ -73,8 +73,6 @@ public class Parser {
                 System.out.println("COMMAND FORMAT INCORRECT: " + flag);
             }
         }
-
-        // System.out.println(argMap);
         return argMap;
     }
 
