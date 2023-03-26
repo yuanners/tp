@@ -5,15 +5,6 @@ import item.Item;
 import java.util.ArrayList;
 
 public class MenuUi extends Ui {
-    enum MenuErrorType {
-
-    }
-
-    /**
-     * Methods for prompting user input
-     */
-
-    /** Prompts for item name **/
 
     public void promptItemName() {
         System.out.println("Please enter the item's name: ");
@@ -27,7 +18,9 @@ public class MenuUi extends Ui {
         System.out.println("Please enter the new name: ");
     }
 
-    /** Prompts for item price **/
+    /**
+     * Prompts for item price
+     **/
 
     public void promptItemPrice() {
         System.out.println("Please enter the item's price: ");
@@ -41,19 +34,25 @@ public class MenuUi extends Ui {
         System.out.println("Please enter the new price: ");
     }
 
-    /** Prompts for item index **/
+    /**
+     * Prompts for item index
+     **/
 
     public void promptItemIndex() {
         System.out.println("Please enter the item's index: ");
     }
 
-    /** Prompts for item keyword **/
+    /**
+     * Prompts for item keyword
+     **/
 
     public void promptItemKeyword() {
         System.out.println("Please enter the keyword to search for: ");
     }
 
-    /** Misc **/
+    /**
+     * Misc
+     **/
     public void promptUpdateItemUnrecognisedAnswer() {
         System.out.println("Sorry your input was not recognised.\nPlease answer with \"yes\" or \"no\".");
     }
@@ -61,6 +60,10 @@ public class MenuUi extends Ui {
     /**
      * Methods for printing output
      */
+
+    public void printItemNotFound() {
+        System.out.println("The entered item cannot be found.");
+    }
 
     public void printFindItem(int index, ArrayList<Item> menu) {
         System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
@@ -118,7 +121,17 @@ public class MenuUi extends Ui {
         case "finditem":
             // Fallthrough
         case "/finditem":
-            System.out.println("Find has been cancelled");
+            System.out.println("Find has been cancelled.");
+            break;
+        case "addorder":
+            //Fallthrough
+        case "/addorder":
+            System.out.println("Add order has been cancelled.");
+            break;
+        case "refundorder":
+            //Fallthrough
+        case "/refundorder":
+            System.out.println("Refund order has been cancelled.");
             break;
         default:
             // Fallthrough
@@ -162,6 +175,16 @@ public class MenuUi extends Ui {
             // Fallthrough
         case "/finditem":
             System.out.println("finditem completed!");
+            break;
+        case "addorder":
+            //Fallthrough
+        case "/addorder":
+            System.out.println("Order is added!");
+            break;
+        case "refundorder":
+            //Fallthrough
+        case "/refundorder":
+            System.out.println("Order is refunded!");
             break;
         default:
             // Fallthrough

@@ -18,18 +18,13 @@ import ui.TransactionUi;
 import validation.Validation;
 
 
-
 public class PaymentValidation extends Validation {
     private TransactionUi transactionUi = new TransactionUi();
 
     /**
      * Map the argument for convenience when the class is initialised
-     *
-     * @param arg user input command
      */
-    public PaymentValidation(Command arg) {
-        arg.mapArgumentAlias("a", "amount");
-        arg.mapArgumentAlias("t", "type");
+    public PaymentValidation() {
     }
 
     /**
@@ -97,6 +92,8 @@ public class PaymentValidation extends Validation {
      */
     public void validateFlag(Command arg) throws MissingPayTypeFlagException, MissingPayTypeArgumentException,
             MissingPayAmountFlagException, MissingPayAmountArgumentException {
+        arg.mapArgumentAlias("a", "amount");
+        arg.mapArgumentAlias("t", "type");
         if (arg.getArgumentString().contains("-t")) {
             if (arg.getArgumentMap().get("t") == null) {
                 throw new MissingPayTypeArgumentException();
@@ -122,7 +119,13 @@ public class PaymentValidation extends Validation {
      * @throws InvalidPayTypeException type is not one of these: cash/card/others
      */
     public void validateType(Command arg) throws InvalidPayTypeException {
-        String type = arg.getArgumentMap().get("t").trim();
+        arg.mapArgumentAlias("t", "type");
+        String type = "";
+        if (arg.getArgumentMap().get("t") != null) {
+            type = arg.getArgumentMap().get("t").trim();
+        } else {
+            type = arg.getUserInput();
+        }
         if (type.equalsIgnoreCase("cash") || type.equalsIgnoreCase("card")
                 || type.equalsIgnoreCase("others")) {
 
@@ -145,7 +148,13 @@ public class PaymentValidation extends Validation {
     public void validateAmount(Command arg, Order order) throws InvalidPayAmountFormatException,
             InvalidPayAmountNegativeException, InsufficientPayAmountException,
             InvalidPayAmountDecimalPlaceException, InvalidPaymentAmountForCardException {
-        String amount = arg.getArgumentMap().get("a").trim();
+        arg.mapArgumentAlias("a", "amount");
+        String amount = "";
+        if (arg.getArgumentMap().get("a") != null) {
+            amount = arg.getArgumentMap().get("a").trim();
+        } else {
+            amount = arg.getUserInput();
+        }
         if (!isDouble(amount)) {
             throw new InvalidPayAmountFormatException();
         } else {
@@ -164,9 +173,11 @@ public class PaymentValidation extends Validation {
                     throw new InvalidPayAmountDecimalPlaceException();
                 }
             }
-            if (arg.getArgumentMap().get("t").equalsIgnoreCase("card")) {
-                if (amountPaid != order.getSubTotal()) {
-                    throw new InvalidPaymentAmountForCardException();
+            if (arg.getArgumentMap().get("a") != null) {
+                if (arg.getArgumentMap().get("t").equalsIgnoreCase("card")) {
+                    if (amountPaid != order.getSubTotal()) {
+                        throw new InvalidPaymentAmountForCardException();
+                    }
                 }
             }
         }

@@ -1,7 +1,9 @@
 package payment;
 
 import app.Command;
+import item.MenuAssistant;
 import order.Order;
+import ui.MenuUi;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
 
@@ -26,7 +28,16 @@ public class Payment {
         while (!isValidPayment) {
             String userInput = sc.nextLine();
             Command arg = new Command(userInput);
-            PaymentValidation paymentValidation = new PaymentValidation(arg);
+            if (userInput.equalsIgnoreCase("pay")) {
+                PaymentAssistant paymentAssistant = new PaymentAssistant();
+                MenuAssistant menuAssistant = new MenuAssistant();
+                MenuUi menuUi = new MenuUi();
+                Command pay = new Command("addorder");
+                boolean isCancelled = paymentAssistant.makePayment(order);
+                menuAssistant.printResult(pay, isCancelled);
+                break;
+            }
+            PaymentValidation paymentValidation = new PaymentValidation();
             isValidPayment = paymentValidation.validatePayment(arg, order);
             if (!isValidPayment) {
                 transactionUi.promptUserInput();

@@ -10,10 +10,17 @@ public class TransactionUi extends Ui {
     public void promptMoreOrderEntries() { System.out.println("Do you have more items to add? (yes/no/cancel)"); }
 
     public void promptPayment() {
-        System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
+        System.out.println("Please use /pay -a <amount> -t <type> or pay to make payment.");
     }
     public void promptOrderID(){
         System.out.println("Please enter order ID to refund order.");
+    }
+    public void promptPaymentAmount(){
+        System.out.println("Please enter amount to pay.");
+    }
+
+    public void promptPaymentType(){
+        System.out.println("Please enter payment type.");
     }
     public void printChangeGiven(Double change) {
         System.out.printf("The calculated change is $%.2f.\n", change);
@@ -48,7 +55,9 @@ public class TransactionUi extends Ui {
         System.out.println("Order added successfully!");
     }
 
-    public void printSuccessfulPayment() { System.out.println("Order has been paid!"); }
+    public void printSuccessfulPayment() {
+        System.out.println("Order has been paid!");
+    }
 
     public void printSuccessfulListOrder() {
         System.out.println("All transactions have been listed!");
