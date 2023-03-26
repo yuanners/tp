@@ -222,13 +222,14 @@ class ItemTest {
     }
 
     public void itemTest12() {
+        Command listcmd = new Command("/listitem");
 
-        menu.displayList();
+        menu.displayList(listcmd);
 
         Command command = new Command("/deleteitem -i " + (menu.getItems().size()-1));
         menu.deleteItem(command);
 
-        menu.displayList();
+        menu.displayList(listcmd);
     }
 
 }

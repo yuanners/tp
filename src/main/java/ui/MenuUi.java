@@ -13,6 +13,8 @@ public class MenuUi extends Ui {
      * Methods for prompting user input
      */
 
+    /** Prompts for item name **/
+
     public void promptItemName() {
         System.out.println("Please enter the item's name: ");
     }
@@ -21,14 +23,11 @@ public class MenuUi extends Ui {
         System.out.println("Would you like to update item name? (yes/no)");
     }
 
-    public void promptUpdateItemUnrecognisedAnswer() {
-        System.out.println("Sorry your input was not recognised.\nPlease answer with \"yes\" or \"no\".");
-    }
-
-    //TODO: To be removed - same as promptItemName()
     public void promptNewItemName() {
         System.out.println("Please enter the new name: ");
     }
+
+    /** Prompts for item price **/
 
     public void promptItemPrice() {
         System.out.println("Please enter the item's price: ");
@@ -42,12 +41,21 @@ public class MenuUi extends Ui {
         System.out.println("Please enter the new price: ");
     }
 
+    /** Prompts for item index **/
+
     public void promptItemIndex() {
         System.out.println("Please enter the item's index: ");
     }
 
+    /** Prompts for item keyword **/
+
     public void promptItemKeyword() {
         System.out.println("Please enter the keyword to search for: ");
+    }
+
+    /** Misc **/
+    public void promptUpdateItemUnrecognisedAnswer() {
+        System.out.println("Sorry your input was not recognised.\nPlease answer with \"yes\" or \"no\".");
     }
 
     /**
@@ -74,28 +82,6 @@ public class MenuUi extends Ui {
         System.out.println("No menu items matching " + input + " were found!");
     }
 
-    public void printSuccessfulListItem() {
-        System.out.println("All items in the menu have been listed!");
-    }
-
-    public void printSuccessfulAddItem() {
-        System.out.println("Item added successfully!");
-    }
-
-    public void printSuccessfulDeleteItem() {
-        System.out.println("Item deleted successfully!");
-    }
-
-    public void printSuccessfulUpdateItem() {
-        System.out.println("Item updated successfully!");
-    }
-
-    public void printFindItemComplete() {
-        System.out.println("finditem completed!");
-    }
-
-    public void printEmptyMenu() {System.out.println("No items in menu!"); }
-
     @Override
     public void printCommandCancelled(String cmd) {
         switch (cmd) {
@@ -119,6 +105,20 @@ public class MenuUi extends Ui {
             // Fallthrough
         case "/deleteitem":
             System.out.println("Deletion of item has been cancelled. All changes are discarded.");
+            break;
+        case "3":
+            // Fallthrough
+        case "listitem":
+            // Fallthrough
+        case "/listitem":
+            System.out.println("List item has been cancelled.");
+            break;
+        case "5":
+            // Fallthrough
+        case "finditem":
+            // Fallthrough
+        case "/finditem":
+            System.out.println("Find has been cancelled");
             break;
         default:
             // Fallthrough
@@ -148,6 +148,20 @@ public class MenuUi extends Ui {
             // Fallthrough
         case "/deleteitem":
             System.out.println("Item deleted successfully.");
+            break;
+        case "3":
+            // Fallthrough
+        case "listitem":
+            // Fallthrough
+        case "/listitem":
+            System.out.println("All items in the menu have been listed!");
+            break;
+        case "5":
+            // Fallthrough
+        case "finditem":
+            // Fallthrough
+        case "/finditem":
+            System.out.println("finditem completed!");
             break;
         default:
             // Fallthrough
