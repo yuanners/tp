@@ -2,7 +2,7 @@ package order;
 
 import app.Command;
 import item.Menu;
-import utility.Ui;
+import ui.TransactionUi;
 import validation.order.AddOrderValidation;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class OrderAssistant {
 
-    Ui ui;
+    TransactionUi transactionUi;
     Scanner sc;
     AddOrderValidation addOrderValidation = new AddOrderValidation();
 
@@ -38,7 +38,6 @@ public class OrderAssistant {
     };
 
     public OrderAssistant() {
-        ui = new Ui();
         sc = new Scanner(System.in);
     }
 
@@ -93,7 +92,7 @@ public class OrderAssistant {
 
         String item = "";
 
-        ui.promptItemName();
+        transactionUi.promptItemName();
         item = sc.nextLine();
         item = item.toLowerCase();
 
@@ -105,7 +104,7 @@ public class OrderAssistant {
 
         String quantity = "";
 
-        ui.promptItemQuantity();
+        transactionUi.promptItemQuantity();
         quantity = sc.nextLine();
         quantity = quantity.toLowerCase();
 
@@ -116,7 +115,7 @@ public class OrderAssistant {
 
         String response = "";
 
-        ui.promptMoreOrderEntries();
+        transactionUi.promptMoreOrderEntries();
         response = sc.nextLine();
         response = response.toLowerCase();
 

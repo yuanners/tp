@@ -186,6 +186,14 @@ public class TransactionUi extends Ui {
             // Fallthrough
         }
     }
+
+    public void promptItemQuantity() {
+        System.out.println("Please enter the quantity of the item: ");
+    }
+
+    public void promptItemName() {
+        System.out.println("Please enter the item's name: ");
+    }
 }
 
 
