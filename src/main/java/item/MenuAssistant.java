@@ -14,14 +14,12 @@ import exception.item.IndexOutOfBoundException;
 import exception.item.IndexInvalidNumberFormatException;
 import ui.Flags;
 import ui.MenuUi;
-import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 
 import java.util.Scanner;
 
 public class MenuAssistant {
-    Ui ui;
     MenuUi menuUi;
     Scanner sc;
     private final String CANCEL = "/cancel";
@@ -30,7 +28,6 @@ public class MenuAssistant {
     private AddItemValidation addItemValidation;
     private DeleteItemValidation deleteItemValidation;
     public MenuAssistant() {
-        ui = new Ui();
         menuUi = new MenuUi();
         sc = new Scanner(System.in);
         addItemValidation = new AddItemValidation();
@@ -65,7 +62,7 @@ public class MenuAssistant {
         boolean isValidName = false;
 
         while (!isValidName) {
-            ui.promptItemName();
+            menuUi.promptItemName();
             name = sc.nextLine();
 
             if(name.equals(CANCEL)) {
@@ -107,7 +104,7 @@ public class MenuAssistant {
         boolean isValidName = false;
 
         while (!isValidName) {
-            ui.promptItemName();
+            menuUi.promptItemName();
             name = sc.nextLine();
 
             if(name.equals(CANCEL)) {
@@ -148,7 +145,7 @@ public class MenuAssistant {
         boolean isValidPrice = false;
 
         while (!isValidPrice) {
-            ui.promptItemPrice();
+            menuUi.promptItemPrice();
             price = sc.nextLine();
 
             if(price.equals(CANCEL)) {
@@ -216,7 +213,7 @@ public class MenuAssistant {
      */
     public boolean updateItem(Command command, Menu menu) {
         if(menu.getItems().size() == 0) {
-            ui.println(ui.getEmptyMenu());
+            menuUi.printError(Flags.Error.EMPTY_MENU);
             return true;
         }
 
@@ -232,7 +229,7 @@ public class MenuAssistant {
         int index = Integer.parseInt(command.getArgumentMap().get(deleteItemValidation.LONG_INDEX_FLAG));
 
         while (!isValidResponse) {
-            ui.promptItemNameChange();
+            menuUi.promptItemNameChange();
             toUpdateName = sc.nextLine();
             if(toUpdateName.equals(CANCEL)) {
                 return true;
@@ -243,7 +240,7 @@ public class MenuAssistant {
                 isValidResponse = true;
             }
             if(!isValidResponse) {
-                ui.promptUpdateItemUnrecognisedAnswer();
+                menuUi.promptUpdateItemUnrecognisedAnswer();
             }
         }
 
@@ -258,7 +255,7 @@ public class MenuAssistant {
         }
 
         while (!isValidResponse) {
-            ui.promptItemPriceChange();
+            menuUi.promptItemPriceChange();
             toUpdatePrice = sc.nextLine();
             if(toUpdatePrice.equals(CANCEL)) {
                 return true;
@@ -269,7 +266,7 @@ public class MenuAssistant {
                 isValidResponse = true;
             }
             if(!isValidResponse) {
-                ui.promptUpdateItemUnrecognisedAnswer();
+                menuUi.promptUpdateItemUnrecognisedAnswer();
             }
         }
 
@@ -306,7 +303,7 @@ public class MenuAssistant {
         boolean isValidIndex = false;
 
         while (!isValidIndex) {
-            ui.promptItemIndex();
+            menuUi.promptItemIndex();
             index = sc.nextLine();
 
             if(index.equals(CANCEL)) {
@@ -340,7 +337,7 @@ public class MenuAssistant {
      */
     public boolean deleteItem(Command command, Menu menu) {
         if(menu.getItems().size() == 0) {
-            ui.println(ui.getEmptyMenu());
+            menuUi.printError(Flags.Error.EMPTY_MENU);
             return true;
         }
 
@@ -369,7 +366,7 @@ public class MenuAssistant {
         String keyword = "";
         boolean isRunning = false;
 
-        ui.promptItemKeyword();
+        menuUi.promptItemKeyword();
         keyword = sc.nextLine();
 
         if(keyword.equals(CANCEL)) {

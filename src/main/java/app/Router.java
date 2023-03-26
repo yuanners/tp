@@ -58,7 +58,7 @@ public class Router {
             menu.deleteItem(command);
             break;
         case "/listitem":
-            menu.displayList();
+            menu.displayList(command);
             break;
         case "/updateitem":
             menu.updateItem(command);
@@ -116,7 +116,7 @@ public class Router {
             break;
         case "3":
         case "listitem":
-            menu.displayList();
+            menu.displayList(command);
             break;
         case "4":
         case "updateitem":
