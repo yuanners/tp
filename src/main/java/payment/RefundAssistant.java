@@ -1,5 +1,5 @@
 package payment;
-
+/*
 import app.Command;
 import exception.item.IndexInvalidNumberFormatException;
 import exception.item.IndexOutOfBoundException;
@@ -23,7 +23,7 @@ public class RefundAssistant {
     private final String CANCEL = "/cancel";
     private final String YES = "yes";
     private final String NO = "no";
-    /*
+
     public RefundAssistant() {
         transactionUi = new TransactionUi();
         scan = new Scanner(System.in);
@@ -44,5 +44,6 @@ public class RefundAssistant {
         return false;
     }
 
-*/
+
 }
+*/
