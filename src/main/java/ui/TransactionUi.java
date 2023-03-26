@@ -1,6 +1,5 @@
 package ui;
 
-import com.google.gson.internal.bind.util.ISO8601Utils;
 import order.Order;
 
 import java.text.DecimalFormat;
@@ -8,9 +7,7 @@ import java.util.ArrayList;
 
 public class TransactionUi extends Ui {
 
-    public void promptMoreOrderEntries() {
-        System.out.println("Do you have more items to add? (yes/no/cancel)");
-    }
+    public void promptMoreOrderEntries() { System.out.println("Do you have more items to add? (yes/no/cancel)"); }
 
     public void promptPayment() {
         System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
@@ -51,9 +48,7 @@ public class TransactionUi extends Ui {
         System.out.println("Order added successfully!");
     }
 
-    public void printSuccessfulPayment() {
-        System.out.println("Order has been paid!");
-    }
+    public void printSuccessfulPayment() { System.out.println("Order has been paid!"); }
 
     public void printSuccessfulListOrder() {
         System.out.println("All transactions have been listed!");
@@ -71,18 +66,20 @@ public class TransactionUi extends Ui {
     }
 
 
-//    public void printItemNotExistError() {
-//        System.out.println("No such item exists.");
-//    }
-//
-//    public void printSimilarItemError() {
-//        System.out.println("Your input referenced multiple similar items. " +
-//                "Please try again with a more specific item name.");
-//    }
+    //    public void printItemNotExistError() {
+    //        System.out.println("No such item exists.");
+    //    }
+    //
+    //    public void printSimilarItemError() {
+    //        System.out.println("Your input referenced multiple similar items. " +
+    //                "Please try again with a more specific item name.");
+    //    }
 
     public void helpAddOder() {
         System.out.println("/addorder -i <number> -q <number>");
     }
+
+    public void printError(String message) {System.out.println(message); }
 
     @Override
     public void printError(Flags.Error error) {
@@ -103,6 +100,7 @@ public class TransactionUi extends Ui {
             break;
         case NEGATIVE_ORDER_ITEM_INDEX:
             System.out.println("Index cannot be negative.");
+            break;
         case INVALID_ORDER_ITEM_INDEX_OUT_OF_BOUNDS:
             System.out.println("Index does not exist.");
             break;
@@ -175,6 +173,8 @@ public class TransactionUi extends Ui {
         case INVALID_REFUND_ORDER_TYPE:
             System.out.println("Order is already refunded.");
             break;
+        default:
+            // Fallthrough
         }
     }
 }

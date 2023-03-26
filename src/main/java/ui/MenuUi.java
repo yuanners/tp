@@ -94,6 +94,8 @@ public class MenuUi extends Ui {
         System.out.println("finditem completed!");
     }
 
+    public void printEmptyMenu() {System.out.println("No items in menu!"); }
+
     @Override
     public void printCommandCancelled(String cmd) {
         switch (cmd) {
@@ -118,6 +120,8 @@ public class MenuUi extends Ui {
         case "/deleteitem":
             System.out.println("Deletion of item has been cancelled. All changes are discarded.");
             break;
+        default:
+            // Fallthrough
         }
     }
 
@@ -145,6 +149,8 @@ public class MenuUi extends Ui {
         case "/deleteitem":
             System.out.println("Item deleted successfully.");
             break;
+        default:
+            // Fallthrough
         }
     }
 
@@ -159,13 +165,13 @@ public class MenuUi extends Ui {
             System.out.println("There are no items on the menu.");
             break;
 
-        /** Item name in find item **/
+        // Item name in find item
         case MISSING_FIND_ITEM_DESCRIPTION:
             System.out.println("Please specify the keyword to search for.");
             break;
 
 
-        /** Item Name **/
+        // Item Name
         case MISSING_ITEM_NAME_FLAG:
             System.out.println("Please include the item's name using: -n <name>");
             break;
@@ -179,7 +185,7 @@ public class MenuUi extends Ui {
             System.out.println("Name already exists. Please choose a different name.");
             break;
 
-        /** Item Price **/
+        // Item Price
         case MISSING_ITEM_PRICE_FLAG:
             System.out.println("Please include the item's price using: -p <price>");
             break;
@@ -199,7 +205,7 @@ public class MenuUi extends Ui {
             System.out.println("Price must be a number.");
             break;
 
-        /** Item Name and Price **/
+        // Item Name and Price
         case MISSING_ITEM_NAME_OR_PRICE_FLAG:
             System.out.println("Please include the item's name or price using: -n <name> OR -p <price>");
             break;
@@ -207,7 +213,7 @@ public class MenuUi extends Ui {
             System.out.println("Please include the item's name and price using: -n <name> -p <price>");
             break;
 
-        /** Item index **/
+        // Item index
         case MISSING_ITEM_INDEX_FLAG:
             System.out.println("Please include the item's index using: -i <index>");
             break;
@@ -219,6 +225,9 @@ public class MenuUi extends Ui {
         case ITEM_INDEX_OUT_OF_BOUND_ERROR:
             System.out.println("Index does not exist.");
             break;
+
+        default:
+            // Fallthrough
 
         }
 

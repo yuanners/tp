@@ -1,8 +1,14 @@
 package validation.order;
 
 import app.Command;
-import exception.item.ItemException;
-import exception.order.*;
+import exception.order.MissingOrderFlagException;
+import exception.order.MissingOrderArgumentException;
+import exception.order.MissingQuantityArgumentException;
+import exception.order.InvalidIndexNumberFormatException;
+import exception.order.InvalidIndexNegativeException;
+import exception.order.InvalidIndexOutOfBoundsException;
+import exception.order.InvalidQuantityNumberFormatException;
+import exception.order.InvalidQuantityNegativeException;
 import item.Menu;
 import ui.Flags;
 import ui.TransactionUi;
@@ -18,25 +24,25 @@ public class AddOrderValidation extends Validation {
     private TransactionUi transactionUi = new TransactionUi();
 
 
-//    public void checkValidItem(Command arg) throws ItemException {
-//
-//        String item;
-//
-//        if (arg.getArgumentMap().get("i") != null) {
-//            item = arg.getArgumentMap().get("i");
-//        } else {
-//            item = arg.getArgumentMap().get("item");
-//        }
-//
-//        if (!isInteger(item)) {
-//            if (menu.findMatchingItemNames(item).size() > 1) {
-//                throw new ItemException(ui.getMultipleSimilarItemsFound());
-//            } else if (menu.findMatchingItemNames(item).size() == 0) {
-//                throw new ItemException(ui.getNoSuchItem());
-//            }
-//        }
-//
-//    }
+    //    public void checkValidItem(Command arg) throws ItemException {
+    //
+    //        String item;
+    //
+    //        if (arg.getArgumentMap().get("i") != null) {
+    //            item = arg.getArgumentMap().get("i");
+    //        } else {
+    //            item = arg.getArgumentMap().get("item");
+    //        }
+    //
+    //        if (!isInteger(item)) {
+    //            if (menu.findMatchingItemNames(item).size() > 1) {
+    //                throw new ItemException(ui.getMultipleSimilarItemsFound());
+    //            } else if (menu.findMatchingItemNames(item).size() == 0) {
+    //                throw new ItemException(ui.getNoSuchItem());
+    //            }
+    //        }
+    //
+    //    }
 
     public boolean checkValidItemName(String itemName) {
 
@@ -65,39 +71,39 @@ public class AddOrderValidation extends Validation {
         return true;
     }
 
-//    /**
-//     * Validate the item index and quantity
-//     *
-//     * @param arg  user command
-//     * @param menu itemlist
-//     * @throws OrderException custom exception for order validation
-//     */
-//    public Command validateAddOrder(Command arg, Menu menu) throws OrderException {
-//
-//        String item = "";
-//        String newItem = "";
-//
-//        if (arg.getArgumentString().contains("-i")) {
-//            item = arg.getArgumentMap().get("i").trim();
-//        } else if (arg.getArgumentString().contains("--item")) {
-//            item = arg.getArgumentMap().get("item").trim();
-//        }
-//
-//        if (!isInteger(item)) {
-//            newItem = Integer.toString(menu.findItemIndex(item));
-//            String newArgumentString = arg.getArgumentString().replace(item, newItem);
-//            Command newCommand = new Command("/addorder " + newArgumentString);
-//            return newCommand;
-//        }
-//
-//
-//        if (!(isValidQuantity(arg))) {
-//            throw new OrderException(ui.getInvalidOrderInteger());
-//        }
-//
-//
-//        return arg;
-//    }
+    //    /**
+    //     * Validate the item index and quantity
+    //     *
+    //     * @param arg  user command
+    //     * @param menu itemlist
+    //     * @throws OrderException custom exception for order validation
+    //     */
+    //    public Command validateAddOrder(Command arg, Menu menu) throws OrderException {
+    //
+    //        String item = "";
+    //        String newItem = "";
+    //
+    //        if (arg.getArgumentString().contains("-i")) {
+    //            item = arg.getArgumentMap().get("i").trim();
+    //        } else if (arg.getArgumentString().contains("--item")) {
+    //            item = arg.getArgumentMap().get("item").trim();
+    //        }
+    //
+    //        if (!isInteger(item)) {
+    //            newItem = Integer.toString(menu.findItemIndex(item));
+    //            String newArgumentString = arg.getArgumentString().replace(item, newItem);
+    //            Command newCommand = new Command("/addorder " + newArgumentString);
+    //            return newCommand;
+    //        }
+    //
+    //
+    //        if (!(isValidQuantity(arg))) {
+    //            throw new OrderException(ui.getInvalidOrderInteger());
+    //        }
+    //
+    //
+    //        return arg;
+    //    }
 
     public void validateFlag(Command arg)
             throws MissingOrderFlagException, MissingOrderArgumentException, MissingQuantityArgumentException {
@@ -119,8 +125,10 @@ public class AddOrderValidation extends Validation {
 
     public void validateIndex(Command arg, Menu menu)
             throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
+
         arg.mapArgumentAlias("i", "item");
-        if (isInteger(arg.getArgumentMap().get("i").trim())) {
+
+        if (!isInteger(arg.getArgumentMap().get("i").trim())) {
             throw new InvalidIndexNumberFormatException();
         } else {
             int index = Integer.parseInt(arg.getArgumentMap().get("i").trim());
@@ -134,9 +142,11 @@ public class AddOrderValidation extends Validation {
 
     public void validateQuantity(Command arg)
             throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
+
         arg.mapArgumentAlias("q", "quantity");
+
         if (arg.getArgumentMap().get("q").length() > 0) {
-            if (isInteger(arg.getArgumentMap().get("q").trim())) {
+            if (!isInteger(arg.getArgumentMap().get("q").trim())) {
                 throw new InvalidQuantityNumberFormatException();
             } else {
                 int quantity = Integer.parseInt(arg.getArgumentMap().get("q").trim());

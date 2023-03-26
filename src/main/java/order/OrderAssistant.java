@@ -55,7 +55,7 @@ public class OrderAssistant {
         while (hasMoreOrderEntry) {
 
             do {
-                 itemName = getItem();
+                itemName = getItem();
                 if (CANCELS.contains(itemName)) {
                     return true;
                 }
@@ -79,7 +79,6 @@ public class OrderAssistant {
 
             // Append to final command string
             commandString += "\"" + itemName + "\":" + quantity + ",";
-
         }
 
         commandString = formatCommandStringForOrders(commandString);

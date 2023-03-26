@@ -1,7 +1,17 @@
 package order;
 
 import app.Command;
-import exception.order.*;
+import exception.order.MissingQuantityArgumentException;
+import exception.order.InvalidIndexNumberFormatException;
+import exception.order.MissingOrderFlagException;
+import exception.order.InvalidQuantityNumberFormatException;
+import exception.order.InvalidIndexNegativeException;
+import exception.order.InvalidQuantityNegativeException;
+import exception.order.MissingOrderArgumentException;
+import exception.order.InvalidIndexOutOfBoundsException;
+import exception.order.MissingMultipleOrderArgumentException;
+import exception.order.MissingMultpleOrderFlagException;
+import exception.order.InvalidMultipleOrderFormatException;
 import item.Menu;
 import payment.Payment;
 import ui.Flags;
@@ -24,8 +34,7 @@ public class Order implements OrderInterface {
     private ArrayList<OrderEntry> orderEntries;
     private String status;
     private String paymentType;
-
-    private TransactionUi transactionUi;
+    private TransactionUi transactionUi = new TransactionUi();
 
 
     /**
@@ -194,9 +203,11 @@ public class Order implements OrderInterface {
      * @param listOfItems ItemList object containing the available items
      */
     public void addOrder(Command command, Menu listOfItems) {
+
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
-            AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation();
+            AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation(listOfItems);
+
             command.mapArgumentAlias("item", "i");
             command.mapArgumentAlias("items", "I");
 
@@ -207,13 +218,13 @@ public class Order implements OrderInterface {
                 //command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
             } else if (command.getArgumentMap().get("items") != null) {
-                addMultipleOrderValidation.validateFormat(command);
+                command = addMultipleOrderValidation.validateFormat(command);
                 addMultipleOrderValidation.validateArguments(command, listOfItems);
-                //command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
             } else {
                 addOrderValidation.validateFlag(command);
             }
+
         } catch (MissingQuantityArgumentException e) {
             transactionUi.printError(Flags.Error.MISSING_QUANTITY_FLAG_ARGUMENT);
         } catch (InvalidIndexNumberFormatException e) {
@@ -237,7 +248,6 @@ public class Order implements OrderInterface {
         } catch (InvalidMultipleOrderFormatException e) {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
         }
-
     }
 
     /**
@@ -256,6 +266,7 @@ public class Order implements OrderInterface {
 
         OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
         this.orderEntries.add(orderEntry);
+        transactionUi.printSuccessfulAddOrder();
     }
 
     /**
@@ -325,7 +336,7 @@ public class Order implements OrderInterface {
             OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
             this.orderEntries.add(orderEntry);
         }
-
+        transactionUi.printSuccessfulAddOrder();
     }
 
     private boolean isInteger(String input) {
