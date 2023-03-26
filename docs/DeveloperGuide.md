@@ -50,49 +50,74 @@ making it easier for them to work on the project.
 The expected inputs to add only one menu item into an order is as such:
 * `/additem -n <item_name> -p <price>`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `/additem`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the 
+command `/additem`.
 
 The general workflow of `/additem` is as follows:
 1. User input is passed to `MoneyGoWhere`.
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes `Menu#addItem` method to run the `/additem` command.
-1. Once the command runs, `Menu#addItem` invokes `AddItemValidation#validateFlags` to check if all the required flags have been given.
-    * If there are missing flags, a message indicating that the usage is invalid will be printed using `Ui#println` and control is given back to `MoneyGoWhere`.
-1. `Menu#addItem` then invokes `AddItemValidation#validateCommand` which in turn, calls all the following validation method to check the arguments provided.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes 
+`Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes `Menu#addItem` 
+method to run the `/additem` command.
+1. Once the command runs, `Menu#addItem` invokes `AddItemValidation#validateFlags` to check if all the required flags 
+have been given.
+    * If there are missing flags, a message indicating that the usage is invalid will be printed using `Ui#println` and 
+   control is given back to `MoneyGoWhere`.
+1. `Menu#addItem` then invokes `AddItemValidation#validateCommand` which in turn, calls all the following validation 
+method to check the arguments provided.
     * `AddItemValidation#validateArgument` checks if the user input `String` is empty
-        * If the user input is empty, a message indicating that the input is empty is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+        * If the user input is empty, a message indicating that the input is empty is printed using `MenuUi#printError` 
+      and control is given back to `MoneyGoWhere`.
     * `AddItemValidation#validateName` checks if the given name is empty or exceeds the limit of 25 characters
-        * If the name violates these naming constraints, a message indicating that the name is too short or too long is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-    * `AddItemValidation#validateDuplicateName` checks if the given name already exists in the `ArrayList<Item> items` of `Menu`.
-        * If the name already exists, a message indicating that the item name already exists is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-    * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative or has more than 2 decimal points
-        * If any of the above is true, a message indicating the constraint that it has violated is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-1. `Menu#processAddItem` is then invoked and it creates a new`Item` object using the name and price given. It then calls `Menu#appendItem` on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`. Then, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been successfully added to the menu.
+        * If the name violates these naming constraints, a message indicating that the name is too short or too long is 
+      printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+    * `AddItemValidation#validateDuplicateName` checks if the given name already exists in the `ArrayList<Item> items` 
+   of `Menu`.
+        * If the name already exists, a message indicating that the item name already exists is printed using 
+      `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+    * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative or has more 
+   than 2 decimal points
+        * If any of the above is true, a message indicating the constraint that it has violated is printed using 
+      `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `Menu#processAddItem` is then invoked and it creates a new`Item` object using the name and price given. It then 
+calls `Menu#appendItem` on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`. 
+Then, `Menu#save` is invoked to save the changes to the local storage file.
+1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been 
+successfully added to the menu.
 
 ##### Basic Mode Add an Item
 The expected inputs to add only one menu item into an order is as such:
 * `additem`
 * `1`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `additem` or `1`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the 
+command `additem` or `1`.
 
 
 The general workflow of `additem` is as follows:
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes `MenuAssistant#addItem` method to run the `additem` command.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes 
+`Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes 
+`MenuAssistant#addItem` method to run the `additem` command.
 1. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
 1. `MenuAssistant#addItem` invokes `MenuAssistant#getName` to get the name of the item to be added.
-1. `MenuAssistant#getName` gets the name from the user and invokes `AddItemValidation#validateName` to check if the given name is empty or exceeds the limit of 25 characters and `AddItemValidation#validateDuplicateName` to check if the given name already exists in the `ArrayList<Item> items` of `Menu`
-    * If the name violates these naming constraints, a message indicating that the name is too short or too long is printed using `MenuUi#printError` and re-prompts the user to enter a new name.
-    * If the name already exists, a message indicating that the item name already exists is printed using `MenuUi#printError` and re-prompts the user to enter a new name.
+1. `MenuAssistant#getName` gets the name from the user and invokes `AddItemValidation#validateName` to check if the 
+given name is empty or exceeds the limit of 25 characters and `AddItemValidation#validateDuplicateName` to check if 
+the given name already exists in the `ArrayList<Item> items` of `Menu`
+    * If the name violates these naming constraints, a message indicating that the name is too short or too long is 
+   printed using `MenuUi#printError` and re-prompts the user to enter a new name.
+    * If the name already exists, a message indicating that the item name already exists is printed using 
+   `MenuUi#printError` and re-prompts the user to enter a new name.
 1. `MenuAssistant#addItem` then invokes `MenuAssistant#getPrice` to get the price of the item to be added.
-1. `MenuAssistant#getPrice` gets the price from the user and invokes `AddItemValidation#validatePrice` to check if the given price is empty, is not a number, is negative or has more than 2 decimal points
-    * If any of the above is true, a message indicating the constraint that it has violated is printed using `MenuUi#printError` and re-prompts the user to enter a new price.
+1. `MenuAssistant#getPrice` gets the price from the user and invokes `AddItemValidation#validatePrice` to check if the 
+given price is empty, is not a number, is negative or has more than 2 decimal points
+    * If any of the above is true, a message indicating the constraint that it has violated is printed using 
+   `MenuUi#printError` and re-prompts the user to enter a new price.
 1. A new `Item` object is then created using the name and price given
 1. `Menu#appendItem` is invoked on the new `Item` object to add it to `ArrayList<Item> items` in `Menu`.
 1. The, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been successfully added to the menu or if the user has cancelled the command accordingly.
+1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been 
+successfully added to the menu or if the user has cancelled the command accordingly.
 
 <hr>
 
@@ -102,22 +127,32 @@ The general workflow of `additem` is as follows:
 The expected inputs to add only one menu item into an order is as such:
 * `/deleteitem -i <index>`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `/deleteitem`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the 
+command `/deleteitem`.
 
 The general workflow of `/deleteitem` is as follows:
 1. User input is passed to `MoneyGoWhere`.
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes `Menu#deleteItem` method to run the `/deleteitem` command.
-1. Once the command runs, `Menu#deleteItem` checks if the list of items is empty. If empty, a message indicating that there is nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes 
+`Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes 
+`Menu#deleteItem` method to run the `/deleteitem` command.
+1. Once the command runs, `Menu#deleteItem` checks if the list of items is empty. If empty, a message indicating that 
+there is nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
 1. `Menu#deleteItem` invokes `DeleteItemValidation#validateFlags` to check if all the required flags have been given.
-    * If there are missing flags, a message indicating that the usage is invalid will be printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-1. `Menu#deleteItem` then invokes `DeleteItemValidation#validateCommand` which in turn, calls all of the following validation method to check the arguments provided.
+    * If there are missing flags, a message indicating that the usage is invalid will be printed using 
+   `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `Menu#deleteItem` then invokes `DeleteItemValidation#validateCommand` which in turn, calls all of the following 
+validation method to check the arguments provided.
     * `DeleteItemValidation#validateArgument` checks if the user input `String` is empty
-        * If the user input is empty, a message indicating that the input is empty is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+        * If the user input is empty, a message indicating that the input is empty is printed using `MenuUi#printError` 
+      and control is given back to `MoneyGoWhere`.
     * `DeleteItemValidation#validateIndex` checks if the given index is valid and exists
-        * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-1. `Menu#processDeleteItem` is then invoked, and it calls `Menu#removeItem` on the given index to delete it from the list of items. Then, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been successfully added to the menu.
+        * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` 
+      and control is given back to `MoneyGoWhere`.
+1. `Menu#processDeleteItem` is then invoked, and it calls `Menu#removeItem` on the given index to delete it from the 
+list of items. Then, `Menu#save` is invoked to save the changes to the local storage file.
+1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been 
+successfully added to the menu.
 
 
 ##### Basic Mode [Delete an Item]()
@@ -125,19 +160,27 @@ The expected inputs to add only one menu item into an order is as such:
 * `deleteitem`
 * `2`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `deleteitem` or `2`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the 
+command `deleteitem` or `2`.
 
 The general workflow of `deleteitem` is as follows:
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes `MenuAssistant#deleteItem` method to run the `deleteitem` command.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes 
+`Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes 
+`MenuAssistant#deleteItem` method to run the `deleteitem` command.
 1. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
-1. `MenuAssistant#deleteItem` checks if the list of items is empty. If empty, a message indicating that there is nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `MenuAssistant#deleteItem` checks if the list of items is empty. If empty, a message indicating that there is 
+nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
 1. `MenuAssistant#deleteItem` invokes `MenuAssistant#getIndex` to get the index of the item to be deleted.
-1. `MenuAssistant#getIndex` gets the index from the user and invokes `DeleteItemValidation#validateIndex` if the given index is valid and exists.
-    * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` and re-prompts the user to enter a new index.
+1. `MenuAssistant#getIndex` gets the index from the user and invokes `DeleteItemValidation#validateIndex` if the given 
+index is valid and exists.
+    * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` 
+   and re-prompts the user to enter a new index.
 1. A new `Item` object is then created using the name and price given
-1. `Menu#removeItem` is then invoked on the given index to delete it from the list of items. Then, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been successfully added to the menu or if the user has cancelled the command accordingly.
+1. `Menu#removeItem` is then invoked on the given index to delete it from the list of items. Then, `Menu#save` is 
+invoked to save the changes to the local storage file.
+1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been 
+successfully added to the menu or if the user has cancelled the command accordingly.
 
 <hr>
 
@@ -150,29 +193,47 @@ The general workflow of `deleteitem` is as follows:
 
 ##### Advanced Mode Update an Item
 The expected inputs to add only one menu item into an order is as such:
-* `/updateitem -i <index> -n <name> -p <price>`, where `-n <name>` and `-p <price>` are optional but at least one of them must be present.
+* `/updateitem -i <index> -n <name> -p <price>`, where `-n <name>` and `-p <price>` are optional 
+but at least one of them must be present.
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `/updateitem`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the 
+command `/updateitem`.
+
 The general workflow of `/updateitem` is as follows:
 1. User input is passed to `MoneyGoWhere`.
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes `Menu#updateItem` method to run the `/updateitem` command.
-1. Once the command runs, `Menu#updateItem` checks if the list of items is empty. If empty, a message indicating that there is nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes 
+`Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes 
+`Menu#updateItem` method to run the `/updateitem` command.
+1. Once the command runs, `Menu#updateItem` checks if the list of items is empty. If empty, a message indicating that 
+there is nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
 1. `Menu#updateItem` invokes `UpdateItemValidation#validateFlags` to check if all the required flags have been given.
-    * If there are missing flags, a message indicating that the usage is invalid will be printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-1. `Menu#addItem` then invokes `UpdateItemValidation#validateCommand` which in turn, calls all of the following validation method to check the arguments if they are provided.
+    * If there are missing flags, a message indicating that the usage is invalid will be printed using 
+   `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `Menu#addItem` then invokes `UpdateItemValidation#validateCommand` which in turn, calls all of the following 
+validation method to check the arguments if they are provided.
     * `UpdateItemValidation#validateArgument` checks if the user input `String` is empty
-        * If the user input is empty, a message indicating that the input is empty is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+        * If the user input is empty, a message indicating that the input is empty is printed using `MenuUi#printError` 
+      and control is given back to `MoneyGoWhere`.
     * `DeleteItemValidation#validateIndex` checks if the given index is valid and exists
-        * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+        * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` 
+      and control is given back to `MoneyGoWhere`.
     * `AddItemValidation#validateName` checks if the given name is empty or exceeds the limit of 25 characters
-        * If the name violates these naming constraints, a message indicating that the name is too short or too long is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-    * `AddItemValidation#validateDuplicateName` checks if the given name already exists in the `ArrayList<Item> items` of `Menu`.
-        * If the name already exists, a message indicating that the item name already exists is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-    * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative or has more than 2 decimal points
-        * If any of the above is true, a message indicating the constraint that it has violated is printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
-1. `Menu#processUpdateItem` is then invoked and calls `Menu#getItem` with `Menu#setName` and/or `Menu#setprice` on the given index to update its name and/or price. Then, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been successfully added to the menu.
+        * If the name violates these naming constraints, a message indicating that the name is too short or too long is 
+      printed using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+    * `AddItemValidation#validateDuplicateName` checks if the given name already exists in the `ArrayList<Item> items` 
+   of `Menu`.
+        * If the name already exists, a message indicating that the item name already exists is printed using 
+      `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+    * `AddItemValidation#validatePrice` checks if the given price is empty, is not a number, is negative 
+   or has more than 2 decimal points
+        * If any of the above is true, a message indicating the constraint that it has violated is printed using 
+      `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `Menu#processUpdateItem` is then invoked and calls `Menu#getItem` with `Menu#setName` and/or `Menu#setprice` 
+on the given index to update its name and/or price. Then, `Menu#save` is invoked to save the changes to the 
+local storage file.
+1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been 
+successfully added to the menu.
 
 
 ##### Basic Mode Update an Item
@@ -180,28 +241,41 @@ The expected inputs to add only one menu item into an order is as such:
 * `updateitem`
 * `4`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command `deleteitem` or `4`.
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the 
+command `deleteitem` or `4`.
 
 The general workflow of `updateitem` is as follows:
-1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes `MenuAssistant#updateItem` method to run the `updateitem` command.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes 
+`Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes 
+`MenuAssistant#updateItem` method to run the `updateitem` command.
 1. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
-1. `MenuAssistant#updateItem` checks if the list of items is empty. If empty, a message indicating that there is nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
+1. `MenuAssistant#updateItem` checks if the list of items is empty. If empty, a message indicating that there 
+is nothing to be deleted using `MenuUi#printError` and control is given back to `MoneyGoWhere`.
 1. `MenuAssistant#updateItem` invokes `MenuAssistant#getIndex` to get the index of the item to be deleted.
-1. `MenuAssistant#getIndex` gets the index from the user and invokes `DeleteItemValidation#validateIndex` if the given index is valid and exists.
-    * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` and re-prompts the user to enter a new index.
+1. `MenuAssistant#getIndex` gets the index from the user and invokes `DeleteItemValidation#validateIndex` if the given 
+index is valid and exists.
+    * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` 
+   and re-prompts the user to enter a new index.
 1. `MenuAssistant#updateItem` then asks the user if the item's name is to be updated.
-1. If user indicates that the item's name is to be updated, `MenuAssistant#getName` is invoked to get the name from the user and invokes `AddItemValidation#validateName` to check if the given name is empty or exceeds the limit of 25 characters and `AddItemValidation#validateDuplicateName` to check if the given name already exists in the `ArrayList<Item> items` of `Menu`
-    * If the name violates these naming constraints, a message indicating that the name is too short or too long is printed using `MenuUi#printError` and re-prompts the user to enter a new name.
-    * If the name already exists, a message indicating that the item name already exists is printed using `MenuUi#printError` and re-prompts the user to enter a new name.
+1. If user indicates that the item's name is to be updated, `MenuAssistant#getName` is invoked to get the name from 
+the user and invokes `AddItemValidation#validateName` to check if the given name is empty or exceeds the limit of 
+25 characters and `AddItemValidation#validateDuplicateName` to check if the given name already exists in the 
+`ArrayList<Item> items` of `Menu`
+    * If the name violates these naming constraints, a message indicating that the name is too short or too long is 
+   printed using `MenuUi#printError` and re-prompts the user to enter a new name.
+    * If the name already exists, a message indicating that the item name already exists is printed using 
+   `MenuUi#printError` and re-prompts the user to enter a new name.
 1. `MenuAssistant#updateItem` then asks the user if the item's price is to be updated.
-1. If user indicates that the item's price is to be updated,`MenuAssistant#getPrice` is invoked to get the price from the user and invokes `AddItemValidation#validatePrice` to check if the given price is empty, is not a number, is negative or has more than 2 decimal points
-    * If any of the above is true, a message indicating the constraint that it has violated is printed using `MenuUi#printError` and re-prompts the user to enter a new price.
-1. `Menu#getItem` is then invoked with `Menu#setName` and/or `Menu#setprice` on the given index to update its name and/or price. Then, `Menu#save` is invoked to save the changes to the local storage file.
-1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been successfully added to the menu or if the user has cancelled the command accordingly.
-<!-- 1. User input is passed to `MoneyGoWhere`.
-2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command as `updateitem`.
-3. The obtained command is then passed back to `MoneyGoWhere`, which calls the `MenuAssistant` object. -->
+1. If user indicates that the item's price is to be updated,`MenuAssistant#getPrice` is invoked to get the price 
+from the user and invokes `AddItemValidation#validatePrice` to check if the given price is empty, is not a number, 
+is negative or has more than 2 decimal points
+    * If any of the above is true, a message indicating the constraint that it has violated is printed using 
+   `MenuUi#printError` and re-prompts the user to enter a new price.
+1. `Menu#getItem` is then invoked with `Menu#setName` and/or `Menu#setprice` on the given index to update its name 
+and/or price. Then, `Menu#save` is invoked to save the changes to the local storage file.
+1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been 
+successfully added to the menu or if the user has cancelled the command accordingly.
 
 <hr>
 
