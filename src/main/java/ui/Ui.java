@@ -2,6 +2,13 @@ package ui;
 
 public class Ui {
 
+    public void printWelcomeMessage() {
+        System.out.println("░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀\n" +
+                "░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀\n" +
+                "░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀");
+        System.out.println("Welcome to MoneyGoWhere!\n");
+    }
+
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
     }
