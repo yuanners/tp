@@ -5,7 +5,9 @@ import item.MenuAssistant;
 import order.Order;
 import order.OrderAssistant;
 import order.Transaction;
+import payment.PaymentAssistant;
 import payment.Refund;
+import payment.RefundAssistant;
 import statistic.RankReport;
 import statistic.SalesReport;
 import ui.MenuUi;
@@ -94,6 +96,7 @@ public class Router {
 
         MenuAssistant menuAssistant = new MenuAssistant();
         OrderAssistant orderAssistant = new OrderAssistant();
+        RefundAssistant refundAssistant = new RefundAssistant();
         boolean isCancelled;
 
         switch (command.getCommand()) {
@@ -134,6 +137,10 @@ public class Router {
         case "listorder":
             transactions.displayList();
             break;
+        case "8":
+        case "refundorder":
+            isCancelled = refundAssistant.refundOrder(command, transactions);
+            menuAssistant.printResult(command, isCancelled);
         default:
             ui.printInvalidCommand(command.getCommand());
         }
