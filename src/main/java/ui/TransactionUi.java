@@ -12,7 +12,9 @@ public class TransactionUi extends Ui {
     public void promptPayment() {
         System.out.println("Please use /pay -a <amount> -t <type> to make payment.");
     }
-
+    public void promptOrderID(){
+        System.out.println("Please enter order ID to refund order.");
+    }
     public void printChangeGiven(Double change) {
         System.out.printf("The calculated change is $%.2f.\n", change);
     }

@@ -5,6 +5,7 @@ import item.MenuAssistant;
 import order.Order;
 import order.OrderAssistant;
 import order.Transaction;
+import payment.Payment;
 import payment.Refund;
 import statistic.RankReport;
 import statistic.SalesReport;
