@@ -27,23 +27,11 @@ public class Refund {
      * @param transactions whole transaction list
      */
     public void refundTransaction(Command arg, Transaction transactions) {
-        String orderID = arg.getArgumentString();
-        Order refundOrder = new Order();
-        ArrayList<Order> orderList = transactions.getOrderList();
         RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
         try {
             refundOrderValidation.validateFlag(arg);
             refundOrderValidation.validateRefund(arg, transactions);
-            for (Order order : orderList) {
-                String ID = order.getOrderId();
-                if (ID.equals(orderID)) {
-                    refundOrder = order;
-                    break;
-                }
-            }
-            refundOrder.setStatus("REFUNDED");
-            transactions.save();
-            transactionUi.printSuccessfulRefundOrder();
+            getOrder(arg, transactions);
 
         } catch (MissingRefundOrderFlag e) {
             transactionUi.printError(Flags.Error.MISSING_REFUND_ORDER_FLAG);
@@ -54,5 +42,22 @@ public class Refund {
         } catch (InvalidRefundOrderType e) {
             transactionUi.printError(Flags.Error.INVALID_REFUND_ORDER_TYPE);
         }
+    }
+
+    public void getOrder(Command arg, Transaction transactions) {
+        arg.mapArgumentAlias("i", "id");
+        String orderID = arg.getArgumentMap().get("i").trim();
+        Order refundOrder = new Order();
+        ArrayList<Order> orderList = transactions.getOrderList();
+        for (Order order : orderList) {
+            String ID = order.getOrderId();
+            if (ID.equals(orderID)) {
+                refundOrder = order;
+                break;
+            }
+        }
+        refundOrder.setStatus("REFUNDED");
+        transactions.save();
+        transactionUi.printSuccessfulRefundOrder();
     }
 }
