@@ -2,11 +2,9 @@ package validation;
 
 import exception.InvalidArgumentException;
 import item.Menu;
-import utility.Ui;
 import app.Command;
 
 public class Validation {
-    private Ui ui = new Ui();
 
     public Validation() {
     }
@@ -20,8 +18,7 @@ public class Validation {
     public void validateArgument(Command arg) throws InvalidArgumentException {
         assert arg.getUserInput() != null : "Null input should be handled";
         if (arg.getUserInput() == null) {
-            // TODO change to no inputs
-            throw new InvalidArgumentException(ui.getNullMessage());
+            throw new InvalidArgumentException();
         }
     }
 
