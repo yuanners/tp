@@ -14,15 +14,14 @@ import validation.order.PaymentValidation;
 import java.util.Scanner;
 
 public class PaymentAssistant {
-    private final String CANCEL = "/cancel";
-    private TransactionUi transactionUi = new TransactionUi();
-    private Scanner scan = new Scanner(System.in);
-    Payment payment = new Payment();
+    private String CANCEL = "/cancel";
     private String amount;
     private String type;
+    private TransactionUi transactionUi = new TransactionUi();
+    private Scanner scan = new Scanner(System.in);
     private PaymentValidation paymentValidation = new PaymentValidation();
 
-    public boolean getAmount(Command command, Order order) {
+    public boolean getAmount(Order order) {
         boolean isValidAmount = false;
         while (!isValidAmount) {
             transactionUi.promptPaymentAmount();
@@ -50,7 +49,7 @@ public class PaymentAssistant {
         return false;
     }
 
-    public boolean getType(Command command, Order order) {
+    public boolean getType() {
         boolean isValidType = false;
         while (!isValidType) {
             transactionUi.promptPaymentType();
@@ -70,22 +69,20 @@ public class PaymentAssistant {
         return false;
     }
 
-    public boolean makePayment(Command command, Order order) {
+    public boolean makePayment(Order order) {
         boolean isCancelled = false;
-        isCancelled = getAmount(command, order);
+        isCancelled = getAmount(order);
 
         if(isCancelled) {
             return true;
         }
 
-        isCancelled = getType(command, order);
+        isCancelled = getType();
 
         if(isCancelled) {
             return true;
         }
         Payment payment = new Payment();
-        command.mapArgumentAlias("a", "amount");
-        command.mapArgumentAlias("t", "type");
         order.setPaymentType(type);
         order.setStatus("COMPLETED");
         double amountToPay = Double.parseDouble(amount);

@@ -33,7 +33,7 @@ public class Payment {
                 MenuAssistant menuAssistant = new MenuAssistant();
                 MenuUi menuUi = new MenuUi();
                 Command pay = new Command("addorder");
-                boolean isCancelled = paymentAssistant.makePayment(arg, order);
+                boolean isCancelled = paymentAssistant.makePayment(order);
                 menuAssistant.printResult(pay, isCancelled);
                 break;
             }

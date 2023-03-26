@@ -8,14 +8,7 @@ public class MenuUi extends Ui {
     enum MenuErrorType {
 
     }
-
-    /**
-     * Methods for prompting user input
-     */
-
-    /**
-     * Prompts for item name
-     **/
+    
 
     public void promptItemName() {
         System.out.println("Please enter the item's name: ");
@@ -130,10 +123,12 @@ public class MenuUi extends Ui {
         case "/finditem":
             System.out.println("Find has been cancelled.");
         case "addorder":
+            //Fallthrough
         case "/addorder":
             System.out.println("Add order has been cancelled.");
             break;
         case "refundorder":
+            //Fallthrough
         case "/refundorder":
             System.out.println("Refund order has been cancelled.");
             break;
@@ -181,10 +176,12 @@ public class MenuUi extends Ui {
             System.out.println("finditem completed!");
             break;
         case "addorder":
+            //Fallthrough
         case "/addorder":
             System.out.println("Order is added!");
             break;
         case "refundorder":
+            //Fallthrough
         case "/refundorder":
             System.out.println("Order is refunded!");
             break;
