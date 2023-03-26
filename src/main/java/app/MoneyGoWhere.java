@@ -2,9 +2,7 @@ package app;
 
 import item.Menu;
 import order.Transaction;
-import ui.MenuUi;
-import ui.TransactionUi;
-import utility.Ui;
+import ui.Ui;
 
 import java.util.Scanner;
 
@@ -28,8 +26,6 @@ public class MoneyGoWhere {
     public void run() {
 
         Ui ui = new Ui();
-        MenuUi menuUi = new MenuUi();
-        TransactionUi transactionUi = new TransactionUi();
         Scanner sc = new Scanner(System.in);
         Router router = new Router(menu, transactions);
 
@@ -40,7 +36,7 @@ public class MoneyGoWhere {
             String userInput = sc.nextLine();
 
             if (userInput.equals("exit")) {
-                ui.println(ui.getExitMessage());
+                ui.printExit();
                 break;
             }
             if(!userInput.isBlank()){

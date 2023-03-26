@@ -75,7 +75,6 @@ public class Transaction {
         TransactionUi transactionUi = new TransactionUi();
         transactionUi.printOrderList(this.transactions);
         transactionUi.printSuccessfulListOrder();
-
     }
 
     /**

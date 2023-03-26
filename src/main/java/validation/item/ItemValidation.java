@@ -1,6 +1,5 @@
 package validation.item;
 
-import utility.Ui;
 import validation.Validation;
 
 public class ItemValidation extends Validation {
@@ -12,7 +11,6 @@ public class ItemValidation extends Validation {
     public final String LONG_INDEX_FLAG = "index";
     public final String SHORT_DESC_FLAG = "d";
     public final String LONG_DESC_FLAG = "description";
-    Ui ui = new Ui();
 
     /**
      * Checks if the given input is a double

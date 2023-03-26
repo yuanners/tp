@@ -5,10 +5,6 @@ import item.Item;
 import java.util.ArrayList;
 
 public class MenuUi extends Ui {
-    enum MenuErrorType {
-
-    }
-
 
     public void promptItemName() {
         System.out.println("Please enter the item's name: ");
@@ -64,6 +60,10 @@ public class MenuUi extends Ui {
     /**
      * Methods for printing output
      */
+
+    public void printItemNotFound() {
+        System.out.println("The entered item cannot be found.");
+    }
 
     public void printFindItem(int index, ArrayList<Item> menu) {
         System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
