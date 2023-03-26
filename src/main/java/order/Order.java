@@ -34,8 +34,7 @@ public class Order implements OrderInterface {
     private ArrayList<OrderEntry> orderEntries;
     private String status;
     private String paymentType;
-
-    private TransactionUi transactionUi;
+    private TransactionUi transactionUi = new TransactionUi();
 
 
     /**
@@ -47,7 +46,7 @@ public class Order implements OrderInterface {
      */
     public Order() {
         this.orderId = UUID.randomUUID().toString();
-        this.status = "COMPLETED";
+        this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
@@ -62,18 +61,17 @@ public class Order implements OrderInterface {
      */
     public Order(Command command, Menu menu, Transaction transactions) {
         this.orderId = UUID.randomUUID().toString();
-        this.status = "COMPLETED";
+        this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
-
-        Ui ui = new Ui();
         transactionUi = new TransactionUi();
-        this.addOrder(command, menu);
-        Payment payment = new Payment();
-        ui.printOrderAdded(this.getSubTotal());
-        payment.makePayment(this);
-        transactions.appendOrder(this);
+        if (this.addOrder(command, menu)) {
+            transactions.appendOrder(this);
+            transactionUi.printOrderAdded(this.getSubTotal());
+            Payment payment = new Payment();
+            payment.makePayment(this);
+        }
     }
 
     /**
@@ -203,10 +201,12 @@ public class Order implements OrderInterface {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public void addOrder(Command command, Menu listOfItems) {
+    public boolean addOrder(Command command, Menu listOfItems) {
+        boolean isAdded = false;
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
-            AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation();
+            AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation(listOfItems);
+
             command.mapArgumentAlias("item", "i");
             command.mapArgumentAlias("items", "I");
 
@@ -216,14 +216,16 @@ public class Order implements OrderInterface {
                 addOrderValidation.validateQuantity(command);
                 //command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
+                isAdded = true;
             } else if (command.getArgumentMap().get("items") != null) {
-                addMultipleOrderValidation.validateFormat(command);
+                command = addMultipleOrderValidation.validateFormat(command);
                 addMultipleOrderValidation.validateArguments(command, listOfItems);
-                //command = addMultipleOrderValidation.validateAddMultipleOrder(command);
                 handleMultipleAddOrders(command, listOfItems);
+                isAdded = true;
             } else {
                 addOrderValidation.validateFlag(command);
             }
+
         } catch (MissingQuantityArgumentException e) {
             transactionUi.printError(Flags.Error.MISSING_QUANTITY_FLAG_ARGUMENT);
         } catch (InvalidIndexNumberFormatException e) {
@@ -247,7 +249,7 @@ public class Order implements OrderInterface {
         } catch (InvalidMultipleOrderFormatException e) {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
         }
-
+        return isAdded;
     }
 
     /**
@@ -266,6 +268,7 @@ public class Order implements OrderInterface {
 
         OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
         this.orderEntries.add(orderEntry);
+        transactionUi.printSuccessfulAddOrder();
     }
 
     /**
@@ -335,7 +338,7 @@ public class Order implements OrderInterface {
             OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
             this.orderEntries.add(orderEntry);
         }
-
+        transactionUi.printSuccessfulAddOrder();
     }
 
     private boolean isInteger(String input) {

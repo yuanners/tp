@@ -8,7 +8,6 @@ public class FindItemValidation extends ItemValidation {
         if(input == null || input == "") {
             throw new MissingFindItemDescriptionException();
         }
-
     }
 
 }

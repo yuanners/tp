@@ -43,6 +43,7 @@ public class Refund {
             }
             refundOrder.setStatus("REFUNDED");
             transactions.save();
+            transactionUi.printSuccessfulRefundOrder();
 
         } catch (MissingRefundOrderFlag e) {
             transactionUi.printError(Flags.Error.MISSING_REFUND_ORDER_FLAG);

@@ -27,7 +27,7 @@ public class RefundOrderValidation extends Validation {
     public void validateFlag(Command arg) throws MissingRefundOrderFlag, MissingRefundOrderArgument {
         arg.mapArgumentAlias("i", "id");
         if (arg.getArgumentString().contains("-i")) {
-            if (arg.getArgumentMap().get("i").length() < 1) {
+            if (arg.getArgumentMap().get("i")==null) {
                 throw new MissingRefundOrderArgument();
             }
         } else {

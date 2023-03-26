@@ -12,14 +12,12 @@ import exception.order.InvalidQuantityNegativeException;
 import item.Menu;
 import ui.Flags;
 import ui.TransactionUi;
-import utility.Ui;
 import validation.Validation;
 
 /**
  * Handles order related input validation
  */
 public class AddOrderValidation extends Validation {
-    private Ui ui = new Ui();
     private Menu menu = new Menu();
     private TransactionUi transactionUi = new TransactionUi();
 
@@ -108,7 +106,7 @@ public class AddOrderValidation extends Validation {
     public void validateFlag(Command arg)
             throws MissingOrderFlagException, MissingOrderArgumentException, MissingQuantityArgumentException {
         if (arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
-            if (arg.getArgumentMap().get("i").length() < 1 && arg.getArgumentMap().get("item").length() < 1) {
+            if (arg.getArgumentMap().get("i")==null && arg.getArgumentMap().get("item")==null) {
                 throw new MissingOrderArgumentException();
             }
         } else {
@@ -116,7 +114,7 @@ public class AddOrderValidation extends Validation {
         }
 
         if (arg.getArgumentString().contains("-q") || arg.getArgumentString().contains("--quantity")) {
-            if (arg.getArgumentMap().get("q").length() < 1 && arg.getArgumentMap().get("quantity").length() < 1) {
+            if (arg.getArgumentMap().get("q")==null && arg.getArgumentMap().get("quantity")==null) {
                 throw new MissingQuantityArgumentException();
             }
 
@@ -125,8 +123,10 @@ public class AddOrderValidation extends Validation {
 
     public void validateIndex(Command arg, Menu menu)
             throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
+
         arg.mapArgumentAlias("i", "item");
-        if (isInteger(arg.getArgumentMap().get("i").trim())) {
+
+        if (!isInteger(arg.getArgumentMap().get("i").trim())) {
             throw new InvalidIndexNumberFormatException();
         } else {
             int index = Integer.parseInt(arg.getArgumentMap().get("i").trim());
@@ -140,9 +140,11 @@ public class AddOrderValidation extends Validation {
 
     public void validateQuantity(Command arg)
             throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
+
         arg.mapArgumentAlias("q", "quantity");
-        if (arg.getArgumentMap().get("q").length() > 0) {
-            if (isInteger(arg.getArgumentMap().get("q").trim())) {
+
+        if (arg.getArgumentMap().get("q")!=null) {
+            if (!isInteger(arg.getArgumentMap().get("q").trim())) {
                 throw new InvalidQuantityNumberFormatException();
             } else {
                 int quantity = Integer.parseInt(arg.getArgumentMap().get("q").trim());

@@ -27,11 +27,15 @@ public class Payment {
             String userInput = sc.nextLine();
             Command arg = new Command(userInput);
             PaymentValidation paymentValidation = new PaymentValidation(arg);
-            paymentValidation.validatePayment(arg, order);
-            isValidPayment = true;
+            isValidPayment = paymentValidation.validatePayment(arg, order);
+            if (!isValidPayment) {
+                transactionUi.promptUserInput();
+                continue;
+            }
             arg.mapArgumentAlias("a", "amount");
             arg.mapArgumentAlias("t", "type");
             order.setPaymentType(arg.getArgumentMap().get("t").trim());
+            order.setStatus("COMPLETED");
             double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
             if (amount != order.getSubTotal()) {
                 transactionUi.printChangeGiven(calculateChange(amount, order));

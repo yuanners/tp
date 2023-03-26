@@ -17,6 +17,8 @@ import ui.Flags;
 import ui.TransactionUi;
 import validation.Validation;
 
+
+
 public class PaymentValidation extends Validation {
     private TransactionUi transactionUi = new TransactionUi();
 
@@ -36,39 +38,39 @@ public class PaymentValidation extends Validation {
      * @param arg   user input
      * @param order list of order entries
      */
-    public void validatePayment(Command arg, Order order) {
+    public boolean validatePayment(Command arg, Order order) {
         boolean isValid = false;
-        while (!isValid) {
-            try {
-                validateCommand(arg);
-                validateFlag(arg);
-                validateType(arg);
-                validateAmount(arg, order);
-                isValid = true;
-            } catch (MissingPayCommandException e) {
-                transactionUi.printError(Flags.Error.MISSING_PAY_COMMAND);
-            } catch (MissingPayTypeFlagException e) {
-                transactionUi.printError(Flags.Error.MISSING_PAY_TYPE_FLAG);
-            } catch (MissingPayTypeArgumentException e) {
-                transactionUi.printError(Flags.Error.MISSING_PAY_TYPE_ARGUMENT);
-            } catch (MissingPayAmountFlagException e) {
-                transactionUi.printError(Flags.Error.MISSING_PAY_AMOUNT_FLAG);
-            } catch (MissingPayAmountArgumentException e) {
-                transactionUi.printError(Flags.Error.MISSING_PAY_AMOUNT_ARGUMENT);
-            } catch (InsufficientPayAmountException e) {
-                transactionUi.printError(Flags.Error.INSUFFICIENT_PAY_AMOUNT);
-            } catch (InvalidPayAmountDecimalPlaceException e) {
-                transactionUi.printError(Flags.Error.INVALID_PAY_AMOUNT_DECIMAL_PLACE);
-            } catch (InvalidPayAmountNegativeException e) {
-                transactionUi.printError(Flags.Error.INVALID_PAY_AMOUNT_NEGATIVE);
-            } catch (InvalidPayAmountFormatException e) {
-                transactionUi.printError(Flags.Error.INVALID_PAY_AMOUNT_FORMAT);
-            } catch (InvalidPaymentAmountForCardException e) {
-                transactionUi.printError(Flags.Error.INVALID_PAYMENT_AMOUNT_FOR_CARD);
-            } catch (InvalidPayTypeException e) {
-                transactionUi.printError(Flags.Error.INVALID_PAY_TYPE);
-            }
+        try {
+            validateCommand(arg);
+            validateFlag(arg);
+            validateType(arg);
+            validateAmount(arg, order);
+            isValid = true;
+        } catch (MissingPayCommandException e) {
+            transactionUi.printError(Flags.Error.MISSING_PAY_COMMAND);
+        } catch (MissingPayTypeFlagException e) {
+            transactionUi.printError(Flags.Error.MISSING_PAY_TYPE_FLAG);
+        } catch (MissingPayTypeArgumentException e) {
+            transactionUi.printError(Flags.Error.MISSING_PAY_TYPE_ARGUMENT);
+        } catch (MissingPayAmountFlagException e) {
+            transactionUi.printError(Flags.Error.MISSING_PAY_AMOUNT_FLAG);
+        } catch (MissingPayAmountArgumentException e) {
+            transactionUi.printError(Flags.Error.MISSING_PAY_AMOUNT_ARGUMENT);
+        } catch (InsufficientPayAmountException e) {
+            transactionUi.printError(Flags.Error.INSUFFICIENT_PAY_AMOUNT);
+        } catch (InvalidPayAmountDecimalPlaceException e) {
+            transactionUi.printError(Flags.Error.INVALID_PAY_AMOUNT_DECIMAL_PLACE);
+        } catch (InvalidPayAmountNegativeException e) {
+            transactionUi.printError(Flags.Error.INVALID_PAY_AMOUNT_NEGATIVE);
+        } catch (InvalidPayAmountFormatException e) {
+            transactionUi.printError(Flags.Error.INVALID_PAY_AMOUNT_FORMAT);
+        } catch (InvalidPaymentAmountForCardException e) {
+            transactionUi.printError(Flags.Error.INVALID_PAYMENT_AMOUNT_FOR_CARD);
+        } catch (InvalidPayTypeException e) {
+            transactionUi.printError(Flags.Error.INVALID_PAY_TYPE);
         }
+        return isValid;
+
 
     }
 
@@ -96,7 +98,7 @@ public class PaymentValidation extends Validation {
     public void validateFlag(Command arg) throws MissingPayTypeFlagException, MissingPayTypeArgumentException,
             MissingPayAmountFlagException, MissingPayAmountArgumentException {
         if (arg.getArgumentString().contains("-t")) {
-            if (arg.getArgumentMap().get("t").length() < 1) {
+            if (arg.getArgumentMap().get("t") == null) {
                 throw new MissingPayTypeArgumentException();
             }
         } else {
@@ -104,7 +106,7 @@ public class PaymentValidation extends Validation {
         }
 
         if (arg.getArgumentString().contains("-a")) {
-            if (arg.getArgumentMap().get("a").length() < 1) {
+            if (arg.getArgumentMap().get("a") == null) {
                 throw new MissingPayAmountArgumentException();
             }
         } else {

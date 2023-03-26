@@ -1,9 +1,9 @@
 package validation.item;
 
 import app.Command;
-import exception.InvalidArgumentException;
 import exception.item.MissingIndexFlagException;
 import exception.item.MissingNameOrPriceFlagException;
+import exception.InvalidArgumentException;
 import exception.item.NameMinimumLengthException;
 import exception.item.NameMaximumLengthException;
 import exception.item.DuplicateNameException;
@@ -44,7 +44,8 @@ public class UpdateItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param c Given command
-     * @throws ItemException If any required flag is not given
+     * @throws MissingIndexFlagException If Index is missing
+     * @throws MissingNameOrPriceFlagException If Name or Price is missing
      */
     private void checkFlags(Command c) throws
             MissingIndexFlagException, MissingNameOrPriceFlagException {
