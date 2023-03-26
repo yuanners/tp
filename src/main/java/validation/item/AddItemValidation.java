@@ -16,15 +16,12 @@ import exception.item.PriceInvalidDecimalPlaceException;
 import item.Menu;
 import ui.Flags;
 import ui.MenuUi;
-import utility.Ui;
 
 public class AddItemValidation extends ItemValidation {
 
-    private Ui ui;
     private MenuUi menuUi;
 
     public AddItemValidation() {
-        ui = new Ui();
         menuUi = new MenuUi();
     }
 
