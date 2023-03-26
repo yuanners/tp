@@ -24,7 +24,7 @@ import java.util.PriorityQueue;
 /**
  * This class generates a rank report which includes two priority queues sorted by popularity and sales respectively.
  * It extends the Statistic class and uses its start and
- *      end date parameters to generate the report for a specific date range.
+ * end date parameters to generate the report for a specific date range.
  */
 public class RankReport extends Statistic {
     /**
@@ -36,7 +36,8 @@ public class RankReport extends Statistic {
      * @param transaction a Transaction object containing the list of orders to generate the report
      * @param menu        a Menu object containing the list of items to be included in the report
      */
-    public RankReport(Command command, StatisticValidation sv, Transaction transaction, Menu menu) throws StartAfterEndDateException, ConflictFlagException {
+    public RankReport(Command command, StatisticValidation sv, Transaction transaction, Menu menu)
+            throws StartAfterEndDateException, ConflictFlagException {
         super(command);
         StatisticUi ui = new StatisticUi();
 
