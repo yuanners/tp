@@ -8,7 +8,7 @@ public class MenuUi extends Ui {
     enum MenuErrorType {
 
     }
-    
+
 
     public void promptItemName() {
         System.out.println("Please enter the item's name: ");
@@ -122,6 +122,7 @@ public class MenuUi extends Ui {
             // Fallthrough
         case "/finditem":
             System.out.println("Find has been cancelled.");
+            break;
         case "addorder":
             //Fallthrough
         case "/addorder":
