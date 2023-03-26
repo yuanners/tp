@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import ui.Flags;
 import ui.MenuUi;
 import utility.Store;
-import utility.Ui;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 import validation.item.FindItemValidation;
@@ -186,7 +185,6 @@ public class Menu {
      */
     public int findItemIndex(String itemName) {
 
-        Ui ui = new Ui();
         ArrayList<Item> menu = this.getItems();
         itemName = itemName.toLowerCase();
 
@@ -200,7 +198,7 @@ public class Menu {
             }
         }
 
-        ui.printItemNotFound();
+        menuUi.printItemNotFound();
         return -1;
 
     }
