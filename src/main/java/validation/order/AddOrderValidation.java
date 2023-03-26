@@ -19,7 +19,6 @@ import validation.Validation;
  * Handles order related input validation
  */
 public class AddOrderValidation extends Validation {
-    private Ui ui = new Ui();
     private Menu menu = new Menu();
     private TransactionUi transactionUi = new TransactionUi();
 
@@ -108,7 +107,7 @@ public class AddOrderValidation extends Validation {
     public void validateFlag(Command arg)
             throws MissingOrderFlagException, MissingOrderArgumentException, MissingQuantityArgumentException {
         if (arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
-            if (arg.getArgumentMap().get("i").length() < 1 && arg.getArgumentMap().get("item").length() < 1) {
+            if (arg.getArgumentMap().get("i")==null && arg.getArgumentMap().get("item")==null) {
                 throw new MissingOrderArgumentException();
             }
         } else {
@@ -116,7 +115,7 @@ public class AddOrderValidation extends Validation {
         }
 
         if (arg.getArgumentString().contains("-q") || arg.getArgumentString().contains("--quantity")) {
-            if (arg.getArgumentMap().get("q").length() < 1 && arg.getArgumentMap().get("quantity").length() < 1) {
+            if (arg.getArgumentMap().get("q")==null && arg.getArgumentMap().get("quantity")==null) {
                 throw new MissingQuantityArgumentException();
             }
 
@@ -145,7 +144,7 @@ public class AddOrderValidation extends Validation {
 
         arg.mapArgumentAlias("q", "quantity");
 
-        if (arg.getArgumentMap().get("q").length() > 0) {
+        if (arg.getArgumentMap().get("q")!=null) {
             if (!isInteger(arg.getArgumentMap().get("q").trim())) {
                 throw new InvalidQuantityNumberFormatException();
             } else {

@@ -65,14 +65,13 @@ public class Order implements OrderInterface {
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
-
-        Ui ui = new Ui();
         transactionUi = new TransactionUi();
-        this.addOrder(command, menu);
-        Payment payment = new Payment();
-        ui.printOrderAdded(this.getSubTotal());
-        payment.makePayment(this);
-        transactions.appendOrder(this);
+        if (this.addOrder(command, menu)) {
+            transactions.appendOrder(this);
+            transactionUi.printOrderAdded(this.getSubTotal());
+            Payment payment = new Payment();
+            payment.makePayment(this);
+        }
     }
 
     /**
@@ -202,8 +201,8 @@ public class Order implements OrderInterface {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public void addOrder(Command command, Menu listOfItems) {
-
+    public boolean addOrder(Command command, Menu listOfItems) {
+        boolean isAdded = false;
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
             AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation(listOfItems);
@@ -217,10 +216,12 @@ public class Order implements OrderInterface {
                 addOrderValidation.validateQuantity(command);
                 //command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
+                isAdded = true;
             } else if (command.getArgumentMap().get("items") != null) {
                 command = addMultipleOrderValidation.validateFormat(command);
                 addMultipleOrderValidation.validateArguments(command, listOfItems);
                 handleMultipleAddOrders(command, listOfItems);
+                isAdded = true;
             } else {
                 addOrderValidation.validateFlag(command);
             }
@@ -248,6 +249,7 @@ public class Order implements OrderInterface {
         } catch (InvalidMultipleOrderFormatException e) {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
         }
+        return isAdded;
     }
 
     /**
