@@ -134,7 +134,7 @@ This adds a new item to the menu. New items must have a name and price.
 Format: `/additem -n "<name>" -p <price>` or `/additem --name "<name>" --price <price>`
 
 * Name refers to the name of the item
-    * It is case-sensitive
+    * It is case-insensitive
     * It has an upper limit of 25 characters
     * Names are unique, regardless of how the words are capitalized. `Chicken` and `chicken` will count as the same
       word.
@@ -171,7 +171,7 @@ This removes an item from the menu, identified by its index when [listing all it
 
 Format: `/deleteitem -i <index>` or `/deleteitem --index <index>`
 
-* The index must be a whole number, and a valid integer.
+* The index must be a valid number.
 
 **Example of Usage**
 
@@ -190,7 +190,9 @@ The command: /deleteitem was successfully executed!
 
 ##### Advanced Mode List all Items
 
-This lists all items currently in the menu. Do note that the index is important as it is the reference
+This lists all items currently in the menu. 
+
+Do note that the index is important as it is the reference
 for [adding Orders](#advanced-mode-add-an-order).
 
 As much as possible, it is recommended to avoid changing the index of all items as it may cause confusion for you and
@@ -491,14 +493,14 @@ Assume your menu is as follows:
 
 A large group comes to your store and orders _2_ bowls of _Laksa_, _3_ plates of _Fried Rice_, and _2_ plates of Wanton
 Mee. At the last moment, your customer adds another _2_ bowls of _Laksa_. This customer uses a voucher to pay (an "
-_others_" mode of payment). To add this lengthy order, you can use the command `/addorder -I [1:2,2:3,2:4,1:2] `.
+_others_" mode of payment). To add this lengthy order, you can use the command `/addorder -I [1:2,2:3,2:4,1:2]`.
 
 ```text
 Please enter a command: 
 > /addorder -I [1:2,2:3,4:2,1:2]
-Order has been added successfully. Total amount: $42.2.
+Order has been added successfully. Total amount: $42.20.
 Please use /pay command to add payment for the order.
-> /pay -a 42.2 -t others
+> /pay -a 42.20 -t others
 The calculated change is $0.0.
 The command: /pay was successfully executed!
 ```
@@ -513,7 +515,8 @@ Forgot the index of an item? Fret not! You can also add an item to an order by s
 
 * For single items, use the command `/addorder -i "<name>" -q <quantity>`
 * For multiple items, use the command `/addorder -I ["<name>":q{,"<name>":q}]`
-    * As usual, it requires a minimum of one item, and different items are split by a comma.
+    * Like in the previous section, Advanced Mode Multiple Items, the command requires a minimum of one item and its corresponding quantity. 
+    * Different items are split by a comma.
 
 **Example of Usage**
 
@@ -730,7 +733,7 @@ of the mode used.
 
 ##### Basic Mode Add an Item
 
-To add an item to the menu, use the command `additem`. You will then be prompted to input a name, and a price.
+To add an item to the menu, use the command `additem` or `1`. You will then be prompted to input a name, and a price.
 
 ###### Example of Usage
 
@@ -751,7 +754,7 @@ Item added successfully.
 
 ##### Basic Mode Delete an Item
 
-To delete an item from the menu, use the command `deleteitem`. You will then be prompted to input the index of the item
+To delete an item from the menu, use the command `deleteitem` or `2`. You will then be prompted to input the index of the item
 to be deleted.
 
 ###### Example of Usage
@@ -775,7 +778,7 @@ Item deleted successfully.
 
 ##### Basic Mode List all Items
 
-To list all items, use the command `listitem`.
+To list all items, use the command `listitem` or `3`.
 
 ###### Example of Usage
 ```text
@@ -794,7 +797,7 @@ All items in the menu have been listed!
 
 ##### Basic Mode Find an Item
 
-To find an item, use the command `finditem`. You will then be prompted to input a description. A list of all items in
+To find an item, use the command `finditem` or `5`. You will then be prompted to input a description. A list of all items in
 the menu matching that description will then be printed.
 * The input is case-insensitive.
 
@@ -826,7 +829,7 @@ finditem completed!
 
 ##### Basic Mode Update an Item
 
-To update an item, use the command `updateitem`. You will be prompted to enter the index, and then the option to change
+To update an item, use the command `updateitem` or `4`. You will be prompted to enter the index, and then the option to change
 the item's name or price.
 
 ###### Example of Usage
@@ -902,7 +905,7 @@ Item updated successfully.
 
 ##### Basic Mode Add an Order
 
-To add an order, use the command `addorder`.
+To add an order, use the command `addorder` or `6`.
 
 ###### Example of Usage
 
@@ -910,7 +913,7 @@ To add an order, use the command `addorder`.
 
 ##### Basic Mode List all Orders
 
-To add an order, use the command `listorder`.
+To add an order, use the command `listorder` or `7`.
 
 ###### Example of Usage
 
@@ -918,7 +921,7 @@ To add an order, use the command `listorder`.
 
 ##### Basic Mode Refund an Order
 
-To add an order, use the command `refundorder`. You will be prompted to enter the order ID, which can be obtained
+To add an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be obtained
 by [listing all orders](#basic-mode-list-all-orders).
 
 ###### Example of Usage

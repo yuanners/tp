@@ -6,9 +6,8 @@ import order.Order;
 import order.OrderAssistant;
 import order.Transaction;
 import payment.Refund;
+import statistic.Statistic;
 import payment.RefundAssistant;
-import statistic.RankReport;
-import statistic.SalesReport;
 import ui.MenuUi;
 import ui.TransactionUi;
 import utility.Ui;
@@ -76,8 +75,7 @@ public class Router {
             refund.refundTransaction(command, transactions);
             break;
         case "/report":
-            //Validate if type is a valid string
-            handleStatisticRoute(command);
+            Statistic.handleStatisticRoute(command, transactions, menu);
             break;
         default:
             ui.printInvalidCommand(command.getCommand());
@@ -145,18 +143,6 @@ public class Router {
             ui.printInvalidCommand(command.getCommand());
         }
 
-    }
-
-    private void handleStatisticRoute(Command command) {
-        command.mapArgumentAlias("sales", "s");
-        command.mapArgumentAlias("rank", "r");
-        if (command.getArgumentMap().containsKey("sales")) {
-            new SalesReport(command, transactions);
-        }
-
-        if (command.getArgumentMap().containsKey("rank")) {
-            new RankReport(command, transactions, menu);
-        }
     }
 
     /**

@@ -1,14 +1,19 @@
 package statistic;
 
 import app.Command;
+import exception.statistic.ConflictFlagException;
+import exception.statistic.StartAfterEndDateException;
+import exception.statistic.TypeNotFoundException;
 import item.Item;
 import item.Menu;
 import order.Order;
 import order.OrderEntry;
 import order.Transaction;
+import ui.Flags;
 import ui.StatisticUi;
 import utility.DateUtils;
 import utility.Parser;
+import validation.statistic.StatisticValidation;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -19,7 +24,7 @@ import java.util.PriorityQueue;
 /**
  * This class generates a rank report which includes two priority queues sorted by popularity and sales respectively.
  * It extends the Statistic class and uses its start and
- *      end date parameters to generate the report for a specific date range.
+ * end date parameters to generate the report for a specific date range.
  */
 public class RankReport extends Statistic {
     /**
@@ -31,18 +36,29 @@ public class RankReport extends Statistic {
      * @param transaction a Transaction object containing the list of orders to generate the report
      * @param menu        a Menu object containing the list of items to be included in the report
      */
-    public RankReport(Command command, Transaction transaction, Menu menu) {
+    public RankReport(Command command, StatisticValidation sv, Transaction transaction, Menu menu)
+            throws StartAfterEndDateException, ConflictFlagException {
         super(command);
-
         StatisticUi ui = new StatisticUi();
 
-        PriorityQueue<ItemRank> popularityRank = rankByPopularity(transaction, menu);
-        PriorityQueue<ItemRank> salesRank = rankBySales(transaction, menu);
-
-        ui.printPopularityRankingTable(popularityRank, super.getStartDate(), super.getEndDate());
-        ui.printSalesRankingTable(salesRank, super.getStartDate(), super.getEndDate());
-
-
+        try {
+            switch (command.getArgumentMap().get("rank")) {
+            case "sales":
+                PriorityQueue<ItemRank> salesRank = rankBySales(transaction, menu);
+                ui.printSalesRankingTable(salesRank, super.getStartDate(), super.getEndDate());
+                break;
+            case "popular":
+                PriorityQueue<ItemRank> popularityRank = rankByPopularity(transaction, menu);
+                ui.printPopularityRankingTable(popularityRank, super.getStartDate(), super.getEndDate());
+                break;
+            default:
+                throw new TypeNotFoundException();
+            }
+        } catch (NullPointerException e) {
+            ui.printError(Flags.Error.TYPE_NOT_SPECIFIED);
+        } catch (TypeNotFoundException e) {
+            ui.printError(Flags.Error.TYPE_NOT_FOUND);
+        }
     }
 
     /**

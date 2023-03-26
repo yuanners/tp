@@ -1,10 +1,17 @@
 package statistic;
 
 import app.Command;
+import exception.statistic.ConflictFlagException;
+import exception.statistic.MissingYearException;
+import exception.statistic.TypeNotFoundException;
+import exception.statistic.StartAfterEndDateException;
 import order.Order;
 import order.Transaction;
+import ui.Flags;
+import ui.StatisticUi;
 import utility.DateUtils;
 import utility.Parser;
+import validation.statistic.StatisticValidation;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -23,20 +30,33 @@ public class SalesReport extends Statistic {
      * @param command     the command to be used for generating the sales report.
      * @param transaction the transaction to be used for generating the sales report.
      */
-    public SalesReport(Command command, Transaction transaction) {
+    public SalesReport(Command command, StatisticValidation sv, Transaction transaction)
+            throws StartAfterEndDateException, ConflictFlagException {
         super(command);
-        double totalSales = totalSales(transaction);
-        switch (command.getArgumentMap().get("mode")) {
-        case "daily":
-            Map<LocalDateTime, Double> dailySalesMap = dailySales(transaction);
-            new Chart().dailySalesChart(dailySalesMap, super.getStartDate(), super.getEndDate(), totalSales);
-            break;
-        case "monthly":
-            Map<LocalDateTime, Double> monthlySalesMap = monthlySales(transaction);
-            new Chart().monthlySalesChart(monthlySalesMap, super.getYear(), totalSales);
-            break;
-        default:
-            break;
+        StatisticUi ui = new StatisticUi();
+
+        try {
+            double totalSales = totalSales(transaction);
+
+            switch (command.getArgumentMap().get("sales")) {
+            case "daily":
+                Map<LocalDateTime, Double> dailySalesMap = dailySales(transaction);
+                new Chart().dailySalesChart(dailySalesMap, super.getStartDate(), super.getEndDate(), totalSales);
+                break;
+            case "monthly":
+                sv.validateYearExist();
+                Map<LocalDateTime, Double> monthlySalesMap = monthlySales(transaction);
+                new Chart().monthlySalesChart(monthlySalesMap, super.getYear(), totalSales);
+                break;
+            default:
+                throw new TypeNotFoundException();
+            }
+        } catch (MissingYearException e) {
+            ui.printError(Flags.Error.YEAR_NOT_FOUND);
+        } catch (NullPointerException e) {
+            ui.printError(Flags.Error.TYPE_NOT_SPECIFIED);
+        } catch (TypeNotFoundException e) {
+            ui.printError(Flags.Error.TYPE_NOT_FOUND);
         }
     }
 
@@ -69,7 +89,7 @@ public class SalesReport extends Statistic {
      *
      * @param transaction the transaction to be used for calculating the daily sales.
      * @return a Map with LocalDateTime keys representing the start of each day within the date range,
-     *      and Double values representing the total sales for each day.
+     *         and Double values representing the total sales for each day.
      */
     public Map<LocalDateTime, Double> dailySales(Transaction transaction) {
         Map<LocalDateTime, Double> dailySalesMap = new HashMap<>();
@@ -95,7 +115,7 @@ public class SalesReport extends Statistic {
      *
      * @param transaction the transaction to be used for calculating the monthly sales.
      * @return a Map with LocalDateTime keys representing the start of each month within the date range,
-     *      and Double values representing the total sales for each month.
+     *         and Double values representing the total sales for each month.
      */
     public Map<LocalDateTime, Double> monthlySales(Transaction transaction) {
         Map<LocalDateTime, Double> monthlySalesMap = new HashMap<>();
