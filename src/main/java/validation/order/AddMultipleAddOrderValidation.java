@@ -23,10 +23,16 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
             InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException {
 
         String input = arg.getUserInput();
-        String regex = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
+        String regex = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|([^\"]+:\\d+)|([a-zA-Z]+\\d*:\\d+))" +
+                "(,((\\d+:\\d+)|([^\"]+:\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
+        String regex2 = "\\/addorder\\s*--items\\s*\\[((\\d+:\\d+)|([^\"]+:\\d+)|([a-zA-Z]+\\d*:\\d+))" +
+                "(,((\\d+:\\d+)|([^\"]+:\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
+        String regex3 = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
                 "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
 
-        if (!input.matches(regex)) {
+        System.out.println("Input: " + input);
+
+        if (!input.matches(regex) && !input.matches(regex2) && !input.matches(regex3)) {
 
             if (arg.getArgumentString().contains("-I") || arg.getArgumentString().contains("--items")) {
 
@@ -92,7 +98,16 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
             throws InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
             InvalidMultipleOrderFormatException {
 
-        int startOfArgumentsIndex = 14;
+        int startOfArgumentsIndex;
+        int startOfArgumentsIndexWhenShortFlagUsed = 14;
+        int startOfArgumentsIndexWhenLongFlagUsed = 19;
+
+        if (input.contains("-I")) {
+            startOfArgumentsIndex = startOfArgumentsIndexWhenShortFlagUsed;
+        } else {
+            startOfArgumentsIndex = startOfArgumentsIndexWhenLongFlagUsed;
+        }
+
         String orderPairsString = input.substring(startOfArgumentsIndex);
         orderPairsString = orderPairsString.substring(0, orderPairsString.length() - 1);
 
