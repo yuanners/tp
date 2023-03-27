@@ -1163,7 +1163,6 @@ The following is a sample of an entire year's monthly sales report.
 ```text
 Please enter a command: 
 > /report -s monthly -y 2023
-/report -s monthly -y 2023
 | ----------------------------------------------------------------------------------------------------------------------------------- |
 | Monthly statistic for the year 2023                                                                                                 |
 | Total sales: $282.30                                                                                                                |
