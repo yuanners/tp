@@ -22,10 +22,11 @@ public class Menu {
     private ArrayList<Item> items;
     private Store store;
     private MenuUi menuUi = new MenuUi();
+    private final String MENU_DATA_FILE = "menu.json";
 
     public Menu() {
         menuUi = new MenuUi();
-        this.store = new Store("menu.json");
+        this.store = new Store(MENU_DATA_FILE);
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
 

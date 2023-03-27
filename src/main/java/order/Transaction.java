@@ -25,9 +25,10 @@ public class Transaction {
     private Store store;
 
     private TransactionUi transactionUi;
+    private final String ORDER_DATA_FILE = "orders.json";
 
     public Transaction() {
-        this.store = new Store("orders.json");
+        this.store = new Store(ORDER_DATA_FILE);
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
 

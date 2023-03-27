@@ -108,7 +108,7 @@ public class AddItemValidation extends ItemValidation {
      * @param c Given command
      */
     public void validateName(Command c) throws NameMinimumLengthException, NameMaximumLengthException {
-        // TODO : Refactor callers
+
         if(c.getArgumentMap().get(LONG_NAME_FLAG) == null) {
             throw new NameMinimumLengthException();
         }
@@ -117,7 +117,7 @@ public class AddItemValidation extends ItemValidation {
             throw new NameMaximumLengthException();
         }
 
-        if (c.getArgumentMap().get(LONG_NAME_FLAG).length() < 1) {
+        if (c.getArgumentMap().get(LONG_NAME_FLAG).trim().length() < 1) {
             throw new NameMinimumLengthException();
         }
 
