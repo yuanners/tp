@@ -5,7 +5,6 @@
 * [Introduction](#introduction)
 * [Advanced Guide](#advanced-guide)
 * [Basic Guide](#basic-guide)
-* [Discounts](#discounts)
 * [Statistics](#statistics)
 * [Save File](#save-file)
 * [Glossary](#glossary)
@@ -62,6 +61,7 @@ the mode used.
 2. Open the command terminal and navigate to the folder where the `.jar` file is, by doing `cd "<file path>"`.
 3. Use the command `java -jar moneygowhere.jar` to launch our application. If correct, you should see the following on
    startup:
+
 ```text
 ░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀
 ░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀
@@ -70,6 +70,7 @@ Welcome to MoneyGoWhere!
     
 Please enter a command:
 ```
+
 4. When you are done using MoneyGoWhere, you can exit the application with the command `exit`.
 
 Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere)
@@ -715,7 +716,16 @@ of the mode used.
       file will be stored in the current working directory.
 8. Use the command `java -jar MoneyGoWhere.jar` to launch MoneyGoWhere. If done correctly, you will see something like
    this on your first start up:
-   **#TODO: Add image**
+
+```text
+░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀
+░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀
+░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀
+Welcome to MoneyGoWhere!
+    
+Please enter a command:
+```
+
 9. When you are done using the app, enter `exit` to shut the application down. This ensures that Duke will save your
    data, as saving data is only done during the shut-down process.
 
@@ -936,40 +946,87 @@ Item updated successfully.
 To add an order, use the command `addorder` or `6`.
 
 ###### Example of Usage
+
 Assume your menu looks like this:
+
 ```text
 | Index | Name                      | Price |
 | ----- | ------------------------- | ----- |
 | 0     | Egg                       | 0.80  |
-| 1     | Laksa                     | 3.55  |
-| 2     | Fried Rice                | 4.00  |
-| 3     | Wanton Mee                | 4.00  |
+| 1     | Mee Goreng                | 5.60  |
+| 2     | Pasta                     | 10.00 |
+| 3     | Chicken Rice              | 5.00  |
 ```
 
-A customer orders _2_ plates of _Fried Rice_ and _5_ bowls of _Wanton Mee_. Use the command `addorder` to add their order.
+A customer orders _2_ plates of _Chicken Rice_ and _5_ bowls of _Pasta_. Use the command `addorder` to add their order.
+
 ```text
+Please enter a command: 
+> addorder
+Please enter the item's name or index: 
+> chicken rice
+Please enter the quantity of the item: 
+> 2
+Do you have more items to add? (yes/no/cancel)
+> yes
+Please enter the item's name or index: 
+> 2
+Please enter the quantity of the item: 
+> 5
+Do you have more items to add? (yes/no/cancel)
+> no
+Order added successfully!
 
+Subtotal: $60.00
+Order has been added successfully. Total amount: $60.00
+Please use /pay -a <amount> -t <type> or pay to make payment.
+> pay
+Please enter amount to pay.
+> 60
+Please enter payment type.
+> cash
+The command: addorder was successfully executed!
 ```
+
+* Note that the payment type can be one of the following 3 types:
+    * Cash
+    * Card
+    * Other
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 ##### Basic Mode List all Orders
 
-To add an order, use the command `listorder` or `7`.
+To list all orders, use the command `listorder` or `7`.
 
 ###### Example of Usage
+
+This is an example of what you will see when you use the command `listorder`. Note that this is just one of many
+transactions, which all follow the same format.
+
+```text
+================================================
+Order 11
+Order ID: bca43cce-ba65-424a-bdaf-406f808aee52
+Order status: COMPLETED
+Order time: 2023-03-27 10:15:14
+1. Chicken Rice x2
+2. Pasta x5
+
+Subtotal: $60.00
+================================================
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 ##### Basic Mode Refund an Order
 
 To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be
-obtained from the
-`order.json` file.
+obtained from the `order.json` file, or through `listorder`.
 
 ###### Example of Usage
 
-Enter the unique order ID of the order you wan to refund.
+Enter the unique order ID of the order you want to refund.
 
 ```text
 Please enter a command: 
@@ -999,39 +1056,6 @@ Order is refunded successfully.
 | Refund an Order | `refundorder` |
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
-
-## Discounts
-
-The team behind MoneyGoWhere understands that sometimes, store owners may choose to run promotions and offer a discount
-on orders.
-
-In the current implementation, we only allow for a **flat rate discount** to be applied to an entire order. To implement
-a discount, you may do so when adding an order, either as a single-item order or multiple-items order, in both advanced
-and basic mode. This discount can be input as either a decimal, such as `0.1` or `0.35`, or as a percentage, such
-as `10%` or `35%`.
-
-### Advanced Mode
-
-In addition to the usual flags of `-i` and`-q`, use the optional flag `-d` or `--discount` to signify the inclusion of a
-flat rate discount.
-
-#### Example
-
-```text
-```
-
-[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
-
-### Basic Mode
-
-As for the basic mode, the option to include a discount will be the last part of the order process.
-
-#### Example
-
-```text
-```
-
-[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
 
 ## Statistics
 

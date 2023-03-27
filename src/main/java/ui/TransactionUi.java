@@ -192,7 +192,7 @@ public class TransactionUi extends Ui {
     }
 
     public void promptItemName() {
-        System.out.println("Please enter the item's name: ");
+        System.out.println("Please enter the item's name or index: ");
     }
 }
 

@@ -138,58 +138,58 @@ public class MenuUi extends Ui {
         }
     }
 
-    @Override
-    public void printCommandSuccess(String cmd) {
-        switch (cmd) {
-        case "1":
-            // Fallthrough
-        case "additem":
-            // Fallthrough
-        case "/additem":
-            System.out.println("Item added successfully.");
-            break;
-        case "4":
-            // Fallthrough
-        case "updateitem":
-            // Fallthrough
-        case "/updateitem":
-            System.out.println("Item updated successfully.");
-            break;
-        case "2":
-            // Fallthrough
-        case "deleteitem":
-            // Fallthrough
-        case "/deleteitem":
-            System.out.println("Item deleted successfully.");
-            break;
-        case "3":
-            // Fallthrough
-        case "listitem":
-            // Fallthrough
-        case "/listitem":
-            System.out.println("All items in the menu have been listed!");
-            break;
-        case "5":
-            // Fallthrough
-        case "finditem":
-            // Fallthrough
-        case "/finditem":
-            System.out.println("finditem completed!");
-            break;
-        case "addorder":
-            //Fallthrough
-        case "/addorder":
-            System.out.println("Order is added!");
-            break;
-        case "refundorder":
-            //Fallthrough
-        case "/refundorder":
-            System.out.println("Order is refunded!");
-            break;
-        default:
-            // Fallthrough
-        }
-    }
+//    @Override
+//    public void printCommandSuccess(String cmd) {
+//        switch (cmd) {
+//        case "1":
+//            // Fallthrough
+//        case "additem":
+//            // Fallthrough
+//        case "/additem":
+//            System.out.println("Item added successfully.");
+//            break;
+//        case "4":
+//            // Fallthrough
+//        case "updateitem":
+//            // Fallthrough
+//        case "/updateitem":
+//            System.out.println("Item updated successfully.");
+//            break;
+//        case "2":
+//            // Fallthrough
+//        case "deleteitem":
+//            // Fallthrough
+//        case "/deleteitem":
+//            System.out.println("Item deleted successfully.");
+//            break;
+//        case "3":
+//            // Fallthrough
+//        case "listitem":
+//            // Fallthrough
+//        case "/listitem":
+//            System.out.println("All items in the menu have been listed!");
+//            break;
+//        case "5":
+//            // Fallthrough
+//        case "finditem":
+//            // Fallthrough
+//        case "/finditem":
+//            System.out.println("finditem completed!");
+//            break;
+//        case "addorder":
+//            //Fallthrough
+//        case "/addorder":
+//            System.out.println("Order is added!");
+//            break;
+//        case "refundorder":
+//            //Fallthrough
+//        case "/refundorder":
+//            System.out.println("Order is refunded!");
+//            break;
+//        default:
+//            // Fallthrough
+//        }
+//    }
 
     @Override
     public void printError(Flags.Error error) {

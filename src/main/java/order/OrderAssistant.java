@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class OrderAssistant {
 
-    TransactionUi transactionUi;
+    TransactionUi transactionUi = new TransactionUi();
     Scanner sc;
     AddOrderValidation addOrderValidation = new AddOrderValidation();
 
@@ -74,6 +74,8 @@ public class OrderAssistant {
                 hasMoreOrderEntry = false;
             } else if (CANCELS.contains(hasMoreOrderEntryString)) {
                 return true;
+            } else {
+                hasMoreOrderEntry = false;
             }
 
             // Append to final command string
