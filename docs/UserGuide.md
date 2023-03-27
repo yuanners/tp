@@ -5,7 +5,6 @@
 * [Introduction](#introduction)
 * [Advanced Guide](#advanced-guide)
 * [Basic Guide](#basic-guide)
-* [Discounts](#discounts)
 * [Statistics](#statistics)
 * [Save File](#save-file)
 * [Glossary](#glossary)
@@ -62,7 +61,16 @@ the mode used.
 2. Open the command terminal and navigate to the folder where the `.jar` file is, by doing `cd "<file path>"`.
 3. Use the command `java -jar moneygowhere.jar` to launch our application. If correct, you should see the following on
    startup:
-   **TODO: Insert Image**
+
+```text
+░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀
+░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀
+░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀
+Welcome to MoneyGoWhere!
+    
+Please enter a command:
+```
+
 4. When you are done using MoneyGoWhere, you can exit the application with the command `exit`.
 
 Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere)
@@ -190,7 +198,7 @@ The command: /deleteitem was successfully executed!
 
 ##### Advanced Mode List all Items
 
-This lists all items currently in the menu. 
+This lists all items currently in the menu.
 
 Do note that the index is important as it is the reference
 for [adding Orders](#advanced-mode-add-an-order).
@@ -514,7 +522,8 @@ Forgot the index of an item? Fret not! You can also add an item to an order by s
 
 * For single items, use the command `/addorder -i "<name>" -q <quantity>`
 * For multiple items, use the command `/addorder -I ["<name>":q{,"<name>":q}]`
-    * Like in the previous section, Advanced Mode Multiple Items, the command requires a minimum of one item and its corresponding quantity. 
+    * Like in the previous section, Advanced Mode Multiple Items, the command requires a minimum of one item and its
+      corresponding quantity.
     * Different items are split by a comma.
 
 **Example of Usage**
@@ -707,7 +716,16 @@ of the mode used.
       file will be stored in the current working directory.
 8. Use the command `java -jar MoneyGoWhere.jar` to launch MoneyGoWhere. If done correctly, you will see something like
    this on your first start up:
-   **#TODO: Add image**
+
+```text
+░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀
+░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀
+░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀
+Welcome to MoneyGoWhere!
+    
+Please enter a command:
+```
+
 9. When you are done using the app, enter `exit` to shut the application down. This ensures that Duke will save your
    data, as saving data is only done during the shut-down process.
 
@@ -735,7 +753,7 @@ of the mode used.
 
 To add an item to the menu, use the command `additem` or `1`. You will then be prompted to input a name, and a price.
 
-###### Example of Usage
+**Example of Usage**
 
 If you want to add _Chicken Rice_, which costs _$3.50_ to your menu, you can use `additem` to begin the process of
 adding it to your menu.
@@ -754,18 +772,23 @@ Item added successfully.
 
 ##### Basic Mode Delete an Item
 
-To delete an item from the menu, use the command `deleteitem` or `2`. You will then be prompted to input the index of the item
+To delete an item from the menu, use the command `deleteitem` or `2`. You will then be prompted to input the index of
+the item
 to be deleted.
 
-###### Example of Usage
+**Example of Usage**
+
 Assume your menu currently looks like this.
+
 ```text
 | Index | Name                      | Price |
 | ----- | ------------------------- | ----- |
 | 0     | Chicken Rice              | 3.50  |
 ```
 
-You change your mind and decide you no longer want to sell Chicken Rice, which is at index _0_. To begin the process of deleting it from your menu, you can use the command `deleteitem`.
+You change your mind and decide you no longer want to sell Chicken Rice, which is at index _0_. To begin the process of
+deleting it from your menu, you can use the command `deleteitem`.
+
 ```text
 Please enter a command: 
 > deleteitem
@@ -780,7 +803,8 @@ Item deleted successfully.
 
 To list all items, use the command `listitem` or `3`.
 
-###### Example of Usage
+**Example of Usage**
+
 ```text
 Please enter a command: 
 > listitem
@@ -797,12 +821,16 @@ All items in the menu have been listed!
 
 ##### Basic Mode Find an Item
 
-To find an item, use the command `finditem` or `5`. You will then be prompted to input a description. A list of all items in
+To find an item, use the command `finditem` or `5`. You will then be prompted to input a description. A list of all
+items in
 the menu matching that description will then be printed.
+
 * The input is case-insensitive.
 
-###### Example of Usage
+**Example of Usage**
+
 Assume your menu looks like this.
+
 ```text
 | Index | Name                      | Price |
 | ----- | ------------------------- | ----- |
@@ -812,7 +840,9 @@ Assume your menu looks like this.
 | 3     | Fish Soup                 | 6.50  |
 ```
 
-You temporarily forget which items on your menu have "_rice_" in the name. To search for all of them, use the command `finditem`.
+You temporarily forget which items on your menu have "_rice_" in the name. To search for all of them, use the
+command `finditem`.
+
 ```text
 Please enter a command: 
 > finditem
@@ -829,11 +859,14 @@ finditem completed!
 
 ##### Basic Mode Update an Item
 
-To update an item, use the command `updateitem` or `4`. You will be prompted to enter the index, and then the option to change
+To update an item, use the command `updateitem` or `4`. You will be prompted to enter the index, and then the option to
+change
 the item's name or price.
 
-###### Example of Usage
+**Example of Usage**
+
 To show all different ways of updating an item, assume your menu looks like this.
+
 ```text
 | Index | Name                      | Price |
 | ----- | ------------------------- | ----- |
@@ -841,7 +874,9 @@ To show all different ways of updating an item, assume your menu looks like this
 | 1     | Egg                       | 80.00 |
 | 2     | mEE gORENG                | 56.00 |
 ```
+
 You want to change 3 things:
+
 1. Change the name to "_Chicken Rice_" at Index _0_.
 2. Change the price to _$0.80_ at Index _1_.
 3. Change the name to "_Mee Goreng_" and change the price to _$5.60_ at Index _2_.
@@ -849,6 +884,7 @@ You want to change 3 things:
 To do so, use the command `updateitem`.
 
 **Example 1: Change the Name**
+
 ```text
 Please enter a command: 
 > updateitem
@@ -864,6 +900,7 @@ Item updated successfully.
 ```
 
 **Example 2: Change the Price**
+
 ```text
 Please enter a command: 
 > updateitem
@@ -879,6 +916,7 @@ Item updated successfully.
 ```
 
 **Example 3: Change Name and Price**
+
 ```text
 Please enter a command: 
 > updateitem
@@ -907,25 +945,89 @@ Item updated successfully.
 
 To add an order, use the command `addorder` or `6`.
 
-###### Example of Usage
+**Example of Usage**
+
+Assume your menu looks like this:
+
+```text
+| Index | Name                      | Price |
+| ----- | ------------------------- | ----- |
+| 0     | Egg                       | 0.80  |
+| 1     | Mee Goreng                | 5.60  |
+| 2     | Pasta                     | 10.00 |
+| 3     | Chicken Rice              | 5.00  |
+```
+
+A customer orders _2_ plates of _Chicken Rice_ and _5_ bowls of _Pasta_. Use the command `addorder` to add their order.
+
+```text
+Please enter a command: 
+> addorder
+Please enter the item's name or index: 
+> chicken rice
+Please enter the quantity of the item: 
+> 2
+Do you have more items to add? (yes/no/cancel)
+> yes
+Please enter the item's name or index: 
+> 2
+Please enter the quantity of the item: 
+> 5
+Do you have more items to add? (yes/no/cancel)
+> no
+Order added successfully!
+
+Subtotal: $60.00
+Order has been added successfully. Total amount: $60.00
+Please use /pay -a <amount> -t <type> or pay to make payment.
+> pay
+Please enter amount to pay.
+> 60
+Please enter payment type.
+> cash
+The command: addorder was successfully executed!
+```
+
+* Note that the payment type can be one of the following 3 types:
+    * Cash
+    * Card
+    * Other
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 ##### Basic Mode List all Orders
 
-To add an order, use the command `listorder` or `7`.
+To list all orders, use the command `listorder` or `7`.
 
-###### Example of Usage
+**Example of Usage**
+
+This is an example of what you will see when you use the command `listorder`. Note that this is just one of many
+transactions, which all follow the same format.
+
+```text
+================================================
+Order 11
+Order ID: bca43cce-ba65-424a-bdaf-406f808aee52
+Order status: COMPLETED
+Order time: 2023-03-27 10:15:14
+1. Chicken Rice x2
+2. Pasta x5
+
+Subtotal: $60.00
+================================================
+```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 ##### Basic Mode Refund an Order
 
-To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be obtained from the
-`order.json` file. 
+To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be
+obtained from the `order.json` file, or through `listorder`.
 
-###### Example of Usage
-Enter the unique order ID of the order you wan to refund.
+**Example of Usage**
+
+Enter the unique order ID of the order you want to refund.
+
 ```text
 Please enter a command: 
 > refundorder
@@ -955,40 +1057,111 @@ Order is refunded successfully.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
-## Discounts
-
-The team behind MoneyGoWhere understands that sometimes, store owners may choose to run promotions and offer a discount
-on orders.
-
-In the current implementation, we only allow for a **flat rate discount** to be applied to an entire order. To implement
-a discount, you may do so when adding an order, either as a single-item order or multiple-items order, in both advanced
-and basic mode. This discount can be input as either a decimal, such as `0.1` or `0.35`, or as a percentage, such
-as `10%` or `35%`.
-
-### Advanced Mode
-
-In addition to the usual flags of `-i` and`-q`, use the optional flag `-d` or `--discount` to signify the inclusion of a
-flat rate discount.
-
-#### Example
-
-```text
-```
-
-[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
-
-### Basic Mode
-
-As for the basic mode, the option to include a discount will be the last part of the order process.
-
-#### Example
-
-```text
-```
-
-[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
-
 ## Statistics
+One unique feature of MoneyGoWhere is the ability to generate reports to view sales data.
+
+At the moment, we only allow for reports to be generated with a single command, taking the following formats:
+* Short-form Flag Format: `/report {-r <type>} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}`
+* Long-form Flag Format: `/report {--rank <type>} {--sale <type} {--year <year>} {--from <start-date> --to <end-date>}`
+
+Do note the following:
+* Of the two, only one of `rank` or `sales` must be present. You cannot enter both flags at the same time.
+  * The type for `rank` is either `sales` or `popular`.
+  * The type for `sales` is either `daily` or `monthly`.
+    * `Monthly` sales must be generated by `year`.
+* Of the two, only one of `year` or `from` and `to` must be present. You cannot enter both `year` and `from` and `to`.
+  * The `year` takes the format `YYYY`.
+  * The dates for `from` and `to` takes the format `DD/MM/YYYY`.
+
+If you are ever confused, you can always use the command `report` to display the above-mentioned information.
+
+**Example**
+To display information on how to use this feature, use the command `report`.
+```text
+Select report type: 
+1. Rank
+2. Sales
+Select sales mode: 
+1. Daily
+2. Monthly
+Select rank mode: 
+1. Sales
+2. Popular
+Select date type: 
+1. Year
+2. Date range
+```
+
+**Example 1: Rank popular items over the year**
+```text
+Please enter a command: 
+> /report -r popular -y 2023
+| ----------------------------------------- |
+| Rank by quantity sold                     |
+| Date: 01/01/2023 - 31/12/2023             |
+| ----------------------------------------- |
+| Rank  | Name                      | Count |
+| ----- | ------------------------- | ----- |
+| 1     | Pasta                     | 5     |
+| 2     | Chicken Rice              | 2     |
+| 3     | Mee Goreng                | 2     |
+| 4     | Egg                       | 0     |
+| ----------------------------------------- |
+```
+
+**Example 2: Rank by sales over the year**
+```text
+Please enter a command: 
+> /report -r sales -y 2023
+| ---------------------------------------------- |
+| Rank by sales                                  |
+| Date: 01/01/2023 - 31/12/2023                  |
+| ---------------------------------------------- |
+| Rank  | Name                      | Sales($)   |
+| ----- | ------------------------- | ---------- |
+| 1     | Pasta                     | 50.00      |
+| 2     | Mee Goreng                | 11.20      |
+| 3     | Chicken Rice              | 10.00      |
+| 4     | Egg                       | 0.00       |
+| ---------------------------------------------- |
+```
+
+**Example 3: Daily sales from 26 March 2023 to 27 March 2023**
+```text
+Please enter a command: 
+> /report -s daily -f 26/03/2023 -t 27/03/2023
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Daily statistic for the date range 26/03/2023 - 27/03/2023                                                                          |
+| Total sales: $71.20                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Date         | Sales($)      | Performance                                                                                          |
+| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
+| 26/03/2023   | 0.00          |                                                                                                      |
+| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
+| 27/03/2023   | 71.20         | |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| |
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+```
+
+**Example 4: Monthly sales for 2023**
+The following is a sample of an entire year's monthly sales report. 
+```text
+Please enter a command: 
+> /report -s monthly -y 2023
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Monthly statistic for the year 2023                                                                                                 |
+| Total sales: $71.20                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Month      | Sales($)        | Performance                                                                                          |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Jan 2023   | 0.00            |                                                                                                      |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Feb 2023   | 0.00            |                                                                                                      |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Mar 2023   | 71.20           | |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Apr 2023   | 0.00            |                                                                                                      |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+```
 
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
 
