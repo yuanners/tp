@@ -75,7 +75,8 @@ public class OrderAssistant {
             } else if (CANCELS.contains(hasMoreOrderEntryString)) {
                 return true;
             } else {
-                hasMoreOrderEntry = false;
+                transactionUi.printInvalidInputEntered();
+                return true;
             }
 
             // Append to final command string

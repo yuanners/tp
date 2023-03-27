@@ -47,6 +47,7 @@ public class AddOrderValidation extends Validation {
         if (!isInteger(itemName)) {
             if (menu.findMatchingItemNames(itemName).size() > 1) {
                 transactionUi.printError(Flags.Error.MULTIPLE_SIMILAR_ITEMS);
+                return false;
             } else if (menu.findMatchingItemNames(itemName).size() == 0) {
                 transactionUi.printError(Flags.Error.NO_SUCH_ITEM);
                 return false;
