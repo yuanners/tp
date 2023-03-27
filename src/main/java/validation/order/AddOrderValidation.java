@@ -69,39 +69,32 @@ public class AddOrderValidation extends Validation {
         return true;
     }
 
-    //    /**
-    //     * Validate the item index and quantity
-    //     *
-    //     * @param arg  user command
-    //     * @param menu itemlist
-    //     * @throws OrderException custom exception for order validation
-    //     */
-    //    public Command validateAddOrder(Command arg, Menu menu) throws OrderException {
-    //
-    //        String item = "";
-    //        String newItem = "";
-    //
-    //        if (arg.getArgumentString().contains("-i")) {
-    //            item = arg.getArgumentMap().get("i").trim();
-    //        } else if (arg.getArgumentString().contains("--item")) {
-    //            item = arg.getArgumentMap().get("item").trim();
-    //        }
-    //
-    //        if (!isInteger(item)) {
-    //            newItem = Integer.toString(menu.findItemIndex(item));
-    //            String newArgumentString = arg.getArgumentString().replace(item, newItem);
-    //            Command newCommand = new Command("/addorder " + newArgumentString);
-    //            return newCommand;
-    //        }
-    //
-    //
-    //        if (!(isValidQuantity(arg))) {
-    //            throw new OrderException(ui.getInvalidOrderInteger());
-    //        }
-    //
-    //
-    //        return arg;
-    //    }
+        /**
+         * Validate the item index and quantity
+         *
+         * @param arg  user command
+         * @param menu menu
+         */
+        public Command validateCommand(Command arg, Menu menu) {
+
+            String item = "";
+            String newItem = "";
+
+            if (arg.getArgumentString().contains("-i")) {
+                item = arg.getArgumentMap().get("i").trim();
+            } else if (arg.getArgumentString().contains("--item")) {
+                item = arg.getArgumentMap().get("item").trim();
+            }
+
+            if (!isInteger(item)) {
+                newItem = Integer.toString(menu.findItemIndex(item));
+                String newArgumentString = arg.getArgumentString().replace(item, newItem);
+                Command newCommand = new Command("/addorder " + newArgumentString);
+                return newCommand;
+            }
+
+            return arg;
+        }
 
     public void validateFlag(Command arg)
             throws MissingOrderFlagException, MissingOrderArgumentException, MissingQuantityArgumentException {
