@@ -753,7 +753,7 @@ Please enter a command:
 
 To add an item to the menu, use the command `additem` or `1`. You will then be prompted to input a name, and a price.
 
-###### Example of Usage
+**Example of Usage**
 
 If you want to add _Chicken Rice_, which costs _$3.50_ to your menu, you can use `additem` to begin the process of
 adding it to your menu.
@@ -776,7 +776,7 @@ To delete an item from the menu, use the command `deleteitem` or `2`. You will t
 the item
 to be deleted.
 
-###### Example of Usage
+**Example of Usage**
 
 Assume your menu currently looks like this.
 
@@ -803,7 +803,7 @@ Item deleted successfully.
 
 To list all items, use the command `listitem` or `3`.
 
-###### Example of Usage
+**Example of Usage**
 
 ```text
 Please enter a command: 
@@ -827,7 +827,7 @@ the menu matching that description will then be printed.
 
 * The input is case-insensitive.
 
-###### Example of Usage
+**Example of Usage**
 
 Assume your menu looks like this.
 
@@ -863,7 +863,7 @@ To update an item, use the command `updateitem` or `4`. You will be prompted to 
 change
 the item's name or price.
 
-###### Example of Usage
+**Example of Usage**
 
 To show all different ways of updating an item, assume your menu looks like this.
 
@@ -945,7 +945,7 @@ Item updated successfully.
 
 To add an order, use the command `addorder` or `6`.
 
-###### Example of Usage
+**Example of Usage**
 
 Assume your menu looks like this:
 
@@ -999,7 +999,7 @@ The command: addorder was successfully executed!
 
 To list all orders, use the command `listorder` or `7`.
 
-###### Example of Usage
+**Example of Usage**
 
 This is an example of what you will see when you use the command `listorder`. Note that this is just one of many
 transactions, which all follow the same format.
@@ -1024,7 +1024,7 @@ Subtotal: $60.00
 To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be
 obtained from the `order.json` file, or through `listorder`.
 
-###### Example of Usage
+**Example of Usage**
 
 Enter the unique order ID of the order you want to refund.
 
@@ -1058,6 +1058,109 @@ Order is refunded successfully.
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 ## Statistics
+One unique feature of MoneyGoWhere is the ability to generate reports to view sales data.
+
+At the moment, we only allow for reports to be generated with a single command, taking the following formats:
+* Short-form Flag Format: `/report {-r <type>} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}`
+* Long-form Flag Format: `/report {--rank <type>} {--sale <type} {--year <year>} {--from <start-date> --to <end-date>}`
+
+Do note the following:
+* Of the two, only one of `rank` or `sales` must be present. You cannot enter both flags at the same time.
+  * The type for `rank` is either `sales` or `popular`.
+  * The type for `sales` is either `daily` or `monthly`.
+* Of the two, only one of `year` or `from` and `to` must be present. You cannot enter both `year` and `from` and `to`.
+  * The `year` takes the format `YYYY`.
+  * The dates for `from` and `to` takes the format `DD/MM/YYYY`.
+
+If you are ever confused, you can always use the command `report` to display the above-mentioned information.
+
+**Example**
+To display information on how to use this feature, use the command `report`.
+```text
+Select report type: 
+1. Rank
+2. Sales
+Select sales mode: 
+1. Daily
+2. Monthly
+Select rank mode: 
+1. Sales
+2. Popular
+Select date type: 
+1. Year
+2. Date range
+```
+
+**Example 1: Rank popular items over the year**
+```text
+Please enter a command: 
+> /report -r popular -y 2023
+| ----------------------------------------- |
+| Rank by quantity sold                     |
+| Date: 01/01/2023 - 31/12/2023             |
+| ----------------------------------------- |
+| Rank  | Name                      | Count |
+| ----- | ------------------------- | ----- |
+| 1     | Pasta                     | 5     |
+| 2     | Chicken Rice              | 2     |
+| 3     | Mee Goreng                | 2     |
+| 4     | Egg                       | 0     |
+| ----------------------------------------- |
+```
+
+**Example 2: Rank by sales over the year**
+```text
+Please enter a command: 
+> /report -r sales -y 2023
+| ---------------------------------------------- |
+| Rank by sales                                  |
+| Date: 01/01/2023 - 31/12/2023                  |
+| ---------------------------------------------- |
+| Rank  | Name                      | Sales($)   |
+| ----- | ------------------------- | ---------- |
+| 1     | Pasta                     | 50.00      |
+| 2     | Mee Goreng                | 11.20      |
+| 3     | Chicken Rice              | 10.00      |
+| 4     | Egg                       | 0.00       |
+| ---------------------------------------------- |
+```
+
+**Example 3: Daily sales from 26 March 2023 to 27 March 2023**
+```text
+Please enter a command: 
+> /report -s daily -f 26/03/2023 -t 27/03/2023
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Daily statistic for the date range 26/03/2023 - 27/03/2023                                                                          |
+| Total sales: $71.20                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Date         | Sales($)      | Performance                                                                                          |
+| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
+| 26/03/2023   | 0.00          |                                                                                                      |
+| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
+| 27/03/2023   | 71.20         | |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| |
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+```
+
+**Example 4: Monthly sales for 2023**
+The following is a sample of an entire year's monthly sales report. 
+```text
+Please enter a command: 
+> /report -s monthly -y 2023
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Monthly statistic for the year 2023                                                                                                 |
+| Total sales: $71.20                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------- |
+| Month      | Sales($)        | Performance                                                                                          |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Jan 2023   | 0.00            |                                                                                                      |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Feb 2023   | 0.00            |                                                                                                      |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Mar 2023   | 71.20           | |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+| Apr 2023   | 0.00            |                                                                                                      |
+| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
+```
 
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
 
