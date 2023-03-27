@@ -210,10 +210,10 @@ public class Order implements OrderInterface {
             command.mapArgumentAlias("items", "I");
 
             if (command.getArgumentMap().get("item") != null) {
+                command = addOrderValidation.validateCommand(command, listOfItems);
                 addOrderValidation.validateFlag(command);
                 addOrderValidation.validateIndex(command, listOfItems);
                 addOrderValidation.validateQuantity(command);
-                //command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
                 isAdded = true;
             } else if (command.getArgumentMap().get("items") != null) {
