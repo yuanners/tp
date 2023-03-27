@@ -138,7 +138,7 @@ public class MenuUi extends Ui {
         }
     }
 
-   /* @Override
+    @Override
     public void printCommandSuccess(String cmd) {
         switch (cmd) {
         case "1":
@@ -189,7 +189,7 @@ public class MenuUi extends Ui {
         default:
             // Fallthrough
         }
-    }*/
+    }
 
     @Override
     public void printError(Flags.Error error) {
