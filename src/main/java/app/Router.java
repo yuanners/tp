@@ -1,5 +1,6 @@
 package app;
 
+import exception.UnrecognisedCommandException;
 import item.Menu;
 import item.MenuAssistant;
 import order.Order;
@@ -9,7 +10,9 @@ import payment.Refund;
 import statistic.Statistic;
 import payment.RefundAssistant;
 import statistic.StatisticAssistant;
+import ui.Flags;
 import ui.Ui;
+import validation.Validation;
 
 /**
  * The Router class handles the routing of commands, based on whether they start with a slash (/) or not.
@@ -85,61 +88,68 @@ public class Router {
      * @param command the Command object containing the assisted command to process
      */
     private void assistRoute(Command command) {
+        Validation validation = new Validation();
 
-        MenuAssistant menuAssistant = new MenuAssistant();
-        OrderAssistant orderAssistant = new OrderAssistant();
-        RefundAssistant refundAssistant = new RefundAssistant();
-        boolean isCancelled;
+        try {
+            validation.validateAssistantCommand(command);
 
-        switch (command.getCommand()) {
-        case "?":
-        case "help":
-            ui.printHelp();
-            break;
-        case "1":
-        case "additem":
-            isCancelled = menuAssistant.addItem(command, menu);
-            menuAssistant.printResult(command, isCancelled);
-            break;
-        case "2":
-        case "deleteitem":
-            isCancelled = menuAssistant.deleteItem(command, menu);
-            menuAssistant.printResult(command, isCancelled);
-            break;
-        case "3":
-        case "listitem":
-            menu.displayList(command);
-            break;
-        case "4":
-        case "updateitem":
-            isCancelled = menuAssistant.updateItem(command, menu);
-            menuAssistant.printResult(command, isCancelled);
-            break;
-        case "5":
-        case "finditem":
-            isCancelled = menuAssistant.showResultsOfFind(command, menu);
-            menuAssistant.printResult(command, isCancelled);
-            break;
-        case "6":
-        case "addorder":
-            isCancelled = orderAssistant.assistedAddOrder(menu, transactions);
-            menuAssistant.printResult(command, isCancelled);
-            break;
-        case "7":
-        case "listorder":
-            transactions.displayList();
-            break;
-        case "8":
-        case "refundorder":
-            isCancelled = refundAssistant.refundOrder(command, transactions);
-            menuAssistant.printResult(command, isCancelled);
-            break;
-        case "9":
-        case "report":
-            new StatisticAssistant();
-            break;
-        default:
-            ui.printInvalidCommand(command.getCommand());
+            MenuAssistant menuAssistant = new MenuAssistant();
+            OrderAssistant orderAssistant = new OrderAssistant();
+            RefundAssistant refundAssistant = new RefundAssistant();
+            boolean isCancelled;
+
+            switch (command.getCommand()) {
+            case "?":
+            case "help":
+                ui.printHelp();
+                break;
+            case "1":
+            case "additem":
+                isCancelled = menuAssistant.addItem(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+            case "2":
+            case "deleteitem":
+                isCancelled = menuAssistant.deleteItem(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+            case "3":
+            case "listitem":
+                menu.displayList(command);
+                break;
+            case "4":
+            case "updateitem":
+                isCancelled = menuAssistant.updateItem(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+            case "5":
+            case "finditem":
+                isCancelled = menuAssistant.showResultsOfFind(command, menu);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+            case "6":
+            case "addorder":
+                isCancelled = orderAssistant.assistedAddOrder(menu, transactions);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+            case "7":
+            case "listorder":
+                transactions.displayList();
+                break;
+            case "8":
+            case "refundorder":
+                isCancelled = refundAssistant.refundOrder(command, transactions);
+                menuAssistant.printResult(command, isCancelled);
+                break;
+            case "9":
+            case "report":
+                new StatisticAssistant();
+                break;
+            default:
+                ui.printInvalidCommand(command.getCommand());
+            }
+        } catch (UnrecognisedCommandException e) {
+            ui.printError(Flags.Error.UNRECOGNISED_COMMAND_ERROR);
         }
 
     }
