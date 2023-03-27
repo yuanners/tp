@@ -30,8 +30,6 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         String regex3 = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+))" +
                 "(,((\\d+:\\d+)|(\"[^\"]+\":\\d+)|([a-zA-Z]+\\d*:\\d+)))*\\]$";
 
-        System.out.println("Input: " + input);
-
         if (!input.matches(regex) && !input.matches(regex2) && !input.matches(regex3)) {
 
             if (arg.getArgumentString().contains("-I") || arg.getArgumentString().contains("--items")) {
