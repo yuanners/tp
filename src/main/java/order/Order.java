@@ -16,7 +16,6 @@ import item.Menu;
 import payment.Payment;
 import ui.Flags;
 import ui.TransactionUi;
-import utility.Ui;
 import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
@@ -291,8 +290,6 @@ public class Order implements OrderInterface {
      * @return quantity
      */
     public int handleQuantity(Command command) throws InvalidQuantityNumberFormatException {
-
-        Ui ui = new Ui();
 
         int quantity;
         boolean isQuantityANumber = isInteger(command.getArgumentMap().get("quantity"));

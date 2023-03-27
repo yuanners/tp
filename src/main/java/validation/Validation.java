@@ -1,12 +1,11 @@
 package validation;
 
 import exception.InvalidArgumentException;
+import exception.UnrecognisedCommandException;
 import item.Menu;
-import utility.Ui;
 import app.Command;
 
 public class Validation {
-    private Ui ui = new Ui();
 
     public Validation() {
     }
@@ -18,11 +17,10 @@ public class Validation {
      * @throws InvalidArgumentException
      */
     public void validateArgument(Command arg) throws InvalidArgumentException {
-        assert arg.getUserInput() != null : "Null input should be handled";
         if (arg.getUserInput() == null) {
-            // TODO change to no inputs
-            throw new InvalidArgumentException(ui.getNullMessage());
+            throw new InvalidArgumentException();
         }
+        assert arg.getUserInput() != null : "Null input should be handled";
     }
 
     /**
@@ -39,6 +37,26 @@ public class Validation {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Validates that there are no redundant arguments after assistant commands
+     *
+     * @param command The given command
+     * @throws UnrecognisedCommandException
+     */
+    public void validateAssistantCommand(Command command) throws UnrecognisedCommandException {
+
+        if(command.getArgumentString() == null) {
+            throw new UnrecognisedCommandException();
+        }
+
+        String argString = command.getArgumentString();
+
+        if (!argString.trim().equals("")) {
+            throw new UnrecognisedCommandException();
+        }
+        assert !command.getArgumentString().equals("") : "There should not be arguments after the commands";
     }
 
 }
