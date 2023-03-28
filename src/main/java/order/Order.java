@@ -1,6 +1,7 @@
 package order;
 
 import app.Command;
+
 import exception.order.MissingQuantityArgumentException;
 import exception.order.InvalidIndexNumberFormatException;
 import exception.order.MissingOrderFlagException;
@@ -12,6 +13,8 @@ import exception.order.InvalidIndexOutOfBoundsException;
 import exception.order.MissingMultipleOrderArgumentException;
 import exception.order.MissingMultpleOrderFlagException;
 import exception.order.InvalidMultipleOrderFormatException;
+import exception.order.MultipleSimilarItemsFoundException;
+
 import item.Menu;
 import payment.Payment;
 import ui.Flags;
@@ -247,6 +250,8 @@ public class Order implements OrderInterface {
             transactionUi.printError(Flags.Error.MISSING_MULTIPLE_ORDER_FLAG_EXCEPTION);
         } catch (InvalidMultipleOrderFormatException e) {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
+        } catch (MultipleSimilarItemsFoundException e) {
+            // Error message is already printed in a separate handler
         }
         return isAdded;
     }
