@@ -1,18 +1,13 @@
 package validation.order;
 
 import app.Command;
-import exception.order.MissingMultipleOrderArgumentException;
-import exception.order.MissingMultpleOrderFlagException;
-import exception.order.InvalidMultipleOrderFormatException;
-import exception.order.InvalidIndexNegativeException;
-import exception.order.InvalidIndexNumberFormatException;
-import exception.order.InvalidIndexOutOfBoundsException;
-import exception.order.InvalidQuantityNumberFormatException;
-import exception.order.InvalidQuantityNegativeException;
+import exception.order.*;
 import item.Menu;
+import ui.Flags;
 
 public class AddMultipleAddOrderValidation extends AddOrderValidation {
     private Menu menu;
+    private AddOrderValidation addOrderValidation = new AddOrderValidation();
 
     public AddMultipleAddOrderValidation(Menu menu) {
         this.menu = menu;
@@ -20,7 +15,8 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
     public Command validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
             MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException,
-            InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException {
+            InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
+            MultipleSimilarItemsFoundException {
 
         String input = arg.getUserInput();
         String regex = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|([^\"]+:\\d+)|([a-zA-Z]+\\d*:\\d+))" +
@@ -94,7 +90,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
     private Command splitMultipleOrdersIntoArrayList(String input)
             throws InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
-            InvalidMultipleOrderFormatException {
+            InvalidMultipleOrderFormatException, MultipleSimilarItemsFoundException {
 
         int startOfArgumentsIndex;
         int startOfArgumentsIndexWhenShortFlagUsed = 14;
@@ -123,7 +119,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
     private Command castIntoProCommandFormat(String[] orderPairs)
             throws InvalidIndexOutOfBoundsException, InvalidQuantityNumberFormatException,
-            InvalidMultipleOrderFormatException {
+            InvalidMultipleOrderFormatException, MultipleSimilarItemsFoundException {
 
         String index;
         String finalCommandString = "";
@@ -137,6 +133,11 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
             }
 
             if (!isInteger(elements[0])) {
+
+                if (!addOrderValidation.checkValidItemName(elements[0])){
+                    throw new MultipleSimilarItemsFoundException();
+                }
+
                 index = Integer.toString(menu.findItemIndex(elements[0]));
                 elements[0] = index;
             }
