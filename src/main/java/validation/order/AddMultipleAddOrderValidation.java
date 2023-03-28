@@ -1,9 +1,18 @@
 package validation.order;
 
 import app.Command;
-import exception.order.*;
+
+import exception.order.MissingMultipleOrderArgumentException;
+import exception.order.MissingMultpleOrderFlagException;
+import exception.order.InvalidMultipleOrderFormatException;
+import exception.order.InvalidIndexNegativeException;
+import exception.order.InvalidIndexNumberFormatException;
+import exception.order.InvalidIndexOutOfBoundsException;
+import exception.order.InvalidQuantityNumberFormatException;
+import exception.order.InvalidQuantityNegativeException;
+import exception.order.MultipleSimilarItemsFoundException;
+
 import item.Menu;
-import ui.Flags;
 
 public class AddMultipleAddOrderValidation extends AddOrderValidation {
     private Menu menu;
@@ -134,7 +143,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
             if (!isInteger(elements[0])) {
 
-                if (!addOrderValidation.checkValidItemName(elements[0])){
+                if (!addOrderValidation.checkValidItemName(elements[0])) {
                     throw new MultipleSimilarItemsFoundException();
                 }
 
