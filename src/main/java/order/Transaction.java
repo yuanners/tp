@@ -24,7 +24,6 @@ public class Transaction {
      */
     private Store store;
 
-    private TransactionUi transactionUi;
     private final String ORDER_DATA_FILE = "orders.json";
 
     public Transaction() {

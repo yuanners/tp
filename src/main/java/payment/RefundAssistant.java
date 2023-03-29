@@ -14,21 +14,32 @@ import java.util.Scanner;
 
 public class RefundAssistant {
     private final String CANCEL = "/cancel";
+    private String orderID = "";
     private TransactionUi transactionUi = new TransactionUi();
     private Scanner scan = new Scanner(System.in);
-    private Refund refund = new Refund();
     private RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
 
-    public boolean getID(Command command, Transaction transaction) {
+    /**
+     * Get the refund order ID from user and validate it
+     *
+     * @param transaction list of orders
+     * @return whether the user entered "/cancel"
+     */
+    public boolean getID(Transaction transaction) {
         boolean isValidID = false;
+
         while (!isValidID) {
             transactionUi.promptOrderID();
             String input = scan.nextLine();
+
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
             }
+            Command command = new Command(input);
+
             try {
                 refundOrderValidation.validateRefund(command, transaction);
+                orderID = input;
                 isValidID = true;
             } catch (InvalidRefundOrderID e) {
                 transactionUi.printError(Flags.Error.INVALID_REFUND_ORDER_ID);
@@ -36,17 +47,38 @@ public class RefundAssistant {
                 transactionUi.printError(Flags.Error.INVALID_REFUND_ORDER_TYPE);
             }
         }
+
         return false;
     }
 
-    public boolean refundOrder(Command command, Transaction transaction){
-        boolean isCancelled = getID(command, transaction);
-        if(isCancelled){
+    /**
+     * Refund the entire order based on the input ID
+     *
+     * @param transaction list of orders
+     * @return whether the user entered "/cancel"
+     */
+    public boolean refundOrder(Transaction transaction) {
+        boolean isCancelled = getID(transaction);
+
+        if (isCancelled) {
             return true;
         }
+
         Order refundOrder = new Order();
         ArrayList<Order> orderList = transaction.getOrderList();
-        refund.getOrder(command, transaction);
+
+        for (Order order : orderList) {
+            String ID = order.getOrderId();
+
+            if (ID.equals(orderID)) {
+                refundOrder = order;
+                break;
+            }
+
+        }
+
+        refundOrder.setStatus("REFUNDED");
+        transaction.save();
         return false;
     }
 }

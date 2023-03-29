@@ -129,8 +129,7 @@ public class Router {
                 break;
             case "6":
             case "addorder":
-                isCancelled = orderAssistant.assistedAddOrder(menu, transactions);
-                menuAssistant.printResult(command, isCancelled);
+                orderAssistant.assistedAddOrder(menu, transactions);
                 break;
             case "7":
             case "listorder":
@@ -138,7 +137,7 @@ public class Router {
                 break;
             case "8":
             case "refundorder":
-                isCancelled = refundAssistant.refundOrder(command, transactions);
+                isCancelled = refundAssistant.refundOrder(transactions);
                 menuAssistant.printResult(command, isCancelled);
                 break;
             case "9":

@@ -21,7 +21,6 @@ public class AddOrderValidation extends Validation {
     private Menu menu = new Menu();
     private TransactionUi transactionUi = new TransactionUi();
 
-
     public boolean checkValidItemName(String itemName) {
 
         if (!isInteger(itemName)) {
@@ -77,6 +76,13 @@ public class AddOrderValidation extends Validation {
         return arg;
     }
 
+    /**
+     * Check if the user input contains the valid flag and arguments
+     * @param arg user input
+     * @throws MissingOrderFlagException missing -i flag
+     * @throws MissingOrderArgumentException missing argument
+     * @throws MissingQuantityArgumentException missing argument for -q flag
+     */
     public void validateFlag(Command arg)
             throws MissingOrderFlagException, MissingOrderArgumentException, MissingQuantityArgumentException {
         if (arg.getArgumentString().contains("-i") || arg.getArgumentString().contains("--item")) {
@@ -95,6 +101,14 @@ public class AddOrderValidation extends Validation {
         }
     }
 
+    /**
+     * Validate the item index in the user input
+     * @param arg user input
+     * @param menu list of menu items
+     * @throws InvalidIndexNumberFormatException item index is not an integer
+     * @throws InvalidIndexNegativeException item index is negative
+     * @throws InvalidIndexOutOfBoundsException item index > menu size
+     */
     public void validateIndex(Command arg, Menu menu)
             throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
 
@@ -112,6 +126,12 @@ public class AddOrderValidation extends Validation {
         }
     }
 
+    /**
+     * Validate quantity in the user input
+     * @param arg user input
+     * @throws InvalidQuantityNumberFormatException quantity is not an integer
+     * @throws InvalidQuantityNegativeException quantity is less than 0
+     */
     public void validateQuantity(Command arg)
             throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
 

@@ -7,26 +7,34 @@ import java.util.ArrayList;
 
 public class TransactionUi extends Ui {
 
-    public void promptMoreOrderEntries() { System.out.println("Do you have more items to add? (yes/no/cancel)"); }
+    public void promptMoreOrderEntries() {
+        System.out.println("Do you have more items to add? (yes/no/cancel)");
+    }
 
     public void promptPayment() {
         System.out.println("Please use /pay -a <amount> -t <type> or pay to make payment.");
     }
-    public void promptOrderID(){
+
+    public void promptOrderID() {
         System.out.println("Please enter order ID to refund order.");
     }
-    public void promptPaymentAmount(){
+
+    public void promptPaymentAmount() {
         System.out.println("Please enter amount to pay.");
     }
-    public void promptPaymentType(){
+
+    public void promptPaymentType() {
         System.out.println("Please enter payment type.");
     }
+
     public void promptItemQuantity() {
         System.out.println("Please enter the quantity of the item: ");
     }
+
     public void promptItemName() {
         System.out.println("Please enter the item's name or index: ");
     }
+
     public void printChangeGiven(Double change) {
         System.out.printf("The calculated change is $%.2f.\n", change);
     }
@@ -96,7 +104,9 @@ public class TransactionUi extends Ui {
         System.out.println("/addorder -i <number> -q <number>");
     }
 
-    public void printError(String message) {System.out.println(message); }
+    public void printError(String message) {
+        System.out.println(message);
+    }
 
     @Override
     public void printError(Flags.Error error) {
