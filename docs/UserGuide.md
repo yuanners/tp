@@ -173,7 +173,7 @@ Format: `/additem -n "<name>" -p <price>` or `/additem --name "<name>" --price <
     * Names are unique, regardless of how the words are capitalized. `Chicken` and `chicken` will count as the same
       word.
 * Price refers to the price of the item
-    * It can have up to two decimal points (`2`, `2.1`, `2.22` are all valid inputs).
+    * It can have up to two decimal places (`2`, `2.1`, `2.22` are all valid inputs).
 
 **Examples of Usage**
 
@@ -425,7 +425,7 @@ of payment.
 After adding the order, you will be prompted to add the payment, which can be done with `/pay -a <amount> -t <type>`
 or `/pay --amount <amount> --type <type>`
 
-* `Amount` refers to the amount paid, with up to 2 decimal points. (`2`, `2.1`, and `2.22` are all valid inputs).
+* `Amount` refers to the amount paid, with up to 2 decimal places. (`2`, `2.1`, and `2.22` are all valid inputs).
 * `Type` must use one of the following three modes: `Card`, `Cash` or `Others`.
     * It is case-insensitive
 
@@ -1341,16 +1341,18 @@ directly as inexperienced users may potentially corrupt the files.
 
 # Glossary
 
-| Term                     | Explanation                                                                                                                                  |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| Case-sensitive           | If something is case-sensitive, it means that whether letters are capitalized or not matters. For example, your passwords are case-sensitive |
-| Command Line Interface   | A text-based interface.                                                                                                                      |
-| Command                  |                                                                                                                                              |
-| Command Terminal         |                                                                                                                                              |
-| Decimal Points           |                                                                                                                                              |
-| Directory                |                                                                                                                                              |
-| Flag                     |                                                                                                                                              |
-| Graphical User Interface |                                                                                                                                              |
-| Index                    |                                                                                                                                              |
-| Integer                  |                                                                                                                                              |
-| Point-of-Sale System     |                                                                                                                                              |
+The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
+
+| Term                     | Explanation                                                                                                                                              |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Case-sensitive           | If something is case-sensitive, it means that whether letters are capitalized or not matters. For example, your passwords are case-sensitive             |
+| Command Line Interface   | A text-based interface. This means there are no icons to click and everything has to be typed.                                                           |
+| Command                  | An instruction given to the computer.                                                                                                                    |
+| Terminal                 | A tool used for CLI programmes to be run. It accepts text input and outputs text.                                                                        |
+| Decimal Places           | The number of digits behind a decimal point. For example `2.123` has 3 decimal places, while `4.20` has 2 decimal places.                                |
+| Directory                | Directories are folders in your computer system.                                                                                                         |
+| Flag                     | Used to specify instructions and change the behaviour of a command. In this application, flags have a short-form and a long-form, ie. `-n` and `--name`. |
+| Graphical User Interface | A graphic-based interface. Usually, it has buttons or icons of some kind and uses visuals to interact with the user.                                     |
+| Index                    | A set of ordered whole numbers used to indicate elements. For example, you can think about the different levels in a building.                           |
+| Integer                  | A whole number, such as `1`, `100` or `-1`. Numbers such as `1.2` and fractions are not integers.                                                        |
+| Point-of-Sale System     | It is used to accept payments from customers and track sales. For MoneyGoWhere, you are also able to create a menu in addition to tracking sales.        |
