@@ -260,7 +260,8 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the item is selected
      */
-    public void addSingleOrder(Command command, Menu listOfItems, TransactionUi transactionUi) throws InvalidQuantityNumberFormatException {
+    public void addSingleOrder(Command command, Menu listOfItems,
+                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
