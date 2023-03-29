@@ -56,7 +56,7 @@ public class AddOrderValidation extends Validation {
      * @param menu menu
      */
     public Command validateCommand(Command arg, Menu menu) {
-
+        assert arg.getUserInput() != null : "Null input should be handled";
         String item = "";
         String newItem = "";
 
