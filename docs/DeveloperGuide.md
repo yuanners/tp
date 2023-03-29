@@ -339,9 +339,10 @@ The general workflow of this `/addorder` command is as follows:
 6. If the input is invalid, the user will be shown an error message about the mistake made, and the correct format to
    enter the command will be shown.
 7. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
+   ![](./images/developersGuide/payment.png)
 8. Once payment is made, the `Order` will be passed to the `Transactions` class, where this `Order` will be appended to
    the list of `Transactions`.
-
+   
 <hr>
 
 ##### Add multiple menu items into an order
