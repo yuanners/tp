@@ -18,9 +18,14 @@ public class TransactionUi extends Ui {
     public void promptPaymentAmount(){
         System.out.println("Please enter amount to pay.");
     }
-
     public void promptPaymentType(){
         System.out.println("Please enter payment type.");
+    }
+    public void promptItemQuantity() {
+        System.out.println("Please enter the quantity of the item: ");
+    }
+    public void promptItemName() {
+        System.out.println("Please enter the item's name or index: ");
     }
     public void printChangeGiven(Double change) {
         System.out.printf("The calculated change is $%.2f.\n", change);
@@ -74,6 +79,9 @@ public class TransactionUi extends Ui {
         System.out.println("Order has been added successfully. Total amount: $" + subtotal);
     }
 
+    public void printInvalidInputEntered() {
+        System.out.println("Invalid input entered.");
+    }
 
     //    public void printItemNotExistError() {
     //        System.out.println("No such item exists.");
@@ -186,6 +194,7 @@ public class TransactionUi extends Ui {
             // Fallthrough
         }
     }
+
 }
 
 

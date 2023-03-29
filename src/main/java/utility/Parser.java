@@ -40,7 +40,7 @@ public class Parser {
     public Map<String, String> formatArguments(String argString) {
 
 
-        String regex = "(\"[^\"]*\")|(\\S+)";
+        String regex = "(\"[^\"]*\")|(\\[[^\\]]*\\])|(\\S+)";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(argString);
@@ -70,9 +70,11 @@ public class Parser {
                 }
             }
             else{
+                System.out.println("COMMAND: " + argString);
                 System.out.println("COMMAND FORMAT INCORRECT: " + flag);
             }
         }
+
         return argMap;
     }
 

@@ -2,6 +2,13 @@ package ui;
 
 public class Ui {
 
+    public void printWelcomeMessage() {
+        System.out.println("░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀\n" +
+                "░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀\n" +
+                "░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀");
+        System.out.println("Welcome to MoneyGoWhere!\n");
+    }
+
     public void promptUserInput() {
         System.out.println("Please enter a command: ");
     }
@@ -41,7 +48,9 @@ public class Ui {
     }
 
 
+
     public void printError(Flags.Error error) {
+        System.out.print("Error: ");
         switch (error) {
         case EMPTY_INPUT:
             System.out.println("Input is empty. Please enter something.");
@@ -54,6 +63,9 @@ public class Ui {
             break;
         case INVALID_INDEX:
             System.out.println("Please enter a valid index!");
+            break;
+        case UNRECOGNISED_COMMAND_ERROR:
+            System.out.println("This command is not recognised.");
             break;
         default:
             // Fallthrough

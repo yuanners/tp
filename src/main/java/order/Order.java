@@ -1,6 +1,7 @@
 package order;
 
 import app.Command;
+
 import exception.order.MissingQuantityArgumentException;
 import exception.order.InvalidIndexNumberFormatException;
 import exception.order.MissingOrderFlagException;
@@ -12,11 +13,12 @@ import exception.order.InvalidIndexOutOfBoundsException;
 import exception.order.MissingMultipleOrderArgumentException;
 import exception.order.MissingMultpleOrderFlagException;
 import exception.order.InvalidMultipleOrderFormatException;
+import exception.order.MultipleSimilarItemsFoundException;
+
 import item.Menu;
 import payment.Payment;
 import ui.Flags;
 import ui.TransactionUi;
-import utility.Ui;
 import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
@@ -211,10 +213,10 @@ public class Order implements OrderInterface {
             command.mapArgumentAlias("items", "I");
 
             if (command.getArgumentMap().get("item") != null) {
+                command = addOrderValidation.validateCommand(command, listOfItems);
                 addOrderValidation.validateFlag(command);
                 addOrderValidation.validateIndex(command, listOfItems);
                 addOrderValidation.validateQuantity(command);
-                //command = addOrderValidation.validateCommand(command);
                 addSingleOrder(command, listOfItems);
                 isAdded = true;
             } else if (command.getArgumentMap().get("items") != null) {
@@ -248,6 +250,8 @@ public class Order implements OrderInterface {
             transactionUi.printError(Flags.Error.MISSING_MULTIPLE_ORDER_FLAG_EXCEPTION);
         } catch (InvalidMultipleOrderFormatException e) {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
+        } catch (MultipleSimilarItemsFoundException e) {
+            // Error message is already printed in a separate handler
         }
         return isAdded;
     }
@@ -291,8 +295,6 @@ public class Order implements OrderInterface {
      * @return quantity
      */
     public int handleQuantity(Command command) throws InvalidQuantityNumberFormatException {
-
-        Ui ui = new Ui();
 
         int quantity;
         boolean isQuantityANumber = isInteger(command.getArgumentMap().get("quantity"));
