@@ -158,22 +158,8 @@ public class Order implements OrderInterface {
         this.status = status;
     }
 
-    /**
-     * Gets the ArrayList of OrderEntry objects of the Order.
-     *
-     * @return ArrayList of OrderEntry objects
-     */
     public ArrayList<OrderEntry> getOrderEntries() {
         return orderEntries;
-    }
-
-    /**
-     * Sets the ArrayList of OrderEntry objects of the Order.
-     *
-     * @param orderEntries ArrayList of OrderEntry objects
-     */
-    public void setOrderEntries(ArrayList<OrderEntry> orderEntries) {
-        this.orderEntries = orderEntries;
     }
 
     /**
