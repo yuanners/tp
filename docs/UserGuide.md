@@ -161,7 +161,7 @@ There are five different commands you can run for items.
 * [Find an Item](#advanced-mode-find-an-item)
 * [Update an Item](#advanced-mode-update-an-item)
 
-#### Advanced Mode Add an Item
+### Advanced Mode Add an Item
 
 This adds a new item to the menu. New items must have a name and price.
 
@@ -201,7 +201,7 @@ The command: /additem was successfully executed!
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Advanced Mode Delete an Item
+### Advanced Mode Delete an Item
 
 This removes an item from the menu, identified by its index when [listing all items](#advanced-mode-list-all-items).
 
@@ -228,7 +228,7 @@ The command: /deleteitem was successfully executed!
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Advanced Mode List all Items
+### Advanced Mode List all Items
 
 This lists all items currently in the menu.
 
@@ -258,7 +258,7 @@ The command: listitem was successfully executed!
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Advanced Mode Find an Item
+### Advanced Mode Find an Item
 
 This command is used to find any and all items that match your input. It will give you the item's index, full name, and
 price.
@@ -298,7 +298,7 @@ The command: /finditem was successfully executed!
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Advanced Mode Update an Item
+### Advanced Mode Update an Item
 
 If you make a mistake when entering details for one of your items, you can update it with this command. The index of the
 item will not change.
@@ -417,7 +417,7 @@ entire [Add an Order](#advanced-mode-add-an-order) section as they are all relat
     * [Searching by Name](#advanced-mode-search-by-name)
 * [List all Orders](#advanced-mode-list-all-orders)
 
-#### Advanced Mode Add an Order
+### Advanced Mode Add an Order
 
 When you add an order, the total price will be given. Afterwards, you have to add the amount paid, as well as the method
 of payment.
@@ -435,7 +435,7 @@ or `/pay --amount <amount> --type <type>`
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-##### Advanced Mode Single Item
+#### Advanced Mode Single Item
 
 This mode of input allows you to add an order with a single item with ease.
 
@@ -509,7 +509,7 @@ The command: /pay was successfully executed!
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-##### Advanced Mode Multiple Items
+#### Advanced Mode Multiple Items
 
 This command allows you to add multiple items to a single order.
 
@@ -557,7 +557,7 @@ The command: /pay was successfully executed!
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-##### Advanced Mode Search by Name
+#### Advanced Mode Search by Name
 
 Forgot the index of an item? Fret not! You can also add an item to an order by searching its name.
 
@@ -599,7 +599,7 @@ The command: /pay was successfully executed!
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Advanced Mode List all Orders
+### Advanced Mode List all Orders
 
 After adding many orders, you may wish to view a list of all transactions.
 
@@ -641,7 +641,7 @@ The Order ID is important as it is used for [refunding orders](#advanced-mode-re
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Advanced Mode Refund An Order
+### Advanced Mode Refund An Order
 
 If you made a mistake in an order, or wish to refund a customer's order, you may do so with this feature.
 
@@ -838,7 +838,7 @@ There are 8 commands you can use in MoneyGoWhere. For more details, please refer
 * [Update an Item](#basic-mode-update-an-item)
 * [Find an Item](#basic-mode-find-an-item)
 
-#### Basic Mode Add an Item
+### Basic Mode Add an Item
 
 Format: `additem` or `1`
 
@@ -865,7 +865,7 @@ Item added successfully.
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Basic Mode Delete an Item
+### Basic Mode Delete an Item
 
 Format: `deleteitem` or `2`.
 
@@ -900,7 +900,7 @@ Item deleted successfully.
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Basic Mode List all Items
+### Basic Mode List all Items
 
 Format: `listitem` or `3`
 
@@ -926,7 +926,7 @@ All items in the menu have been listed!
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Basic Mode Update an Item
+### Basic Mode Update an Item
 
 Format: `updateitem` or `4`
 
@@ -1009,7 +1009,7 @@ Item updated successfully.
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Basic Mode Find an Item
+### Basic Mode Find an Item
 
 Format: `finditem` or `5`
 
@@ -1060,7 +1060,7 @@ finditem completed!
 * [List all Orders](#basic-mode-list-all-orders)
 * [Refund an Order](#basic-mode-refund-an-order)
 
-#### Basic Mode Add an Order
+### Basic Mode Add an Order
 
 Format: `addorder` or `6`
 
@@ -1120,8 +1120,10 @@ The command: addorder was successfully executed!
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
-#### Basic Mode List all Orders
+### Basic Mode List all Orders
 
 Format: `listorder` or `7`
 
@@ -1151,7 +1153,7 @@ Subtotal: $60.00
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-#### Basic Mode Refund an Order
+### Basic Mode Refund an Order
 
 Format: `refundorder` or `8`
 
