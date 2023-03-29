@@ -73,7 +73,7 @@ public class Order implements OrderInterface {
             transactions.appendOrder(this);
         }
     }
-make
+
     /**
      * Constructs an Order object with a unique ID
      * default transaction status as COMPLETED
