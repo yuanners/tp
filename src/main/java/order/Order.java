@@ -36,8 +36,6 @@ public class Order implements OrderInterface {
     private ArrayList<OrderEntry> orderEntries;
     private String status;
     private String paymentType;
-    private TransactionUi transactionUi = new TransactionUi();
-    private Payment payment = new Payment();
 
 
     /**
@@ -62,15 +60,14 @@ public class Order implements OrderInterface {
      * @param menu         The menu from which the customer chooses items for the order.
      * @param transactions The transaction object to which the order will be appended.
      */
-    public Order(Command command, Menu menu, Transaction transactions) {
+    public Order(Command command, Menu menu, Transaction transactions,
+                 TransactionUi transactionUi, Payment payment) {
         this.orderId = UUID.randomUUID().toString();
         this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
-        if (this.addOrder(command, menu)) {
-            transactionUi = new TransactionUi();
-            payment = new Payment();
+        if (this.addOrder(command, menu, transactionUi)) {
             transactionUi.printOrderAdded(this.getSubTotal());
             payment.makePayment(this);
             transactions.appendOrder(this);
@@ -204,7 +201,7 @@ public class Order implements OrderInterface {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Menu listOfItems) {
+    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) {
         boolean isAdded = false;
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
@@ -218,12 +215,12 @@ public class Order implements OrderInterface {
                 addOrderValidation.validateFlag(command);
                 addOrderValidation.validateIndex(command, listOfItems);
                 addOrderValidation.validateQuantity(command);
-                addSingleOrder(command, listOfItems);
+                addSingleOrder(command, listOfItems, transactionUi);
                 isAdded = true;
             } else if (command.getArgumentMap().get("items") != null) {
                 command = addMultipleOrderValidation.validateFormat(command);
                 addMultipleOrderValidation.validateArguments(command, listOfItems);
-                handleMultipleAddOrders(command, listOfItems);
+                handleMultipleAddOrders(command, listOfItems, transactionUi);
                 isAdded = true;
             } else {
                 addOrderValidation.validateFlag(command);
@@ -263,7 +260,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the item is selected
      */
-    public void addSingleOrder(Command command, Menu listOfItems) throws InvalidQuantityNumberFormatException {
+    public void addSingleOrder(Command command, Menu listOfItems, TransactionUi transactionUi) throws InvalidQuantityNumberFormatException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -318,7 +315,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the items are selected
      */
-    public void handleMultipleAddOrders(Command command, Menu listOfItems) {
+    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi) {
 
         command.mapArgumentAlias("items", "I");
 
