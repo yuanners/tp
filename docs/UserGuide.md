@@ -81,6 +81,9 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 1. Ensure you have Java 11 installed,
    and [download the latest release of MoneyGoWhere](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it
    in a folder.
+
+   ![downloadMoneyGoWhere](/images/userGuide/downloadMoneyGoWhere.png)
+
 2. Open the command terminal and navigate to the folder where the `.jar` file is, by doing `cd "<file path>"`.
 3. Use the command `java -jar moneygowhere.jar` to launch our application. If correct, you should see the following on
    startup:
@@ -751,12 +754,16 @@ Note that all functionality is the same, regardless of the mode used.
 ## Setting up MoneyGoWhere
 
 1. Before installing and using MoneyGoWhere, do note that Java 11 is required. If you do not already have it installed,
-   you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11).
+   you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11)
+    * For Windows users, download the x64 Installer.
+      ![JavaWindows](images/userGuide/downloadJavaWindows.png)
+    * For Mac users, download the ARM 64 DMG Installer.
+      ![JavaWindows](images/userGuide/downloadJavaMac.png)
 2. After installing Java 11, please download the `.jar`
    file [here](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it in a folder. Doing so ensures that
    the save-file will not be lost, allowing you to use data that you have previously entered. Click
    on `MoneyGoWhere.jar` to automatically download the file. Ensure that it is the latest version.
-   **#TODO: Add image**
+   ![downloadMoneyGoWhere](/images/userGuide/downloadMoneyGo
 3. Move the jar file into a folder. This will allow you to view all data related to MoneyGoWhere easily, as all data
    files will be stored here.
 4. Open the command terminal and navigate to the folder where the `.jar` file is. If you are unsure of how to do so,
