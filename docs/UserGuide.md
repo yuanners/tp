@@ -12,6 +12,8 @@ low-cost and adaptability.
 
 This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
 
+<br>
+
 # Using This Guide
 
 This guide is split into **two** main sections:
@@ -31,7 +33,7 @@ new to MoneyGoWhere, or less proficient in computers, we recommend the basic gui
 Additionally, MoneyGoWhere has a [statistics feature](#statistics-feature) which allows you to generate reports based on
 your sales.
 
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 # General Table of Contents
 
@@ -70,7 +72,7 @@ Note that all functionality is the same, regardless of the mode used.
         * [List all Orders](#advanced-mode-list-all-orders)
         * [Refund an Order](#advanced-mode-refund-an-order)
 
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ## Quick Setup
 
@@ -96,7 +98,7 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ## Advanced Commands
 
@@ -115,7 +117,7 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ### Advanced Help
 
@@ -196,6 +198,8 @@ The command: /additem was successfully executed!
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 #### Advanced Mode Delete an Item
 
@@ -220,6 +224,8 @@ The command: /deleteitem was successfully executed!
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 #### Advanced Mode List all Items
@@ -248,6 +254,8 @@ The command: listitem was successfully executed!
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 #### Advanced Mode Find an Item
@@ -286,6 +294,8 @@ The command: /finditem was successfully executed!
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 #### Advanced Mode Update an Item
@@ -420,6 +430,8 @@ or `/pay --amount <amount> --type <type>`
     * It is case-insensitive
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
@@ -492,6 +504,8 @@ The command: /pay was successfully executed!
 ```
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
@@ -540,6 +554,8 @@ The command: /pay was successfully executed!
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ##### Advanced Mode Search by Name
 
@@ -580,6 +596,8 @@ The command: /pay was successfully executed!
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 #### Advanced Mode List all Orders
 
@@ -619,6 +637,8 @@ The Order ID is important as it is used for [refunding orders](#advanced-mode-re
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 #### Advanced Mode Refund An Order
@@ -698,7 +718,7 @@ preferred mode of input.
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
 <br>
 
 # Basic Guide
@@ -725,6 +745,8 @@ Note that all functionality is the same, regardless of the mode used.
         * [List all Orders](#basic-mode-list-all-orders)
         * [Refund an order](#basic-mode-refund-an-order)
 3. [Command Summary](#basic-mode-command-summary)
+
+<br>
 
 ## Setting up MoneyGoWhere
 
@@ -764,6 +786,8 @@ Note that all functionality is the same, regardless of the mode used.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+
 ## Basic Commands
 
 * All options are signified by `<example>`, which means you can change it according to what you need.
@@ -773,6 +797,8 @@ Note that all functionality is the same, regardless of the mode used.
   commands, [click here](#advanced-guide)
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+
+<br>
 
 ### Basic Help
 
@@ -836,6 +862,8 @@ Item added successfully.
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 #### Basic Mode Delete an Item
 
@@ -869,6 +897,8 @@ Item deleted successfully.
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 #### Basic Mode List all Items
 
@@ -892,6 +922,8 @@ All items in the menu have been listed!
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 #### Basic Mode Update an Item
@@ -973,6 +1005,8 @@ Item updated successfully.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 #### Basic Mode Find an Item
@@ -1114,6 +1148,8 @@ Subtotal: $60.00
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 #### Basic Mode Refund an Order
 
@@ -1159,6 +1195,8 @@ Order is refunded successfully.
 | Refund an Order | `refundorder` |
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+
+<br>
 
 # Statistics Feature
 
@@ -1289,6 +1327,8 @@ Please enter a command:
 ```
 
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
+
+<br>
 
 # Save File
 
