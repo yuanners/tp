@@ -37,6 +37,7 @@ public class Order implements OrderInterface {
     private String status;
     private String paymentType;
     private TransactionUi transactionUi = new TransactionUi();
+    private Payment payment = new Payment();
 
 
     /**
@@ -67,12 +68,12 @@ public class Order implements OrderInterface {
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
-        transactionUi = new TransactionUi();
         if (this.addOrder(command, menu)) {
-            transactions.appendOrder(this);
+            transactionUi = new TransactionUi();
+            payment = new Payment();
             transactionUi.printOrderAdded(this.getSubTotal());
-            Payment payment = new Payment();
             payment.makePayment(this);
+            transactions.appendOrder(this);
         }
     }
 

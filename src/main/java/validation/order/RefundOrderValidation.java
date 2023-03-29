@@ -27,7 +27,7 @@ public class RefundOrderValidation extends Validation {
     public void validateFlag(Command arg) throws MissingRefundOrderFlag, MissingRefundOrderArgument {
         arg.mapArgumentAlias("i", "id");
         if (arg.getArgumentString().contains("-i")) {
-            if (arg.getArgumentMap().get("i")==null) {
+            if (arg.getArgumentMap().get("i") == null) {
                 throw new MissingRefundOrderArgument();
             }
         } else {
@@ -45,7 +45,12 @@ public class RefundOrderValidation extends Validation {
     public void validateRefund(Command arg, Transaction transaction) throws
             InvalidRefundOrderType, InvalidRefundOrderID {
         boolean isValidID = false;
-        String orderID = arg.getArgumentString();
+        String orderID = "";
+        if (arg.getArgumentString() != null && arg.getArgumentString().length() > 1) {
+            orderID = arg.getArgumentString();
+        } else {
+            orderID = arg.getUserInput();
+        }
         ArrayList<Order> orderList = transaction.getOrderList();
         for (Order order : orderList) {
             String ID = order.getOrderId();

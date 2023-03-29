@@ -22,6 +22,17 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         this.menu = menu;
     }
 
+    /**
+     * Validate the user input format
+     * @param arg user input
+     * @return if format is valid, return the user input so can be checked in the next validation method
+     * @throws MissingMultipleOrderArgumentException the command has no argument
+     * @throws MissingMultpleOrderFlagException missing -I flag
+     * @throws InvalidMultipleOrderFormatException invalid format
+     * @throws InvalidQuantityNumberFormatException quantity is not an integer
+     * @throws InvalidIndexOutOfBoundsException item index is > item size
+     * @throws MultipleSimilarItemsFoundException more than 1 search item result
+     */
     public Command validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
             MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException,
             InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
@@ -59,6 +70,16 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         }
     }
 
+    /**
+     * Validate the arguments in the user input
+     * @param arg user input
+     * @param items a list of menu items
+     * @throws InvalidIndexNegativeException item index is negative
+     * @throws InvalidIndexNumberFormatException item index is not an integer
+     * @throws InvalidIndexOutOfBoundsException item index is > item list size
+     * @throws InvalidQuantityNumberFormatException quantity is not an integer
+     * @throws InvalidQuantityNegativeException quantity is negative
+     */
     public void validateArguments(Command arg, Menu items) throws InvalidIndexNegativeException,
             InvalidIndexNumberFormatException, InvalidIndexOutOfBoundsException,
             InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
