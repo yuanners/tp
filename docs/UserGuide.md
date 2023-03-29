@@ -12,9 +12,6 @@ low-cost and adaptability.
 
 This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
 
-<br>
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-
 # Using This Guide
 
 This guide is split into **two** main sections:
@@ -34,7 +31,7 @@ new to MoneyGoWhere, or less proficient in computers, we recommend the basic gui
 Additionally, MoneyGoWhere has a [statistics feature](#statistics-feature) which allows you to generate reports based on
 your sales.
 
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 
 # General Table of Contents
 
@@ -46,8 +43,6 @@ your sales.
 * [Statistics Feature](#statistics-feature)
 * [Save File](#save-file)
 * [Glossary](#glossary)
-
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 
 # Advanced Guide
 
@@ -74,7 +69,7 @@ the mode used.
         * [List all Orders](#advanced-mode-list-all-orders)
         * [Refund an Order](#advanced-mode-refund-an-order)
 
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 
 ## Quick Setup
 
@@ -100,7 +95,7 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 
 ## Advanced Commands
 
@@ -119,7 +114,7 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 
 ### Advanced Help
 
@@ -148,6 +143,10 @@ There are 8 commands you can use in MoneyGoWhere. For more details, please refer
 ```
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
+
+<br>
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ### Advanced Mode Items
 
@@ -393,7 +392,9 @@ The command: listitem was successfully executed!
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ### Advanced Mode Orders
 
@@ -578,7 +579,7 @@ The command: /pay was successfully executed!
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 #### Advanced Mode List all Orders
 
@@ -618,7 +619,7 @@ The Order ID is important as it is used for [refunding orders](#advanced-mode-re
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
-<hr style="height:1px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 #### Advanced Mode Refund An Order
 
@@ -669,6 +670,8 @@ Subtotal: $9.00
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ## Advanced Mode Command Summary
 
@@ -691,7 +694,7 @@ preferred mode of input.
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
-<hr>
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 # Basic Guide
@@ -796,6 +799,8 @@ Item added successfully.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+
 #### Basic Mode Delete an Item
 
 To delete an item from the menu, use the command `deleteitem` or `2`. You will then be prompted to input the index of
@@ -826,6 +831,8 @@ Item deleted successfully.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+
 #### Basic Mode List all Items
 
 To list all items, use the command `listitem` or `3`.
@@ -845,6 +852,8 @@ All items in the menu have been listed!
 ```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+
+<br>
 
 #### Basic Mode Find an Item
 
@@ -883,6 +892,8 @@ finditem completed!
 ```
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+
+<br>
 
 #### Basic Mode Update an Item
 
@@ -962,6 +973,10 @@ Item updated successfully.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
+
 ### Basic Mode Orders
 
 * [Add an Order](#basic-mode-add-an-order)
@@ -1023,6 +1038,8 @@ The command: addorder was successfully executed!
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+
 #### Basic Mode List all Orders
 
 To list all orders, use the command `listorder` or `7`.
@@ -1047,6 +1064,8 @@ Subtotal: $60.00
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+
 #### Basic Mode Refund an Order
 
 To refund an order, use the command `refundorder` or `8`. You will be prompted to enter the order ID, which can be
@@ -1070,7 +1089,8 @@ Order is refunded successfully.
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 <br>
-<hr>
+<hr style="height:3px; color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
+<br>
 
 ## Basic Mode Command Summary
 
