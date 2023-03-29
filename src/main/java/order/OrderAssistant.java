@@ -2,6 +2,7 @@ package order;
 
 import app.Command;
 import item.Menu;
+import payment.Payment;
 import ui.TransactionUi;
 import validation.order.AddOrderValidation;
 
@@ -85,7 +86,8 @@ public class OrderAssistant {
 
         commandString = formatCommandStringForOrders(commandString);
         command = new Command(commandString);
-        order = new Order(command, menu, transaction);
+        Payment payment = new Payment();
+        order = new Order(command, menu, transaction, transactionUi, payment);
 
         // Returns false when there are no more orderEntries to add
         return false;

@@ -6,11 +6,13 @@ import item.MenuAssistant;
 import order.Order;
 import order.OrderAssistant;
 import order.Transaction;
+import payment.Payment;
 import payment.Refund;
 import statistic.Statistic;
 import payment.RefundAssistant;
 import statistic.StatisticAssistant;
 import ui.Flags;
+import ui.TransactionUi;
 import ui.Ui;
 import validation.Validation;
 
@@ -23,6 +25,8 @@ public class Router {
     public Ui ui;
     public Menu menu;
     public Transaction transactions;
+    private TransactionUi transactionUi;
+    private Payment payment;
 
     /**
      * Constructs a new Router object with the specified menu and transactions.
@@ -34,6 +38,8 @@ public class Router {
         this.ui = new Ui();
         this.menu = menu;
         this.transactions = transactions;
+        this.transactionUi = new TransactionUi();
+        this.payment = new Payment();
     }
 
     /**
@@ -63,7 +69,7 @@ public class Router {
             menu.showResultsOfFind(command);
             break;
         case "/addorder":
-            Order order = new Order(command, menu, transactions);
+            Order order = new Order(command, menu, transactions, transactionUi, payment);
             break;
         case "/listorder":
             transactions.displayList();
