@@ -7,8 +7,8 @@ use it.
 
 MoneyGoWhere is a point-of-sale, desktop app for tracking sales and inventory, optimised for use via a Command line
 Interface (CLI). With the ability to type fast and with familiarity of the system, you will be able to quickly track
-sales, check inventory and calculate change. This CLI application is comparable with GUI applications due to its
-low-cost and adaptability.
+sales, check inventory and calculate change. This CLI application is comparable with Graphical User Interface (GUI)
+applications due to its low-cost and adaptability.
 
 This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
 
@@ -50,7 +50,7 @@ your sales.
 
 This version of our guide will bring you through how to use the features of MoneyGoWhere in a single command.
 
-To see the beginner's version, [please click here](#basic-guide). 
+To see the beginner's version, [please click here](#basic-guide).
 
 Note that all functionality is the same, regardless of the mode used.
 
@@ -804,7 +804,7 @@ Note that all functionality is the same, regardless of the mode used.
 
 Entering this command will show you a list of all available commands.
 
-Note that it is possible to use the given index as a command input, but doing so will execute commands in basic mode. 
+Note that it is possible to use the given index as a command input, but doing so will execute commands in basic mode.
 
 Format: `help`
 
@@ -1341,6 +1341,16 @@ directly as inexperienced users may potentially corrupt the files.
 
 # Glossary
 
-| Term | Explanation |
-|------|-------------|
-| Item | Explanation |
+| Term                     | Explanation                                                                                                                                  |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| Case-sensitive           | If something is case-sensitive, it means that whether letters are capitalized or not matters. For example, your passwords are case-sensitive |
+| Command Line Interface   | A text-based interface.                                                                                                                      |
+| Command                  |                                                                                                                                              |
+| Command Terminal         |                                                                                                                                              |
+| Decimal Points           |                                                                                                                                              |
+| Directory                |                                                                                                                                              |
+| Flag                     |                                                                                                                                              |
+| Graphical User Interface |                                                                                                                                              |
+| Index                    |                                                                                                                                              |
+| Integer                  |                                                                                                                                              |
+| Point-of-Sale System     |                                                                                                                                              |
