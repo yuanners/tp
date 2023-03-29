@@ -1,9 +1,12 @@
 package seedu.moneygowhere;
 
+import app.Command;
 import item.Item;
 import order.Order;
 import order.OrderEntry;
+import order.Transaction;
 import org.junit.jupiter.api.Test;
+import payment.Refund;
 
 import java.util.ArrayList;
 
@@ -77,7 +80,7 @@ public class OrderTest {
 
     @Test
     void refundOrderTest() {
-
+        Transaction transaction = new Transaction();
         Item item1 = new Item("chicken rice", 2.00);
 
         OrderEntry orderEntry1 = new OrderEntry(item1, 10);
@@ -85,25 +88,13 @@ public class OrderTest {
         ArrayList<OrderEntry> orderEntries = new ArrayList<>();
         orderEntries.add(orderEntry1);
         Order order = new Order(orderEntries);
-
-        assertEquals("COMPLETED", order.getStatus());
-
+        transaction.appendOrder(order);
+        String ID = order.getOrderId();
+        String input = "/refundorder -i " +ID;
+        Command command = new Command(input);
+        Refund refund = new Refund();
+        refund.getOrder(command,transaction);
+        assertEquals("REFUNDED", order.getStatus());
     }
-
-    @Test
-    void paymentTest() {
-
-        Item item1 = new Item("chicken rice", 2.00);
-
-        OrderEntry orderEntry1 = new OrderEntry(item1, 10);
-
-        ArrayList<OrderEntry> orderEntries = new ArrayList<>();
-        orderEntries.add(orderEntry1);
-        Order order = new Order(orderEntries);
-        order.setPaymentType("card");
-        assertEquals("card", order.getPaymentType());
-
-    }
-
 
 }

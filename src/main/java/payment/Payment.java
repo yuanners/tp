@@ -3,7 +3,6 @@ package payment;
 import app.Command;
 import item.MenuAssistant;
 import order.Order;
-import ui.MenuUi;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
 
@@ -25,33 +24,39 @@ public class Payment {
         boolean isValidPayment = false;
         Scanner sc = new Scanner(System.in);
         transactionUi.promptPayment();
+
         while (!isValidPayment) {
             String userInput = sc.nextLine();
             Command arg = new Command(userInput);
+
             if (userInput.equalsIgnoreCase("pay")) {
                 PaymentAssistant paymentAssistant = new PaymentAssistant();
                 MenuAssistant menuAssistant = new MenuAssistant();
-                MenuUi menuUi = new MenuUi();
                 Command pay = new Command("addorder");
                 boolean isCancelled = paymentAssistant.makePayment(order);
                 menuAssistant.printResult(pay, isCancelled);
                 break;
+
+            } else {
+                PaymentValidation paymentValidation = new PaymentValidation();
+                isValidPayment = paymentValidation.validatePayment(arg, order);
+
+                if (!isValidPayment) {
+                    transactionUi.promptUserInput();
+                    continue;
+                }
+
+                arg.mapArgumentAlias("a", "amount");
+                arg.mapArgumentAlias("t", "type");
+                order.setPaymentType(arg.getArgumentMap().get("t").trim());
+                order.setStatus("COMPLETED");
+                double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
+                if (amount != order.getSubTotal()) {
+                    transactionUi.printChangeGiven(calculateChange(amount, order));
+                }
+                transactionUi.printSuccessfulPayment();
             }
-            PaymentValidation paymentValidation = new PaymentValidation();
-            isValidPayment = paymentValidation.validatePayment(arg, order);
-            if (!isValidPayment) {
-                transactionUi.promptUserInput();
-                continue;
-            }
-            arg.mapArgumentAlias("a", "amount");
-            arg.mapArgumentAlias("t", "type");
-            order.setPaymentType(arg.getArgumentMap().get("t").trim());
-            order.setStatus("COMPLETED");
-            double amount = Double.parseDouble(arg.getArgumentMap().get("a").trim());
-            if (amount != order.getSubTotal()) {
-                transactionUi.printChangeGiven(calculateChange(amount, order));
-            }
-            transactionUi.printSuccessfulPayment();
+
         }
     }
 

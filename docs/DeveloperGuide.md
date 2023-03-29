@@ -53,6 +53,8 @@ The expected inputs to add only one menu item into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the 
 command `/additem`.
 
+![](./images/developersGuide/addItem.png)
+
 The general workflow of `/additem` is as follows:
 1. User input is passed to `MoneyGoWhere`.
 1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes 

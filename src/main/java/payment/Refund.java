@@ -21,18 +21,17 @@ public class Refund {
     }
 
     /**
-     * Refund entire order based on order ID given
-     *
-     * @param arg          user input
-     * @param transactions whole transaction list
+     * Validate the refundorder command before refunding it
+     * @param arg user command
+     * @param transactions list of orders
      */
     public void refundTransaction(Command arg, Transaction transactions) {
         RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
+
         try {
             refundOrderValidation.validateFlag(arg);
             refundOrderValidation.validateRefund(arg, transactions);
             getOrder(arg, transactions);
-
         } catch (MissingRefundOrderFlag e) {
             transactionUi.printError(Flags.Error.MISSING_REFUND_ORDER_FLAG);
         } catch (MissingRefundOrderArgument e) {
@@ -44,11 +43,18 @@ public class Refund {
         }
     }
 
+    /**
+     * Refund entire order based on order ID given
+     *
+     * @param arg          user input
+     * @param transactions whole transaction list
+     */
     public void getOrder(Command arg, Transaction transactions) {
         arg.mapArgumentAlias("i", "id");
         String orderID = arg.getArgumentMap().get("i").trim();
         Order refundOrder = new Order();
         ArrayList<Order> orderList = transactions.getOrderList();
+
         for (Order order : orderList) {
             String ID = order.getOrderId();
             if (ID.equals(orderID)) {
@@ -56,6 +62,7 @@ public class Refund {
                 break;
             }
         }
+
         refundOrder.setStatus("REFUNDED");
         transactions.save();
         transactionUi.printSuccessfulRefundOrder();

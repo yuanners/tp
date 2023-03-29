@@ -1,6 +1,7 @@
 package order;
 
 import app.Command;
+
 import exception.order.MissingQuantityArgumentException;
 import exception.order.InvalidIndexNumberFormatException;
 import exception.order.MissingOrderFlagException;
@@ -12,6 +13,8 @@ import exception.order.InvalidIndexOutOfBoundsException;
 import exception.order.MissingMultipleOrderArgumentException;
 import exception.order.MissingMultpleOrderFlagException;
 import exception.order.InvalidMultipleOrderFormatException;
+import exception.order.MultipleSimilarItemsFoundException;
+
 import item.Menu;
 import payment.Payment;
 import ui.Flags;
@@ -33,7 +36,6 @@ public class Order implements OrderInterface {
     private ArrayList<OrderEntry> orderEntries;
     private String status;
     private String paymentType;
-    private TransactionUi transactionUi = new TransactionUi();
 
 
     /**
@@ -58,18 +60,17 @@ public class Order implements OrderInterface {
      * @param menu         The menu from which the customer chooses items for the order.
      * @param transactions The transaction object to which the order will be appended.
      */
-    public Order(Command command, Menu menu, Transaction transactions) {
+    public Order(Command command, Menu menu, Transaction transactions,
+                 TransactionUi transactionUi, Payment payment) {
         this.orderId = UUID.randomUUID().toString();
         this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
         this.orderEntries = new ArrayList<>();
         this.paymentType = "";
-        transactionUi = new TransactionUi();
-        if (this.addOrder(command, menu)) {
-            transactions.appendOrder(this);
+        if (this.addOrder(command, menu, transactionUi)) {
             transactionUi.printOrderAdded(this.getSubTotal());
-            Payment payment = new Payment();
             payment.makePayment(this);
+            transactions.appendOrder(this);
         }
     }
 
@@ -200,7 +201,7 @@ public class Order implements OrderInterface {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Menu listOfItems) {
+    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) {
         boolean isAdded = false;
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation();
@@ -210,16 +211,16 @@ public class Order implements OrderInterface {
             command.mapArgumentAlias("items", "I");
 
             if (command.getArgumentMap().get("item") != null) {
+                command = addOrderValidation.validateCommand(command, listOfItems);
                 addOrderValidation.validateFlag(command);
                 addOrderValidation.validateIndex(command, listOfItems);
                 addOrderValidation.validateQuantity(command);
-                //command = addOrderValidation.validateCommand(command);
-                addSingleOrder(command, listOfItems);
+                addSingleOrder(command, listOfItems, transactionUi);
                 isAdded = true;
             } else if (command.getArgumentMap().get("items") != null) {
                 command = addMultipleOrderValidation.validateFormat(command);
                 addMultipleOrderValidation.validateArguments(command, listOfItems);
-                handleMultipleAddOrders(command, listOfItems);
+                handleMultipleAddOrders(command, listOfItems, transactionUi);
                 isAdded = true;
             } else {
                 addOrderValidation.validateFlag(command);
@@ -247,6 +248,8 @@ public class Order implements OrderInterface {
             transactionUi.printError(Flags.Error.MISSING_MULTIPLE_ORDER_FLAG_EXCEPTION);
         } catch (InvalidMultipleOrderFormatException e) {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
+        } catch (MultipleSimilarItemsFoundException e) {
+            // Error message is already printed in a separate handler
         }
         return isAdded;
     }
@@ -257,7 +260,8 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the item is selected
      */
-    public void addSingleOrder(Command command, Menu listOfItems) throws InvalidQuantityNumberFormatException {
+    public void addSingleOrder(Command command, Menu listOfItems,
+                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -312,7 +316,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the items are selected
      */
-    public void handleMultipleAddOrders(Command command, Menu listOfItems) {
+    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi) {
 
         command.mapArgumentAlias("items", "I");
 

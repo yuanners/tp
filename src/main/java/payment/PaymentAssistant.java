@@ -11,6 +11,7 @@ import order.Order;
 import ui.Flags;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
+
 import java.util.Scanner;
 
 public class PaymentAssistant {
@@ -21,6 +22,11 @@ public class PaymentAssistant {
     private Scanner scan = new Scanner(System.in);
     private PaymentValidation paymentValidation = new PaymentValidation();
 
+    /**
+     * Get the payment amount from user and validate it
+     * @param order order to pay
+     * @return whether the user entered "/cancel"
+     */
     public boolean getAmount(Order order) {
         boolean isValidAmount = false;
         while (!isValidAmount) {
@@ -33,6 +39,7 @@ public class PaymentAssistant {
             try {
                 paymentValidation.validateAmount(arg, order);
                 amount = input;
+                checkAmount(order);
                 isValidAmount = true;
             } catch (InsufficientPayAmountException e) {
                 transactionUi.printError(Flags.Error.INSUFFICIENT_PAY_AMOUNT);
@@ -49,6 +56,10 @@ public class PaymentAssistant {
         return false;
     }
 
+    /**
+     * Get payment type from user and validate it
+     * @return whether user entered "/cancel"
+     */
     public boolean getType() {
         boolean isValidType = false;
         while (!isValidType) {
@@ -69,19 +80,37 @@ public class PaymentAssistant {
         return false;
     }
 
+    /**
+     * Check if the payment amount is exact if paying by card
+     * @param order order to pay
+     * @throws InvalidPaymentAmountForCardException amount not exact when paying by card
+     */
+    public void checkAmount(Order order) throws InvalidPaymentAmountForCardException {
+        double amountToPay = Double.parseDouble(amount);
+        if (type.equalsIgnoreCase("card") && amountToPay != order.getSubTotal()) {
+            throw new InvalidPaymentAmountForCardException();
+        }
+    }
+
+    /**
+     * Set the order status and payment type, calculate change if amount is not exact
+     * @param order order to pay
+     * @return whether user entered "/cancel"
+     */
     public boolean makePayment(Order order) {
         boolean isCancelled = false;
-        isCancelled = getAmount(order);
-
-        if(isCancelled) {
-            return true;
-        }
-
         isCancelled = getType();
 
-        if(isCancelled) {
+        if (isCancelled) {
             return true;
         }
+
+        isCancelled = getAmount(order);
+
+        if (isCancelled) {
+            return true;
+        }
+
         Payment payment = new Payment();
         order.setPaymentType(type);
         order.setStatus("COMPLETED");
@@ -89,6 +118,7 @@ public class PaymentAssistant {
         if (amountToPay != order.getSubTotal()) {
             transactionUi.printChangeGiven(payment.calculateChange(amountToPay, order));
         }
+        transactionUi.printSuccessfulPayment();
         return false;
     }
 }
