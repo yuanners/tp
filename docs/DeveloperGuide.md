@@ -319,7 +319,7 @@ Both ways work similarly, but are parsed differently.
 
 This sequence diagram shows the interaction between various components in MoneyGoWhere when a user inputs commands to add an order.
 
-![](.\images\developersGuide\addOrder.png)
+![](./images/developersGuide/addOrder.png)
 
 
 The next section will describe exactly how the inputs are parsed into the `addorder` command through each of the
@@ -337,7 +337,7 @@ The expected inputs to add only one menu item into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs these
 commands.
 
-![](.\images\developersGuide\addOrderValidation.png)
+![](./images/developersGuide/addOrderValidation.png)
 
 The general workflow of this `/addorder` command is as follows:
 
@@ -368,7 +368,7 @@ The expected inputs to add multiple menu items into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/addorder`.
 
-![](.\images\developersGuide\addMultipleAddOrders.png)
+![](./images/developersGuide/addMultipleAddOrders.png)
 
 The general workflow of the `/addorder` command is as follows:
 
@@ -388,7 +388,7 @@ The general workflow of the `/addorder` command is as follows:
 
 ##### Basic Mode Add an Order
 
-![](.\images\developersGuide\assistedAddOrder.png)
+![](./images/developersGuide/assistedAddOrder.png)
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `addorder` or `6`.
@@ -411,7 +411,7 @@ The general workflow of `addorder` is as follows:
 
 #### List all Orders
 
-![](.\images\developersGuide\ListOrders.png)
+![](./images/developersGuide/ListOrders.png)
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/listorder`.
