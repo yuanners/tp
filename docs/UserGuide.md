@@ -430,13 +430,14 @@ or `/pay --amount <amount> --type <type>`
 
 * `Amount` refers to the amount paid, with up to 2 decimal places. (`2`, `2.1`, and `2.22` are all valid inputs).
 * `Type` must use one of the following three modes: `Card`, `Cash` or `Others`.
-    * It is case-insensitive
+      * It is case-insensitive
+
+[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 #### Advanced Mode Single Item
 
@@ -506,11 +507,12 @@ Please use /pay command to add payment for the order.
 The command: /pay was successfully executed!
 ```
 
+[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
+
 <br>
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 #### Advanced Mode Multiple Items
 
@@ -793,6 +795,8 @@ Note that all functionality is the same, regardless of the mode used.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 ## Basic Commands
@@ -1203,8 +1207,12 @@ Order is refunded successfully.
 | List an Order   | `listorder`   |
 | Refund an Order | `refundorder` |
 
+<br>
+
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+<hr>
 <br>
 
 # Statistics Feature
@@ -1338,6 +1346,8 @@ Please enter a command:
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
+<br>
 
 # Save File
 
@@ -1345,6 +1355,10 @@ The menu and transactions are stored in `json` files. The team at MoneyGoWhere a
 directly as inexperienced users may potentially corrupt the files.
 
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
+
+<br>
+<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
+<br>
 
 # Glossary
 
@@ -1363,3 +1377,7 @@ The glossary is shown in alphabetical order. If you have any additional question
 | Index                    | A set of ordered whole numbers used to indicate elements. For example, you can think about the different levels in a building.                           |
 | Integer                  | A whole number, such as `1`, `100` or `-1`. Numbers such as `1.2` and fractions are not integers.                                                        |
 | Point-of-Sale System     | It is used to accept payments from customers and track sales. For MoneyGoWhere, you are also able to create a menu in addition to tracking sales.        |
+
+<br>
+
+[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
