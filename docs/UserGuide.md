@@ -430,14 +430,13 @@ or `/pay --amount <amount> --type <type>`
 
 * `Amount` refers to the amount paid, with up to 2 decimal places. (`2`, `2.1`, and `2.22` are all valid inputs).
 * `Type` must use one of the following three modes: `Card`, `Cash` or `Others`.
-      * It is case-insensitive
+    * It is case-insensitive.
 
 [Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
-
 
 #### Advanced Mode Single Item
 
@@ -455,6 +454,7 @@ Format: `/addorder -i <index> -q <quantity>` or `/addorder --index <index> --qua
 
 **Example of Usage**
 **Example 1 - Cash Payment**
+
 Assume your menu is as follows:
 
 ```text
@@ -477,8 +477,8 @@ Order has been added successfully. Total amount: $9.00.
 Please use /pay command to add payment for the order.
 ```
 
-You tell them the total amount is _$9.00_, and they give you _$10_ in _cash_. So, you input `/pay -a 10 -t cash`, and
-obtain the following result:
+* You tell them the total amount is _$9.00_, and they give you _$10_ in _cash_. So, you input `/pay -a 10 -t cash`, and
+  obtain the following result:
 
 ```text
 Please use /pay command to add payment for the order.
@@ -499,7 +499,7 @@ Order has been added successfully. Total amount: $10.65.
 Please use /pay command to add payment for the order.
 ```
 
-Next, you use the command `/pay -a 10.65 -t card` and obtain the following result:
+* Next, you use the command `/pay -a 10.65 -t card` and obtain the following result:
 
 ```text
 Please use /pay command to add payment for the order.
@@ -512,7 +512,6 @@ The command: /pay was successfully executed!
 <br>
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
-
 
 #### Advanced Mode Multiple Items
 
@@ -660,6 +659,7 @@ Format: `/refundorder <order ID>`.
 More information about data storage and `.json` files can be found [here](#save-file).
 
 **Example of Usage**
+
 Assume you want to refund the following order.
 
 ```text
@@ -675,6 +675,8 @@ Subtotal: $9.00
 ```
 
 To refund it, you use the command `/refundorder ffc76ebe-09b1-48d2-9378-af49c234f399`.
+
+* The order ID can be copied from the interface.
 
 ```text
 Please enter a command: 
@@ -790,8 +792,7 @@ Note that all functionality is the same, regardless of the mode used.
     Please enter a command:
     ```
 
-9. When you are done using the app, enter `exit` to shut the application down. This ensures that Duke will save your
-   data, as saving data is only done during the shut-down process.
+9. When you are done using the app, enter `exit` to shut the application down.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
@@ -1207,8 +1208,6 @@ Order is refunded successfully.
 | List an Order   | `listorder`   |
 | Refund an Order | `refundorder` |
 
-<br>
-
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 <br>
@@ -1363,6 +1362,8 @@ directly as inexperienced users may potentially corrupt the files.
 # Glossary
 
 The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
+The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
+The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
 
 | Term                     | Explanation                                                                                                                                              |
 |--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1377,7 +1378,5 @@ The glossary is shown in alphabetical order. If you have any additional question
 | Index                    | A set of ordered whole numbers used to indicate elements. For example, you can think about the different levels in a building.                           |
 | Integer                  | A whole number, such as `1`, `100` or `-1`. Numbers such as `1.2` and fractions are not integers.                                                        |
 | Point-of-Sale System     | It is used to accept payments from customers and track sales. For MoneyGoWhere, you are also able to create a menu in addition to tracking sales.        |
-
-<br>
 
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
