@@ -317,9 +317,10 @@ There are three ways to add an order into MoneyGoWhere.
 
 Both ways work similarly, but are parsed differently.
 
-This sequence diagram shows the interaction between various components in MoneyGoWhere when a user inputs commands to add an order.
+These sequence diagrams show the interaction between various components in MoneyGoWhere when a user inputs commands to add an order.
 
 ![](./images/developersGuide/addOrder.png)
+![](./images/developersGuide/handlePayment.png)
 
 
 The next section will describe exactly how the inputs are parsed into the `addorder` command through each of the
@@ -350,7 +351,6 @@ The general workflow of this `/addorder` command is as follows:
 6. If the input is invalid, the user will be shown an error message about the mistake made, and the correct format to
    enter the command will be shown.
 7. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
-   ![](./images/developersGuide/payment.png)
 8. Once payment is made, the `Order` will be passed to the `Transactions` class, where this `Order` will be appended to
    the list of `Transactions`.
    
