@@ -387,7 +387,7 @@ The general workflow of the `/addorder` command is as follows:
 
 ##### Basic Mode Add an Order
 
-![](./images/developersGuide/assistedAddOrder.png)
+![](./images/developersGuide/AssistedAddOrder.png)
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `addorder` or `6`.
