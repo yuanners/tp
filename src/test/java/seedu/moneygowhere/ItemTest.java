@@ -15,7 +15,7 @@ class ItemTest {
 
     public ItemTest() {
 
-        menu = new Menu();
+        menu = new Menu("menu.json");
         menuUi = new MenuUi();
         menuAssistant = new MenuAssistant();
     }
