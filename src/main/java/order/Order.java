@@ -190,7 +190,7 @@ public class Order implements OrderInterface {
     public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) {
         boolean isAdded = false;
         try {
-            AddOrderValidation addOrderValidation = new AddOrderValidation();
+            AddOrderValidation addOrderValidation = new AddOrderValidation(listOfItems);
             AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation(listOfItems);
 
             command.mapArgumentAlias("item", "i");

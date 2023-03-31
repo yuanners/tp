@@ -7,8 +7,6 @@ import app.Command;
 
 public class Validation {
 
-    public Validation() {
-    }
 
     /**
      * Handles the common input validators

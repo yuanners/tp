@@ -24,7 +24,6 @@ import com.opencsv.CSVWriter;
 public class Store {
     private static final String STORE_DIR_PATH = "./datastore";
     private String storeFilePath;
-    private String fileExtension;
 
     /**
      * Constructs a new Store object with the specified file name.
@@ -33,9 +32,10 @@ public class Store {
      */
     public Store(String fileName) {
         this.storeFilePath = STORE_DIR_PATH + '/' + fileName;
+    }
 
-        int index = fileName.lastIndexOf('.');
-        this.fileExtension = index > 0 ? fileName.substring(index + 1) : "";
+    public Store(String dirName, String fileName) {
+        this.storeFilePath = dirName + '/' + fileName;
     }
 
     /**
@@ -50,16 +50,7 @@ public class Store {
         Parser parser = new Parser();
         String jsonString = parser.jsonStringify(object);
 
-        switch (fileExtension) {
-        case "json":
-            saveAsJson(jsonString, file);
-            break;
-        case "csv":
-            saveAsCsv(jsonString, file);
-            break;
-        default:
-            //A method that provide a generic save capability
-        }
+        saveAsJson(jsonString, file);
     }
 
     /**

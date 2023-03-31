@@ -1,0 +1,28 @@
+[
+  {"name": "Chicken rice", "price": 3.0},
+  {"name": "Fish ball noodle", "price": 2.5},
+  {"name": "Mee Rubus", "price": 3.5},
+  {"name": "Fish soup", "price": 5.0},
+  {"name": "Rojak", "price": 2.0},
+  {"name": "Roti Prata", "price": 1.2},
+  {"name": "Hainanese Chicken Rice", "price": 3.5},
+  {"name": "Laksa", "price": 4.0},
+  {"name": "Nasi Lemak", "price": 2.5},
+  {"name": "Char Kway Teow", "price": 3.5},
+  {"name": "Satay", "price": 0.7},
+  {"name": "Fried Rice", "price": 3.0},
+  {"name": "Mee Goreng", "price": 3.5},
+  {"name": "Fish Head Curry", "price": 25.0},
+  {"name": "Nasi Briyani", "price": 4.0},
+  {"name": "Kaya Toast", "price": 1.2},
+  {"name": "Teh Tarik", "price": 1.5},
+  {"name": "Bandung", "price": 2.0},
+  {"name": "Curry", "price": 2.8},
+  {"name": "Curry rice", "price": 2.8},
+  {"name": "Coffee", "price": 1.5},
+  {"name": "Tea", "price": 1.5},
+  {"name": "Milo", "price": 1.8},
+  {"name": "coke", "price": 1.5},
+  {"name": "Teh-O", "price": 1.2}
+
+]
