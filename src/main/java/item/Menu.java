@@ -24,7 +24,7 @@ public class Menu {
     private Store store;
     private MenuUi menuUi;
 
-    public Menu(){
+    public Menu() {
         menuUi = new MenuUi();
         this.items = new ArrayList<>();
     }
@@ -238,7 +238,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     * or an empty list if no matching item is found
+     *     or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
