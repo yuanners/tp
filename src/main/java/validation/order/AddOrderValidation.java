@@ -18,8 +18,14 @@ import validation.Validation;
  * Handles order related input validation
  */
 public class AddOrderValidation extends Validation {
-    private Menu menu = new Menu();
-    private TransactionUi transactionUi = new TransactionUi();
+    private Menu menu;
+
+    private TransactionUi transactionUi;
+
+    public AddOrderValidation(Menu menu) {
+        this.menu = menu;
+        this.transactionUi = new TransactionUi();
+    }
 
     public boolean checkValidItemName(String itemName) {
 
@@ -78,9 +84,10 @@ public class AddOrderValidation extends Validation {
 
     /**
      * Check if the user input contains the valid flag and arguments
+     *
      * @param arg user input
-     * @throws MissingOrderFlagException missing -i flag
-     * @throws MissingOrderArgumentException missing argument
+     * @throws MissingOrderFlagException        missing -i flag
+     * @throws MissingOrderArgumentException    missing argument
      * @throws MissingQuantityArgumentException missing argument for -q flag
      */
     public void validateFlag(Command arg)
@@ -103,11 +110,12 @@ public class AddOrderValidation extends Validation {
 
     /**
      * Validate the item index in the user input
-     * @param arg user input
+     *
+     * @param arg  user input
      * @param menu list of menu items
      * @throws InvalidIndexNumberFormatException item index is not an integer
-     * @throws InvalidIndexNegativeException item index is negative
-     * @throws InvalidIndexOutOfBoundsException item index > menu size
+     * @throws InvalidIndexNegativeException     item index is negative
+     * @throws InvalidIndexOutOfBoundsException  item index > menu size
      */
     public void validateIndex(Command arg, Menu menu)
             throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
@@ -128,9 +136,10 @@ public class AddOrderValidation extends Validation {
 
     /**
      * Validate quantity in the user input
+     *
      * @param arg user input
      * @throws InvalidQuantityNumberFormatException quantity is not an integer
-     * @throws InvalidQuantityNegativeException quantity is less than 0
+     * @throws InvalidQuantityNegativeException     quantity is less than 0
      */
     public void validateQuantity(Command arg)
             throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
@@ -164,6 +173,10 @@ public class AddOrderValidation extends Validation {
         }
 
         return true;
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 
 }

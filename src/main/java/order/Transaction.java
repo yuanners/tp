@@ -24,10 +24,12 @@ public class Transaction {
      */
     private Store store;
 
-    private final String ORDER_DATA_FILE = "orders.json";
-
     public Transaction() {
-        this.store = new Store(ORDER_DATA_FILE);
+        this.transactions = new ArrayList<>();
+    }
+
+    public Transaction(String fileName) {
+        this.store = new Store(fileName);
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
 
@@ -45,8 +47,23 @@ public class Transaction {
         }
     }
 
-    public Transaction(boolean isTest) {
-        this.transactions = new ArrayList<>();
+    public Transaction(String dirName, String fileName) {
+        this.store = new Store(dirName, fileName);
+        Type type = new TypeToken<ArrayList<Order>>() {
+        }.getType();
+
+        try {
+            this.transactions = store.load(type);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            this.transactions = new ArrayList<>();
+        } catch (JsonParseException e) {
+            System.out.println(e.getMessage());
+            this.transactions = new ArrayList<>();
+        } catch (NumberFormatException e) {
+            System.out.println(e.getMessage());
+            this.transactions = new ArrayList<>();
+        }
     }
 
     /**
