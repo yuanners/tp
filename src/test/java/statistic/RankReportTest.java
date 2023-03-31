@@ -8,7 +8,8 @@ import order.Transaction;
 import org.junit.jupiter.api.Test;
 import validation.statistic.StatisticValidation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class RankReportTest {
     public Menu menu;
