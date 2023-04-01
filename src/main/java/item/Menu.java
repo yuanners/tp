@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.lang.reflect.Type;
 
+import exception.FileIsEmptyException;
 import exception.item.MissingFindItemDescriptionException;
 import app.Command;
 import com.google.gson.reflect.TypeToken;
@@ -12,6 +13,7 @@ import com.google.gson.JsonParseException;
 import org.apache.commons.lang3.StringUtils;
 import ui.Flags;
 import ui.MenuUi;
+import ui.StoreUi;
 import utility.Store;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
@@ -24,34 +26,44 @@ public class Menu {
     private Store store;
     private MenuUi menuUi;
 
-    public Menu() {
-        menuUi = new MenuUi();
-        this.items = new ArrayList<>();
-    }
-
     public Menu(String fileName) {
-        menuUi = new MenuUi();
+        this.menuUi = new MenuUi();
         this.store = new Store(fileName);
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
 
         try {
             this.items = store.load(type);
-        } catch (IOException | JsonParseException | NumberFormatException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            new StoreUi().menuNotFound();
             this.items = new ArrayList<>();
+            save();
+
+        } catch (JsonParseException | NumberFormatException | FileIsEmptyException e) {
+
+            if (new StoreUi().reinitializeMenu()) {
+                this.items = new ArrayList<>();
+                save();
+            } else {
+                System.exit(0);
+            }
         }
     }
 
+    public Menu() {
+        this.menuUi = new MenuUi();
+        this.items = new ArrayList<>();
+    }
+
     public Menu(String dirName, String fileName) {
-        menuUi = new MenuUi();
+        this.menuUi = new MenuUi();
         this.store = new Store(dirName, fileName);
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
 
         try {
             this.items = store.load(type);
-        } catch (IOException | JsonParseException | NumberFormatException e) {
+        } catch (IOException | JsonParseException | NumberFormatException | FileIsEmptyException e) {
             System.out.println(e.getMessage());
             this.items = new ArrayList<>();
         }
@@ -238,7 +250,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     *     or an empty list if no matching item is found
+     * or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 

@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.lang.reflect.Type;
 
 import com.opencsv.CSVWriter;
+import exception.FileIsEmptyException;
 
 /**
  * This class provides functionality for managing the storage and retrieval of local files,
@@ -138,11 +139,24 @@ public class Store {
      * @return the loaded object of the specified Type
      * @throws IOException if an I/O error occurs while reading the file
      */
-    public <T> T load(Type type) throws IOException {
+    public <T> T load(Type type) throws IOException, FileIsEmptyException {
         File file = new File(storeFilePath);
+
+        boolean isEmpty = Files.readString(Paths.get(storeFilePath)).trim().isEmpty();
+        if(isEmpty){
+            throw new FileIsEmptyException();
+        }
+
         FileReader fr = new FileReader(file);
         Parser parser = new Parser();
 
         return parser.jsonParse(fr, type);
+    }
+
+    public boolean isEmpty(File file){
+
+
+
+        return false;
     }
 }
