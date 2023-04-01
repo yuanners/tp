@@ -50,6 +50,7 @@ public class StoreUi {
     }
 
     public void transactionsNotFound(){
-        System.out.println("Data file ./datestore/orders.json not found. Initializing new empty list of transactions ...");
+        System.out.println("Data file ./datestore/orders.json not found. " +
+                "Initializing new empty list of transactions ...");
     }
 }

@@ -69,69 +69,6 @@ public class Store {
         fw.close();
     }
 
-
-    /**
-     * Saves the specified JSON string to a file in CSV format.
-     *
-     * @param jsonString the JSON string to be saved
-     * @param file       the file to which the CSV data should be saved
-     * @throws IOException if an I/O error occurs while saving the CSV data to the file
-     */
-    private void saveAsCsv(String jsonString, File file) throws IOException {
-        JsonParser jsonParser = new JsonParser();
-        JsonElement jsonElement = jsonParser.parse(new StringReader(jsonString));
-
-        JsonArray dataArray = jsonElement.getAsJsonArray();
-        JsonObject firstObject = dataArray.get(0).getAsJsonObject();
-        String[] headers = firstObject.keySet().toArray(new String[0]);
-
-        boolean append = file.exists();
-
-        FileWriter fw = new FileWriter(file, append);
-        CSVWriter cw = new CSVWriter(fw);
-
-        writeCsvHeader(append, headers, file, cw);
-
-        for (JsonElement element : dataArray) {
-            JsonObject jsonObject = element.getAsJsonObject();
-            String[] data = new String[headers.length];
-            for (int i = 0; i < headers.length; i++) {
-                data[i] = jsonObject.get(headers[i]).getAsString();
-            }
-            cw.writeNext(data);
-        }
-
-        cw.close();
-        fw.flush();
-        fw.close();
-    }
-
-    /**
-     * Writes the headers to a CSV file if header is incorrect or does not exist
-     *
-     * @param append  a boolean flag indicating whether to append to an existing file
-     * @param headers an array of header strings to be written to the file
-     * @param file    the file to which the headers should be written
-     * @param cw      a CSVWriter object used to write to the file
-     * @throws IOException if an I/O error occurs while writing the headers to the file
-     */
-    private void writeCsvHeader(boolean append, String[] headers, File file, CSVWriter cw) throws IOException {
-
-        if (!append) {
-            cw.writeNext(headers);
-        } else {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            String headerLine = reader.readLine();
-
-            if (!headerLine.equals(String.join(",", headers))) {
-                cw.writeNext(headers);
-            }
-
-            reader.close();
-        }
-
-    }
-
     /**
      * Loads an object from a file in JSON format.
      *
@@ -143,7 +80,7 @@ public class Store {
         File file = new File(storeFilePath);
 
         boolean isEmpty = Files.readString(Paths.get(storeFilePath)).trim().isEmpty();
-        if(isEmpty){
+        if (isEmpty) {
             throw new FileIsEmptyException();
         }
 
@@ -151,12 +88,5 @@ public class Store {
         Parser parser = new Parser();
 
         return parser.jsonParse(fr, type);
-    }
-
-    public boolean isEmpty(File file){
-
-
-
-        return false;
     }
 }
