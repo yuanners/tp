@@ -6,11 +6,12 @@ import java.util.Scanner;
 public class StoreUi {
     public boolean reinitializeMenu() {
         Scanner sc = new Scanner(System.in);
+        int attempts = 0;
 
         System.out.println("Data file ./datestore/menu.json is corrupted.");
         System.out.print("Do you want to reinitialize a new empty menu? [Y]es or [N]o: ");
 
-        while (true) {
+        while (attempts < 10) {
             try {
                 String userInput = sc.nextLine().toUpperCase();
 
@@ -26,16 +27,21 @@ public class StoreUi {
             } catch (NoSuchElementException e) {
                 System.out.print("Invalid input! Enter [Y]es or [N]o: ");
             }
+            attempts++;
         }
+        System.out.println("Maximum number of attempts reached, exiting program.");
+        System.out.println("Please fix ./datestore/menu.json before re-launching application");
+        return false;
     }
 
     public boolean reinitializeTransactions() {
         Scanner sc = new Scanner(System.in);
+        int attempts = 0;
 
         System.out.println("Data file ./datestore/orders.json is corrupted.");
         System.out.println("Do you want to reinitialize a new empty list of transactions? [Y]es or [N]o: ");
 
-        while (true) {
+        while (attempts < 10) {
             try {
                 String userInput = sc.nextLine().toUpperCase();
 
@@ -51,7 +57,12 @@ public class StoreUi {
             } catch (NoSuchElementException e) {
                 System.out.print("Invalid input! Enter [Y]es or [N]o: ");
             }
+            attempts++;
         }
+
+        System.out.println("Maximum number of attempts reached, exiting program.");
+        System.out.println("Please fix ./datestore/menu.json before re-launching application");
+        return false;
     }
 
     public void menuNotFound() {
