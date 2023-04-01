@@ -3,5 +3,5 @@
 ░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀
 Welcome to MoneyGoWhere!
 
-Please enter a command: 
+Please enter a command:
 Thank you for using MoneyGoWhere. Goodbye!
