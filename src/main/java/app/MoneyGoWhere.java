@@ -28,14 +28,13 @@ public class MoneyGoWhere {
     public void run() {
 
         Ui ui = new Ui();
-        Scanner sc = new Scanner(System.in);
         Router router = new Router(menu, transactions);
 
         ui.printWelcomeMessage();
 
         while (true) {
             ui.promptUserInput();
-            String userInput = sc.nextLine();
+            String userInput = ui.inputHandler();
 
             if (userInput.equals("exit")) {
                 ui.printExit();
@@ -48,8 +47,6 @@ public class MoneyGoWhere {
                 System.out.println("INPUT IS BLANK");
             }
         }
-
-        sc.close();
     }
 
 

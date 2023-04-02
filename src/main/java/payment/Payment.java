@@ -22,11 +22,10 @@ public class Payment {
      */
     public void makePayment(Order order) {
         boolean isValidPayment = false;
-        Scanner sc = new Scanner(System.in);
         transactionUi.promptPayment();
 
         while (!isValidPayment) {
-            String userInput = sc.nextLine();
+            String userInput = transactionUi.inputHandler();
             Command arg = new Command(userInput);
 
             if (userInput.equalsIgnoreCase("pay")) {

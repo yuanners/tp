@@ -28,8 +28,8 @@ import java.util.PriorityQueue;
  */
 public class RankReport extends Statistic {
 
-    Transaction transaction;
-    Menu menu;
+    private Transaction transaction;
+    private Menu menu;
 
     /**
      * Constructor for the RankReport class.

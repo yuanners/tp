@@ -19,7 +19,6 @@ public class PaymentAssistant {
     private String amount;
     private String type;
     private TransactionUi transactionUi = new TransactionUi();
-    private Scanner scan = new Scanner(System.in);
     private PaymentValidation paymentValidation = new PaymentValidation();
 
     /**
@@ -31,7 +30,7 @@ public class PaymentAssistant {
         boolean isValidAmount = false;
         while (!isValidAmount) {
             transactionUi.promptPaymentAmount();
-            String input = scan.nextLine();
+            String input = transactionUi.inputHandler();
             Command arg = new Command(input);
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
@@ -64,7 +63,7 @@ public class PaymentAssistant {
         boolean isValidType = false;
         while (!isValidType) {
             transactionUi.promptPaymentType();
-            String input = scan.nextLine();
+            String input = transactionUi.inputHandler();
             Command arg = new Command(input);
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
