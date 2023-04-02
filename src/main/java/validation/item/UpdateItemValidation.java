@@ -21,7 +21,7 @@ import ui.MenuUi;
 import item.Menu;
 
 public class UpdateItemValidation extends ItemValidation {
-    MenuUi menuUi;
+    private MenuUi menuUi;
 
     public UpdateItemValidation() {
         menuUi = new MenuUi();

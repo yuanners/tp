@@ -21,9 +21,9 @@ import validation.Validation;
  * classes for execution.
  */
 public class Router {
-    public Ui ui;
-    public Menu menu;
-    public Transaction transactions;
+    private Ui ui;
+    private Menu menu;
+    private Transaction transactions;
     private TransactionUi transactionUi;
     private Payment payment;
 

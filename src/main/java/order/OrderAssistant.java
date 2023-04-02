@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class OrderAssistant {
 
-    TransactionUi transactionUi;
+    private TransactionUi transactionUi;
 
     private final String[] CANCELS = {"/cancel", "cancel"};
     private final String[] YESES = {"/yes", "yes", "/y", "y"};

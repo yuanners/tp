@@ -19,7 +19,7 @@ import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 
 public class MenuAssistant {
-    MenuAssistantUi menuAssistantUi;
+    private MenuAssistantUi menuAssistantUi;
     private final String CANCEL = "/cancel";
     private final String YES = "yes";
     private final String NO = "no";

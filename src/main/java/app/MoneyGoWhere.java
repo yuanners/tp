@@ -7,8 +7,8 @@ import ui.Ui;
 
 public class MoneyGoWhere {
 
-    public Menu menu;
-    public Transaction transactions;
+    private Menu menu;
+    private Transaction transactions;
     private final String ORDER_DATA_FILE = "orders.json";
     private final String MENU_DATA_FILE = "menu.json";
 
