@@ -84,10 +84,11 @@ public class TransactionUi extends Ui {
         DecimalFormat df = new DecimalFormat("#.00");
         String subtotal = df.format(total);
         System.out.println("\nSubtotal: $" + subtotal);
-        System.out.println("Order has been added successfully. Total amount: $" + subtotal);
+        System.out.println("Order has been added successfully.");
     }
 
     public void printInvalidInputEntered() {
+
         System.out.println("Invalid input entered.");
     }
 

@@ -257,7 +257,6 @@ public class Order implements OrderInterface {
 
         OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
         this.orderEntries.add(orderEntry);
-        transactionUi.printSuccessfulAddOrder();
     }
 
     /**
@@ -325,7 +324,6 @@ public class Order implements OrderInterface {
             OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
             this.orderEntries.add(orderEntry);
         }
-        transactionUi.printSuccessfulAddOrder();
     }
 
     private boolean isInteger(String input) {
