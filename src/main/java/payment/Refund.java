@@ -1,6 +1,7 @@
 package payment;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import exception.order.MissingRefundOrderArgument;
@@ -27,7 +28,7 @@ public class Refund {
      * @param arg          user command
      * @param transactions list of orders
      */
-    public void refundTransaction(Command arg, Transaction transactions) {
+    public void refundTransaction(Command arg, Transaction transactions) throws DuplicateArgumentFoundException {
         RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
 
         try {
@@ -55,7 +56,7 @@ public class Refund {
      * @param arg          user input
      * @param transactions whole transaction list
      */
-    public void getOrder(Command arg, Transaction transactions) {
+    public void getOrder(Command arg, Transaction transactions) throws DuplicateArgumentFoundException  {
         arg.mapArgumentAlias("i", "id");
         String orderID = arg.getArgumentMap().get("i").trim();
         Order refundOrder = new Order();

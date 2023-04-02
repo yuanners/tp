@@ -1,5 +1,6 @@
 package app;
 
+import exception.DuplicateArgumentFoundException;
 import exception.UnrecognisedCommandException;
 import item.Menu;
 import item.MenuAssistant;
@@ -47,7 +48,7 @@ public class Router {
      *
      * @param command the Command object containing the professional command to process
      */
-    private void proRoute(Command command) {
+    private void proRoute(Command command) throws DuplicateArgumentFoundException {
         switch (command.getCommand()) {
         case "/help":
             ui.printHelp();
@@ -92,7 +93,7 @@ public class Router {
      *
      * @param command the Command object containing the assisted command to process
      */
-    private void assistRoute(Command command) {
+    private void assistRoute(Command command) throws DuplicateArgumentFoundException {
         Validation validation = new Validation();
 
         try {
@@ -162,7 +163,7 @@ public class Router {
      *
      * @param command The command to be processed.
      */
-    public void handleRoute(Command command) {
+    public void handleRoute(Command command) throws DuplicateArgumentFoundException {
         if (command.getCommand().charAt(0) == '/') {
             proRoute(command);
         } else {

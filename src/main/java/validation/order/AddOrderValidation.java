@@ -1,6 +1,7 @@
 package validation.order;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.MissingOrderFlagException;
 import exception.order.MissingOrderArgumentException;
 import exception.order.MissingQuantityArgumentException;
@@ -61,7 +62,7 @@ public class AddOrderValidation extends Validation {
      * @param arg  user command
      * @param menu menu
      */
-    public Command validateCommand(Command arg, Menu menu) {
+    public Command validateCommand(Command arg, Menu menu) throws DuplicateArgumentFoundException {
         assert arg.getUserInput() != null : "Null input should be handled";
         String item = "";
         String newItem = "";
@@ -118,7 +119,8 @@ public class AddOrderValidation extends Validation {
      * @throws InvalidIndexOutOfBoundsException  item index > menu size
      */
     public void validateIndex(Command arg, Menu menu)
-            throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException {
+            throws InvalidIndexNumberFormatException, InvalidIndexNegativeException, InvalidIndexOutOfBoundsException,
+            DuplicateArgumentFoundException {
 
         arg.mapArgumentAlias("i", "item");
 
@@ -142,7 +144,8 @@ public class AddOrderValidation extends Validation {
      * @throws InvalidQuantityNegativeException     quantity is less than 0
      */
     public void validateQuantity(Command arg)
-            throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException {
+            throws InvalidQuantityNumberFormatException, InvalidQuantityNegativeException,
+            DuplicateArgumentFoundException {
 
         arg.mapArgumentAlias("q", "quantity");
 

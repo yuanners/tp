@@ -1,5 +1,6 @@
 package app;
 
+import exception.DuplicateArgumentFoundException;
 import utility.Parser;
 
 import java.util.Map;
@@ -20,7 +21,7 @@ public class Command {
      *
      * @param userInput the input string entered by the user
      */
-    public Command(String userInput) {
+    public Command(String userInput) throws DuplicateArgumentFoundException {
         assert !userInput.isBlank() : "Command is empty";
 
         Parser parser = new Parser();
@@ -40,7 +41,15 @@ public class Command {
      * @param longAlias  the long alias of the argument
      * @param shortAlias the short alias of the argument
      */
-    public void mapArgumentAlias(String longAlias, String shortAlias) {
+    public void mapArgumentAlias(String longAlias, String shortAlias) throws DuplicateArgumentFoundException {
+
+        if (argumentMap.containsKey(shortAlias) && argumentMap.containsKey(longAlias)) {
+            if(!argumentMap.get(shortAlias).equals(argumentMap.get(longAlias))){
+                throw new DuplicateArgumentFoundException();
+            }
+        }
+
+
         if (argumentMap.containsKey(shortAlias)) {
             argumentMap.put(longAlias, argumentMap.get(shortAlias));
         }

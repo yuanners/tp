@@ -1,6 +1,7 @@
 package payment;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import item.MenuAssistant;
 import order.Order;
 import ui.TransactionUi;
@@ -18,7 +19,7 @@ public class Payment {
      *
      * @param order list of order entries added
      */
-    public void makePayment(Order order) {
+    public void makePayment(Order order) throws DuplicateArgumentFoundException {
         boolean isValidPayment = false;
         transactionUi.promptPayment();
 
