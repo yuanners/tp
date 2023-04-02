@@ -12,8 +12,6 @@ import ui.Flags;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
 
-import java.util.Scanner;
-
 public class PaymentAssistant {
     private String CANCEL = "/cancel";
     private String amount;

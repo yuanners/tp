@@ -10,7 +10,6 @@ import ui.TransactionUi;
 import validation.order.RefundOrderValidation;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RefundAssistant {
     private final String CANCEL = "/cancel";

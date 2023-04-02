@@ -1,7 +1,6 @@
 package ui;
 
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class StoreUi extends Ui {
     public boolean reinitializeMenu() {

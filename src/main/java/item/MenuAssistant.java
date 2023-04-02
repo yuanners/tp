@@ -17,8 +17,6 @@ import ui.MenuAssistantUi;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 
-import java.util.Scanner;
-
 public class MenuAssistant {
     MenuAssistantUi menuAssistantUi;
     private final String CANCEL = "/cancel";

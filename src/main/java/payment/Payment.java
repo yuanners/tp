@@ -6,8 +6,6 @@ import order.Order;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
 
-import java.util.Scanner;
-
 
 public class Payment {
     private TransactionUi transactionUi = new TransactionUi();

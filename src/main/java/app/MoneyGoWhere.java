@@ -4,8 +4,6 @@ import item.Menu;
 import order.Transaction;
 import ui.Ui;
 
-import java.util.Scanner;
-
 
 public class MoneyGoWhere {
 
