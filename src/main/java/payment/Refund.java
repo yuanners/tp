@@ -5,6 +5,7 @@ import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import exception.order.MissingRefundOrderArgument;
 import exception.order.MissingRefundOrderFlag;
+import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import ui.Flags;
@@ -22,16 +23,22 @@ public class Refund {
 
     /**
      * Validate the refundorder command before refunding it
-     * @param arg user command
+     *
+     * @param arg          user command
      * @param transactions list of orders
      */
     public void refundTransaction(Command arg, Transaction transactions) {
         RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
+        MenuAssistant menuAssistant = new MenuAssistant();
 
         try {
-            refundOrderValidation.validateFlag(arg);
-            refundOrderValidation.validateRefund(arg, transactions);
-            getOrder(arg, transactions);
+            if (!(transactions.getOrderList().isEmpty())) {
+                refundOrderValidation.validateFlag(arg);
+                refundOrderValidation.validateRefund(arg, transactions);
+                getOrder(arg, transactions);
+            } else {
+                transactionUi.printEmptyTransaction();
+            }
         } catch (MissingRefundOrderFlag e) {
             transactionUi.printError(Flags.Error.MISSING_REFUND_ORDER_FLAG);
         } catch (MissingRefundOrderArgument e) {
