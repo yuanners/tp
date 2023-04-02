@@ -17,7 +17,7 @@ public class Ui {
 
     public String inputHandler(){
         Scanner scanner = new Scanner(System.in);
-        String userInput = scanner.nextLine();
+        String userInput = scanner.nextLine().trim();
         return userInput;
     }
 
