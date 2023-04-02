@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Parser" as Parser
+participant ":ModuleList" as ML
+participant ":Core" as Core
+participant ":GeneralElective" as GE
+participant ":UnrestrictedElective" as UE
+participant ":Internship" as Internship
+participant ":Print" as Print
+[->Parser : CheckUserInput\n(userInput:String, moduleList:ModuleList)
+activate Parser
+
+
+loop until all modules are added
+    Parser->ML: addModule()
+    activate ML
+    alt Core
+        ML->Core: Core(moduleCode:String, modularCredits:String, year:String, semester:String)
+        activate Core
+        Core-->ML: newCore:Core
+        deactivate Core
+        ML-->Parser: addedModule:Module
+    else GeneralElective
+        ML->GE: GeneralElective(moduleCode:String, modularCredits:String, year:String, semester:String)
+        activate GE
+        GE-->ML: newGeneralElective:GeneralElective
+        deactivate GE
+        ML-->Parser: addedModule:Module
+    else UnrestrictedElective
+        ML->UE: UnrestrictedElective(moduleCode:String, modularCredits:String, year:String, semester:String)
+        activate UE
+        UE-->ML: newUnrestrictedElective:UnrestrictedElective
+        deactivate UE
+        ML-->Parser: addedModule:Module
+    else Internship
+        ML->Internship: Internship(moduleCode:String, modularCredits:String, year:String, semester:String)
+        activate Internship
+        Internship-->ML: newInternship:Internship
+        deactivate Internship
+        ML-->Parser: addedModule:Module
+    end
+    Parser->ML: getModuleListSize()
+    ML-->Parser: moduleListSize:Int
+    deactivate ML
+    Parser->Print: printAddedModule(addedModule:Module, moduleListSize:Int)
+    activate Print
+    Print-->Parser:
+    deactivate Print
+end
+Parser-->[
+deactivate Parser
+
+@enduml
