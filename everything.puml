@@ -1,0 +1,598 @@
+@startuml
+class statistic.SalesReport {
+- Transaction transaction
++ double totalSales()
++ Map<LocalDateTime,Double> dailySales()
++ Map<LocalDateTime,Double> monthlySales()
+}
+class exception.item.NameMinimumLengthException {
+}
+class exception.item.DuplicateNameException {
+}
+class validation.item.AddItemValidation {
+- MenuUi menuUi
++ boolean validateFlags(Command)
+- void checkFlags(Command)
++ boolean validateCommand(Command,Menu)
++ void validateName(Command)
++ void validateDuplicateName(Command,Menu)
++ void validatePrice(Command)
+}
+class order.Transaction {
+- ArrayList<Order> transactions
+- Store store
++ void appendOrder(Order)
++ ArrayList<Order> getOrderList()
++ void displayList()
++ void save()
+}
+class exception.item.PriceOverflowException {
+}
+class exception.item.PriceInvalidNumberException {
+}
+class item.MenuAssistant {
+- MenuAssistantUi menuAssistantUi
+- String CANCEL
+- String YES
+- String NO
+- AddItemValidation addItemValidation
+- DeleteItemValidation deleteItemValidation
++ void printResult(Command,boolean)
+- boolean getName(Command,Menu)
+- boolean getName(Command,Menu,String)
+- boolean getPrice(Command,Menu)
++ boolean addItem(Command,Menu)
++ boolean updateItem(Command,Menu)
+- boolean getIndex(Command,Menu)
++ boolean deleteItem(Command,Menu)
+- boolean getKeyword(Command,Menu)
++ boolean showResultsOfFind(Command,Menu)
+}
+class exception.statistic.MissingYearException {
+}
+class order.OrderEntry {
+- Item item
+- int quantity
++ Item getItem()
++ int getQuantity()
+}
+class statistic.ItemRank {
+- String name
+- double value
++ String getName()
++ double getValue()
+}
+class validation.item.ItemValidation {
++ String SHORT_NAME_FLAG
++ String LONG_NAME_FLAG
++ String SHORT_PRICE_FLAG
++ String LONG_PRICE_FLAG
++ String SHORT_INDEX_FLAG
++ String LONG_INDEX_FLAG
++ boolean isDouble(String)
++ int isInteger(String)
+}
+class exception.item.NameMaximumLengthException {
+}
+class exception.statistic.MissingRequiredFlagException {
+}
+class exception.order.MissingRefundOrderFlag {
+}
+class exception.item.IndexInvalidNumberFormatException {
+}
+class exception.item.PriceMinimumLengthException {
+}
+class payment.Payment {
+- TransactionUi transactionUi
++ void makePayment(Order)
++ double calculateChange(Double,Order)
+}
+class statistic.Statistic {
+- LocalDateTime startDate
+- LocalDateTime endDate
+- int year
++ void setWholeYear(String)
++ void setDateRange(String,String)
++ {static} Command mapArguments(Command)
++ {static} void handleStatisticRoute(Command,Transaction,Menu)
++ LocalDateTime getStartDate()
++ LocalDateTime getEndDate()
++ int getYear()
+}
+class payment.RefundAssistant {
+- String CANCEL
+- String orderID
+- TransactionUi transactionUi
+- RefundOrderValidation refundOrderValidation
++ boolean getID(Transaction)
++ boolean refundOrder(Transaction)
+}
+class exception.order.InvalidPayTypeException {
+}
+class exception.FileIsEmptyException {
+}
+class exception.item.PriceInvalidDecimalPlaceException {
+}
+class exception.item.MissingNameAndPriceFlag {
+}
+class app.Router {
+- Ui ui
+- Menu menu
+- Transaction transactions
+- TransactionUi transactionUi
+- Payment payment
+- void proRoute(Command)
+- void assistRoute(Command)
++ void handleRoute(Command)
+}
+class payment.PaymentAssistant {
+- String CANCEL
+- String amount
+- String type
+- TransactionUi transactionUi
+- PaymentValidation paymentValidation
++ boolean getAmount(Order)
++ boolean getType()
++ void checkAmount(Order)
++ boolean makePayment(Order)
+}
+class validation.statistic.StatisticValidation {
+- Command command
++ void validateRequiredFlag()
++ void validateConflictFlag()
++ void validateYearExist()
+}
+class exception.order.InvalidPayAmountFormatException {
+}
+class exception.order.MissingQuantityArgumentException {
+}
+class exception.order.InvalidRefundOrderType {
+}
+class payment.Refund {
+- TransactionUi transactionUi
++ void refundTransaction(Command,Transaction)
++ void getOrder(Command,Transaction)
+}
+class validation.item.UpdateItemValidation {
+- MenuUi menuUi
++ boolean validateFlags(Command)
+- void checkFlags(Command)
++ boolean validateCommand(Command,Menu)
+}
+class item.Menu {
+- ArrayList<Item> items
+- Store store
+- MenuUi menuUi
++ void displayList(Command)
++ void appendItem(Item)
++ void removeItem(int)
++ ArrayList<Item> getItems()
++ Item getItem(int)
++ void addItem(Command)
+- void processAddItem(Command,AddItemValidation)
++ void updateItem(Command)
+- void processUpdateItem(Command,UpdateItemValidation)
++ void deleteItem(Command)
+- void processDeleteItem(Command,DeleteItemValidation)
++ int findItemIndex(String)
++ ArrayList<Integer> findMatchingItemNames(String)
++ void showResultsOfFind(Command)
++ void save()
+}
+class exception.order.MissingOrderFlagException {
+}
+class exception.order.InvalidRefundOrderID {
+}
+class exception.order.InvalidPayAmountNegativeException {
+}
+class exception.item.MissingIndexFlagException {
+}
+class exception.order.MissingOrderArgumentException {
+}
+class exception.order.InvalidMultipleOrderFormatException {
+}
+class statistic.RankReport {
+- Transaction transaction
+- Menu menu
++ PriorityQueue<ItemRank> rankByPopularity()
++ PriorityQueue<ItemRank> rankBySales()
+}
+class exception.item.MissingPriceFlagException {
+}
+class ui.Ui {
++ void printWelcomeMessage()
++ void promptUserInput()
++ String inputHandler()
++ void printInvalidCommand(String)
++ void printCommandSuccess(String)
++ void printCommandCancelled(String)
++ void printHelp()
++ void printExit()
++ void printError(Flags.Error)
+}
+class exception.order.InsufficientPayAmountException {
+}
+interface order.OrderInterface {
++ double getSubTotal()
+}
+class ui.MenuUi {
++ void printItemNotFound()
++ void printFindItem(int,ArrayList<Item>)
++ void printMenuHeader()
++ void printMenu(ArrayList<Item>)
++ void printNoItemFound(String)
++ void printCommandSuccess(String)
++ void printError(Flags.Error)
+}
+class exception.statistic.TypeNotFoundException {
+}
+class ui.StatisticUi {
++ void printDailyBarChartHeader(LocalDateTime,LocalDateTime,double)
++ void printDailyBarChart(LocalDateTime,int,double)
++ void printBarChartFooter()
++ void printMonthlyChartHeader(int,double)
++ void printMonthlyBarChart(LocalDateTime,int,double)
++ void printPopularityRankingTable(PriorityQueue<ItemRank>,LocalDateTime,LocalDateTime)
++ void printSalesRankingTable(PriorityQueue<ItemRank>,LocalDateTime,LocalDateTime)
++ void printError(Flags.Error)
+}
+class exception.order.MissingPayAmountArgumentException {
+}
+class validation.item.FindItemValidation {
++ void validateName(String)
+}
+class order.OrderAssistant {
+- TransactionUi transactionUi
+- String[] CANCELS
+- String[] YESES
+- String[] NOS
++ boolean assistedAddOrder(Menu,Transaction)
+- String getItem()
+- String getQuantity()
+- String askIfGotMoreOrderEntries()
+- String formatCommandStringForOrders(String)
+}
+class app.MoneyGoWhere {
+- Menu menu
+- Transaction transactions
+- String ORDER_DATA_FILE
+- String MENU_DATA_FILE
++ void run()
+}
+class exception.order.MissingPayTypeFlagException {
+}
+class exception.order.InvalidQuantityNegativeException {
+}
+class exception.order.MultipleSimilarItemsFoundException {
+}
+class exception.order.MissingPayTypeArgumentException {
+}
+class exception.item.MissingNameFlagException {
+}
+class utility.Parser {
++ String[] formatInput(String)
++ Map<String,String> formatArguments(String)
++ String jsonStringify(Object)
++ T jsonParse(FileReader,Type)
++ double roundToTwoDecimalPlaces(double)
+}
+class utility.Store {
+- {static} String STORE_DIR_PATH
+- String storeFilePath
++ void save(Object)
+- void saveAsJson(String,File)
++ T load(Type)
+}
+class ui.Flags {
+}
+enum ui.Error {
++  EMPTY_INPUT
++  DOUBLE_OVERFLOW
++  INTEGER_OVERFLOW
++  INVALID_INDEX
++  ITEM_DUPLICATE_NAME_ERROR
++  ITEM_NAME_MIN_LENGTH_ERROR
++  ITEM_NAME_MAX_LENGTH_ERROR
++  ITEM_NAME_IS_INTEGER_ERROR
++  ITEM_PRICE_MIN_LENGTH_ERROR
++  ITEM_PRICE_NEGATIVE_ERROR
++  ITEM_PRICE_INVALID_DECIMAL_PLACE_ERROR
++  ITEM_PRICE_INVALID_FORMAT_ERROR
++  ITEM_PRICE_OVERFLOW_ERROR
++  ITEM_INDEX_INVALID_FORMAT_ERROR
++  ITEM_INDEX_OVERFLOW_ERROR
++  ITEM_INDEX_OUT_OF_BOUND_ERROR
++  NO_SUCH_ITEM
++  MULTIPLE_SIMILAR_ITEMS
++  EMPTY_MENU
++  MISSING_FIND_ITEM_DESCRIPTION
++  MISSING_ITEM_NAME_FLAG
++  MISSING_ITEM_PRICE_FLAG
++  MISSING_ITEM_INDEX_FLAG
++  MISSING_ITEM_NAME_OR_PRICE_FLAG
++  MISSING_ITEM_NAME_AND_PRICE_FLAG
++  MISSING_ORDER_FLAG
++  REQUIRED_FLAG_MISSING
++  CONFLICT_FLAG
++  DATE_RANGE_INVALID
++  INVALID_DATE_FORMAT
++  INVALID_YEAR_FORMAT
++  YEAR_NOT_FOUND
++  TYPE_NOT_SPECIFIED
++  TYPE_NOT_FOUND
++  MISSING_ORDER_FLAG_ARGUMENT
++  MISSING_QUANTITY_FLAG_ARGUMENT
++  INVALID_ORDER_ITEM_INDEX_FORMAT
++  NEGATIVE_ORDER_ITEM_INDEX
++  INVALID_QUANTITY_FORMAT
++  INVALID_NEGATIVE_QUANTITY
++  INVALID_ORDER_ITEM_INDEX_OUT_OF_BOUNDS
++  INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION
++  MISSING_MULTIPLE_ORDER_ARGUMENT_EXCEPTION
++  MISSING_MULTIPLE_ORDER_FLAG_EXCEPTION
++  INVALID_PAY_TYPE
++  INVALID_PAYMENT_AMOUNT_FOR_CARD
++  INVALID_PAY_AMOUNT_NEGATIVE
++  INVALID_PAY_AMOUNT_FORMAT
++  INVALID_PAY_AMOUNT_DECIMAL_PLACE
++  INSUFFICIENT_PAY_AMOUNT
++  MISSING_PAY_TYPE_FLAG
++  MISSING_PAY_TYPE_ARGUMENT
++  MISSING_PAY_AMOUNT_FLAG
++  MISSING_PAY_AMOUNT_ARGUMENT
++  MISSING_PAY_COMMAND
++  MISSING_REFUND_ORDER_FLAG
++  MISSING_REFUND_ORDER_ARGUMENT
++  INVALID_REFUND_ORDER_ID
++  INVALID_REFUND_ORDER_TYPE
++  UNRECOGNISED_COMMAND_ERROR
+}
+class ui.StoreUi {
++ boolean reinitializeMenu()
++ boolean reinitializeTransactions()
++ void menuNotFound()
++ void transactionsNotFound()
+}
+class exception.order.InvalidPayAmountDecimalPlaceException {
+}
+class exception.order.MissingMultpleOrderFlagException {
+}
+class exception.order.InvalidIndexOutOfBoundsException {
+}
+class validation.order.PaymentValidation {
+- TransactionUi transactionUi
++ boolean validatePayment(Command,Order)
++ void validateCommand(Command)
++ void validateFlag(Command)
++ void validateType(Command)
++ void validateAmount(Command,Order)
++ boolean isDouble(String)
+}
+class exception.order.MissingPayAmountFlagException {
+}
+class exception.item.IndexOverflowException {
+}
+class validation.order.RefundOrderValidation {
+- Order refundOrder
++ void validateFlag(Command)
++ void validateRefund(Command,Transaction)
+}
+class item.Item {
+- String name
+- double price
++ String getName()
++ void setName(String)
++ double getPrice()
++ void setPrice(double)
+}
+class exception.order.MissingRefundOrderArgument {
+}
+class exception.order.InvalidQuantityNumberFormatException {
+}
+class exception.order.MissingPayCommandException {
+}
+class app.Command {
+- String userInput
+- String command
+- String argumentString
+- Map<String,String> argumentMap
++ void mapArgumentAlias(String,String)
++ String getUserInput()
++ String getCommand()
++ String getArgumentString()
++ void setArgumentString(String)
++ Map<String,String> getArgumentMap()
+}
+class validation.order.AddOrderValidation {
+- Menu menu
+- TransactionUi transactionUi
++ boolean checkValidItemName(String)
++ boolean checkValidQuantity(String)
++ Command validateCommand(Command,Menu)
++ void validateFlag(Command)
++ void validateIndex(Command,Menu)
++ void validateQuantity(Command)
++ boolean isInteger(String)
++ Menu getMenu()
+}
+class ui.TransactionUi {
++ void promptMoreOrderEntries()
++ void promptPayment()
++ void promptOrderID()
++ void promptPaymentAmount()
++ void promptPaymentType()
++ void promptItemQuantity()
++ void promptItemName()
++ void printChangeGiven(Double)
++ void printOrderList(ArrayList<Order>)
++ void printSuccessfulPayment()
++ void printSuccessfulListOrder()
++ void printSuccessfulRefundOrder()
++ void printEmptyTransaction()
++ void printOrderAdded(Double)
++ void printInvalidInputEntered()
++ void printError(Flags.Error)
+}
+class validation.order.AddMultipleAddOrderValidation {
++ Command validateFormat(Command)
++ void validateArguments(Command,Menu)
+- Command splitMultipleOrdersIntoArrayList(String)
+- Command castIntoProCommandFormat(String[])
+}
+class exception.order.InvalidIndexNumberFormatException {
+}
+class exception.order.InvalidIndexNegativeException {
+}
+class exception.item.MissingFindItemDescriptionException {
+}
+class validation.item.DeleteItemValidation {
+- MenuUi menuUi
++ boolean validateFlags(Command)
+- void checkFlags(Command)
++ boolean validateCommand(Command,Menu)
++ void validateIndex(Command,Menu)
+}
+class ui.MenuAssistantUi {
++ void promptItemName()
++ void promptItemNameChange()
++ void promptItemPrice()
++ void promptItemPriceChange()
++ void promptItemIndex()
++ void promptItemKeyword()
++ void promptUpdateItemUnrecognisedAnswer()
++ void printCommandCancelled(String)
++ void printError(Flags.Error)
+}
+class exception.item.IndexOutOfBoundException {
+}
+class validation.Validation {
++ void validateArgument(Command)
++ boolean isValidIndex(String,Menu)
++ void validateAssistantCommand(Command)
+}
+class exception.statistic.ConflictFlagException {
+}
+class exception.statistic.StartAfterEndDateException {
+}
+class exception.order.InvalidPaymentAmountForCardException {
+}
+class order.Order {
+- String orderId
+- LocalDateTime dateTime
+- ArrayList<OrderEntry> orderEntries
+- String status
+- String paymentType
++ String getOrderId()
++ void setPaymentType(String)
++ String getFormatDateTime()
++ LocalDateTime getDateTime()
++ String getStatus()
++ void setStatus(String)
++ ArrayList<OrderEntry> getOrderEntries()
++ double getSubTotal()
++ boolean addOrder(Command,Menu,TransactionUi)
++ void addSingleOrder(Command,Menu,TransactionUi)
++ int handleOrderIndex(Command)
++ int handleQuantity(Command)
++ void handleMultipleAddOrders(Command,Menu,TransactionUi)
+- boolean isInteger(String)
+}
+class exception.order.MissingMultipleOrderArgumentException {
+}
+class exception.item.NameIsIntegerException {
+}
+class exception.item.PriceNegativeException {
+}
+class statistic.Chart {
++ void dailySalesChart(Map<LocalDateTime,Double>,LocalDateTime,LocalDateTime,double)
++ void monthlySalesChart(Map<LocalDateTime,Double>,int,double)
+}
+class utility.DateUtils {
++ {static} LocalDateTime getEndOfDay(LocalDateTime)
++ {static} LocalDateTime getStartOfMonth(LocalDateTime)
++ {static} LocalDateTime stringToDate(String)
++ {static} boolean isBetween(LocalDateTime,LocalDateTime,LocalDateTime)
+}
+class exception.UnrecognisedCommandException {
+}
+class exception.item.MissingNameOrPriceFlagException {
+}
+class Main {
++ {static} void main(String[])
+}
+class exception.InvalidArgumentException {
+}
+
+
+statistic.Statistic <|-- statistic.SalesReport
+exception.item.Exception <|-- exception.item.NameMinimumLengthException
+exception.item.Exception <|-- exception.item.DuplicateNameException
+validation.item.ItemValidation <|-- validation.item.AddItemValidation
+exception.item.Exception <|-- exception.item.PriceOverflowException
+exception.item.Exception <|-- exception.item.PriceInvalidNumberException
+exception.statistic.Exception <|-- exception.statistic.MissingYearException
+validation.Validation <|-- validation.item.ItemValidation
+exception.item.Exception <|-- exception.item.NameMaximumLengthException
+exception.statistic.Exception <|-- exception.statistic.MissingRequiredFlagException
+exception.order.Exception <|-- exception.order.MissingRefundOrderFlag
+exception.item.Exception <|-- exception.item.IndexInvalidNumberFormatException
+exception.item.Exception <|-- exception.item.PriceMinimumLengthException
+exception.order.Exception <|-- exception.order.InvalidPayTypeException
+exception.Exception <|-- exception.FileIsEmptyException
+exception.item.Exception <|-- exception.item.PriceInvalidDecimalPlaceException
+exception.item.Exception <|-- exception.item.MissingNameAndPriceFlag
+validation.Validation <|-- validation.statistic.StatisticValidation
+exception.order.Exception <|-- exception.order.InvalidPayAmountFormatException
+exception.order.Exception <|-- exception.order.MissingQuantityArgumentException
+exception.order.Exception <|-- exception.order.InvalidRefundOrderType
+validation.item.ItemValidation <|-- validation.item.UpdateItemValidation
+exception.order.Exception <|-- exception.order.MissingOrderFlagException
+exception.order.Exception <|-- exception.order.InvalidRefundOrderID
+exception.order.Exception <|-- exception.order.InvalidPayAmountNegativeException
+exception.item.Exception <|-- exception.item.MissingIndexFlagException
+exception.order.Exception <|-- exception.order.MissingOrderArgumentException
+exception.order.Exception <|-- exception.order.InvalidMultipleOrderFormatException
+statistic.Statistic <|-- statistic.RankReport
+exception.item.Exception <|-- exception.item.MissingPriceFlagException
+exception.order.Exception <|-- exception.order.InsufficientPayAmountException
+ui.Ui <|-- ui.MenuUi
+exception.statistic.Exception <|-- exception.statistic.TypeNotFoundException
+ui.Ui <|-- ui.StatisticUi
+exception.order.Exception <|-- exception.order.MissingPayAmountArgumentException
+validation.item.ItemValidation <|-- validation.item.FindItemValidation
+exception.order.Exception <|-- exception.order.MissingPayTypeFlagException
+exception.order.Exception <|-- exception.order.InvalidQuantityNegativeException
+exception.order.Exception <|-- exception.order.MultipleSimilarItemsFoundException
+exception.order.Exception <|-- exception.order.MissingPayTypeArgumentException
+exception.item.Exception <|-- exception.item.MissingNameFlagException
+ui.Ui <|-- ui.StoreUi
+exception.order.Exception <|-- exception.order.InvalidPayAmountDecimalPlaceException
+exception.order.Exception <|-- exception.order.MissingMultpleOrderFlagException
+exception.order.Exception <|-- exception.order.InvalidIndexOutOfBoundsException
+validation.Validation <|-- validation.order.PaymentValidation
+exception.order.Exception <|-- exception.order.MissingPayAmountFlagException
+exception.item.Exception <|-- exception.item.IndexOverflowException
+validation.Validation <|-- validation.order.RefundOrderValidation
+exception.order.Exception <|-- exception.order.MissingRefundOrderArgument
+exception.order.Exception <|-- exception.order.InvalidQuantityNumberFormatException
+exception.order.Exception <|-- exception.order.MissingPayCommandException
+validation.Validation <|-- validation.order.AddOrderValidation
+ui.Ui <|-- ui.TransactionUi
+validation.order.AddOrderValidation <|-- validation.order.AddMultipleAddOrderValidation
+exception.order.Exception <|-- exception.order.InvalidIndexNumberFormatException
+exception.order.Exception <|-- exception.order.InvalidIndexNegativeException
+exception.item.Exception <|-- exception.item.MissingFindItemDescriptionException
+validation.item.ItemValidation <|-- validation.item.DeleteItemValidation
+ui.MenuUi <|-- ui.MenuAssistantUi
+exception.item.Exception <|-- exception.item.IndexOutOfBoundException
+exception.statistic.Exception <|-- exception.statistic.ConflictFlagException
+exception.statistic.Exception <|-- exception.statistic.StartAfterEndDateException
+exception.order.Exception <|-- exception.order.InvalidPaymentAmountForCardException
+order.OrderInterface <|.. order.Order
+exception.order.Exception <|-- exception.order.MissingMultipleOrderArgumentException
+exception.item.Exception <|-- exception.item.NameIsIntegerException
+exception.item.Exception <|-- exception.item.PriceNegativeException
+exception.Exception <|-- exception.UnrecognisedCommandException
+exception.item.Exception <|-- exception.item.MissingNameOrPriceFlagException
+exception.Exception <|-- exception.InvalidArgumentException
+@enduml

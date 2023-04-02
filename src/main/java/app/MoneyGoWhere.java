@@ -1,7 +1,9 @@
 package app;
 
+import exception.DuplicateArgumentFoundException;
 import item.Menu;
 import order.Transaction;
+import ui.Flags;
 import ui.Ui;
 
 
@@ -31,18 +33,22 @@ public class MoneyGoWhere {
         ui.printWelcomeMessage();
 
         while (true) {
-            ui.promptUserInput();
-            String userInput = ui.inputHandler();
+            try {
+                ui.promptUserInput();
+                String userInput = ui.inputHandler();
 
-            if (userInput.equals("exit")) {
-                ui.printExit();
-                break;
-            }
-            if(!userInput.isBlank()){
-                Command command = new Command(userInput);
-                router.handleRoute(command);
-            } else {
-                System.out.println("INPUT IS BLANK");
+                if (userInput.equals("exit")) {
+                    ui.printExit();
+                    break;
+                }
+                if (!userInput.isBlank()) {
+                    Command command = new Command(userInput);
+                    router.handleRoute(command);
+                } else {
+                    System.out.println("INPUT IS BLANK");
+                }
+            } catch (DuplicateArgumentFoundException e) {
+                ui.printError(Flags.Error.DUPLICATE_ARGUMENT_FOUND);
             }
         }
     }

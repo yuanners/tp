@@ -71,6 +71,9 @@ public class Ui {
         case UNRECOGNISED_COMMAND_ERROR:
             System.out.println("This command is not recognised.");
             break;
+        case DUPLICATE_ARGUMENT_FOUND:
+            System.out.println("Multiple options found. Please enter a valid command.");
+            break;
         default:
             // Fallthrough
         }

@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
+import exception.DuplicateArgumentFoundException;
 
 
 public class Parser {
@@ -37,7 +38,7 @@ public class Parser {
      * @param argString the argument string
      * @return a map of argument key-value pairs
      */
-    public Map<String, String> formatArguments(String argString) {
+    public Map<String, String> formatArguments(String argString) throws DuplicateArgumentFoundException {
 
 
         String regex = "(\"[^\"]*\")|(\\[[^\\]]*\\])|(\\S+)";
@@ -60,7 +61,12 @@ public class Parser {
         for (int i = 0; i < words.size(); i++) {
             boolean isFlag = pattern2.matcher(words.get(i)).matches();
             if (isFlag) {
+
                 flag = words.get(i).replaceFirst("^-+", "");
+
+                if (argMap.containsKey(flag)) {
+                    throw new DuplicateArgumentFoundException();
+                }
 
                 if (i + 1 < words.size() && !pattern2.matcher(words.get(i + 1)).matches()) {
                     argMap.put(flag, words.get(i + 1).replaceAll("^\"|\"$", ""));

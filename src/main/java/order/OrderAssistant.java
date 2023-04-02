@@ -1,6 +1,7 @@
 package order;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import item.Menu;
 import payment.Payment;
 import ui.TransactionUi;
@@ -20,7 +21,7 @@ public class OrderAssistant {
         transactionUi = new TransactionUi();
     }
 
-    public boolean assistedAddOrder(Menu menu, Transaction transaction) {
+    public boolean assistedAddOrder(Menu menu, Transaction transaction) throws DuplicateArgumentFoundException {
 
         Command command;
         String commandString = "";

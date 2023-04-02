@@ -1,6 +1,7 @@
 package payment;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import order.Order;
@@ -23,7 +24,7 @@ public class RefundAssistant {
      * @param transaction list of orders
      * @return whether the user entered "/cancel"
      */
-    public boolean getID(Transaction transaction) {
+    public boolean getID(Transaction transaction) throws DuplicateArgumentFoundException {
         boolean isValidID = false;
 
         while (!isValidID) {
@@ -55,7 +56,7 @@ public class RefundAssistant {
      * @param transaction list of orders
      * @return whether the user entered "/cancel"
      */
-    public boolean refundOrder(Transaction transaction) {
+    public boolean refundOrder(Transaction transaction) throws DuplicateArgumentFoundException {
         if (transaction.getOrderList().isEmpty()) {
             transactionUi.printEmptyTransaction();
             return true;

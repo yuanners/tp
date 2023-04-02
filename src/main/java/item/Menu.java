@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.lang.reflect.Type;
 
+import exception.DuplicateArgumentFoundException;
 import exception.FileIsEmptyException;
 import exception.item.MissingFindItemDescriptionException;
 import app.Command;
@@ -50,10 +51,6 @@ public class Menu {
         }
     }
 
-    public Menu() {
-        this.menuUi = new MenuUi();
-        this.items = new ArrayList<>();
-    }
 
     public Menu(String dirName, String fileName) {
         this.menuUi = new MenuUi();
@@ -100,7 +97,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void addItem(Command command) {
+    public void addItem(Command command) throws DuplicateArgumentFoundException {
 
         AddItemValidation addItemValidation = new AddItemValidation();
         boolean isValid = true;
@@ -147,7 +144,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void updateItem(Command command) {
+    public void updateItem(Command command) throws DuplicateArgumentFoundException {
         if (this.getItems().size() == 0) {
             menuUi.printError(Flags.Error.EMPTY_MENU);
             return;
@@ -204,7 +201,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void deleteItem(Command command) {
+    public void deleteItem(Command command) throws DuplicateArgumentFoundException {
         if (this.getItems().size() == 0) {
             menuUi.printError(Flags.Error.EMPTY_MENU);
             return;
@@ -267,7 +264,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     *     or an empty list if no matching item is found
+     * or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
