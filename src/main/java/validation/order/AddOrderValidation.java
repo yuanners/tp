@@ -31,14 +31,37 @@ public class AddOrderValidation extends Validation {
     public boolean checkValidItemName(String itemName) {
 
         if (!isInteger(itemName)) {
+            if (!(itemName.substring(0, 1).equals("\"")) ||
+                    !(itemName.substring(itemName.length() - 1).equals("\""))) {
+                transactionUi.printError(Flags.Error.MISSING_QUOTES);
+                return false;
+            }
+
+            // Strip itemName of double quotes
+            if (!isInteger(itemName)) {
+                itemName = itemName.substring(1, itemName.length() - 1);
+            }
+
             if (menu.findMatchingItemNames(itemName).size() > 1) {
                 transactionUi.printError(Flags.Error.MULTIPLE_SIMILAR_ITEMS);
+                Command findItemCommand = new Command("finditem " + itemName);
+                menu.showResultsOfFindWithoutSuccessMsg(findItemCommand);
                 return false;
             } else if (menu.findMatchingItemNames(itemName).size() == 0) {
                 transactionUi.printError(Flags.Error.NO_SUCH_ITEM);
                 return false;
             }
+
+        } else {
+            if (Integer.parseInt(itemName) < 0) {
+                transactionUi.printError(Flags.Error.INVALID_INDEX);
+                return false;
+            } else if (Integer.parseInt(itemName) >= menu.getItems().size()){
+                transactionUi.printError(Flags.Error.INVALID_INDEX);
+                return false;
+            }
         }
+
 
         return true;
     }
@@ -51,6 +74,7 @@ public class AddOrderValidation extends Validation {
 
         if (Integer.parseInt(quantity) < 0) {
             transactionUi.printError(Flags.Error.INVALID_NEGATIVE_QUANTITY);
+            return false;
         }
 
         return true;

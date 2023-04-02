@@ -39,6 +39,7 @@ public class OrderAssistant {
                 if (Arrays.asList(CANCELS).contains(itemName)) {
                     return true;
                 }
+
             } while (!addOrderValidation.checkValidItemName(itemName));
 
             do {
@@ -61,7 +62,7 @@ public class OrderAssistant {
             }
 
             // Append to final command string
-            commandString += "\"" + itemName + "\":" + quantity + ",";
+            commandString +=  itemName + ":" + quantity + ",";
         }
 
         commandString = formatCommandStringForOrders(commandString);
@@ -116,6 +117,16 @@ public class OrderAssistant {
         ordersString = "/addorder -I [" + ordersString + "]";
         return ordersString;
 
+    }
+
+    public boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException n) {
+            return false;
+        }
+
+        return true;
     }
 
 }

@@ -167,7 +167,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
             if (!isInteger(elements[0])) {
 
-                if (!super.checkValidItemName(elements[0])) {
+                if (!super.checkValidItemName("\"" + elements[0] + "\"")) {
                     throw new MultipleSimilarItemsFoundException();
                 }
 

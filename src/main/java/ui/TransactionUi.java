@@ -125,7 +125,8 @@ public class TransactionUi extends Ui {
             System.out.println("No such item exists.");
             break;
         case MULTIPLE_SIMILAR_ITEMS:
-            System.out.println("Multiple items with similar names found. Please enter a more specific item name!");
+            System.out.println("Multiple items with similar names found. Please enter a more specific item name!" +
+                    "\nHere are a list of items that matched your input:");
             break;
         //add multiple order flags
         case INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION:
@@ -178,11 +179,19 @@ public class TransactionUi extends Ui {
         case MISSING_REFUND_ORDER_ARGUMENT:
             System.out.println("Order ID cannot be empty.");
             break;
+        case MISSING_QUOTES:
+            System.out.println("The entered item name must either be an index from /listitem " +
+                    "or be the actual or part of the item name, surrounded with \" \"." +
+                    "\nFor example, \"Chicken Rice\".");
+            break;
         case INVALID_REFUND_ORDER_ID:
             System.out.println("Invalid order ID.");
             break;
         case INVALID_REFUND_ORDER_TYPE:
             System.out.println("Order is already refunded.");
+            break;
+        case INVALID_INDEX:
+            System.out.println("You have entered an invalid item index.");
             break;
         default:
             // Fallthrough
