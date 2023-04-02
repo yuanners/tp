@@ -4,8 +4,9 @@ import app.Command;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.MissingRequiredFlagException;
 import exception.statistic.MissingYearException;
+import validation.Validation;
 
-public class StatisticValidation {
+public class StatisticValidation extends Validation {
     private Command command;
 
     public StatisticValidation(Command command) {

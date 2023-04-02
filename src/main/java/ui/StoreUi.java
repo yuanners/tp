@@ -1,18 +1,16 @@
 package ui;
 
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
-public class StoreUi {
+public class StoreUi extends Ui {
     public boolean reinitializeMenu() {
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Data file ./datestore/menu.json is corrupted.");
         System.out.print("Do you want to reinitialize a new empty menu? [Y]es or [N]o: ");
 
         while (true) {
             try {
-                String userInput = sc.nextLine().toUpperCase();
+                String userInput = super.inputHandler().toUpperCase();
 
                 if (userInput.equals("YES") || userInput.equals("Y")) {
                     System.out.println("Initializing empty menu ...");
@@ -30,14 +28,13 @@ public class StoreUi {
     }
 
     public boolean reinitializeTransactions() {
-        Scanner sc = new Scanner(System.in);
 
         System.out.println("Data file ./datestore/orders.json is corrupted.");
         System.out.println("Do you want to reinitialize a new empty list of transactions? [Y]es or [N]o: ");
 
         while (true) {
             try {
-                String userInput = sc.nextLine().toUpperCase();
+                String userInput = super.inputHandler().toUpperCase();
 
                 if (userInput.equals("YES") || userInput.equals("Y")) {
                     System.out.println("Initializing empty list of transactions ...");

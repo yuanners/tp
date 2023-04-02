@@ -10,13 +10,11 @@ import ui.TransactionUi;
 import validation.order.RefundOrderValidation;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RefundAssistant {
     private final String CANCEL = "/cancel";
     private String orderID = "";
     private TransactionUi transactionUi = new TransactionUi();
-    private Scanner scan = new Scanner(System.in);
     private RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
 
     /**
@@ -30,7 +28,7 @@ public class RefundAssistant {
 
         while (!isValidID) {
             transactionUi.promptOrderID();
-            String input = scan.nextLine();
+            String input = transactionUi.inputHandler();
 
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;

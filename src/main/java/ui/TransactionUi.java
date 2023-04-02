@@ -64,10 +64,6 @@ public class TransactionUi extends Ui {
         }
     }
 
-    public void printSuccessfulAddOrder() {
-        System.out.println("Order added successfully!");
-    }
-
     public void printSuccessfulPayment() {
         System.out.println("Order has been paid!");
     }
@@ -94,23 +90,6 @@ public class TransactionUi extends Ui {
     public void printInvalidInputEntered() {
 
         System.out.println("Invalid input entered.");
-    }
-
-    //    public void printItemNotExistError() {
-    //        System.out.println("No such item exists.");
-    //    }
-    //
-    //    public void printSimilarItemError() {
-    //        System.out.println("Your input referenced multiple similar items. " +
-    //                "Please try again with a more specific item name.");
-    //    }
-
-    public void helpAddOder() {
-        System.out.println("/addorder -i <number> -q <number>");
-    }
-
-    public void printError(String message) {
-        System.out.println(message);
     }
 
     @Override

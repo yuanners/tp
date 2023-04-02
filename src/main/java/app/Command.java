@@ -54,16 +54,9 @@ public class Command {
         return userInput;
     }
 
-    public void setUserInput(String userInput) {
-        this.userInput = userInput;
-    }
 
     public String getCommand() {
         return command;
-    }
-
-    public void setCommand(String command) {
-        this.command = command;
     }
 
     public String getArgumentString() {
@@ -78,7 +71,4 @@ public class Command {
         return argumentMap;
     }
 
-    public void setArgumentMap(Map<String, String> argumentMap) {
-        this.argumentMap = argumentMap;
-    }
 }

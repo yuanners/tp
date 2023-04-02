@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class SalesReport extends Statistic {
 
-    Transaction transaction;
+    private Transaction transaction;
 
     /**
      * Constructs a SalesReport object based on a given command and transaction.

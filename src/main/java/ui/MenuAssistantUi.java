@@ -14,10 +14,6 @@ public class MenuAssistantUi extends MenuUi {
         System.out.println("\nWould you like to update item name? (yes/no) or use \"/cancel\" to abort");
     }
 
-    public void promptNewItemName() {
-        System.out.println("\nPlease enter the new name or use \"/cancel\" to abort: ");
-    }
-
     /**
      * Prompts for item price
      **/
@@ -28,10 +24,6 @@ public class MenuAssistantUi extends MenuUi {
 
     public void promptItemPriceChange() {
         System.out.println("\nWould you like to update item price? (yes/no) or use \"/cancel\" to abort");
-    }
-
-    public void promptNewItemPrice() {
-        System.out.println("\nPlease enter the new price or use \"/cancel\" to abort: ");
     }
 
     /**

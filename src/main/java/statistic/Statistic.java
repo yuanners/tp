@@ -75,7 +75,7 @@ public class Statistic {
             sv.validateRequiredFlag();
 
             if (command.getArgumentMap().containsKey("rank")) {
-                new RankReport(command, sv, transactions, menu);
+                new RankReport(command, transactions, menu);
             }
             if (command.getArgumentMap().containsKey("sales")) {
                 new SalesReport(command, sv, transactions);
