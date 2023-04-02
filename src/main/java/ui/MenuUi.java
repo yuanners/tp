@@ -117,6 +117,9 @@ public class MenuUi extends Ui {
         case ITEM_DUPLICATE_NAME_ERROR:
             System.out.println("Name already exists. Please choose a different name.");
             break;
+        case ITEM_NAME_IS_INTEGER_ERROR:
+            System.out.println("Name cannot be number. Please choose a different name.");
+            break;
 
         // Item Price
         case MISSING_ITEM_PRICE_FLAG:
