@@ -14,12 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SalesReportTest {
 
-    public Menu menu;
     public Transaction transactions;
 
     @Test
     void dailySales() {
-        this.menu = new Menu("./datastore-test", "menu-test.json");
         this.transactions = new Transaction("./datastore-test", "orders-test.json");
 
         try {
@@ -35,7 +33,6 @@ class SalesReportTest {
 
     @Test
     void monthlySales() {
-        this.menu = new Menu("./datastore-test", "menu-test.json");
         this.transactions = new Transaction("./datastore-test", "orders-test.json");
 
         try {

@@ -10,14 +10,9 @@ import item.Menu;
 
 class ItemTest {
     Menu menu;
-    MenuUi menuUi;
-    MenuAssistant menuAssistant;
 
     public ItemTest() {
-
         menu = new Menu("menu.json");
-        menuUi = new MenuUi();
-        menuAssistant = new MenuAssistant();
     }
 
     @Test

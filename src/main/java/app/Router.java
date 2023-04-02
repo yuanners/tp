@@ -68,7 +68,7 @@ public class Router {
             menu.showResultsOfFind(command);
             break;
         case "/addorder":
-            Order order = new Order(command, menu, transactions, transactionUi, payment);
+            new Order(command, menu, transactions, transactionUi, payment);
             break;
         case "/listorder":
             transactions.displayList();

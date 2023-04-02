@@ -22,8 +22,7 @@ class RankReportTest {
 
         try {
             Command c = new Command("/report -r popular -y 2023");
-            StatisticValidation sv = new StatisticValidation(c);
-            RankReport rr = new RankReport(c, sv, transactions, menu);
+            RankReport rr = new RankReport(c, transactions, menu);
             ItemRank ir = rr.rankByPopularity().poll();
 
             assertEquals("Teh Tarik", ir.getName());
@@ -41,8 +40,7 @@ class RankReportTest {
 
         try {
             Command c = new Command("/report -r sales -f 01/03/2023 -t 01/07/2023");
-            StatisticValidation sv = new StatisticValidation(c);
-            RankReport rr = new RankReport(c, sv, transactions, menu);
+            RankReport rr = new RankReport(c, transactions, menu);
             ItemRank ir = rr.rankBySales().poll();
 
             assertEquals("Fish Head Curry", ir.getName());

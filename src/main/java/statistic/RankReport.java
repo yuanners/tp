@@ -40,7 +40,7 @@ public class RankReport extends Statistic {
      * @param transaction a Transaction object containing the list of orders to generate the report
      * @param menu        a Menu object containing the list of items to be included in the report
      */
-    public RankReport(Command command, StatisticValidation sv, Transaction transaction, Menu menu)
+    public RankReport(Command command, Transaction transaction, Menu menu)
             throws StartAfterEndDateException, ConflictFlagException {
         super(command);
         StatisticUi ui = new StatisticUi();

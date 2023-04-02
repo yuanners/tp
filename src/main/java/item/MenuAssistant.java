@@ -367,7 +367,6 @@ public class MenuAssistant {
      */
     private boolean getKeyword(Command command, Menu menu) {
         String keyword = "";
-        boolean isRunning = false;
 
         menuAssistantUi.promptItemKeyword();
         keyword = menuAssistantUi.inputHandler();

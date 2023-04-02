@@ -8,10 +8,6 @@ import java.time.temporal.TemporalAdjusters;
 
 public class DateUtils {
 
-    public static LocalDateTime getStartOfDay(LocalDateTime dateTime) {
-        return LocalDateTime.of(dateTime.toLocalDate(), LocalTime.MIN);
-    }
-
     public static LocalDateTime getEndOfDay(LocalDateTime dateTime) {
         return LocalDateTime.of(dateTime.toLocalDate(), LocalTime.MAX);
     }

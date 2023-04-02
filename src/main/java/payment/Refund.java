@@ -29,7 +29,6 @@ public class Refund {
      */
     public void refundTransaction(Command arg, Transaction transactions) {
         RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
-        MenuAssistant menuAssistant = new MenuAssistant();
 
         try {
             if (!(transactions.getOrderList().isEmpty())) {
