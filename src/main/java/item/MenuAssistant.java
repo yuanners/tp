@@ -4,14 +4,15 @@ import app.Command;
 import exception.item.NameMinimumLengthException;
 import exception.item.NameMaximumLengthException;
 import exception.item.DuplicateNameException;
-import exception.item.PriceInvalidDecimalPlaceException;
-import exception.item.PriceInvalidNumberException;
-import exception.item.PriceNegativeException;
-import exception.item.PriceOverflowException;
 import exception.item.PriceMinimumLengthException;
+import exception.item.PriceInvalidNumberException;
+import exception.item.PriceOverflowException;
+import exception.item.PriceNegativeException;
+import exception.item.PriceInvalidDecimalPlaceException;
+import exception.item.NameIsIntegerException;
+import exception.item.IndexInvalidNumberFormatException;
 import exception.item.IndexOverflowException;
 import exception.item.IndexOutOfBoundException;
-import exception.item.IndexInvalidNumberFormatException;
 import ui.Flags;
 import ui.MenuAssistantUi;
 import validation.item.AddItemValidation;
@@ -65,6 +66,7 @@ public class MenuAssistant {
                 return true;
             }
 
+            name = name.trim();
             command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG, name);
             command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
 
@@ -78,6 +80,8 @@ public class MenuAssistant {
                 menuAssistantUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
             } catch (DuplicateNameException e) {
                 menuAssistantUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
+            } catch (NameIsIntegerException e) {
+                menuAssistantUi.printError(Flags.Error.ITEM_NAME_IS_INTEGER_ERROR);
             }
 
         }
@@ -107,6 +111,7 @@ public class MenuAssistant {
                 return true;
             }
 
+            name = name.trim();
             command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG, name);
             command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
 
@@ -122,6 +127,8 @@ public class MenuAssistant {
                 menuAssistantUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
             } catch (DuplicateNameException e) {
                 menuAssistantUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
+            } catch (NameIsIntegerException e) {
+                menuAssistantUi.printError(Flags.Error.ITEM_NAME_IS_INTEGER_ERROR);
             }
 
         }

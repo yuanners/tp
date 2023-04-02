@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Parser" as Parser
+participant ":ManPage" as MP
+
+[->Parser : CheckUserInput()\n(userInput:String, moduleList:ModuleList)
+activate Parser
+
+
+loop till no user input
+
+
+
+    alt printManPage
+        Parser-> MP
+        activate MP
+        MP--> Parser
+        deactivate MP
+
+
+    else printManPageAdd
+        Parser-> MP
+        activate MP
+        MP--> Parser
+        deactivate MP
+
+    else printManPageList
+          Parser-> MP
+          activate MP
+          MP--> Parser
+          deactivate MP
+
+    else printManPageEdit
+          Parser-> MP
+          activate MP
+          MP--> Parser
+          deactivate MP
+
+    else printManPageFind
+          Parser-> MP
+          activate MP
+          MP--> Parser
+          deactivate MP
+
+    else printManPageDelete
+         Parser-> MP
+         activate MP
+         MP--> Parser
+         deactivate MP
+
+    else printManPageCalculator
+          Parser-> MP
+          activate MP
+          MP--> Parser
+          deactivate MP
+
+    else printManPageCalculatorInput
+         Parser-> MP
+         activate MP
+         MP--> Parser
+         deactivate MP
+
+    else printManPageExit
+         Parser-> MP
+         activate MP
+         MP--> Parser
+         deactivate MP
+end
+Parser-->[
+deactivate Parser
+
+@enduml
