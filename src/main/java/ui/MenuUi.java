@@ -11,7 +11,7 @@ public class MenuUi extends Ui {
      */
 
     public void printItemNotFound() {
-        System.out.println("The entered item cannot be found.");
+        System.out.println("\nThe entered item cannot be found.");
     }
 
     public void printFindItem(int index, ArrayList<Item> menu) {
@@ -31,7 +31,7 @@ public class MenuUi extends Ui {
     }
 
     public void printNoItemFound(String input) {
-        System.out.println("No menu items matching " + input + " were found!");
+        System.out.println("\nNo menu items matching " + input + " were found!");
     }
 
     @Override
@@ -42,45 +42,45 @@ public class MenuUi extends Ui {
         case "additem":
             // Fallthrough
         case "/additem":
-            System.out.println("Item added successfully.");
+            System.out.println("\nItem added successfully.\n");
             break;
         case "4":
             // Fallthrough
         case "updateitem":
             // Fallthrough
         case "/updateitem":
-            System.out.println("Item updated successfully.");
+            System.out.println("\nItem updated successfully.\n");
             break;
         case "2":
             // Fallthrough
         case "deleteitem":
             // Fallthrough
         case "/deleteitem":
-            System.out.println("Item deleted successfully.");
+            System.out.println("\nItem deleted successfully.\n");
             break;
         case "3":
             // Fallthrough
         case "listitem":
             // Fallthrough
         case "/listitem":
-            System.out.println("All items in the menu have been listed!");
+            System.out.println("\nAll items in the menu have been listed!\n");
             break;
         case "5":
             // Fallthrough
         case "finditem":
             // Fallthrough
         case "/finditem":
-            System.out.println("finditem completed!");
+            System.out.println("\nfinditem completed!\n");
             break;
         case "addorder":
             //Fallthrough
         case "/addorder":
-            System.out.println("Order is added!");
+            System.out.println("\nOrder is added!\n");
             break;
         case "refundorder":
             //Fallthrough
         case "/refundorder":
-            System.out.println("Order is refunded!");
+            System.out.println("\nOrder is refunded!\n");
             break;
         default:
             // Fallthrough
@@ -89,7 +89,7 @@ public class MenuUi extends Ui {
 
     @Override
     public void printError(Flags.Error error) {
-        System.out.print("Error: ");
+        System.out.print("\nError: ");
         switch (error) {
         case EMPTY_INPUT:
             System.out.println("Input is empty. Please enter something.");
