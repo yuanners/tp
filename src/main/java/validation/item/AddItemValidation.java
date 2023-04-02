@@ -2,8 +2,8 @@ package validation.item;
 
 import app.Command;
 import exception.InvalidArgumentException;
-import exception.item.MissingNameAndPriceFlag;
 import exception.item.MissingNameFlagException;
+import exception.item.MissingNameAndPriceFlag;
 import exception.item.MissingPriceFlagException;
 import exception.item.NameMinimumLengthException;
 import exception.item.NameMaximumLengthException;
@@ -13,6 +13,7 @@ import exception.item.PriceInvalidNumberException;
 import exception.item.PriceOverflowException;
 import exception.item.PriceNegativeException;
 import exception.item.PriceInvalidDecimalPlaceException;
+import exception.item.NameIsIntegerException;
 import item.Menu;
 import ui.Flags;
 import ui.MenuUi;
@@ -97,6 +98,8 @@ public class AddItemValidation extends ItemValidation {
             menuUi.printError(Flags.Error.ITEM_PRICE_NEGATIVE_ERROR);
         } catch (PriceInvalidDecimalPlaceException e) {
             menuUi.printError(Flags.Error.ITEM_PRICE_INVALID_DECIMAL_PLACE_ERROR);
+        } catch (NameIsIntegerException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_IS_INTEGER_ERROR);
         }
 
         return isValid;
@@ -107,10 +110,21 @@ public class AddItemValidation extends ItemValidation {
      *
      * @param c Given command
      */
-    public void validateName(Command c) throws NameMinimumLengthException, NameMaximumLengthException {
+    public void validateName(Command c) throws NameMinimumLengthException, NameMaximumLengthException,
+            NameIsIntegerException {
 
         if(c.getArgumentMap().get(LONG_NAME_FLAG) == null) {
             throw new NameMinimumLengthException();
+        }
+
+        int result = isInteger(c.getArgumentMap().get(LONG_NAME_FLAG));
+
+        if(result == 0) {
+            throw new NameIsIntegerException();
+        }
+
+        if(isDouble(c.getArgumentMap().get(LONG_NAME_FLAG))) {
+            throw new NameIsIntegerException();
         }
 
         if (c.getArgumentMap().get(LONG_NAME_FLAG).length() > 25) {
