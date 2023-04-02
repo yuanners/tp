@@ -13,7 +13,6 @@ import ui.Flags;
 import ui.StatisticUi;
 import utility.DateUtils;
 import utility.Parser;
-import validation.statistic.StatisticValidation;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
