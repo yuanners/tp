@@ -122,6 +122,16 @@ public class Menu {
             return;
         }
 
+        if (command.getArgumentMap().containsKey(addItemValidation.SHORT_NAME_FLAG)) {
+            command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG,
+                    command.getArgumentMap().get(addItemValidation.SHORT_NAME_FLAG).trim());
+        }
+
+        if (command.getArgumentMap().containsKey(addItemValidation.LONG_NAME_FLAG)) {
+            command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG,
+                    command.getArgumentMap().get(addItemValidation.LONG_NAME_FLAG).trim());
+        }
+
         processAddItem(command, addItemValidation);
         menuUi.printCommandSuccess(command.getCommand());
     }
@@ -157,9 +167,20 @@ public class Menu {
         command.mapArgumentAlias(updateItemValidation.LONG_INDEX_FLAG, updateItemValidation.SHORT_INDEX_FLAG);
         command.mapArgumentAlias(updateItemValidation.LONG_NAME_FLAG, updateItemValidation.SHORT_NAME_FLAG);
         command.mapArgumentAlias(updateItemValidation.LONG_PRICE_FLAG, updateItemValidation.SHORT_PRICE_FLAG);
+
         isValid = updateItemValidation.validateCommand(command, this);
         if (!isValid) {
             return;
+        }
+
+        if (command.getArgumentMap().containsKey(updateItemValidation.SHORT_NAME_FLAG)) {
+            command.getArgumentMap().put(updateItemValidation.SHORT_NAME_FLAG,
+                    command.getArgumentMap().get(updateItemValidation.SHORT_NAME_FLAG).trim());
+        }
+
+        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
+            command.getArgumentMap().put(updateItemValidation.LONG_NAME_FLAG,
+                    command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG).trim());
         }
 
         processUpdateItem(command, updateItemValidation);
