@@ -129,8 +129,9 @@ public class Router {
                 break;
             case "5":
             case "finditem":
-                isCancelled = menuAssistant.showResultsOfFind(command, menu);
-                menuAssistant.printResult(command, isCancelled);
+                menuAssistant.showResultsOfFind(command, menu);
+                /*isCancelled = menuAssistant.showResultsOfFind(command, menu);
+                menuAssistant.printResult(command, isCancelled);*/
                 break;
             case "6":
             case "addorder":

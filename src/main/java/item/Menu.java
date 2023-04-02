@@ -333,7 +333,6 @@ public class Menu {
         }
 
         menuUi.printCommandSuccess(command.getCommand());
-
     }
 
     public void save() {
