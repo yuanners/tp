@@ -5,7 +5,6 @@ import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import exception.order.MissingRefundOrderArgument;
 import exception.order.MissingRefundOrderFlag;
-import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import ui.Flags;
