@@ -80,7 +80,7 @@ public class OrderTest {
 
     @Test
     void refundOrderTest() {
-        Transaction transaction = new Transaction();
+        Transaction transaction = new Transaction("orders.json");
         Item item1 = new Item("chicken rice", 2.00);
 
         OrderEntry orderEntry1 = new OrderEntry(item1, 10);

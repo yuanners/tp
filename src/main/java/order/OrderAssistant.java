@@ -6,49 +6,31 @@ import payment.Payment;
 import ui.TransactionUi;
 import validation.order.AddOrderValidation;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class OrderAssistant {
 
-    TransactionUi transactionUi = new TransactionUi();
     Scanner sc;
-    AddOrderValidation addOrderValidation = new AddOrderValidation();
+    TransactionUi transactionUi;
 
-    private final ArrayList<String> CANCELS = new ArrayList<>() {
-        {
-            add("/cancel");
-            add("cancel");
-        }
-    };
-    private final ArrayList<String> YESES = new ArrayList<>() {
-        {
-            add("yes");
-            add("y");
-            add("/yes");
-            add("/y");
-        }
-    };
-    private final ArrayList<String> NOS = new ArrayList<>() {
-        {
-            add("no");
-            add("n");
-            add("/no");
-            add("/n");
-        }
-    };
+    private final String[] CANCELS = {"/cancel", "cancel"};
+    private final String[] YESES = {"/yes", "yes", "/y", "y"};
+    private final String[] NOS = {"/no", "no", "/n", "n"};
 
     public OrderAssistant() {
         sc = new Scanner(System.in);
+        transactionUi = new TransactionUi();
     }
 
     public boolean assistedAddOrder(Menu menu, Transaction transaction) {
 
-        Order order;
         Command command;
         String commandString = "";
         String itemName = "";
         String quantity = "";
+
+        AddOrderValidation addOrderValidation = new AddOrderValidation(menu);
 
         boolean hasMoreOrderEntry = true;
 
@@ -56,24 +38,24 @@ public class OrderAssistant {
 
             do {
                 itemName = getItem();
-                if (CANCELS.contains(itemName)) {
+                if (Arrays.asList(CANCELS).contains(itemName)) {
                     return true;
                 }
             } while (!addOrderValidation.checkValidItemName(itemName));
 
             do {
                 quantity = getQuantity();
-                if (CANCELS.contains(quantity)) {
+                if (Arrays.asList(CANCELS).contains(quantity)) {
                     return true;
                 }
             } while (!addOrderValidation.checkValidQuantity(quantity));
 
             String hasMoreOrderEntryString = askIfGotMoreOrderEntries();
-            if (YESES.contains(hasMoreOrderEntryString)) {
+            if (Arrays.asList(YESES).contains(hasMoreOrderEntryString)) {
                 hasMoreOrderEntry = true;
-            } else if (NOS.contains(hasMoreOrderEntryString)) {
+            } else if (Arrays.asList(NOS).contains(hasMoreOrderEntryString)) {
                 hasMoreOrderEntry = false;
-            } else if (CANCELS.contains(hasMoreOrderEntryString)) {
+            } else if (Arrays.asList(CANCELS).contains(hasMoreOrderEntryString)) {
                 return true;
             } else {
                 transactionUi.printInvalidInputEntered();
@@ -86,8 +68,9 @@ public class OrderAssistant {
 
         commandString = formatCommandStringForOrders(commandString);
         command = new Command(commandString);
+
         Payment payment = new Payment();
-        order = new Order(command, menu, transaction, transactionUi, payment);
+        new Order(command, menu, transaction, transactionUi, payment);
 
         // Returns false when there are no more orderEntries to add
         return false;

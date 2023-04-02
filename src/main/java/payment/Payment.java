@@ -28,21 +28,22 @@ public class Payment {
         while (!isValidPayment) {
             String userInput = sc.nextLine();
             Command arg = new Command(userInput);
-
+            MenuAssistant menuAssistant = new MenuAssistant();
+            Command pay = new Command("addorder");
             if (userInput.equalsIgnoreCase("pay")) {
                 PaymentAssistant paymentAssistant = new PaymentAssistant();
-                MenuAssistant menuAssistant = new MenuAssistant();
-                Command pay = new Command("addorder");
                 boolean isCancelled = paymentAssistant.makePayment(order);
                 menuAssistant.printResult(pay, isCancelled);
                 break;
-
+            }else if (userInput.equalsIgnoreCase("/cancel")){
+                menuAssistant.printResult(pay, true);
+                break;
             } else {
                 PaymentValidation paymentValidation = new PaymentValidation();
                 isValidPayment = paymentValidation.validatePayment(arg, order);
 
                 if (!isValidPayment) {
-                    transactionUi.promptUserInput();
+                    transactionUi.promptPayment();
                     continue;
                 }
 

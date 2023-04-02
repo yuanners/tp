@@ -58,12 +58,15 @@ public class RefundAssistant {
      * @return whether the user entered "/cancel"
      */
     public boolean refundOrder(Transaction transaction) {
+        if (transaction.getOrderList().isEmpty()) {
+            transactionUi.printEmptyTransaction();
+            return true;
+        }
         boolean isCancelled = getID(transaction);
 
         if (isCancelled) {
             return true;
         }
-
         Order refundOrder = new Order();
         ArrayList<Order> orderList = transaction.getOrderList();
 
@@ -77,8 +80,10 @@ public class RefundAssistant {
 
         }
 
+
         refundOrder.setStatus("REFUNDED");
         transaction.save();
+
         return false;
     }
 }

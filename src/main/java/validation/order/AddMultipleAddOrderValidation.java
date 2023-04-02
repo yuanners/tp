@@ -15,23 +15,22 @@ import exception.order.MultipleSimilarItemsFoundException;
 import item.Menu;
 
 public class AddMultipleAddOrderValidation extends AddOrderValidation {
-    private Menu menu;
-    private AddOrderValidation addOrderValidation = new AddOrderValidation();
 
     public AddMultipleAddOrderValidation(Menu menu) {
-        this.menu = menu;
+        super(menu);
     }
 
     /**
      * Validate the user input format
+     *
      * @param arg user input
      * @return if format is valid, return the user input so can be checked in the next validation method
      * @throws MissingMultipleOrderArgumentException the command has no argument
-     * @throws MissingMultpleOrderFlagException missing -I flag
-     * @throws InvalidMultipleOrderFormatException invalid format
-     * @throws InvalidQuantityNumberFormatException quantity is not an integer
-     * @throws InvalidIndexOutOfBoundsException item index is > item size
-     * @throws MultipleSimilarItemsFoundException more than 1 search item result
+     * @throws MissingMultpleOrderFlagException      missing -I flag
+     * @throws InvalidMultipleOrderFormatException   invalid format
+     * @throws InvalidQuantityNumberFormatException  quantity is not an integer
+     * @throws InvalidIndexOutOfBoundsException      item index is > item size
+     * @throws MultipleSimilarItemsFoundException    more than 1 search item result
      */
     public Command validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
             MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException,
@@ -72,13 +71,14 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
     /**
      * Validate the arguments in the user input
-     * @param arg user input
+     *
+     * @param arg   user input
      * @param items a list of menu items
-     * @throws InvalidIndexNegativeException item index is negative
-     * @throws InvalidIndexNumberFormatException item index is not an integer
-     * @throws InvalidIndexOutOfBoundsException item index is > item list size
+     * @throws InvalidIndexNegativeException        item index is negative
+     * @throws InvalidIndexNumberFormatException    item index is not an integer
+     * @throws InvalidIndexOutOfBoundsException     item index is > item list size
      * @throws InvalidQuantityNumberFormatException quantity is not an integer
-     * @throws InvalidQuantityNegativeException quantity is negative
+     * @throws InvalidQuantityNegativeException     quantity is negative
      */
     public void validateArguments(Command arg, Menu items) throws InvalidIndexNegativeException,
             InvalidIndexNumberFormatException, InvalidIndexOutOfBoundsException,
@@ -154,6 +154,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
         String index;
         String finalCommandString = "";
 
+
         for (String order : orderPairs) {
 
             String[] elements = order.trim().split(":");
@@ -164,11 +165,11 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
             if (!isInteger(elements[0])) {
 
-                if (!addOrderValidation.checkValidItemName(elements[0])) {
+                if (!super.checkValidItemName(elements[0])) {
                     throw new MultipleSimilarItemsFoundException();
                 }
 
-                index = Integer.toString(menu.findItemIndex(elements[0]));
+                index = Integer.toString(super.getMenu().findItemIndex(elements[0]));
                 elements[0] = index;
             }
 
@@ -176,7 +177,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
                 String itemIndex = elements[0];
 
-                if (!(isValidIndex(itemIndex, menu))) {
+                if (!(isValidIndex(itemIndex, super.getMenu()))) {
                     throw new InvalidIndexOutOfBoundsException();
                 }
 

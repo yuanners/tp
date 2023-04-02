@@ -10,7 +10,7 @@ public class Ui {
     }
 
     public void promptUserInput() {
-        System.out.println("Please enter a command: ");
+        System.out.println("Please enter a command:");
     }
 
     public void printInvalidCommand(String command) {

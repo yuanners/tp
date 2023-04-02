@@ -20,6 +20,9 @@ The aim of this guide is to provide a comprehensive explanation of the internal 
 This will enable upcoming software engineers to acquire a detailed understanding of the application's implementation,
 making it easier for them to work on the project.
 
+For all sequence diagrams included in this guide, we will not include the interaction 
+with the Parser and Router classes as it is implied that all inputs will first be parsed through them. 
+
 ## Design
 
 ## Implementation
@@ -176,7 +179,7 @@ nothing to be deleted using `MenuUi#printError` and control is given back to `Mo
 1. `MenuAssistant#deleteItem` invokes `MenuAssistant#getIndex` to get the index of the item to be deleted.
 1. `MenuAssistant#getIndex` gets the index from the user and invokes `DeleteItemValidation#validateIndex` if the given 
 index is valid and exists.
-    * If the index is invalid, a message indicating the index does not exists is printed using `MenuUi#printError` 
+    * If the index is invalid, a message indicating the index does not exist is printed using `MenuUi#printError` 
    and re-prompts the user to enter a new index.
 1. A new `Item` object is then created using the name and price given
 1. `Menu#removeItem` is then invoked on the given index to delete it from the list of items. Then, `Menu#save` is 
@@ -313,6 +316,13 @@ There are three ways to add an order into MoneyGoWhere.
 3. By using Basic Mode to add one or more menu items into an order
 
 Both ways work similarly, but are parsed differently.
+
+These sequence diagrams show the interaction between various components in MoneyGoWhere when a user inputs commands to add an order.
+
+![](./images/developersGuide/addOrder.png)
+![](./images/developersGuide/handlePayment.png)
+
+
 The next section will describe exactly how the inputs are parsed into the `addorder` command through each of the
 described ways.
 
@@ -328,6 +338,8 @@ The expected inputs to add only one menu item into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs these
 commands.
 
+![](./images/developersGuide/addOrderValidation.png)
+
 The general workflow of this `/addorder` command is as follows:
 
 1. User input is passed to `MoneyGoWhere`
@@ -341,7 +353,7 @@ The general workflow of this `/addorder` command is as follows:
 7. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
 8. Once payment is made, the `Order` will be passed to the `Transactions` class, where this `Order` will be appended to
    the list of `Transactions`.
-
+   
 <hr>
 
 ##### Add multiple menu items into an order
@@ -355,6 +367,9 @@ The expected inputs to add multiple menu items into an order is as such:
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/addorder`.
+
+![](./images/developersGuide/addMultipleAddOrders.png)
+
 The general workflow of the `/addorder` command is as follows:
 
 1. User input is passed to `MoneyGoWhere`
@@ -372,6 +387,8 @@ The general workflow of the `/addorder` command is as follows:
 <hr>
 
 ##### Basic Mode Add an Order
+
+![](./images/developersGuide/AssistedAddOrder.png)
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `addorder` or `6`.
@@ -393,6 +410,8 @@ The general workflow of `addorder` is as follows:
 <hr>
 
 #### List all Orders
+
+![](./images/developersGuide/ListOrders.png)
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/listorder`.

@@ -158,22 +158,8 @@ public class Order implements OrderInterface {
         this.status = status;
     }
 
-    /**
-     * Gets the ArrayList of OrderEntry objects of the Order.
-     *
-     * @return ArrayList of OrderEntry objects
-     */
     public ArrayList<OrderEntry> getOrderEntries() {
         return orderEntries;
-    }
-
-    /**
-     * Sets the ArrayList of OrderEntry objects of the Order.
-     *
-     * @param orderEntries ArrayList of OrderEntry objects
-     */
-    public void setOrderEntries(ArrayList<OrderEntry> orderEntries) {
-        this.orderEntries = orderEntries;
     }
 
     /**
@@ -204,7 +190,7 @@ public class Order implements OrderInterface {
     public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) {
         boolean isAdded = false;
         try {
-            AddOrderValidation addOrderValidation = new AddOrderValidation();
+            AddOrderValidation addOrderValidation = new AddOrderValidation(listOfItems);
             AddMultipleAddOrderValidation addMultipleOrderValidation = new AddMultipleAddOrderValidation(listOfItems);
 
             command.mapArgumentAlias("item", "i");
@@ -271,7 +257,6 @@ public class Order implements OrderInterface {
 
         OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
         this.orderEntries.add(orderEntry);
-        transactionUi.printSuccessfulAddOrder();
     }
 
     /**
@@ -339,7 +324,6 @@ public class Order implements OrderInterface {
             OrderEntry orderEntry = new OrderEntry(listOfItems.getItems().get(itemIndex), quantity);
             this.orderEntries.add(orderEntry);
         }
-        transactionUi.printSuccessfulAddOrder();
     }
 
     private boolean isInteger(String input) {

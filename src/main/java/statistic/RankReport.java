@@ -27,6 +27,10 @@ import java.util.PriorityQueue;
  * end date parameters to generate the report for a specific date range.
  */
 public class RankReport extends Statistic {
+
+    Transaction transaction;
+    Menu menu;
+
     /**
      * Constructor for the RankReport class.
      * It generates two priority queues sorted by popularity and sales respectively.
@@ -40,15 +44,17 @@ public class RankReport extends Statistic {
             throws StartAfterEndDateException, ConflictFlagException {
         super(command);
         StatisticUi ui = new StatisticUi();
+        this.transaction = transaction;
+        this.menu = menu;
 
         try {
             switch (command.getArgumentMap().get("rank")) {
             case "sales":
-                PriorityQueue<ItemRank> salesRank = rankBySales(transaction, menu);
+                PriorityQueue<ItemRank> salesRank = rankBySales();
                 ui.printSalesRankingTable(salesRank, super.getStartDate(), super.getEndDate());
                 break;
             case "popular":
-                PriorityQueue<ItemRank> popularityRank = rankByPopularity(transaction, menu);
+                PriorityQueue<ItemRank> popularityRank = rankByPopularity();
                 ui.printPopularityRankingTable(popularityRank, super.getStartDate(), super.getEndDate());
                 break;
             default:
@@ -65,11 +71,9 @@ public class RankReport extends Statistic {
      * Generates a priority queue of ItemRank objects sorted by popularity.
      * The popularity of an item is determined by the number of times it has been ordered within the date range.
      *
-     * @param transaction a Transaction object containing the list of orders to generate the report
-     * @param menu        a Menu object containing the list of items to be included in the report
      * @return a priority queue of ItemRank objects sorted by popularity
      */
-    public PriorityQueue<ItemRank> rankByPopularity(Transaction transaction, Menu menu) {
+    public PriorityQueue<ItemRank> rankByPopularity() {
         Map<String, Integer> itemCountMap = new HashMap<>();
         PriorityQueue<ItemRank> rank = new PriorityQueue<>(Comparator.comparingDouble(ItemRank::getValue).reversed());
 
@@ -104,11 +108,9 @@ public class RankReport extends Statistic {
     /**
      * Calculates the ranking of menu items based on total sales during a given date range.
      *
-     * @param transaction the transaction to be analyzed
-     * @param menu        the menu containing the items to be ranked
      * @return a priority queue of ItemRank objects representing the ranking of items by sales
      */
-    public PriorityQueue<ItemRank> rankBySales(Transaction transaction, Menu menu) {
+    public PriorityQueue<ItemRank> rankBySales() {
         Map<String, Double> itemSalesMap = new HashMap<>();
         PriorityQueue<ItemRank> rank = new PriorityQueue<>(Comparator.comparingDouble(ItemRank::getValue).reversed());
         Parser parser = new Parser();
