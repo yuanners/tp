@@ -80,6 +80,10 @@ public class TransactionUi extends Ui {
         System.out.println("The order's status is now refunded!");
     }
 
+    public void printEmptyTransaction() {
+        System.out.println("There is no order to refund!");
+    }
+
     public void printOrderAdded(Double total) {
         DecimalFormat df = new DecimalFormat("#.00");
         String subtotal = df.format(total);
