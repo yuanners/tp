@@ -335,6 +335,51 @@ public class Menu {
         menuUi.printCommandSuccess(command.getCommand());
     }
 
+    /**
+     * Has the same functionality as showResultsOfFind(),
+     * but does not print the success message at the end.
+     *
+     * @param command the Command object containing the search term
+     */
+    public void showResultsOfFindWithoutSuccessMsg(Command command) {
+
+        FindItemValidation findItemValidation = new FindItemValidation();
+
+        ArrayList<Item> menu = this.getItems();
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        String itemName = command.getArgumentString().trim();
+
+        try {
+            findItemValidation.validateName(itemName);
+        } catch (MissingFindItemDescriptionException e) {
+            menuUi.printError(Flags.Error.MISSING_FIND_ITEM_DESCRIPTION);
+            return;
+        }
+
+        if (itemName.contains("\"")) {
+            itemName = itemName.replace("\"", "");
+        }
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (StringUtils.containsIgnoreCase(menu.get(i).getName(), itemName)) {
+                indexes.add(i);
+            }
+        }
+
+        if (indexes.size() == 0) {
+            menuUi.printNoItemFound(itemName);
+            return;
+        }
+
+        menuUi.printMenuHeader();
+        for (int i = 0; i < indexes.size(); i++) {
+            menuUi.printFindItem(indexes.get(i), menu);
+        }
+
+    }
+
+
     public void save() {
         try {
             store.save(items);
