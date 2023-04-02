@@ -3,6 +3,8 @@ package order;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
+import exception.FileIsEmptyException;
+import ui.StoreUi;
 import ui.TransactionUi;
 import utility.Store;
 
@@ -24,29 +26,43 @@ public class Transaction {
      */
     private Store store;
 
-    private final String ORDER_DATA_FILE = "orders.json";
-
-    public Transaction() {
-        this.store = new Store(ORDER_DATA_FILE);
+    public Transaction(String fileName) {
+        this.store = new Store(fileName);
         Type type = new TypeToken<ArrayList<Order>>() {
         }.getType();
 
         try {
             this.transactions = store.load(type);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            new StoreUi().transactionsNotFound();
             this.transactions = new ArrayList<>();
-        } catch (JsonParseException e) {
-            System.out.println(e.getMessage());
-            this.transactions = new ArrayList<>();
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
-            this.transactions = new ArrayList<>();
+            save();
+
+        } catch (JsonParseException | NumberFormatException | FileIsEmptyException e) {
+            if (new StoreUi().reinitializeTransactions()) {
+                this.transactions = new ArrayList<>();
+                save();
+            } else {
+                System.exit(0);
+            }
         }
     }
 
-    public Transaction(boolean isTest) {
+    public Transaction() {
         this.transactions = new ArrayList<>();
+    }
+
+    public Transaction(String dirName, String fileName) {
+        this.store = new Store(dirName, fileName);
+        Type type = new TypeToken<ArrayList<Order>>() {
+        }.getType();
+
+        try {
+            this.transactions = store.load(type);
+        } catch (IOException | FileIsEmptyException | JsonParseException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+            this.transactions = new ArrayList<>();
+        }
     }
 
     /**

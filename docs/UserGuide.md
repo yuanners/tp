@@ -7,8 +7,8 @@ use it.
 
 MoneyGoWhere is a point-of-sale, desktop app for tracking sales and inventory, optimised for use via a Command line
 Interface (CLI). With the ability to type fast and with familiarity of the system, you will be able to quickly track
-sales, check inventory and calculate change. This CLI application is comparable with GUI applications due to its
-low-cost and adaptability.
+sales, check inventory and calculate change. This CLI application is comparable with Graphical User Interface (GUI)
+applications due to its low-cost and adaptability.
 
 This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
 
@@ -50,7 +50,7 @@ your sales.
 
 This version of our guide will bring you through how to use the features of MoneyGoWhere in a single command.
 
-To see the beginner's version, [please click here](#basic-guide). 
+To see the beginner's version, [please click here](#basic-guide).
 
 Note that all functionality is the same, regardless of the mode used.
 
@@ -81,6 +81,9 @@ Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere
 1. Ensure you have Java 11 installed,
    and [download the latest release of MoneyGoWhere](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it
    in a folder.
+
+   ![downloadMoneyGoWhere](/images/userGuide/downloadMoneyGoWhere.png)
+
 2. Open the command terminal and navigate to the folder where the `.jar` file is, by doing `cd "<file path>"`.
 3. Use the command `java -jar moneygowhere.jar` to launch our application. If correct, you should see the following on
    startup:
@@ -173,7 +176,7 @@ Format: `/additem -n "<name>" -p <price>` or `/additem --name "<name>" --price <
     * Names are unique, regardless of how the words are capitalized. `Chicken` and `chicken` will count as the same
       word.
 * Price refers to the price of the item
-    * It can have up to two decimal points (`2`, `2.1`, `2.22` are all valid inputs).
+    * It can have up to two decimal places (`2`, `2.1`, `2.22` are all valid inputs).
 
 **Examples of Usage**
 
@@ -425,15 +428,15 @@ of payment.
 After adding the order, you will be prompted to add the payment, which can be done with `/pay -a <amount> -t <type>`
 or `/pay --amount <amount> --type <type>`
 
-* `Amount` refers to the amount paid, with up to 2 decimal points. (`2`, `2.1`, and `2.22` are all valid inputs).
+* `Amount` refers to the amount paid, with up to 2 decimal places. (`2`, `2.1`, and `2.22` are all valid inputs).
 * `Type` must use one of the following three modes: `Card`, `Cash` or `Others`.
-    * It is case-insensitive
+    * It is case-insensitive.
+
+[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 <br>
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 #### Advanced Mode Single Item
 
@@ -451,6 +454,7 @@ Format: `/addorder -i <index> -q <quantity>` or `/addorder --index <index> --qua
 
 **Example of Usage**
 **Example 1 - Cash Payment**
+
 Assume your menu is as follows:
 
 ```text
@@ -473,8 +477,8 @@ Order has been added successfully. Total amount: $9.00.
 Please use /pay command to add payment for the order.
 ```
 
-You tell them the total amount is _$9.00_, and they give you _$10_ in _cash_. So, you input `/pay -a 10 -t cash`, and
-obtain the following result:
+* You tell them the total amount is _$9.00_, and they give you _$10_ in _cash_. So, you input `/pay -a 10 -t cash`, and
+  obtain the following result:
 
 ```text
 Please use /pay command to add payment for the order.
@@ -495,7 +499,7 @@ Order has been added successfully. Total amount: $10.65.
 Please use /pay command to add payment for the order.
 ```
 
-Next, you use the command `/pay -a 10.65 -t card` and obtain the following result:
+* Next, you use the command `/pay -a 10.65 -t card` and obtain the following result:
 
 ```text
 Please use /pay command to add payment for the order.
@@ -503,11 +507,11 @@ Please use /pay command to add payment for the order.
 The command: /pay was successfully executed!
 ```
 
+[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
+
 <br>
 <hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
 
 #### Advanced Mode Multiple Items
 
@@ -655,6 +659,7 @@ Format: `/refundorder <order ID>`.
 More information about data storage and `.json` files can be found [here](#save-file).
 
 **Example of Usage**
+
 Assume you want to refund the following order.
 
 ```text
@@ -670,6 +675,8 @@ Subtotal: $9.00
 ```
 
 To refund it, you use the command `/refundorder ffc76ebe-09b1-48d2-9378-af49c234f399`.
+
+* The order ID can be copied from the interface.
 
 ```text
 Please enter a command: 
@@ -751,12 +758,16 @@ Note that all functionality is the same, regardless of the mode used.
 ## Setting up MoneyGoWhere
 
 1. Before installing and using MoneyGoWhere, do note that Java 11 is required. If you do not already have it installed,
-   you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11).
+   you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11)
+    * For Windows users, download the x64 Installer.
+      ![JavaWindows](images/userGuide/downloadJavaWindows.png)
+    * For Mac users, download the ARM 64 DMG Installer.
+      ![JavaWindows](images/userGuide/downloadJavaMac.png)
 2. After installing Java 11, please download the `.jar`
    file [here](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it in a folder. Doing so ensures that
    the save-file will not be lost, allowing you to use data that you have previously entered. Click
    on `MoneyGoWhere.jar` to automatically download the file. Ensure that it is the latest version.
-   **#TODO: Add image**
+   ![downloadMoneyGoWhere](/images/userGuide/downloadMoneyGo
 3. Move the jar file into a folder. This will allow you to view all data related to MoneyGoWhere easily, as all data
    files will be stored here.
 4. Open the command terminal and navigate to the folder where the `.jar` file is. If you are unsure of how to do so,
@@ -781,11 +792,12 @@ Note that all functionality is the same, regardless of the mode used.
     Please enter a command:
     ```
 
-9. When you are done using the app, enter `exit` to shut the application down. This ensures that Duke will save your
-   data, as saving data is only done during the shut-down process.
+9. When you are done using the app, enter `exit` to shut the application down.
 
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
 <br>
 
 ## Basic Commands
@@ -804,7 +816,7 @@ Note that all functionality is the same, regardless of the mode used.
 
 Entering this command will show you a list of all available commands.
 
-Note that it is possible to use the given index as a command input, but doing so will execute commands in basic mode. 
+Note that it is possible to use the given index as a command input, but doing so will execute commands in basic mode.
 
 Format: `help`
 
@@ -1199,6 +1211,8 @@ Order is refunded successfully.
 [Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
 
 <br>
+<hr>
+<br>
 
 # Statistics Feature
 
@@ -1331,6 +1345,8 @@ Please enter a command:
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
 
 <br>
+<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
+<br>
 
 # Save File
 
@@ -1339,8 +1355,28 @@ directly as inexperienced users may potentially corrupt the files.
 
 [Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
 
+<br>
+<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
+<br>
+
 # Glossary
 
-| Term | Explanation |
-|------|-------------|
-| Item | Explanation |
+The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
+The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
+The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
+
+| Term                     | Explanation                                                                                                                                              |
+|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Case-sensitive           | If something is case-sensitive, it means that whether letters are capitalized or not matters. For example, your passwords are case-sensitive             |
+| Command Line Interface   | A text-based interface. This means there are no icons to click and everything has to be typed.                                                           |
+| Command                  | An instruction given to the computer.                                                                                                                    |
+| Terminal                 | A tool used for CLI programmes to be run. It accepts text input and outputs text.                                                                        |
+| Decimal Places           | The number of digits behind a decimal point. For example `2.123` has 3 decimal places, while `4.20` has 2 decimal places.                                |
+| Directory                | Directories are folders in your computer system.                                                                                                         |
+| Flag                     | Used to specify instructions and change the behaviour of a command. In this application, flags have a short-form and a long-form, ie. `-n` and `--name`. |
+| Graphical User Interface | A graphic-based interface. Usually, it has buttons or icons of some kind and uses visuals to interact with the user.                                     |
+| Index                    | A set of ordered whole numbers used to indicate elements. For example, you can think about the different levels in a building.                           |
+| Integer                  | A whole number, such as `1`, `100` or `-1`. Numbers such as `1.2` and fractions are not integers.                                                        |
+| Point-of-Sale System     | It is used to accept payments from customers and track sales. For MoneyGoWhere, you are also able to create a menu in addition to tracking sales.        |
+
+[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)

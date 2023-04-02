@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import java.lang.reflect.Type;
+
+import exception.FileIsEmptyException;
 import exception.item.MissingFindItemDescriptionException;
 import app.Command;
 import com.google.gson.reflect.TypeToken;
@@ -11,6 +13,7 @@ import com.google.gson.JsonParseException;
 import org.apache.commons.lang3.StringUtils;
 import ui.Flags;
 import ui.MenuUi;
+import ui.StoreUi;
 import utility.Store;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
@@ -21,25 +24,49 @@ public class Menu {
 
     private ArrayList<Item> items;
     private Store store;
-    private MenuUi menuUi = new MenuUi();
-    private final String MENU_DATA_FILE = "menu.json";
+    private MenuUi menuUi;
 
-    public Menu() {
-        menuUi = new MenuUi();
-        this.store = new Store(MENU_DATA_FILE);
+    public Menu(String fileName) {
+        this.menuUi = new MenuUi();
+        this.store = new Store(fileName);
         Type type = new TypeToken<ArrayList<Item>>() {
         }.getType();
 
         try {
             this.items = store.load(type);
-        } catch (IOException | JsonParseException | NumberFormatException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            new StoreUi().menuNotFound();
             this.items = new ArrayList<>();
+            save();
+
+        } catch (JsonParseException | NumberFormatException | FileIsEmptyException e) {
+
+            if (new StoreUi().reinitializeMenu()) {
+                this.items = new ArrayList<>();
+                save();
+            } else {
+                System.exit(0);
+            }
         }
     }
 
-    public Menu(boolean isTest) {
+    public Menu() {
+        this.menuUi = new MenuUi();
         this.items = new ArrayList<>();
+    }
+
+    public Menu(String dirName, String fileName) {
+        this.menuUi = new MenuUi();
+        this.store = new Store(dirName, fileName);
+        Type type = new TypeToken<ArrayList<Item>>() {
+        }.getType();
+
+        try {
+            this.items = store.load(type);
+        } catch (IOException | JsonParseException | NumberFormatException | FileIsEmptyException e) {
+            System.out.println(e.getMessage());
+            this.items = new ArrayList<>();
+        }
     }
 
     public void displayList(Command command) {
@@ -83,13 +110,17 @@ public class Menu {
         boolean isValid = true;
 
         isValid = addItemValidation.validateFlags(command);
-        if(!isValid) { return; }
+        if (!isValid) {
+            return;
+        }
 
         command.mapArgumentAlias(addItemValidation.LONG_NAME_FLAG, addItemValidation.SHORT_NAME_FLAG);
         command.mapArgumentAlias(addItemValidation.LONG_PRICE_FLAG, addItemValidation.SHORT_PRICE_FLAG);
 
         isValid = addItemValidation.validateCommand(command, this);
-        if(!isValid) { return; }
+        if (!isValid) {
+            return;
+        }
 
         processAddItem(command, addItemValidation);
         menuUi.printCommandSuccess(command.getCommand());
@@ -120,12 +151,16 @@ public class Menu {
         boolean isValid = true;
 
         isValid = updateItemValidation.validateFlags(command);
-        if(!isValid) { return; }
+        if (!isValid) {
+            return;
+        }
         command.mapArgumentAlias(updateItemValidation.LONG_INDEX_FLAG, updateItemValidation.SHORT_INDEX_FLAG);
         command.mapArgumentAlias(updateItemValidation.LONG_NAME_FLAG, updateItemValidation.SHORT_NAME_FLAG);
         command.mapArgumentAlias(updateItemValidation.LONG_PRICE_FLAG, updateItemValidation.SHORT_PRICE_FLAG);
         isValid = updateItemValidation.validateCommand(command, this);
-        if(!isValid) { return; }
+        if (!isValid) {
+            return;
+        }
 
         processUpdateItem(command, updateItemValidation);
         menuUi.printCommandSuccess(command.getCommand());
@@ -162,10 +197,14 @@ public class Menu {
         boolean isValid = true;
 
         isValid = deleteItemValidation.validateFlags(command);
-        if(!isValid) { return; }
+        if (!isValid) {
+            return;
+        }
         command.mapArgumentAlias(deleteItemValidation.LONG_INDEX_FLAG, deleteItemValidation.SHORT_INDEX_FLAG);
         isValid = deleteItemValidation.validateCommand(command, this);
-        if(!isValid) { return; }
+        if (!isValid) {
+            return;
+        }
 
         processDeleteItem(command, deleteItemValidation);
         menuUi.printCommandSuccess(command.getCommand());

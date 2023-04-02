@@ -11,11 +11,13 @@ public class MoneyGoWhere {
 
     public Menu menu;
     public Transaction transactions;
+    private final String ORDER_DATA_FILE = "orders.json";
+    private final String MENU_DATA_FILE = "menu.json";
 
 
     public MoneyGoWhere() {
-        menu = new Menu();
-        transactions = new Transaction();
+        menu = new Menu(MENU_DATA_FILE);
+        transactions = new Transaction(ORDER_DATA_FILE);
     }
 
     /**

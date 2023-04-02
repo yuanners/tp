@@ -24,6 +24,8 @@ import java.util.Map;
  */
 public class SalesReport extends Statistic {
 
+    Transaction transaction;
+
     /**
      * Constructs a SalesReport object based on a given command and transaction.
      *
@@ -34,18 +36,19 @@ public class SalesReport extends Statistic {
             throws StartAfterEndDateException, ConflictFlagException {
         super(command);
         StatisticUi ui = new StatisticUi();
+        this.transaction = transaction;
 
         try {
-            double totalSales = totalSales(transaction);
+            double totalSales = totalSales();
 
             switch (command.getArgumentMap().get("sales")) {
             case "daily":
-                Map<LocalDateTime, Double> dailySalesMap = dailySales(transaction);
+                Map<LocalDateTime, Double> dailySalesMap = dailySales();
                 new Chart().dailySalesChart(dailySalesMap, super.getStartDate(), super.getEndDate(), totalSales);
                 break;
             case "monthly":
                 sv.validateYearExist();
-                Map<LocalDateTime, Double> monthlySalesMap = monthlySales(transaction);
+                Map<LocalDateTime, Double> monthlySalesMap = monthlySales();
                 new Chart().monthlySalesChart(monthlySalesMap, super.getYear(), totalSales);
                 break;
             default:
@@ -63,10 +66,9 @@ public class SalesReport extends Statistic {
     /**
      * Calculates the total sales within a given date range based on a given transaction.
      *
-     * @param transaction the transaction to be used for calculating the total sales.
      * @return the total sales within the given date range.
      */
-    public double totalSales(Transaction transaction) {
+    public double totalSales() {
         double totalSales = 0;
 
         for (Order order : transaction.getOrderList()) {
@@ -87,11 +89,10 @@ public class SalesReport extends Statistic {
     /**
      * Calculates the daily sales within a given date range based on a given transaction.
      *
-     * @param transaction the transaction to be used for calculating the daily sales.
      * @return a Map with LocalDateTime keys representing the start of each day within the date range,
      *         and Double values representing the total sales for each day.
      */
-    public Map<LocalDateTime, Double> dailySales(Transaction transaction) {
+    public Map<LocalDateTime, Double> dailySales() {
         Map<LocalDateTime, Double> dailySalesMap = new HashMap<>();
 
         for (Order order : transaction.getOrderList()) {
@@ -113,11 +114,10 @@ public class SalesReport extends Statistic {
     /**
      * Calculates the monthly sales within a given date range based on a given transaction.
      *
-     * @param transaction the transaction to be used for calculating the monthly sales.
      * @return a Map with LocalDateTime keys representing the start of each month within the date range,
      *         and Double values representing the total sales for each month.
      */
-    public Map<LocalDateTime, Double> monthlySales(Transaction transaction) {
+    public Map<LocalDateTime, Double> monthlySales() {
         Map<LocalDateTime, Double> monthlySalesMap = new HashMap<>();
 
         for (Order order : transaction.getOrderList()) {

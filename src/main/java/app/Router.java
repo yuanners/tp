@@ -10,7 +10,6 @@ import payment.Payment;
 import payment.Refund;
 import statistic.Statistic;
 import payment.RefundAssistant;
-import statistic.StatisticAssistant;
 import ui.Flags;
 import ui.TransactionUi;
 import ui.Ui;
@@ -145,10 +144,6 @@ public class Router {
             case "refundorder":
                 isCancelled = refundAssistant.refundOrder(transactions);
                 menuAssistant.printResult(command, isCancelled);
-                break;
-            case "9":
-            case "report":
-                new StatisticAssistant();
                 break;
             default:
                 ui.printInvalidCommand(command.getCommand());
