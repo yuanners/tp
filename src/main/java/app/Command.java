@@ -44,11 +44,13 @@ public class Command {
     public void mapArgumentAlias(String longAlias, String shortAlias) throws DuplicateArgumentFoundException {
 
         if (argumentMap.containsKey(shortAlias) && argumentMap.containsKey(longAlias)) {
-            if(!argumentMap.get(shortAlias).equals(argumentMap.get(longAlias))){
+            String longAliasValue = argumentMap.get(longAlias) != null ? argumentMap.get(longAlias) : "";
+            String shortAliasValue = argumentMap.get(shortAlias) != null ? argumentMap.get(shortAlias) : "";
+
+            if (!shortAliasValue.equals(longAliasValue)) {
                 throw new DuplicateArgumentFoundException();
             }
         }
-
 
         if (argumentMap.containsKey(shortAlias)) {
             argumentMap.put(longAlias, argumentMap.get(shortAlias));

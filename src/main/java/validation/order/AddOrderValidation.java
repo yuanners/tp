@@ -28,7 +28,7 @@ public class AddOrderValidation extends Validation {
         this.transactionUi = new TransactionUi();
     }
 
-    public boolean checkValidItemName(String itemName) {
+    public boolean checkValidItemName(String itemName) throws DuplicateArgumentFoundException {
 
         if (!isInteger(itemName)) {
             if (!(itemName.substring(0, 1).equals("\"")) ||
