@@ -42,7 +42,7 @@ public class MenuAssistant {
     public void printResult(Command command, boolean isCancelled) {
         if (isCancelled) {
             menuAssistantUi.printCommandCancelled(command.getCommand());
-        } else {
+        } else if(!command.getCommand().equals("finditem")){
             menuAssistantUi.printCommandSuccess(command.getCommand());
         }
     }
