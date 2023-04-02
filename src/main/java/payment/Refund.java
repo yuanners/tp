@@ -5,7 +5,6 @@ import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import exception.order.MissingRefundOrderArgument;
 import exception.order.MissingRefundOrderFlag;
-import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import ui.Flags;
@@ -29,7 +28,6 @@ public class Refund {
      */
     public void refundTransaction(Command arg, Transaction transactions) {
         RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
-        MenuAssistant menuAssistant = new MenuAssistant();
 
         try {
             if (!(transactions.getOrderList().isEmpty())) {

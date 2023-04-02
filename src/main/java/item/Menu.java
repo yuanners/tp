@@ -95,10 +95,6 @@ public class Menu {
         return items.get(index);
     }
 
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
-
     /**
      * Validates the add item command and calls processAddItem if command is valid
      *
@@ -337,7 +333,6 @@ public class Menu {
         }
 
         menuUi.printCommandSuccess(command.getCommand());
-
     }
 
     public void save() {

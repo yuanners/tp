@@ -23,10 +23,8 @@ import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 public class Order implements OrderInterface {
@@ -101,24 +99,6 @@ public class Order implements OrderInterface {
     }
 
     /**
-     * Sets the unique ID of the Order.
-     *
-     * @param orderId unique ID of the Order
-     */
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    /**
-     * Get the payment type of the order: only accept card, cash or others
-     *
-     * @return payment type
-     */
-    public String getPaymentType() {
-        return paymentType;
-    }
-
-    /**
      * Set the payment type of the order
      *
      * @param paymentType user input payment type
@@ -140,14 +120,6 @@ public class Order implements OrderInterface {
 
     public LocalDateTime getDateTime() {
         return dateTime;
-    }
-
-    public Date getDate() {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        ZoneId zoneId = ZoneId.systemDefault();
-        Date date = Date.from(localDateTime.atZone(zoneId).toInstant());
-
-        return date;
     }
 
     public String getStatus() {

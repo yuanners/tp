@@ -1,5 +1,7 @@
 package ui;
 
+import java.util.Scanner;
+
 public class Ui {
 
     public void printWelcomeMessage() {
@@ -13,6 +15,12 @@ public class Ui {
         System.out.println("Please enter a command:");
     }
 
+    public String inputHandler(){
+        Scanner scanner = new Scanner(System.in);
+        String userInput = scanner.nextLine().trim();
+        return userInput;
+    }
+
     public void printInvalidCommand(String command) {
         System.out.println("The command: " + command + " is not a valid command.");
     }
@@ -23,10 +31,6 @@ public class Ui {
 
     public void printCommandCancelled(String command) {
         System.out.println("The command: " + command + " has been cancelled.");
-    }
-
-    public String printInvalidFlags(String command) {
-        return "The usage of " + command + " is invalid.";
     }
 
     public void printHelp() {

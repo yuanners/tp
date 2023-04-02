@@ -3,7 +3,6 @@ package statistic;
 import app.Command;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.StartAfterEndDateException;
-import item.Menu;
 import order.Transaction;
 import org.junit.jupiter.api.Test;
 import validation.statistic.StatisticValidation;
@@ -14,12 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SalesReportTest {
 
-    public Menu menu;
     public Transaction transactions;
 
     @Test
     void dailySales() {
-        this.menu = new Menu("./datastore-test", "menu-test.json");
         this.transactions = new Transaction("./datastore-test", "orders-test.json");
 
         try {
@@ -35,7 +32,6 @@ class SalesReportTest {
 
     @Test
     void monthlySales() {
-        this.menu = new Menu("./datastore-test", "menu-test.json");
         this.transactions = new Transaction("./datastore-test", "orders-test.json");
 
         try {
