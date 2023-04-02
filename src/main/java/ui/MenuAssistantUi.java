@@ -55,7 +55,8 @@ public class MenuAssistantUi extends MenuUi {
      **/
 
     public void promptUpdateItemUnrecognisedAnswer() {
-        System.out.println("\nSorry your input was not recognised.\nPlease answer with \"yes\" or \"no\" or use \"/cancel\" to abort.");
+        System.out.println("\nSorry your input was not recognised.\nPlease answer with \"yes\" or \"no\""
+                + " or use \"/cancel\" to abort.");
     }
 
     @Override
