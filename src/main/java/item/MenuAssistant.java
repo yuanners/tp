@@ -69,6 +69,7 @@ public class MenuAssistant {
                 return true;
             }
 
+            name = name.trim();
             command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG, name);
             command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
 
@@ -111,6 +112,7 @@ public class MenuAssistant {
                 return true;
             }
 
+            name = name.trim();
             command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG, name);
             command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
 
