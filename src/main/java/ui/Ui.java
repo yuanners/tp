@@ -34,12 +34,12 @@ public class Ui {
     }
 
     public void printAssistedHelp() {
-        System.out.println("There are 10 commands you can use as a new user in MoneyGoWhere.\n" +
+        System.out.println("\nThere are 10 commands you can use as a new user in MoneyGoWhere.\n" +
                 "For more details, please refer to the User Guide.\n" +
                 "0. help\n" +
                 "1. additem\n" +
-                "2. deleteitem\n" +
-                "3. listitem\n" +
+                "2. listitem\n" +
+                "3. deleteitem\n" +
                 "4. updateitem\n" +
                 "5. finditem\n" +
                 "6. addorder\n" +
@@ -51,12 +51,12 @@ public class Ui {
     }
 
     public void printHelp() {
-        System.out.println("There are 10 commands you can use as an experienced user in MoneyGoWhere.\n" +
+        System.out.println("\nThere are 10 commands you can use as an experienced user in MoneyGoWhere.\n" +
                 "For more details, please refer to the User Guide.\n" +
                 "0.  /help\n" +
                 "1.  /additem -n \"<name>\" -p <price>\n" +
-                "2.  /deleteitem -i <index>\n" +
-                "3.  /listitem\n" +
+                "2.  /listitem\n" +
+                "3.  /deleteitem -i <index>\n" +
                 "4.  /updateitem -i <index> {-n <name>} {-p <price>}\n" +
                 "5.  /finditem -n \"<name>\"\n" +
                 "6a. /addorder -i <index> -q <quantity>\n" +
