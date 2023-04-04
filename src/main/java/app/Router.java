@@ -50,6 +50,9 @@ public class Router {
      */
     private void proRoute(Command command) throws DuplicateArgumentFoundException {
         switch (command.getCommand()) {
+        case "help":
+            ui.printAssistedHelp();
+            break;
         case "/help":
             ui.printHelp();
             break;
@@ -107,7 +110,7 @@ public class Router {
             switch (command.getCommand()) {
             case "?":
             case "help":
-                ui.printHelp();
+                ui.printAssistedHelp();
                 break;
             case "1":
             case "additem":
