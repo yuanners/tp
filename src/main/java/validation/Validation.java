@@ -43,10 +43,10 @@ public class Validation {
      * @param command The given command
      * @throws UnrecognisedCommandException
      */
-    public void validateAssistantCommand(Command command) throws UnrecognisedCommandException {
+    public void validateNoArgumentCommand(Command command) throws UnrecognisedCommandException {
 
         if(command.getArgumentString() == null) {
-            throw new UnrecognisedCommandException();
+            return;
         }
 
         String argString = command.getArgumentString();
@@ -54,7 +54,7 @@ public class Validation {
         if (!argString.trim().equals("")) {
             throw new UnrecognisedCommandException();
         }
-        assert !command.getArgumentString().equals("") : "There should not be arguments after the commands";
+        assert command.getArgumentString().trim().equals("") : "There should not be arguments after the commands";
     }
 
 }

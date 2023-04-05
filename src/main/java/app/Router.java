@@ -54,7 +54,7 @@ public class Router {
             ui.printAssistedHelp();
             break;
         case "/help":
-            ui.printHelp();
+            ui.printHelp(command);
             break;
         case "/additem":
             menu.addItem(command);
@@ -75,7 +75,7 @@ public class Router {
             new Order(command, menu, transactions, transactionUi, payment);
             break;
         case "/listorder":
-            transactions.displayList();
+            transactions.displayList(command);
             break;
         case "/refundorder":
             Refund refund = new Refund();
@@ -100,7 +100,7 @@ public class Router {
         Validation validation = new Validation();
 
         try {
-            validation.validateAssistantCommand(command);
+            validation.validateNoArgumentCommand(command);
 
             MenuAssistant menuAssistant = new MenuAssistant();
             OrderAssistant orderAssistant = new OrderAssistant();
@@ -142,7 +142,7 @@ public class Router {
                 break;
             case "7":
             case "listorder":
-                transactions.displayList();
+                transactions.displayList(command);
                 break;
             case "8":
             case "refundorder":
