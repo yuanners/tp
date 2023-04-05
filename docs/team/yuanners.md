@@ -17,9 +17,10 @@ Please click on this [link to my RepoSense report](https://nus-cs2113-ay2223s2.g
 Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS2113T-T09-2/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Ayuanners) to view my pull requests.
 
 ### Enhancements Implemented
-* Implemented validation for add order commands
+* Implemented validation classes for add order, add multiple order, payment and refund commands.
 * Implemented the payment package
-* Implemented Junit test cases for refund and payment commands
+* Implemented Junit test cases for refund order.
 
 ### Contributions to DG
 * Wrote the section of refund order for both assist and pro mode
+* Wrote the section of payment.
