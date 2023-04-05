@@ -43,7 +43,7 @@ public class Validation {
      * @param command The given command
      * @throws UnrecognisedCommandException
      */
-    public void validateAssistantCommand(Command command) throws UnrecognisedCommandException {
+    public void validateNoArgumentCommand(Command command) throws UnrecognisedCommandException {
 
         if(command.getArgumentString() == null) {
             throw new UnrecognisedCommandException();

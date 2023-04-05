@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 
 import exception.DuplicateArgumentFoundException;
 import exception.FileIsEmptyException;
+import exception.UnrecognisedCommandException;
 import exception.item.MissingFindItemDescriptionException;
 import app.Command;
 import com.google.gson.reflect.TypeToken;
@@ -15,7 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import ui.Flags;
 import ui.MenuUi;
 import ui.StoreUi;
+import ui.Ui;
 import utility.Store;
+import validation.Validation;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 import validation.item.FindItemValidation;
@@ -67,6 +70,14 @@ public class Menu {
     }
 
     public void displayList(Command command) {
+        try {
+            Validation validation = new Validation();
+            validation.validateNoArgumentCommand(command);
+        } catch (UnrecognisedCommandException e) {
+            Ui ui = new Ui();
+            ui.printError(Flags.Error.UNRECOGNISED_COMMAND_ERROR);
+            return;
+        }
         MenuUi menuUi = new MenuUi();
         if (this.items.size() != 0) {
             menuUi.printMenu(items);
