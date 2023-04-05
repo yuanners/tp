@@ -300,6 +300,7 @@ successfully added to the menu or if the user has cancelled the command accordin
     * [Add a Single Item](#add-only-one-menu-item-into-an-order)
     * [Add Multiple Items](#add-multiple-menu-items-into-an-order)
     * [Basic Mode](#basic-mode-add-an-order)
+* [Make payment](#make-payment)
 * [List all Orders](#list-all-orders)
 * [Refund an Order](#refund-an-order)
     * [Advanced Mode](#advanced-mode-refund-an-order)
@@ -317,10 +318,9 @@ There are three ways to add an order into MoneyGoWhere.
 
 Both ways work similarly, but are parsed differently.
 
-These sequence diagrams show the interaction between various components in MoneyGoWhere when a user inputs commands to add an order.
+This sequence diagram shows the interaction between various components in MoneyGoWhere when a user inputs commands to add an order.
 
 ![](./images/developersGuide/addOrder.png)
-![](./images/developersGuide/handlePayment.png)
 
 
 The next section will describe exactly how the inputs are parsed into the `addorder` command through each of the
@@ -409,6 +409,26 @@ The general workflow of `addorder` is as follows:
 
 <hr>
 
+#### Make payment
+
+![](./images/developersGuide/handlePayment.png)
+
+This sequence diagram shows what happens after a valid add order command is executed. 
+
+The general workflow of `/pay` is as follows:
+1. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
+2. The `Payment` object uses the `handlePayment` method to prompt the user to enter the `/pay` command with the valid arguments.
+3. `Payment#handlePayment` then instantiates the validation class `PaymentValidation` to validate the arguments provided.
+4. The method `PaymentValidation#validatePayment` is invoked to check the following:
+   * The correct command format is used.
+   * The flag for payment type and amount flags are present
+   * The payment amount is a valid 2 decimal place double and must be more than or equals to the subtotal of the order.
+5. If the command passes all the validation checks, control is given back to #Payment class and the `Order.status` will be updated to `completed`, 
+the payment type and amount are also updated accordingly and is saved to the `orders.json` file using the `Transaction.save` method.
+6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to print a 
+message indicating that the command has executed successfully.
+7. (The above workflow is similar for the basic mode `pay` command, hence not elaborated.)
+<hr>
 #### List all Orders
 
 ![](./images/developersGuide/ListOrders.png)
@@ -453,7 +473,7 @@ The general workflow of `/refundorder` is as follows:
     * `refundOrderValidation#checkOrder` first check if the argument is indeed a valid `Order.UUID` then checks
       the `Order.status`.
         * If the `Order.status` is already `refunded`, then the command would be invalid.
-          7.If the command passes all the validation checks, control is given back to `Refund` class and
+7. If the command passes all the validation checks, control is given back to `Refund` class and
           the `Order.status` will be updated to `refunded` and is saved to the `orders.json` file using
           the `Transaction.save` method. 
 6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to
@@ -474,10 +494,12 @@ The general workflow of `refundorder` is as follows:
    user input.
 3. `Router#handleRoute` is then invoked to process the command. It calls the `Router#assistRoute` for the basic mode
    commands.
-4. Once the command runs, it can be aborted at any time when the user inputs /cancel.
+4. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
 4. The obtained command `refundorder` is then passed back to `MoneyGoWhere`, which instantiates a new `RefundAssistant`object
    and calls the `RefundAssistant#refundOrder` method.
-5. `RefundAssistant#refundOrder` invokes the `getID` method to get and validate the order ID to be refunded (same validation as advanced mode).
+5. `RefundAssistant#refundOrder` invokes the `getID` method to get and validate the order ID to be refunded.
+   * If the order list is empty, the command would be invalid.
+   * If the order ID is invalid, the command would be invalid.
 6.  If the command passes all the validation checks, control is given back to `Refund` class and the `Order.status` will be updated to `refunded` and is saved to the `orders.json` file using the `Transaction.save` method.
 7. Router#assistRoute then calls MenuAssistant#printResult to print a message indicating that if the item has been successfully added to the menu or if the user has cancelled the command accordingly.
 
