@@ -1,6 +1,7 @@
 package order;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import item.Menu;
 import payment.Payment;
 import ui.TransactionUi;
@@ -20,7 +21,7 @@ public class OrderAssistant {
         transactionUi = new TransactionUi();
     }
 
-    public boolean assistedAddOrder(Menu menu, Transaction transaction) {
+    public boolean assistedAddOrder(Menu menu, Transaction transaction) throws DuplicateArgumentFoundException {
 
         Command command;
         String commandString = "";
@@ -38,6 +39,7 @@ public class OrderAssistant {
                 if (Arrays.asList(CANCELS).contains(itemName)) {
                     return true;
                 }
+
             } while (!addOrderValidation.checkValidItemName(itemName));
 
             do {
@@ -60,7 +62,7 @@ public class OrderAssistant {
             }
 
             // Append to final command string
-            commandString += "\"" + itemName + "\":" + quantity + ",";
+            commandString +=  itemName + ":" + quantity + ",";
         }
 
         commandString = formatCommandStringForOrders(commandString);
@@ -115,6 +117,16 @@ public class OrderAssistant {
         ordersString = "/addorder -I [" + ordersString + "]";
         return ordersString;
 
+    }
+
+    public boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException n) {
+            return false;
+        }
+
+        return true;
     }
 
 }

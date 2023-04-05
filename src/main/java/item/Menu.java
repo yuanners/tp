@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import java.lang.reflect.Type;
 
+import exception.DuplicateArgumentFoundException;
 import exception.FileIsEmptyException;
+import exception.UnrecognisedCommandException;
 import exception.item.MissingFindItemDescriptionException;
 import app.Command;
 import com.google.gson.reflect.TypeToken;
@@ -14,7 +16,9 @@ import org.apache.commons.lang3.StringUtils;
 import ui.Flags;
 import ui.MenuUi;
 import ui.StoreUi;
+import ui.Ui;
 import utility.Store;
+import validation.Validation;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 import validation.item.FindItemValidation;
@@ -50,10 +54,6 @@ public class Menu {
         }
     }
 
-    public Menu() {
-        this.menuUi = new MenuUi();
-        this.items = new ArrayList<>();
-    }
 
     public Menu(String dirName, String fileName) {
         this.menuUi = new MenuUi();
@@ -70,6 +70,14 @@ public class Menu {
     }
 
     public void displayList(Command command) {
+        try {
+            Validation validation = new Validation();
+            validation.validateNoArgumentCommand(command);
+        } catch (UnrecognisedCommandException e) {
+            Ui ui = new Ui();
+            ui.printError(Flags.Error.UNRECOGNISED_COMMAND_ERROR);
+            return;
+        }
         MenuUi menuUi = new MenuUi();
         if (this.items.size() != 0) {
             menuUi.printMenu(items);
@@ -100,7 +108,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void addItem(Command command) {
+    public void addItem(Command command) throws DuplicateArgumentFoundException {
 
         AddItemValidation addItemValidation = new AddItemValidation();
         boolean isValid = true;
@@ -147,7 +155,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void updateItem(Command command) {
+    public void updateItem(Command command) throws DuplicateArgumentFoundException {
         if (this.getItems().size() == 0) {
             menuUi.printError(Flags.Error.EMPTY_MENU);
             return;
@@ -204,7 +212,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void deleteItem(Command command) {
+    public void deleteItem(Command command) throws DuplicateArgumentFoundException {
         if (this.getItems().size() == 0) {
             menuUi.printError(Flags.Error.EMPTY_MENU);
             return;
@@ -266,8 +274,7 @@ public class Menu {
      * If itemName is an exact match for an item's name, only the index of that item is returned.
      *
      * @param itemName the name of the item to search for, case-insensitively
-     * @return an ArrayList of integers containing the indexes of all matching items,
-     *     or an empty list if no matching item is found
+     * @return an ArrayList of integers containing the indexes of all matching items, or empty if no result
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
@@ -334,6 +341,51 @@ public class Menu {
 
         menuUi.printCommandSuccess(command.getCommand());
     }
+
+    /**
+     * Has the same functionality as showResultsOfFind(),
+     * but does not print the success message at the end.
+     *
+     * @param command the Command object containing the search term
+     */
+    public void showResultsOfFindWithoutSuccessMsg(Command command) {
+
+        FindItemValidation findItemValidation = new FindItemValidation();
+
+        ArrayList<Item> menu = this.getItems();
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        String itemName = command.getArgumentString().trim();
+
+        try {
+            findItemValidation.validateName(itemName);
+        } catch (MissingFindItemDescriptionException e) {
+            menuUi.printError(Flags.Error.MISSING_FIND_ITEM_DESCRIPTION);
+            return;
+        }
+
+        if (itemName.contains("\"")) {
+            itemName = itemName.replace("\"", "");
+        }
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (StringUtils.containsIgnoreCase(menu.get(i).getName(), itemName)) {
+                indexes.add(i);
+            }
+        }
+
+        if (indexes.size() == 0) {
+            menuUi.printNoItemFound(itemName);
+            return;
+        }
+
+        menuUi.printMenuHeader();
+        for (int i = 0; i < indexes.size(); i++) {
+            menuUi.printFindItem(indexes.get(i), menu);
+        }
+
+    }
+
 
     public void save() {
         try {

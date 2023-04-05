@@ -1,6 +1,7 @@
 package statistic;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.StartAfterEndDateException;
 import exception.statistic.TypeNotFoundException;
@@ -40,7 +41,7 @@ public class RankReport extends Statistic {
      * @param menu        a Menu object containing the list of items to be included in the report
      */
     public RankReport(Command command, Transaction transaction, Menu menu)
-            throws StartAfterEndDateException, ConflictFlagException {
+            throws StartAfterEndDateException, ConflictFlagException, DuplicateArgumentFoundException {
         super(command);
         StatisticUi ui = new StatisticUi();
         this.transaction = transaction;

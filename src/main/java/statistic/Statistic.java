@@ -1,6 +1,7 @@
 package statistic;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.MissingRequiredFlagException;
 import exception.statistic.StartAfterEndDateException;
@@ -21,7 +22,8 @@ public class Statistic {
 
     private int year;
 
-    public Statistic(Command command) throws StartAfterEndDateException, ConflictFlagException {
+    public Statistic(Command command) throws StartAfterEndDateException,
+            ConflictFlagException, DuplicateArgumentFoundException {
         command = mapArguments(command);
 
         StatisticValidation sv = new StatisticValidation(command);
@@ -55,7 +57,7 @@ public class Statistic {
         }
     }
 
-    public static Command mapArguments(Command command) {
+    public static Command mapArguments(Command command) throws DuplicateArgumentFoundException {
         command.mapArgumentAlias("sales", "s");
         command.mapArgumentAlias("rank", "r");
         command.mapArgumentAlias("year", "y");
@@ -65,7 +67,8 @@ public class Statistic {
         return command;
     }
 
-    public static void handleStatisticRoute(Command command, Transaction transactions, Menu menu) {
+    public static void handleStatisticRoute(Command command, Transaction transactions, Menu menu)
+            throws DuplicateArgumentFoundException {
 
         command = mapArguments(command);
         StatisticValidation sv = new StatisticValidation(command);

@@ -1,6 +1,7 @@
 package statistic;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.StartAfterEndDateException;
 import order.Transaction;
@@ -25,7 +26,7 @@ class SalesReportTest {
             SalesReport sr = new SalesReport(c, sv, transactions);
 
             assertEquals(101.4, sr.totalSales());
-        } catch (StartAfterEndDateException | ConflictFlagException e) {
+        } catch (StartAfterEndDateException | ConflictFlagException | DuplicateArgumentFoundException e) {
             assertTrue(false);
         }
     }
@@ -40,7 +41,7 @@ class SalesReportTest {
             SalesReport sr = new SalesReport(c, sv, transactions);
 
             assertEquals(286.5, sr.totalSales());
-        } catch (StartAfterEndDateException | ConflictFlagException e) {
+        } catch (StartAfterEndDateException | ConflictFlagException | DuplicateArgumentFoundException e) {
             System.out.println("ERROR");
         }
     }

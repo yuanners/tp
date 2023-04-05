@@ -1,6 +1,7 @@
 package validation.order;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.MissingPayCommandException;
 import exception.order.MissingPayTypeFlagException;
 import exception.order.MissingPayTypeArgumentException;
@@ -33,7 +34,7 @@ public class PaymentValidation extends Validation {
      * @param arg   user input
      * @param order list of order entries
      */
-    public boolean validatePayment(Command arg, Order order) {
+    public boolean validatePayment(Command arg, Order order) throws DuplicateArgumentFoundException  {
         boolean isValid = false;
         try {
             validateCommand(arg);
@@ -91,7 +92,7 @@ public class PaymentValidation extends Validation {
      * @throws MissingPayAmountArgumentException missing amount argument
      */
     public void validateFlag(Command arg) throws MissingPayTypeFlagException, MissingPayTypeArgumentException,
-            MissingPayAmountFlagException, MissingPayAmountArgumentException {
+            MissingPayAmountFlagException, MissingPayAmountArgumentException, DuplicateArgumentFoundException {
         arg.mapArgumentAlias("a", "amount");
         arg.mapArgumentAlias("t", "type");
         if (arg.getArgumentString().contains("-t")) {
@@ -118,7 +119,7 @@ public class PaymentValidation extends Validation {
      * @param arg user input command
      * @throws InvalidPayTypeException type is not one of these: cash/card/others
      */
-    public void validateType(Command arg) throws InvalidPayTypeException {
+    public void validateType(Command arg) throws InvalidPayTypeException, DuplicateArgumentFoundException {
         arg.mapArgumentAlias("t", "type");
         String type = "";
         if (arg.getArgumentMap().get("t") != null) {
@@ -147,7 +148,8 @@ public class PaymentValidation extends Validation {
      */
     public void validateAmount(Command arg, Order order) throws InvalidPayAmountFormatException,
             InvalidPayAmountNegativeException, InsufficientPayAmountException,
-            InvalidPayAmountDecimalPlaceException, InvalidPaymentAmountForCardException {
+            InvalidPayAmountDecimalPlaceException, InvalidPaymentAmountForCardException,
+            DuplicateArgumentFoundException {
         arg.mapArgumentAlias("a", "amount");
         String amount = "";
         if (arg.getArgumentMap().get("a") != null) {

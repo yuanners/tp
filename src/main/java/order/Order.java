@@ -2,6 +2,7 @@ package order;
 
 import app.Command;
 
+import exception.DuplicateArgumentFoundException;
 import exception.order.MissingQuantityArgumentException;
 import exception.order.InvalidIndexNumberFormatException;
 import exception.order.MissingOrderFlagException;
@@ -27,7 +28,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Order implements OrderInterface {
+public class Order implements ComputeOrder {
 
     private String orderId;
     private LocalDateTime dateTime;
@@ -59,7 +60,7 @@ public class Order implements OrderInterface {
      * @param transactions The transaction object to which the order will be appended.
      */
     public Order(Command command, Menu menu, Transaction transactions,
-                 TransactionUi transactionUi, Payment payment) {
+                 TransactionUi transactionUi, Payment payment) throws DuplicateArgumentFoundException {
         this.orderId = UUID.randomUUID().toString();
         this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
@@ -159,7 +160,8 @@ public class Order implements OrderInterface {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) {
+    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi)
+            throws DuplicateArgumentFoundException {
         boolean isAdded = false;
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation(listOfItems);
@@ -219,7 +221,8 @@ public class Order implements OrderInterface {
      * @param listOfItems the list of items from which the item is selected
      */
     public void addSingleOrder(Command command, Menu listOfItems,
-                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException {
+                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException,
+            DuplicateArgumentFoundException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -273,7 +276,8 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the items are selected
      */
-    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi) {
+    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi)
+            throws DuplicateArgumentFoundException {
 
         command.mapArgumentAlias("items", "I");
 

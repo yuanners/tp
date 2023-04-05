@@ -3,6 +3,7 @@ package seedu.moneygowhere;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import org.junit.jupiter.api.Test;
 import item.Menu;
 
@@ -14,7 +15,7 @@ class ItemTest {
     }
 
     @Test
-    public void itemTest() {
+    public void itemTest() throws DuplicateArgumentFoundException {
         Command command = new Command("/additem -p 2.50 -n \"chicken rice\"");
         menu.addItem(command);
 
@@ -44,7 +45,7 @@ class ItemTest {
         itemTest12();
     }
 
-    public void itemTest2() {
+    public void itemTest2() throws DuplicateArgumentFoundException {
         Command command = new Command("/additem -p 2kuku0.01 -n \"chicken rice3\"");
         menu.addItem(command);
 
@@ -57,7 +58,7 @@ class ItemTest {
 
     }
 
-    public void itemTest3() {
+    public void itemTest3() throws DuplicateArgumentFoundException {
         // max 2dp error
         Command command = new Command("/additem -p 20.0001 -n \"chicken rice4\"");
         menu.addItem(command);
@@ -70,7 +71,7 @@ class ItemTest {
                 get(menu.getItems().size() - 1).getName());
     }
 
-    public void itemTest4() {
+    public void itemTest4() throws DuplicateArgumentFoundException {
         int index = menu.getItems().size() - 1;
 
         Command command = new Command("/updateitem -i " + index + " -n \"chicken rice1000\"");
@@ -84,7 +85,7 @@ class ItemTest {
                 get(index).getName());
     }
 
-    public void itemTest5() {
+    public void itemTest5() throws DuplicateArgumentFoundException {
         int index = menu.getItems().size() - 1;
 
         Command command = new Command("/updateitem -i " + index + " -p 2000.001");
@@ -97,7 +98,7 @@ class ItemTest {
                 get(index).getPrice());
     }
 
-    public void itemTest6() {
+    public void itemTest6() throws DuplicateArgumentFoundException {
         int index = menu.getItems().size() - 1;
 
         Command command = new Command("/updateitem -i " + index + " -p 123.45");
@@ -110,7 +111,7 @@ class ItemTest {
                 get(index).getPrice());
     }
 
-    public void itemTest7() {
+    public void itemTest7() throws DuplicateArgumentFoundException {
         int index = menu.getItems().size() - 1;
 
         Command command = new Command("/updateitem -i " + index + " -p 987.65 -n \"itemTest7 name 1 2 3\"");
@@ -130,7 +131,7 @@ class ItemTest {
                 get(index).getPrice());
     }
 
-    public void itemTest8() {
+    public void itemTest8() throws DuplicateArgumentFoundException {
         int index = menu.getItems().size() - 1;
         String newName = menu.getItems().
                 get(0).getName();
@@ -156,7 +157,7 @@ class ItemTest {
                 get(index).getPrice());
     }
 
-    public void itemTest9() {
+    public void itemTest9() throws DuplicateArgumentFoundException {
         Command command = new Command("/deleteitem -i 1as.sdf");
         menu.deleteItem(command);
 
@@ -178,7 +179,7 @@ class ItemTest {
 
     }
 
-    public void itemTest10() {
+    public void itemTest10() throws DuplicateArgumentFoundException {
         Command command = new Command("/deleteitem -i -1.0");
         menu.deleteItem(command);
 
@@ -196,7 +197,7 @@ class ItemTest {
                 "Item price should be 987.65";
     }
 
-    public void itemTest11() {
+    public void itemTest11() throws DuplicateArgumentFoundException {
         Command command = new Command("/deleteitem -i 2.3");
         menu.deleteItem(command);
 
@@ -214,7 +215,7 @@ class ItemTest {
                 "Item price should be 987.65";
     }
 
-    public void itemTest12() {
+    public void itemTest12() throws DuplicateArgumentFoundException {
         Command listcmd = new Command("/listitem");
 
         menu.displayList(listcmd);

@@ -1,6 +1,7 @@
 package validation.order;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import exception.order.MissingRefundOrderArgument;
@@ -24,7 +25,8 @@ public class RefundOrderValidation extends Validation {
      * @throws MissingRefundOrderFlag     no -i/--id flag in user input
      * @throws MissingRefundOrderArgument no argument for -i/--id flag in user input
      */
-    public void validateFlag(Command arg) throws MissingRefundOrderFlag, MissingRefundOrderArgument {
+    public void validateFlag(Command arg) throws MissingRefundOrderFlag, MissingRefundOrderArgument,
+            DuplicateArgumentFoundException {
         arg.mapArgumentAlias("i", "id");
         if (arg.getArgumentString().contains("-i")) {
             if (arg.getArgumentMap().get("i") == null) {
@@ -43,11 +45,12 @@ public class RefundOrderValidation extends Validation {
      * @throws InvalidRefundOrderID   invalid order ID
      */
     public void validateRefund(Command arg, Transaction transaction) throws
-            InvalidRefundOrderType, InvalidRefundOrderID {
+            InvalidRefundOrderType, InvalidRefundOrderID, DuplicateArgumentFoundException {
+        arg.mapArgumentAlias("i", "id");
         boolean isValidID = false;
         String orderID = "";
         if (arg.getArgumentString() != null && arg.getArgumentString().length() > 1) {
-            orderID = arg.getArgumentString();
+            orderID = arg.getArgumentMap().get("i").trim();
         } else {
             orderID = arg.getUserInput();
         }

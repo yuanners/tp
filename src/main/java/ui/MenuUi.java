@@ -15,18 +15,18 @@ public class MenuUi extends Ui {
     }
 
     public void printFindItem(int index, ArrayList<Item> menu) {
-        System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
+        System.out.printf("| %-5d | %-25s | %-8.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
     }
 
     public void printMenuHeader() {
-        System.out.printf("| %-5s | %-25s | %-5s |\n", "Index", "Name", "Price");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+        System.out.printf("\n| %-5s | %-25s | %-8s |\n", "Index", "Name", "Price");
+        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(8) + " |");
     }
 
     public void printMenu(ArrayList<Item> menu) {
         printMenuHeader();
         for (int i = 0; i < menu.size(); ++i) {
-            System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
+            System.out.printf("| %-5d | %-25s | %-8.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
         }
     }
 

@@ -12,7 +12,7 @@ public class OrderNegativeTest {
     void orderEntryNegativeTest() {
 
         Item item = new Item("chicken rice", 2.00);
-        OrderEntry orderEntry = new OrderEntry(item, 10);
+        OrderEntry orderEntry = new OrderEntry(item, 11);
 
         assertNotEquals(9, orderEntry.getQuantity());
         assertNotEquals("chickenest rice", orderEntry.getItem().getName());
