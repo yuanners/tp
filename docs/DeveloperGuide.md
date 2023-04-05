@@ -388,7 +388,7 @@ The general workflow of the `/addorder` command is as follows:
 
 ##### Basic Mode Add an Order
 
-![](./images/developersGuide/AssistedAddOrder.png)
+![](./images/developersGuide/assistedAddOrder.png)
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `addorder` or `6`.
@@ -429,9 +429,10 @@ the payment type and amount are also updated accordingly and is saved to the `or
 message indicating that the command has executed successfully.
 7. (The above workflow is similar for the basic mode `pay` command, hence not elaborated.)
 <hr>
+
 #### List all Orders
 
-![](./images/developersGuide/ListOrders.png)
+![](./images/developersGuide/listOrders.png)
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/listorder`.
