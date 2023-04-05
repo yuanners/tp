@@ -7,15 +7,11 @@ public class MenuAssistantUi extends MenuUi {
      **/
 
     public void promptItemName() {
-        System.out.println("Please enter the item's name: ");
+        System.out.println("\nPlease enter the item's name or use \"/cancel\" to abort: ");
     }
 
     public void promptItemNameChange() {
-        System.out.println("Would you like to update item name? (yes/no)");
-    }
-
-    public void promptNewItemName() {
-        System.out.println("Please enter the new name: ");
+        System.out.println("\nWould you like to update item name? (yes/no) or use \"/cancel\" to abort");
     }
 
     /**
@@ -23,15 +19,11 @@ public class MenuAssistantUi extends MenuUi {
      **/
 
     public void promptItemPrice() {
-        System.out.println("Please enter the item's price: ");
+        System.out.println("\nPlease enter the item's price or use \"/cancel\" to abort: ");
     }
 
     public void promptItemPriceChange() {
-        System.out.println("Would you like to update item price? (yes/no)");
-    }
-
-    public void promptNewItemPrice() {
-        System.out.println("Please enter the new price: ");
+        System.out.println("\nWould you like to update item price? (yes/no) or use \"/cancel\" to abort");
     }
 
     /**
@@ -39,7 +31,7 @@ public class MenuAssistantUi extends MenuUi {
      **/
 
     public void promptItemIndex() {
-        System.out.println("Please enter the item's index: ");
+        System.out.println("\nPlease enter the item's index or use \"/cancel\" to abort: ");
     }
 
     /**
@@ -47,7 +39,7 @@ public class MenuAssistantUi extends MenuUi {
      **/
 
     public void promptItemKeyword() {
-        System.out.println("Please enter the keyword to search for: ");
+        System.out.println("\nPlease enter the keyword to search for or use \"/cancel\" to abort: ");
     }
 
     /**
@@ -55,7 +47,8 @@ public class MenuAssistantUi extends MenuUi {
      **/
 
     public void promptUpdateItemUnrecognisedAnswer() {
-        System.out.println("Sorry your input was not recognised.\nPlease answer with \"yes\" or \"no\".");
+        System.out.println("\nSorry your input was not recognised.\nPlease answer with \"yes\" or \"no\""
+                + " or use \"/cancel\" to abort.");
     }
 
     @Override
@@ -66,45 +59,45 @@ public class MenuAssistantUi extends MenuUi {
         case "additem":
             // Fallthrough
         case "/additem":
-            System.out.println("Adding of item has been cancelled. All changes are discarded.");
+            System.out.println("\nAdding of item has been cancelled. All changes are discarded.\n");
             break;
         case "4":
             // Fallthrough
         case "updateitem":
             // Fallthrough
         case "/updateitem":
-            System.out.println("Update of item has been cancelled. All changes are discarded.");
+            System.out.println("\nUpdate of item has been cancelled. All changes are discarded.\n");
             break;
         case "2":
             // Fallthrough
         case "deleteitem":
             // Fallthrough
         case "/deleteitem":
-            System.out.println("Deletion of item has been cancelled. All changes are discarded.");
+            System.out.println("\nDeletion of item has been cancelled. All changes are discarded.\n");
             break;
         case "3":
             // Fallthrough
         case "listitem":
             // Fallthrough
         case "/listitem":
-            System.out.println("List item has been cancelled.");
+            System.out.println("\nList item has been cancelled.\n");
             break;
         case "5":
             // Fallthrough
         case "finditem":
             // Fallthrough
         case "/finditem":
-            System.out.println("Find has been cancelled.");
+            System.out.println("\nFind has been cancelled.\n");
             break;
         case "addorder":
             //Fallthrough
         case "/addorder":
-            System.out.println("Add order has been cancelled.");
+            System.out.println("\nAdd order has been cancelled.\n");
             break;
         case "refundorder":
             //Fallthrough
         case "/refundorder":
-            System.out.println("Refund order has been cancelled.");
+            System.out.println("\nRefund order has been cancelled.\n");
             break;
         default:
             // Fallthrough
@@ -113,7 +106,7 @@ public class MenuAssistantUi extends MenuUi {
 
     @Override
     public void printError(Flags.Error error) {
-        System.out.print("Error: ");
+        System.out.print("\nError: ");
         switch (error) {
         case EMPTY_INPUT:
             System.out.println("Input is empty. Please enter something.");
@@ -139,6 +132,9 @@ public class MenuAssistantUi extends MenuUi {
             break;
         case ITEM_DUPLICATE_NAME_ERROR:
             System.out.println("Name already exists. Please choose a different name.");
+            break;
+        case ITEM_NAME_IS_INTEGER_ERROR:
+            System.out.println("Name cannot be number. Please choose a different name.");
             break;
 
         // Item Price

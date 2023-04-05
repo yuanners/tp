@@ -1,6 +1,7 @@
 package statistic;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.StartAfterEndDateException;
 import exception.statistic.TypeNotFoundException;
@@ -13,7 +14,6 @@ import ui.Flags;
 import ui.StatisticUi;
 import utility.DateUtils;
 import utility.Parser;
-import validation.statistic.StatisticValidation;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -28,8 +28,8 @@ import java.util.PriorityQueue;
  */
 public class RankReport extends Statistic {
 
-    Transaction transaction;
-    Menu menu;
+    private Transaction transaction;
+    private Menu menu;
 
     /**
      * Constructor for the RankReport class.
@@ -40,8 +40,8 @@ public class RankReport extends Statistic {
      * @param transaction a Transaction object containing the list of orders to generate the report
      * @param menu        a Menu object containing the list of items to be included in the report
      */
-    public RankReport(Command command, StatisticValidation sv, Transaction transaction, Menu menu)
-            throws StartAfterEndDateException, ConflictFlagException {
+    public RankReport(Command command, Transaction transaction, Menu menu)
+            throws StartAfterEndDateException, ConflictFlagException, DuplicateArgumentFoundException {
         super(command);
         StatisticUi ui = new StatisticUi();
         this.transaction = transaction;

@@ -1,11 +1,11 @@
 package payment;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import exception.order.MissingRefundOrderArgument;
 import exception.order.MissingRefundOrderFlag;
-import item.MenuAssistant;
 import order.Order;
 import order.Transaction;
 import ui.Flags;
@@ -27,9 +27,8 @@ public class Refund {
      * @param arg          user command
      * @param transactions list of orders
      */
-    public void refundTransaction(Command arg, Transaction transactions) {
+    public void refundTransaction(Command arg, Transaction transactions) throws DuplicateArgumentFoundException {
         RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
-        MenuAssistant menuAssistant = new MenuAssistant();
 
         try {
             if (!(transactions.getOrderList().isEmpty())) {
@@ -56,7 +55,7 @@ public class Refund {
      * @param arg          user input
      * @param transactions whole transaction list
      */
-    public void getOrder(Command arg, Transaction transactions) {
+    public void getOrder(Command arg, Transaction transactions) throws DuplicateArgumentFoundException  {
         arg.mapArgumentAlias("i", "id");
         String orderID = arg.getArgumentMap().get("i").trim();
         Order refundOrder = new Order();

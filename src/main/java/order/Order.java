@@ -2,6 +2,7 @@ package order;
 
 import app.Command;
 
+import exception.DuplicateArgumentFoundException;
 import exception.order.MissingQuantityArgumentException;
 import exception.order.InvalidIndexNumberFormatException;
 import exception.order.MissingOrderFlagException;
@@ -23,13 +24,11 @@ import validation.order.AddMultipleAddOrderValidation;
 import validation.order.AddOrderValidation;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
-public class Order implements OrderInterface {
+public class Order implements ComputeOrder {
 
     private String orderId;
     private LocalDateTime dateTime;
@@ -61,7 +60,7 @@ public class Order implements OrderInterface {
      * @param transactions The transaction object to which the order will be appended.
      */
     public Order(Command command, Menu menu, Transaction transactions,
-                 TransactionUi transactionUi, Payment payment) {
+                 TransactionUi transactionUi, Payment payment) throws DuplicateArgumentFoundException {
         this.orderId = UUID.randomUUID().toString();
         this.status = "IN PROGRESS";
         this.dateTime = LocalDateTime.now();
@@ -101,24 +100,6 @@ public class Order implements OrderInterface {
     }
 
     /**
-     * Sets the unique ID of the Order.
-     *
-     * @param orderId unique ID of the Order
-     */
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    /**
-     * Get the payment type of the order: only accept card, cash or others
-     *
-     * @return payment type
-     */
-    public String getPaymentType() {
-        return paymentType;
-    }
-
-    /**
      * Set the payment type of the order
      *
      * @param paymentType user input payment type
@@ -140,14 +121,6 @@ public class Order implements OrderInterface {
 
     public LocalDateTime getDateTime() {
         return dateTime;
-    }
-
-    public Date getDate() {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        ZoneId zoneId = ZoneId.systemDefault();
-        Date date = Date.from(localDateTime.atZone(zoneId).toInstant());
-
-        return date;
     }
 
     public String getStatus() {
@@ -187,7 +160,7 @@ public class Order implements OrderInterface {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) {
+    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) throws DuplicateArgumentFoundException {
         boolean isAdded = false;
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation(listOfItems);
@@ -247,7 +220,7 @@ public class Order implements OrderInterface {
      * @param listOfItems the list of items from which the item is selected
      */
     public void addSingleOrder(Command command, Menu listOfItems,
-                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException {
+                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException, DuplicateArgumentFoundException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -301,7 +274,7 @@ public class Order implements OrderInterface {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the items are selected
      */
-    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi) {
+    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi) throws DuplicateArgumentFoundException {
 
         command.mapArgumentAlias("items", "I");
 

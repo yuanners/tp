@@ -11,7 +11,7 @@ import ui.Flags;
 import ui.MenuUi;
 
 public class DeleteItemValidation extends ItemValidation {
-    MenuUi menuUi;
+    private MenuUi menuUi;
 
     public DeleteItemValidation() {
         menuUi = new MenuUi();
@@ -33,7 +33,7 @@ public class DeleteItemValidation extends ItemValidation {
      * Checks if the required flag is given
      *
      * @param c Given command
-     * @throws ItemException If any required flag is not given
+     * @throws MissingIndexFlagException If any required flag is not given
      */
     private void checkFlags(Command c) throws MissingIndexFlagException {
         String args = c.getArgumentString();

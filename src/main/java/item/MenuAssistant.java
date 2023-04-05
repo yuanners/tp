@@ -4,24 +4,22 @@ import app.Command;
 import exception.item.NameMinimumLengthException;
 import exception.item.NameMaximumLengthException;
 import exception.item.DuplicateNameException;
-import exception.item.PriceInvalidDecimalPlaceException;
-import exception.item.PriceInvalidNumberException;
-import exception.item.PriceNegativeException;
-import exception.item.PriceOverflowException;
 import exception.item.PriceMinimumLengthException;
+import exception.item.PriceInvalidNumberException;
+import exception.item.PriceOverflowException;
+import exception.item.PriceNegativeException;
+import exception.item.PriceInvalidDecimalPlaceException;
+import exception.item.NameIsIntegerException;
+import exception.item.IndexInvalidNumberFormatException;
 import exception.item.IndexOverflowException;
 import exception.item.IndexOutOfBoundException;
-import exception.item.IndexInvalidNumberFormatException;
 import ui.Flags;
 import ui.MenuAssistantUi;
 import validation.item.AddItemValidation;
 import validation.item.DeleteItemValidation;
 
-import java.util.Scanner;
-
 public class MenuAssistant {
-    MenuAssistantUi menuAssistantUi;
-    Scanner sc;
+    private MenuAssistantUi menuAssistantUi;
     private final String CANCEL = "/cancel";
     private final String YES = "yes";
     private final String NO = "no";
@@ -29,7 +27,6 @@ public class MenuAssistant {
     private DeleteItemValidation deleteItemValidation;
     public MenuAssistant() {
         menuAssistantUi = new MenuAssistantUi();
-        sc = new Scanner(System.in);
         addItemValidation = new AddItemValidation();
         deleteItemValidation = new DeleteItemValidation();
     }
@@ -45,7 +42,7 @@ public class MenuAssistant {
     public void printResult(Command command, boolean isCancelled) {
         if (isCancelled) {
             menuAssistantUi.printCommandCancelled(command.getCommand());
-        } else {
+        } else if(!command.getCommand().equals("finditem")){
             menuAssistantUi.printCommandSuccess(command.getCommand());
         }
     }
@@ -63,12 +60,13 @@ public class MenuAssistant {
 
         while (!isValidName) {
             menuAssistantUi.promptItemName();
-            name = sc.nextLine();
+            name = menuAssistantUi.inputHandler();
 
             if(name.equals(CANCEL)) {
                 return true;
             }
 
+            name = name.trim();
             command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG, name);
             command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
 
@@ -82,6 +80,8 @@ public class MenuAssistant {
                 menuAssistantUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
             } catch (DuplicateNameException e) {
                 menuAssistantUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
+            } catch (NameIsIntegerException e) {
+                menuAssistantUi.printError(Flags.Error.ITEM_NAME_IS_INTEGER_ERROR);
             }
 
         }
@@ -105,12 +105,13 @@ public class MenuAssistant {
 
         while (!isValidName) {
             menuAssistantUi.promptItemName();
-            name = sc.nextLine();
+            name = menuAssistantUi.inputHandler();
 
             if(name.equals(CANCEL)) {
                 return true;
             }
 
+            name = name.trim();
             command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG, name);
             command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG, name);
 
@@ -126,6 +127,8 @@ public class MenuAssistant {
                 menuAssistantUi.printError(Flags.Error.ITEM_NAME_MAX_LENGTH_ERROR);
             } catch (DuplicateNameException e) {
                 menuAssistantUi.printError(Flags.Error.ITEM_DUPLICATE_NAME_ERROR);
+            } catch (NameIsIntegerException e) {
+                menuAssistantUi.printError(Flags.Error.ITEM_NAME_IS_INTEGER_ERROR);
             }
 
         }
@@ -146,7 +149,7 @@ public class MenuAssistant {
 
         while (!isValidPrice) {
             menuAssistantUi.promptItemPrice();
-            price = sc.nextLine();
+            price = menuAssistantUi.inputHandler();
 
             if(price.equals(CANCEL)) {
                 return true;
@@ -230,7 +233,7 @@ public class MenuAssistant {
 
         while (!isValidResponse) {
             menuAssistantUi.promptItemNameChange();
-            toUpdateName = sc.nextLine();
+            toUpdateName = menuAssistantUi.inputHandler();
             if(toUpdateName.equals(CANCEL)) {
                 return true;
             }
@@ -256,7 +259,7 @@ public class MenuAssistant {
 
         while (!isValidResponse) {
             menuAssistantUi.promptItemPriceChange();
-            toUpdatePrice = sc.nextLine();
+            toUpdatePrice = menuAssistantUi.inputHandler();
             if(toUpdatePrice.equals(CANCEL)) {
                 return true;
             }
@@ -304,7 +307,7 @@ public class MenuAssistant {
 
         while (!isValidIndex) {
             menuAssistantUi.promptItemIndex();
-            index = sc.nextLine();
+            index = menuAssistantUi.inputHandler();
 
             if(index.equals(CANCEL)) {
                 return true;
@@ -364,10 +367,9 @@ public class MenuAssistant {
      */
     private boolean getKeyword(Command command, Menu menu) {
         String keyword = "";
-        boolean isRunning = false;
 
         menuAssistantUi.promptItemKeyword();
-        keyword = sc.nextLine();
+        keyword = menuAssistantUi.inputHandler();
 
         if(keyword.equals(CANCEL)) {
             return true;

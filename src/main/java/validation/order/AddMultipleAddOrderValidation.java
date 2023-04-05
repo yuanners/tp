@@ -2,6 +2,7 @@ package validation.order;
 
 import app.Command;
 
+import exception.DuplicateArgumentFoundException;
 import exception.order.MissingMultipleOrderArgumentException;
 import exception.order.MissingMultpleOrderFlagException;
 import exception.order.InvalidMultipleOrderFormatException;
@@ -35,7 +36,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
     public Command validateFormat(Command arg) throws MissingMultipleOrderArgumentException,
             MissingMultpleOrderFlagException, InvalidMultipleOrderFormatException,
             InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
-            MultipleSimilarItemsFoundException {
+            MultipleSimilarItemsFoundException, DuplicateArgumentFoundException {
 
         String input = arg.getUserInput();
         String regex = "\\/addorder\\s*-I\\s*\\[((\\d+:\\d+)|([^\"]+:\\d+)|([a-zA-Z]+\\d*:\\d+))" +
@@ -120,7 +121,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
     private Command splitMultipleOrdersIntoArrayList(String input)
             throws InvalidQuantityNumberFormatException, InvalidIndexOutOfBoundsException,
-            InvalidMultipleOrderFormatException, MultipleSimilarItemsFoundException {
+            InvalidMultipleOrderFormatException, MultipleSimilarItemsFoundException, DuplicateArgumentFoundException {
 
         int startOfArgumentsIndex;
         int startOfArgumentsIndexWhenShortFlagUsed = 14;
@@ -149,7 +150,8 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
     private Command castIntoProCommandFormat(String[] orderPairs)
             throws InvalidIndexOutOfBoundsException, InvalidQuantityNumberFormatException,
-            InvalidMultipleOrderFormatException, MultipleSimilarItemsFoundException {
+            InvalidMultipleOrderFormatException, MultipleSimilarItemsFoundException,
+            DuplicateArgumentFoundException {
 
         String index;
         String finalCommandString = "";
@@ -165,7 +167,7 @@ public class AddMultipleAddOrderValidation extends AddOrderValidation {
 
             if (!isInteger(elements[0])) {
 
-                if (!super.checkValidItemName(elements[0])) {
+                if (!super.checkValidItemName("\"" + elements[0] + "\"")) {
                     throw new MultipleSimilarItemsFoundException();
                 }
 

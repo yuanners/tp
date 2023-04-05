@@ -1,6 +1,7 @@
 package payment;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.InvalidRefundOrderID;
 import exception.order.InvalidRefundOrderType;
 import order.Order;
@@ -10,13 +11,11 @@ import ui.TransactionUi;
 import validation.order.RefundOrderValidation;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class RefundAssistant {
     private final String CANCEL = "/cancel";
     private String orderID = "";
     private TransactionUi transactionUi = new TransactionUi();
-    private Scanner scan = new Scanner(System.in);
     private RefundOrderValidation refundOrderValidation = new RefundOrderValidation();
 
     /**
@@ -25,12 +24,12 @@ public class RefundAssistant {
      * @param transaction list of orders
      * @return whether the user entered "/cancel"
      */
-    public boolean getID(Transaction transaction) {
+    public boolean getID(Transaction transaction) throws DuplicateArgumentFoundException {
         boolean isValidID = false;
 
         while (!isValidID) {
             transactionUi.promptOrderID();
-            String input = scan.nextLine();
+            String input = transactionUi.inputHandler();
 
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
@@ -57,7 +56,7 @@ public class RefundAssistant {
      * @param transaction list of orders
      * @return whether the user entered "/cancel"
      */
-    public boolean refundOrder(Transaction transaction) {
+    public boolean refundOrder(Transaction transaction) throws DuplicateArgumentFoundException {
         if (transaction.getOrderList().isEmpty()) {
             transactionUi.printEmptyTransaction();
             return true;

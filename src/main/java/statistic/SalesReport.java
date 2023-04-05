@@ -1,6 +1,7 @@
 package statistic;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.MissingYearException;
 import exception.statistic.TypeNotFoundException;
@@ -24,7 +25,7 @@ import java.util.Map;
  */
 public class SalesReport extends Statistic {
 
-    Transaction transaction;
+    private Transaction transaction;
 
     /**
      * Constructs a SalesReport object based on a given command and transaction.
@@ -33,7 +34,7 @@ public class SalesReport extends Statistic {
      * @param transaction the transaction to be used for generating the sales report.
      */
     public SalesReport(Command command, StatisticValidation sv, Transaction transaction)
-            throws StartAfterEndDateException, ConflictFlagException {
+            throws StartAfterEndDateException, ConflictFlagException, DuplicateArgumentFoundException {
         super(command);
         StatisticUi ui = new StatisticUi();
         this.transaction = transaction;

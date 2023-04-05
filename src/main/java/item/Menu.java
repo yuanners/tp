@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.lang.reflect.Type;
 
+import exception.DuplicateArgumentFoundException;
 import exception.FileIsEmptyException;
 import exception.item.MissingFindItemDescriptionException;
 import app.Command;
@@ -50,10 +51,6 @@ public class Menu {
         }
     }
 
-    public Menu() {
-        this.menuUi = new MenuUi();
-        this.items = new ArrayList<>();
-    }
 
     public Menu(String dirName, String fileName) {
         this.menuUi = new MenuUi();
@@ -95,16 +92,12 @@ public class Menu {
         return items.get(index);
     }
 
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
-
     /**
      * Validates the add item command and calls processAddItem if command is valid
      *
      * @param command the Command object containing the search term
      */
-    public void addItem(Command command) {
+    public void addItem(Command command) throws DuplicateArgumentFoundException {
 
         AddItemValidation addItemValidation = new AddItemValidation();
         boolean isValid = true;
@@ -120,6 +113,16 @@ public class Menu {
         isValid = addItemValidation.validateCommand(command, this);
         if (!isValid) {
             return;
+        }
+
+        if (command.getArgumentMap().containsKey(addItemValidation.SHORT_NAME_FLAG)) {
+            command.getArgumentMap().put(addItemValidation.SHORT_NAME_FLAG,
+                    command.getArgumentMap().get(addItemValidation.SHORT_NAME_FLAG).trim());
+        }
+
+        if (command.getArgumentMap().containsKey(addItemValidation.LONG_NAME_FLAG)) {
+            command.getArgumentMap().put(addItemValidation.LONG_NAME_FLAG,
+                    command.getArgumentMap().get(addItemValidation.LONG_NAME_FLAG).trim());
         }
 
         processAddItem(command, addItemValidation);
@@ -141,7 +144,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void updateItem(Command command) {
+    public void updateItem(Command command) throws DuplicateArgumentFoundException {
         if (this.getItems().size() == 0) {
             menuUi.printError(Flags.Error.EMPTY_MENU);
             return;
@@ -157,9 +160,20 @@ public class Menu {
         command.mapArgumentAlias(updateItemValidation.LONG_INDEX_FLAG, updateItemValidation.SHORT_INDEX_FLAG);
         command.mapArgumentAlias(updateItemValidation.LONG_NAME_FLAG, updateItemValidation.SHORT_NAME_FLAG);
         command.mapArgumentAlias(updateItemValidation.LONG_PRICE_FLAG, updateItemValidation.SHORT_PRICE_FLAG);
+
         isValid = updateItemValidation.validateCommand(command, this);
         if (!isValid) {
             return;
+        }
+
+        if (command.getArgumentMap().containsKey(updateItemValidation.SHORT_NAME_FLAG)) {
+            command.getArgumentMap().put(updateItemValidation.SHORT_NAME_FLAG,
+                    command.getArgumentMap().get(updateItemValidation.SHORT_NAME_FLAG).trim());
+        }
+
+        if (command.getArgumentMap().containsKey(updateItemValidation.LONG_NAME_FLAG)) {
+            command.getArgumentMap().put(updateItemValidation.LONG_NAME_FLAG,
+                    command.getArgumentMap().get(updateItemValidation.LONG_NAME_FLAG).trim());
         }
 
         processUpdateItem(command, updateItemValidation);
@@ -187,7 +201,7 @@ public class Menu {
      *
      * @param command the Command object containing the search term
      */
-    public void deleteItem(Command command) {
+    public void deleteItem(Command command) throws DuplicateArgumentFoundException {
         if (this.getItems().size() == 0) {
             menuUi.printError(Flags.Error.EMPTY_MENU);
             return;
@@ -250,7 +264,7 @@ public class Menu {
      *
      * @param itemName the name of the item to search for, case-insensitively
      * @return an ArrayList of integers containing the indexes of all matching items,
-     *     or an empty list if no matching item is found
+     * or an empty list if no matching item is found
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
@@ -316,8 +330,52 @@ public class Menu {
         }
 
         menuUi.printCommandSuccess(command.getCommand());
+    }
+
+    /**
+     * Has the same functionality as showResultsOfFind(),
+     * but does not print the success message at the end.
+     *
+     * @param command the Command object containing the search term
+     */
+    public void showResultsOfFindWithoutSuccessMsg(Command command) {
+
+        FindItemValidation findItemValidation = new FindItemValidation();
+
+        ArrayList<Item> menu = this.getItems();
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        String itemName = command.getArgumentString().trim();
+
+        try {
+            findItemValidation.validateName(itemName);
+        } catch (MissingFindItemDescriptionException e) {
+            menuUi.printError(Flags.Error.MISSING_FIND_ITEM_DESCRIPTION);
+            return;
+        }
+
+        if (itemName.contains("\"")) {
+            itemName = itemName.replace("\"", "");
+        }
+
+        for (int i = 0; i < menu.size(); i++) {
+            if (StringUtils.containsIgnoreCase(menu.get(i).getName(), itemName)) {
+                indexes.add(i);
+            }
+        }
+
+        if (indexes.size() == 0) {
+            menuUi.printNoItemFound(itemName);
+            return;
+        }
+
+        menuUi.printMenuHeader();
+        for (int i = 0; i < indexes.size(); i++) {
+            menuUi.printFindItem(indexes.get(i), menu);
+        }
 
     }
+
 
     public void save() {
         try {

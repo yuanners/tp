@@ -1,12 +1,11 @@
 package payment;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import item.MenuAssistant;
 import order.Order;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
-
-import java.util.Scanner;
 
 
 public class Payment {
@@ -20,13 +19,12 @@ public class Payment {
      *
      * @param order list of order entries added
      */
-    public void makePayment(Order order) {
+    public void makePayment(Order order) throws DuplicateArgumentFoundException {
         boolean isValidPayment = false;
-        Scanner sc = new Scanner(System.in);
         transactionUi.promptPayment();
 
         while (!isValidPayment) {
-            String userInput = sc.nextLine();
+            String userInput = transactionUi.inputHandler();
             Command arg = new Command(userInput);
             MenuAssistant menuAssistant = new MenuAssistant();
             Command pay = new Command("addorder");

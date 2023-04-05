@@ -1,5 +1,6 @@
 package app;
 
+import exception.DuplicateArgumentFoundException;
 import exception.UnrecognisedCommandException;
 import item.Menu;
 import item.MenuAssistant;
@@ -21,9 +22,9 @@ import validation.Validation;
  * classes for execution.
  */
 public class Router {
-    public Ui ui;
-    public Menu menu;
-    public Transaction transactions;
+    private Ui ui;
+    private Menu menu;
+    private Transaction transactions;
     private TransactionUi transactionUi;
     private Payment payment;
 
@@ -47,8 +48,11 @@ public class Router {
      *
      * @param command the Command object containing the professional command to process
      */
-    private void proRoute(Command command) {
+    private void proRoute(Command command) throws DuplicateArgumentFoundException {
         switch (command.getCommand()) {
+        case "help":
+            ui.printAssistedHelp();
+            break;
         case "/help":
             ui.printHelp();
             break;
@@ -68,7 +72,7 @@ public class Router {
             menu.showResultsOfFind(command);
             break;
         case "/addorder":
-            Order order = new Order(command, menu, transactions, transactionUi, payment);
+            new Order(command, menu, transactions, transactionUi, payment);
             break;
         case "/listorder":
             transactions.displayList();
@@ -92,7 +96,7 @@ public class Router {
      *
      * @param command the Command object containing the assisted command to process
      */
-    private void assistRoute(Command command) {
+    private void assistRoute(Command command) throws DuplicateArgumentFoundException {
         Validation validation = new Validation();
 
         try {
@@ -106,7 +110,7 @@ public class Router {
             switch (command.getCommand()) {
             case "?":
             case "help":
-                ui.printHelp();
+                ui.printAssistedHelp();
                 break;
             case "1":
             case "additem":
@@ -162,7 +166,7 @@ public class Router {
      *
      * @param command The command to be processed.
      */
-    public void handleRoute(Command command) {
+    public void handleRoute(Command command) throws DuplicateArgumentFoundException {
         if (command.getCommand().charAt(0) == '/') {
             proRoute(command);
         } else {

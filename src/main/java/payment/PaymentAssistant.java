@@ -1,6 +1,7 @@
 package payment;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.order.InsufficientPayAmountException;
 import exception.order.InvalidPayAmountDecimalPlaceException;
 import exception.order.InvalidPayAmountFormatException;
@@ -12,14 +13,11 @@ import ui.Flags;
 import ui.TransactionUi;
 import validation.order.PaymentValidation;
 
-import java.util.Scanner;
-
 public class PaymentAssistant {
     private String CANCEL = "/cancel";
     private String amount;
     private String type;
     private TransactionUi transactionUi = new TransactionUi();
-    private Scanner scan = new Scanner(System.in);
     private PaymentValidation paymentValidation = new PaymentValidation();
 
     /**
@@ -27,11 +25,11 @@ public class PaymentAssistant {
      * @param order order to pay
      * @return whether the user entered "/cancel"
      */
-    public boolean getAmount(Order order) {
+    public boolean getAmount(Order order) throws DuplicateArgumentFoundException  {
         boolean isValidAmount = false;
         while (!isValidAmount) {
             transactionUi.promptPaymentAmount();
-            String input = scan.nextLine();
+            String input = transactionUi.inputHandler();
             Command arg = new Command(input);
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
@@ -60,11 +58,11 @@ public class PaymentAssistant {
      * Get payment type from user and validate it
      * @return whether user entered "/cancel"
      */
-    public boolean getType() {
+    public boolean getType() throws DuplicateArgumentFoundException {
         boolean isValidType = false;
         while (!isValidType) {
             transactionUi.promptPaymentType();
-            String input = scan.nextLine();
+            String input = transactionUi.inputHandler();
             Command arg = new Command(input);
             if (input.equalsIgnoreCase(CANCEL)) {
                 return true;
@@ -97,7 +95,7 @@ public class PaymentAssistant {
      * @param order order to pay
      * @return whether user entered "/cancel"
      */
-    public boolean makePayment(Order order) {
+    public boolean makePayment(Order order) throws DuplicateArgumentFoundException  {
         boolean isCancelled = false;
         isCancelled = getType();
 

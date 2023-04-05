@@ -1,29 +1,27 @@
 package order;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import item.Menu;
 import payment.Payment;
 import ui.TransactionUi;
 import validation.order.AddOrderValidation;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class OrderAssistant {
 
-    Scanner sc;
-    TransactionUi transactionUi;
+    private TransactionUi transactionUi;
 
     private final String[] CANCELS = {"/cancel", "cancel"};
     private final String[] YESES = {"/yes", "yes", "/y", "y"};
     private final String[] NOS = {"/no", "no", "/n", "n"};
 
     public OrderAssistant() {
-        sc = new Scanner(System.in);
         transactionUi = new TransactionUi();
     }
 
-    public boolean assistedAddOrder(Menu menu, Transaction transaction) {
+    public boolean assistedAddOrder(Menu menu, Transaction transaction) throws DuplicateArgumentFoundException {
 
         Command command;
         String commandString = "";
@@ -41,6 +39,7 @@ public class OrderAssistant {
                 if (Arrays.asList(CANCELS).contains(itemName)) {
                     return true;
                 }
+
             } while (!addOrderValidation.checkValidItemName(itemName));
 
             do {
@@ -63,7 +62,7 @@ public class OrderAssistant {
             }
 
             // Append to final command string
-            commandString += "\"" + itemName + "\":" + quantity + ",";
+            commandString +=  itemName + ":" + quantity + ",";
         }
 
         commandString = formatCommandStringForOrders(commandString);
@@ -81,7 +80,7 @@ public class OrderAssistant {
         String item = "";
 
         transactionUi.promptItemName();
-        item = sc.nextLine();
+        item = transactionUi.inputHandler();
         item = item.toLowerCase();
 
         return item;
@@ -93,7 +92,7 @@ public class OrderAssistant {
         String quantity = "";
 
         transactionUi.promptItemQuantity();
-        quantity = sc.nextLine();
+        quantity = transactionUi.inputHandler();
         quantity = quantity.toLowerCase();
 
         return quantity;
@@ -104,7 +103,7 @@ public class OrderAssistant {
         String response = "";
 
         transactionUi.promptMoreOrderEntries();
-        response = sc.nextLine();
+        response = transactionUi.inputHandler();
         response = response.toLowerCase();
 
         return response;
@@ -118,6 +117,16 @@ public class OrderAssistant {
         ordersString = "/addorder -I [" + ordersString + "]";
         return ordersString;
 
+    }
+
+    public boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+        } catch (NumberFormatException n) {
+            return false;
+        }
+
+        return true;
     }
 
 }

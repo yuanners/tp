@@ -11,27 +11,27 @@ public class MenuUi extends Ui {
      */
 
     public void printItemNotFound() {
-        System.out.println("The entered item cannot be found.");
+        System.out.println("\nThe entered item cannot be found.");
     }
 
     public void printFindItem(int index, ArrayList<Item> menu) {
-        System.out.printf("| %-5d | %-25s | %-5.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
+        System.out.printf("| %-5d | %-25s | %-8.2f |\n", index, menu.get(index).getName(), menu.get(index).getPrice());
     }
 
     public void printMenuHeader() {
-        System.out.printf("| %-5s | %-25s | %-5s |\n", "Index", "Name", "Price");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(5) + " |");
+        System.out.printf("\n| %-5s | %-25s | %-8s |\n", "Index", "Name", "Price");
+        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(8) + " |");
     }
 
     public void printMenu(ArrayList<Item> menu) {
         printMenuHeader();
         for (int i = 0; i < menu.size(); ++i) {
-            System.out.printf("| %-5d | %-25s | %-5.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
+            System.out.printf("| %-5d | %-25s | %-8.2f |\n", i, menu.get(i).getName(), menu.get(i).getPrice());
         }
     }
 
     public void printNoItemFound(String input) {
-        System.out.println("No menu items matching " + input + " were found!");
+        System.out.println("\nNo menu items matching " + input + " were found!");
     }
 
     @Override
@@ -42,45 +42,45 @@ public class MenuUi extends Ui {
         case "additem":
             // Fallthrough
         case "/additem":
-            System.out.println("Item added successfully.");
+            System.out.println("\nItem added successfully.\n");
             break;
         case "4":
             // Fallthrough
         case "updateitem":
             // Fallthrough
         case "/updateitem":
-            System.out.println("Item updated successfully.");
+            System.out.println("\nItem updated successfully.\n");
             break;
         case "2":
             // Fallthrough
         case "deleteitem":
             // Fallthrough
         case "/deleteitem":
-            System.out.println("Item deleted successfully.");
+            System.out.println("\nItem deleted successfully.\n");
             break;
         case "3":
             // Fallthrough
         case "listitem":
             // Fallthrough
         case "/listitem":
-            System.out.println("All items in the menu have been listed!");
+            System.out.println("\nAll items in the menu have been listed!\n");
             break;
         case "5":
             // Fallthrough
         case "finditem":
             // Fallthrough
         case "/finditem":
-            System.out.println("finditem completed!");
+            System.out.println("\nfinditem completed!\n");
             break;
         case "addorder":
             //Fallthrough
         case "/addorder":
-            System.out.println("Order is added!");
+            System.out.println("\nOrder is added!\n");
             break;
         case "refundorder":
             //Fallthrough
         case "/refundorder":
-            System.out.println("Order is refunded!");
+            System.out.println("\nOrder is refunded!\n");
             break;
         default:
             // Fallthrough
@@ -89,7 +89,7 @@ public class MenuUi extends Ui {
 
     @Override
     public void printError(Flags.Error error) {
-        System.out.print("Error: ");
+        System.out.print("\nError: ");
         switch (error) {
         case EMPTY_INPUT:
             System.out.println("Input is empty. Please enter something.");
@@ -116,6 +116,9 @@ public class MenuUi extends Ui {
             break;
         case ITEM_DUPLICATE_NAME_ERROR:
             System.out.println("Name already exists. Please choose a different name.");
+            break;
+        case ITEM_NAME_IS_INTEGER_ERROR:
+            System.out.println("Name cannot be number. Please choose a different name.");
             break;
 
         // Item Price

@@ -9,8 +9,6 @@ public class ItemValidation extends Validation {
     public final String LONG_PRICE_FLAG = "price";
     public final String SHORT_INDEX_FLAG = "i";
     public final String LONG_INDEX_FLAG = "index";
-    public final String SHORT_DESC_FLAG = "d";
-    public final String LONG_DESC_FLAG = "description";
 
     /**
      * Checks if the given input is a double
