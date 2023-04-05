@@ -22,7 +22,8 @@ public class Statistic {
 
     private int year;
 
-    public Statistic(Command command) throws StartAfterEndDateException, ConflictFlagException, DuplicateArgumentFoundException {
+    public Statistic(Command command) throws StartAfterEndDateException,
+            ConflictFlagException, DuplicateArgumentFoundException {
         command = mapArguments(command);
 
         StatisticValidation sv = new StatisticValidation(command);
@@ -66,7 +67,8 @@ public class Statistic {
         return command;
     }
 
-    public static void handleStatisticRoute(Command command, Transaction transactions, Menu menu) throws DuplicateArgumentFoundException {
+    public static void handleStatisticRoute(Command command, Transaction transactions, Menu menu)
+            throws DuplicateArgumentFoundException {
 
         command = mapArguments(command);
         StatisticValidation sv = new StatisticValidation(command);

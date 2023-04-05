@@ -263,8 +263,7 @@ public class Menu {
      * If itemName is an exact match for an item's name, only the index of that item is returned.
      *
      * @param itemName the name of the item to search for, case-insensitively
-     * @return an ArrayList of integers containing the indexes of all matching items,
-     * or an empty list if no matching item is found
+     * @return an ArrayList of integers containing the indexes of all matching items, or empty if no result
      */
     public ArrayList<Integer> findMatchingItemNames(String itemName) {
 
