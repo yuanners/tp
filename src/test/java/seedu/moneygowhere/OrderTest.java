@@ -1,6 +1,7 @@
 package seedu.moneygowhere;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import item.Item;
 import order.Order;
 import order.OrderEntry;
@@ -79,7 +80,7 @@ public class OrderTest {
     }
 
     @Test
-    void refundOrderTest() {
+    void refundOrderTest() throws DuplicateArgumentFoundException {
         Transaction transaction = new Transaction("orders.json");
         Item item1 = new Item("chicken rice", 2.00);
 

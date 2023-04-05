@@ -1,5 +1,6 @@
 package utility;
 
+import exception.DuplicateArgumentFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -9,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
     @Test
-    void formatArguments_normal() {
+    void formatArguments_normal() throws DuplicateArgumentFoundException {
         Parser p = new Parser();
 
         String arguments = "-p 100 --positive 200 --sentence \"a very long sentence\"";
@@ -22,7 +23,7 @@ class ParserTest {
     }
 
     @Test
-    void formatArguments_dash() {
+    void formatArguments_dash() throws DuplicateArgumentFoundException {
         Parser p = new Parser();
 
         String arguments = "-n -100 --negative -200 --middle_dash text-with-middle-dash --trailing_dash some-text-";
@@ -36,7 +37,7 @@ class ParserTest {
     }
 
     @Test
-    void formatArguments_exist() {
+    void formatArguments_exist() throws DuplicateArgumentFoundException {
         Parser p = new Parser();
 
         String arguments = "-a";
@@ -47,7 +48,7 @@ class ParserTest {
     }
 
     @Test
-    void formatArguments_printMap() {
+    void formatArguments_printMap() throws DuplicateArgumentFoundException {
         Parser p = new Parser();
 
         String arguments = "-p 2sdkfnds -b 123/234/345";
@@ -58,7 +59,7 @@ class ParserTest {
     }
 
     @Test
-    void formatArgument_date(){
+    void formatArgument_date() throws DuplicateArgumentFoundException {
         Parser p = new Parser();
 
         String arguments = "--date 20/20/2022";
@@ -68,7 +69,7 @@ class ParserTest {
     }
 
     @Test
-    void formatArgument_arrayOfOrders(){
+    void formatArgument_arrayOfOrders() throws DuplicateArgumentFoundException {
         Parser p = new Parser();
 
         String arguments = "-I [Chicken rice:2,Noodle:1, 3:4]";

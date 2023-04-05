@@ -160,7 +160,8 @@ public class Order implements ComputeOrder {
      * @param command     Command object representing the user input
      * @param listOfItems ItemList object containing the available items
      */
-    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi) throws DuplicateArgumentFoundException {
+    public boolean addOrder(Command command, Menu listOfItems, TransactionUi transactionUi)
+            throws DuplicateArgumentFoundException {
         boolean isAdded = false;
         try {
             AddOrderValidation addOrderValidation = new AddOrderValidation(listOfItems);
@@ -220,7 +221,8 @@ public class Order implements ComputeOrder {
      * @param listOfItems the list of items from which the item is selected
      */
     public void addSingleOrder(Command command, Menu listOfItems,
-                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException, DuplicateArgumentFoundException {
+                               TransactionUi transactionUi) throws InvalidQuantityNumberFormatException,
+            DuplicateArgumentFoundException {
 
         command.mapArgumentAlias("item", "i");
         command.mapArgumentAlias("quantity", "q");
@@ -274,7 +276,8 @@ public class Order implements ComputeOrder {
      * @param command     the command object containing the user input
      * @param listOfItems the list of items from which the items are selected
      */
-    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi) throws DuplicateArgumentFoundException {
+    public void handleMultipleAddOrders(Command command, Menu listOfItems, TransactionUi transactionUi)
+            throws DuplicateArgumentFoundException {
 
         command.mapArgumentAlias("items", "I");
 
