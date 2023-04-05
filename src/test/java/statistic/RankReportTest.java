@@ -1,6 +1,7 @@
 package statistic;
 
 import app.Command;
+import exception.DuplicateArgumentFoundException;
 import exception.statistic.ConflictFlagException;
 import exception.statistic.StartAfterEndDateException;
 import item.Menu;
@@ -28,6 +29,8 @@ class RankReportTest {
             assertEquals(26, ir.getValue());
         } catch (StartAfterEndDateException | ConflictFlagException e) {
             System.out.println("ERROR");
+        } catch (DuplicateArgumentFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -44,7 +47,7 @@ class RankReportTest {
 
             assertEquals("Fish Head Curry", ir.getName());
             assertEquals(25.0, ir.getValue());
-        } catch (StartAfterEndDateException | ConflictFlagException e) {
+        } catch (StartAfterEndDateException | ConflictFlagException | DuplicateArgumentFoundException e) {
             System.out.println("ERROR");
         }
     }
