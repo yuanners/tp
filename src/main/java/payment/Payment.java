@@ -34,6 +34,7 @@ public class Payment {
                 menuAssistant.printResult(pay, isCancelled);
                 break;
             }else if (userInput.equalsIgnoreCase("/cancel")){
+                order.setStatus("CANCELED");
                 menuAssistant.printResult(pay, true);
                 break;
             } else {

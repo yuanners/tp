@@ -45,11 +45,12 @@ public class RefundOrderValidation extends Validation {
      * @throws InvalidRefundOrderID   invalid order ID
      */
     public void validateRefund(Command arg, Transaction transaction) throws
-            InvalidRefundOrderType, InvalidRefundOrderID {
+            InvalidRefundOrderType, InvalidRefundOrderID, DuplicateArgumentFoundException {
+        arg.mapArgumentAlias("i", "id");
         boolean isValidID = false;
         String orderID = "";
         if (arg.getArgumentString() != null && arg.getArgumentString().length() > 1) {
-            orderID = arg.getArgumentString();
+            orderID = arg.getArgumentMap().get("i").trim();
         } else {
             orderID = arg.getUserInput();
         }
