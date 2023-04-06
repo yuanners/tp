@@ -26,6 +26,7 @@ Given below are my contributions to the project:
   * Implemented an additional feature for both expert and guided Add Order commands to accept substrings of item names as valid inputs when adding items to an order.
   * Wrote additional JUnit test cases to check for code correctness in adding orders.
 
+<div style="page-break-after: always;"></div>
 
 #### Contributions to the UG
 * Made the UG more beginner-friendly, with more emphasis on readability and presentation.
