@@ -1,12 +1,17 @@
 package order;
 
+import app.Command;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import exception.FileIsEmptyException;
+import exception.UnrecognisedCommandException;
+import ui.Flags;
 import ui.StoreUi;
 import ui.TransactionUi;
+import ui.Ui;
 import utility.Store;
+import validation.Validation;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -87,7 +92,16 @@ public class Transaction {
     /**
      * Displays the order list using the UI class.
      */
-    public void displayList() {
+    public void displayList(Command command) {
+        try {
+            Validation validation = new Validation();
+            validation.validateNoArgumentCommand(command);
+        } catch (UnrecognisedCommandException e) {
+            Ui ui = new Ui();
+            ui.printError(Flags.Error.UNRECOGNISED_COMMAND_ERROR);
+            return;
+        }
+
         TransactionUi transactionUi = new TransactionUi();
         transactionUi.printOrderList(this.transactions);
         transactionUi.printSuccessfulListOrder();

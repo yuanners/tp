@@ -1,5 +1,9 @@
 package ui;
 
+import app.Command;
+import exception.UnrecognisedCommandException;
+import validation.Validation;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +12,8 @@ public class Ui {
         System.out.println("░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀\n" +
                 "░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀\n" +
                 "░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀");
-        System.out.println("Welcome to MoneyGoWhere!\n");
+        System.out.println("Welcome to MoneyGoWhere!");
+        System.out.println("To begin, you may enter \"help\" to see a list of commands.\n");
     }
 
     public void promptUserInput() {
@@ -50,7 +55,15 @@ public class Ui {
         );
     }
 
-    public void printHelp() {
+    public void printHelp(Command command) {
+        try {
+            Validation validation = new Validation();
+            validation.validateNoArgumentCommand(command);
+        } catch (UnrecognisedCommandException e) {
+            this.printError(Flags.Error.UNRECOGNISED_COMMAND_ERROR);
+            return;
+        }
+
         System.out.println("\nThere are 10 commands you can use as an experienced user in MoneyGoWhere.\n" +
                 "For more details, please refer to the User Guide.\n" +
                 "0.  /help\n" +
