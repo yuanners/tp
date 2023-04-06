@@ -33,12 +33,12 @@ Given below are my contributions to the project:
 * Designed a logo for branding purposes.
 
 #### Contributions to the DG
-* Drew up Sequence Diagrams for most of the features in MoneyGoWhere
+* Drew up Sequence Diagrams for most of the features in MoneyGoWhere.
 * Co-authored contents of the section on Orders.
 * Designed a logo for branding purposes.
 
 ### Contributions to Team-based Tasks
-* Drew up Sequence Diagrams for DG and for reference purposes.
+* Drew up Sequence Diagrams for the DG and for reference purposes.
 * Linked issues found in PE-D to the respective owners of the functions with reported bugs.
 * Started first draft of UG on HackMD.
 * Enforced OOP during the early stages of the application's development. 
