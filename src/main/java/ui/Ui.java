@@ -12,7 +12,8 @@ public class Ui {
         System.out.println("░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀\n" +
                 "░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀\n" +
                 "░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀");
-        System.out.println("Welcome to MoneyGoWhere!\n");
+        System.out.println("Welcome to MoneyGoWhere!");
+        System.out.println("To begin, you may enter \"help\" to see a list of commands.\n");
     }
 
     public void promptUserInput() {
