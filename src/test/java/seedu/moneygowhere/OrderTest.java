@@ -53,7 +53,7 @@ public class OrderTest {
     }
 
     @Test
-    void orderTest2() {
+    void orderBoundaryLimitTest() {
 
         Item item1 = new Item("earl grey milk tea avocado pudding jelly more pearls less ice 50% sugar",
                 29.0);
