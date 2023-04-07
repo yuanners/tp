@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import app.Command;
 import exception.DuplicateArgumentFoundException;
 import org.junit.jupiter.api.Test;
-import item.Menu;
 
 class ItemTest {
     Menu menu;
