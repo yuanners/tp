@@ -1,4 +1,4 @@
-package seedu.moneygowhere;
+package order;
 
 import app.Command;
 import exception.DuplicateArgumentFoundException;

@@ -1,4 +1,4 @@
-package seedu.moneygowhere;
+package order;
 
 import item.Item;
 import order.Order;
