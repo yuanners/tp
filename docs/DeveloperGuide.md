@@ -476,12 +476,11 @@ Note that the work flow for both Basic and Advanced Mode is the same.
 
 The general workflow of `/listorder` is as follows:
 
-1. User input is passed to `MoneyGoWhere`.
-2. `MoneyGoWhere` then passes it to the `Command` class, which uses the `Parser` class to extract the command
-   as `listitem`.
-3. The obtained command is then passed back to `MoneyGoWhere`, which calls the `displayList` method in
-   the `Menu` object that was initialized alongside `MoneyGoWhere`.
-4. The menu items list will be printed onto the console.
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
+   `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` or `Router#promode` which invokes
+   `MenuAssistant#displayList` method to run the `listitem` command.
+1.  The menu items list will be printed onto the console.
 
 <hr>
 
@@ -594,6 +593,16 @@ command `/finditem`.
 
 ![](./images/developersGuide/SequenceDiagrams/Item/findItem.png)
 
+The general workflow of `finditem` is as follows:
+
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
+   `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes
+   `Menu#findItem` method to run the `finditem` command.
+1. `Menu#findItem` will then instantiates `FindItemValidation` class to call the `validateInput` method to check if 
+the input matches any of the item names
+1.  If there is matching result, the control will pass to `MenuUi` class to print the list of matched item names.
+1.  If there is no matching names found, the control will pass to `MenuUi` class to print no matching item names found.
 <hr>
 ##### Basic Mode Find an Item
 
@@ -608,6 +617,8 @@ command `/finditem`.
     * [Add Multiple Items](#add-multiple-menu-items-into-an-order)
     * [Basic Mode](#basic-mode-add-an-order)
 * [Make payment](#make-payment)
+  * [Advanced Mode](#advanced-mode-make-payment)
+  * [Basic Mode](#basic-mode-make-payment)
 * [List all Orders](#list-all-orders)
 * [Refund an Order](#refund-an-order)
     * [Advanced Mode](#advanced-mode-refund-an-order)
@@ -718,6 +729,7 @@ The general workflow of `addorder` is as follows:
 
 #### Make payment
 
+##### Advanced Mode Make Payment
 This sequence diagram shows what happens after a valid add order command is executed.
 
 ![](./images/developersGuide/SequenceDiagrams/Order/handlePayment.png)
@@ -732,6 +744,7 @@ The general workflow of `/pay` is as follows:
 4. The method `PaymentValidation#validatePayment` is invoked to check the following:
     * The correct command format is used.
     * The flag for payment type and amount flags are present
+    * If the payment type is by card, the payment amount must be exact
     * The payment amount is a valid 2 decimal place double and must be more than or equals to the subtotal of the order.
 5. If the command passes all the validation checks, control is given back to #Payment class and the `Order.status` will
    be updated to `completed`,
@@ -740,7 +753,31 @@ The general workflow of `/pay` is as follows:
 6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to
    print a
    message indicating that the command has executed successfully.
-7. (The above workflow is similar for the basic mode `pay` command, hence not elaborated.)
+
+<hr>
+
+#### Basic Mode Make Payment
+
+The sequence diagram is similar to `Advanced Mode Make Payment`.
+
+The general workflow of `pay` is as follows:
+
+1. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
+2. The `Payment` object uses the `handlePayment` method to prompt the user to enter the `pay` command.
+3. `Payment#handlePayment` then instantiates the assistant class `PaymentAssistant` and invoke its `makePayment` method.
+4. The method `PaymentAssistant#makePayment` is invoked to check the following:
+    * If the user enters `/cancel`, abort the command and return the control to `Router` class.
+    * The `getAmount` and `getType` methods are called to prompt user to enter the payment amount and type, then calles the 
+`PaymentValidation` class to validate the input:
+      * If the payment type is by card, the payment amount must be exact
+      * The payment amount is a valid 2 decimal place double and must be more than or equals to the subtotal of the order.
+5. If the command passes all the validation checks, control is given back to `PaymentAssistant` class and the `Order.status` will
+   be updated to `completed`,
+   the payment type and amount are also updated accordingly and is saved to the `orders.json` file using
+   the `Transaction.save` method.
+6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to
+   print a
+   message indicating that the command has executed successfully.
 
 <hr>
 
