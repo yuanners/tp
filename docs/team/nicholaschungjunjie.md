@@ -41,7 +41,7 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 * Fixed many failed Java-CI tests
 
 #### Reviewing / Mentoring contributions
-* Helped check some code before merging PR
+* Helped with PR review before merging
 * Helped with user testing
 
 #### Contributions beyond the project team
