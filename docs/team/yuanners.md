@@ -1,10 +1,12 @@
 # yuanners - Project Portfolio Page
 
-## Product Overview
+## Project: MoneyGoWhere
 MoneyGoWhere is a point-of-sale, desktop app for tracking sales and inventory, optimised for use via a Command line
 Interface (CLI). With the ability to type fast and with familiarity of the system, the user will be able to quickly track
 sales, check inventory and calculate change. This CLI application is comparable with GUI applications due to its
-low-cost and adaptability. This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
+low-cost and adaptability. 
+
+This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
 
 
 
@@ -18,9 +20,17 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 
 ### Enhancements Implemented
 * Implemented validation classes for add order, add multiple order, payment and refund commands.
-* Implemented the payment package
-* Implemented Junit test cases for refund order.
+* Implemented the payment package for 
+  * refund order command (both basic and advanced)
+  * payment command (both basic and advanced)
+* Implemented Junit test cases for refund order and payment.
 
 ### Contributions to DG
-* Wrote the section of refund order for both assist and pro mode
-* Wrote the section of payment.
+* Wrote the section of refund order for both assist and pro mode.
+* Wrote the section of payment for both assist and pro mode.
+
+### Contributions to Team-based Tasks
+* Fixed failing check style
+* Review teammates' PR
+* Added sequence diagrams to DG
+* Closed milestones and release jar versions 1.0 and 2.0

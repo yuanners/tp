@@ -319,7 +319,7 @@ The expected inputs to add only one menu item into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/additem`.
 
-![](./images/developersGuide/addItem.png)
+![](./images/developersGuide/SequenceDiagrams/Item/addItem.png)
 
 The general workflow of `/additem` is as follows:
 
@@ -361,8 +361,7 @@ The expected inputs to add only one menu item into an order is as such:
 * `additem`
 * `1`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
-command `additem` or `1`.
+The sequence diagram is similar to the `Advanced Mode Add an Item`.
 
 The general workflow of `additem` is as follows:
 
@@ -403,6 +402,8 @@ The expected inputs to add only one menu item into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/deleteitem`.
 
+![](./images/developersGuide/SequenceDiagrams/Item/deleteItem.png)
+
 The general workflow of `/deleteitem` is as follows:
 
 1. User input is passed to `MoneyGoWhere`.
@@ -435,8 +436,8 @@ The expected inputs to add only one menu item into an order is as such:
 * `deleteitem`
 * `2`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
-command `deleteitem` or `2`.
+The sequence diagram is similar to the `Advanced Mode Delete an Item`.
+
 
 The general workflow of `deleteitem` is as follows:
 
@@ -462,6 +463,25 @@ The general workflow of `deleteitem` is as follows:
 
 #### List all Items
 
+The expected inputs to list all item is as such:
+
+* `/listitem` or `listitem` or `3`
+
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
+command `/listitem` or `lisitem` or `3`.
+
+![](./images/developersGuide/SequenceDiagrams/Item/listItem.png)
+
+Note that the work flow for both Basic and Advanced Mode is the same.
+
+The general workflow of `/listorder` is as follows:
+
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
+   `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` or `Router#promode` which invokes
+   `MenuAssistant#displayList` method to run the `listitem` command.
+1.  The menu items list will be printed onto the console.
+
 <hr>
 
 #### Update an Item
@@ -475,6 +495,8 @@ The expected inputs to add only one menu item into an order is as such:
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/updateitem`.
+
+![](./images/developersGuide/SequenceDiagrams/Item/updateItem.png)
 
 The general workflow of `/updateitem` is as follows:
 
@@ -520,8 +542,8 @@ The expected inputs to add only one menu item into an order is as such:
 * `updateitem`
 * `4`
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
-command `deleteitem` or `4`.
+The sequence diagram is similar to the `Advanced Mode Update an Item`.
+
 
 The general workflow of `updateitem` is as follows:
 
@@ -562,7 +584,26 @@ The general workflow of `updateitem` is as follows:
 #### Find an Item
 
 ##### Advanced Mode Find an Item
+The expected inputs to find any or all items that match the input is as such:
 
+* `/finditem <"description">`
+
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
+command `/finditem`.
+
+![](./images/developersGuide/SequenceDiagrams/Item/findItem.png)
+
+The general workflow of `finditem` is as follows:
+
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
+   `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes
+   `Menu#findItem` method to run the `finditem` command.
+1. `Menu#findItem` will then instantiates `FindItemValidation` class to call the `validateInput` method to check if 
+the input matches any of the item names
+1.  If there is matching result, the control will pass to `MenuUi` class to print the list of matched item names.
+1.  If there is no matching names found, the control will pass to `MenuUi` class to print no matching item names found.
+<hr>
 ##### Basic Mode Find an Item
 
 <hr> 
@@ -576,6 +617,8 @@ The general workflow of `updateitem` is as follows:
     * [Add Multiple Items](#add-multiple-menu-items-into-an-order)
     * [Basic Mode](#basic-mode-add-an-order)
 * [Make payment](#make-payment)
+  * [Advanced Mode](#advanced-mode-make-payment)
+  * [Basic Mode](#basic-mode-make-payment)
 * [List all Orders](#list-all-orders)
 * [Refund an Order](#refund-an-order)
     * [Advanced Mode](#advanced-mode-refund-an-order)
@@ -596,7 +639,7 @@ Both ways work similarly, but are parsed differently.
 This sequence diagram shows the interaction between various components in MoneyGoWhere when a user inputs commands to
 add an order.
 
-![](./images/developersGuide/addOrder.png)
+![](./images/developersGuide/SequenceDiagrams/Order/addOrder.png)
 
 The next section will describe exactly how the inputs are parsed into the `addorder` command through each of the
 described ways.
@@ -613,7 +656,7 @@ The expected inputs to add only one menu item into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs these
 commands.
 
-![](./images/developersGuide/addOrderValidation.png)
+![](./images/developersGuide/SequenceDiagrams/Order/addOrderValidation.png)
 
 The general workflow of this `/addorder` command is as follows:
 
@@ -643,7 +686,7 @@ The expected inputs to add multiple menu items into an order is as such:
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/addorder`.
 
-![](./images/developersGuide/addMultipleAddOrders.png)
+![](./images/developersGuide/SequenceDiagrams/Order/addMultipleAddOrders.png)
 
 The general workflow of the `/addorder` command is as follows:
 
@@ -663,10 +706,10 @@ The general workflow of the `/addorder` command is as follows:
 
 ##### Basic Mode Add an Order
 
-![](./images/developersGuide/assistedAddOrder.png)
-
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `addorder` or `6`.
+
+![](./images/developersGuide/SequenceDiagrams/Order/assistedAddOrder.png)
 
 The general workflow of `addorder` is as follows:
 
@@ -686,9 +729,10 @@ The general workflow of `addorder` is as follows:
 
 #### Make payment
 
-![](./images/developersGuide/handlePayment.png)
-
+##### Advanced Mode Make Payment
 This sequence diagram shows what happens after a valid add order command is executed.
+
+![](./images/developersGuide/SequenceDiagrams/Order/handlePayment.png)
 
 The general workflow of `/pay` is as follows:
 
@@ -700,6 +744,7 @@ The general workflow of `/pay` is as follows:
 4. The method `PaymentValidation#validatePayment` is invoked to check the following:
     * The correct command format is used.
     * The flag for payment type and amount flags are present
+    * If the payment type is by card, the payment amount must be exact
     * The payment amount is a valid 2 decimal place double and must be more than or equals to the subtotal of the order.
 5. If the command passes all the validation checks, control is given back to #Payment class and the `Order.status` will
    be updated to `completed`,
@@ -708,16 +753,40 @@ The general workflow of `/pay` is as follows:
 6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to
    print a
    message indicating that the command has executed successfully.
-7. (The above workflow is similar for the basic mode `pay` command, hence not elaborated.)
+
+<hr>
+
+#### Basic Mode Make Payment
+
+The sequence diagram is similar to `Advanced Mode Make Payment`.
+
+The general workflow of `pay` is as follows:
+
+1. If the input is valid, a `Payment` object will be created with the current `Order` as an input.
+2. The `Payment` object uses the `handlePayment` method to prompt the user to enter the `pay` command.
+3. `Payment#handlePayment` then instantiates the assistant class `PaymentAssistant` and invoke its `makePayment` method.
+4. The method `PaymentAssistant#makePayment` is invoked to check the following:
+    * If the user enters `/cancel`, abort the command and return the control to `Router` class.
+    * The `getAmount` and `getType` methods are called to prompt user to enter the payment amount and type, then calles the 
+`PaymentValidation` class to validate the input:
+      * If the payment type is by card, the payment amount must be exact
+      * The payment amount is a valid 2 decimal place double and must be more than or equals to the subtotal of the order.
+5. If the command passes all the validation checks, control is given back to `PaymentAssistant` class and the `Order.status` will
+   be updated to `completed`,
+   the payment type and amount are also updated accordingly and is saved to the `orders.json` file using
+   the `Transaction.save` method.
+6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to
+   print a
+   message indicating that the command has executed successfully.
 
 <hr>
 
 #### List all Orders
 
-![](./images/developersGuide/listOrders.png)
-
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/listorder`.
+
+![](./images/developersGuide/SequenceDiagrams/Order/listOrders.png)
 
 Note that the work flow for both Basic and Advanced Mode is the same, and if the user input is `7` or `listorder`.
 
@@ -738,6 +807,8 @@ The general workflow of `/listorder` is as follows:
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/refundorder`.
+
+![](./images/developersGuide/SequenceDiagrams/Order/refundOrder.png)
 
 The general workflow of `/refundorder` is as follows:
 
@@ -766,8 +837,7 @@ The general workflow of `/refundorder` is as follows:
 
 ##### Basic Mode Refund an Order
 
-This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
-command `refundorder` or `8`.
+The sequence diagram is similar to the `Advanced mode Refund an Order`.
 
 The general workflow of `refundorder` is as follows:
 
@@ -795,9 +865,25 @@ The general workflow of `refundorder` is as follows:
 
 #### Overview
 
-* [Generate Sales Report](#add-an-item)
-* [Generate Ranking Report](#delete-an-item)
+* [Generate Sales Report](#generate-sales-report)
+* [Generate Ranking Report](#generate-rank-report)
 
+#### Generate sales report
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command
+`/report {-r sales} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}`
+
+![](./images/developersGuide/SequenceDiagrams/Statistic/createSalesReport.png)
+
+The general workflow of `/report -r sales` is as follows:
+<hr>
+
+#### Generate rank report
+This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command
+`/report {-r popular} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}`
+
+![](./images/developersGuide/SequenceDiagrams/Statistic/createRankReport.png)
+
+The general workflow of `/report -r popular` is as follows:
 <hr>
 
 ## Requirements
