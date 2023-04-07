@@ -28,6 +28,7 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 * v2.0
     * Implemented `additem`, `updateitem`, `deleteitem`, `finditem` and `listitem` commands in guided mode
     * Added IO operations and validation for `additem`, `updateitem`, `deleteitem`, `finditem` and `listitem` commands in guided mode
+    * Added custom Exceptions and exception handling for commands related to `Item`
 
 #### Contributions to the UG
 * Proofread and corrected content in `Item` section
