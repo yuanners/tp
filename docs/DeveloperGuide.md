@@ -22,7 +22,7 @@ This will enable upcoming software engineers to acquire a detailed understanding
 making it easier for them to work on the project.
 
 For all sequence diagrams included in this guide, we will not include the interaction
-with the Parser and Router classes as it is implied that all inputs will first be parsed through them.
+with the [Parser](#glossary) and Router classes as it is implied that all inputs will first be parsed through them.
 
 #### [Back to table of contents](#table-of-contents)
 
@@ -44,23 +44,23 @@ with the Parser and Router classes as it is implied that all inputs will first b
 
 `MoneyGoWhere`
 
-- Upon creation, it initialises and loads `Menu` and `Transaction` from storage and caches them.
-- On run, it initialises `Ui` and `Router` and runs the following in a loop:
-    - `Ui` receives user input and uses `Command` to format the input so that it can be understood by the application.
+- Upon creation, it initialises and loads `Menu` and `Transaction` from [storage](#glossary) and caches them.
+- On run, it initialises [`Ui`](#glossary) and `Router` and runs the following in a loop:
+    - [`Ui`](#glossary) receives user input and uses `Command` to format the input so that it can be understood by the application.
     - The `Command` is then passed to the `Router` for further processing.
 
-`Ui`
+[`Ui`](#glossary)
 
 - Handles the process of obtaining user input and presenting the application's output to the user.
 
-`Parser`
+[`Parser`](#glossary)
 
 - Handles the process of formatting user input for the `Command`
 - Handles the formatting of the `Menu` and `Transaction` components for the `Store`
 
 `Command`
 
-- Work closely with `Parser` to ensure that user input is accurately formatted.
+- Work closely with [`Parser`](#glossary) to ensure that user input is accurately formatted.
 - Stores the necessary information in a comprehensible format that can be readily utilised across the application.
 
 `Router`
@@ -92,7 +92,7 @@ with the Parser and Router classes as it is implied that all inputs will first b
 
 `Store`
 
-- Handles the storage operation of the application.
+- Handles the [storage](#glossary) operation of the application.
 
 ###### [Back to table of contents](#table-of-contents)
 
@@ -111,7 +111,7 @@ First, its job is to initialise and maintain the instance of `Menu` and `Transac
 After initialisation, it proceed to run a loop which prompts the user for input. When it receives an input from the
 user, it will invoke `Command` to stores the information in a comprehensible format.
 
-The `Parser` is a helper class that assist the `Command` object to extract and format the relevant information from the
+The [`Parser`](#glossary) is a helper class that assist the `Command` object to extract and format the relevant information from the
 given user input.
 
 After the `Command` object has been successfully parsed, it will be handed over to `Router` to determine which methods
@@ -249,10 +249,10 @@ to its methods.
 The `Store` class facilitates the saving and loading of both `Transaction` and `Menu` objects to and from
 the `./datastore` directory.
 
-Both `Transaction` and `Menu` objects undergo JSON serialisation prior to being persisted to a file through the `Parser`
+Both `Transaction` and `Menu` objects undergo JSON serialisation prior to being persisted to a file through the [`Parser`](#glossary)
 component.
 
-The `Parser` component parses the JSON data retrieved from the file, converting it into either a `Transaction` or `Menu`
+The [`Parser`](#glossary) component parses the JSON data retrieved from the file, converting it into either a `Transaction` or `Menu`
 object.
 
 <hr>
@@ -261,7 +261,7 @@ object.
 
 ![](./images/developersGuide/UiComponent.png)
 <br>
-*Figure 8: Class diagram for Ui component*
+*Figure 8: Class diagram for [Ui](#glossary) component*
 
 The `Ui` component manages the process of gathering user input and displaying the application's output to the user.
 
@@ -276,7 +276,7 @@ The `StatisticUi` class are responsible for statistic related Ui
 
 The `StoreUi` class are responsible for store related Ui
 
-The `Flag` enumeration is a comprehensive collection of all error flags utilised throughout the entirety of the
+The [`Flag`](#glossary) enumeration is a comprehensive collection of all error [flags](#glossary) utilised throughout the entirety of the
 MoneyGoWhere application
 
 <hr>
@@ -1049,7 +1049,6 @@ The glossary is shown in alphabetical order. If you have any additional question
 
 | Term    | Explanation                                                                                                                                              |
 |---------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Command | A Command is an object that performs a task that corresponds to the user input.                                                                          |
 | Parser  | A Parser is responsible for making sense of the user inputs and processing them as commands for the application to run.                                  |                                                                                                                                      |
 | Flag    | Used to specify instructions and change the behaviour of a command. In this application, flags have a short-form and a long-form, ie. `-n` and `--name`. |
 | Ui      | A UI is an user interface that the user sees on the CLI.                                                                                                 |
