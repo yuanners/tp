@@ -11,7 +11,8 @@
     * [User Stories](#user-stories)
     * [Non-functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-* [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
+* [Appendix](#appendix)
+    * [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -1058,7 +1059,9 @@ The glossary is shown in alphabetical order. If you have any additional question
 
 <hr>
 
-### Appendix: Instructions for manual testing
+### Appendix
+
+### Instructions for manual testing
 
 Below are some instructions to test MoneyGoWhere manually.
 
@@ -1080,21 +1083,23 @@ Below are some instructions to test MoneyGoWhere manually.
 
 1. Initial launch
 
-
-    1. Ensure that Java 11 or above is installed.
-    2. Download the latest .jar version of MoneyGoWhere from [here](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases/tag/v2.0).
-    3. Copy the file to the folder you wish to use as a home folder for MoneyGoWhere.
-    4. Open a terminal and navigate to the folder.
-    5. Start the application by executing java -jar MoneyGoWhere.jar in the terminal.
-    6. Once MoneyGoWhere has successfully launched a welcome message should appear. When
-       launched for the first time, a folder will be created for file storage.
-
+```
+1. Ensure that Java 11 or above is installed.
+2. Download the latest .jar version of MoneyGoWhere from [here](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases/tag/v2.0).
+3. Copy the file to the folder you wish to use as a home folder for MoneyGoWhere.
+4. Open a terminal and navigate to the folder.
+5. Start the application by executing java -jar MoneyGoWhere.jar in the terminal.
+6. Once MoneyGoWhere has successfully launched a welcome message should appear. When
+   launched for the first time, a folder will be created for file storage.
+```
 
 2. Shutting down 
 
+```
+1. Quit the application using the command `exit`
+2. MoneyGoWhere prints a farewell message before terminating.
+```
 
-    1. Quit the application using the command `exit`
-    2. MoneyGoWhere prints a farewell message before terminating.
 ###### [Back to table of contents](#table-of-contents)
 <hr>
 
@@ -1103,115 +1108,125 @@ Below are some instructions to test MoneyGoWhere manually.
 
 1. Adding an item when menu is empty.
 
+```
+1. Test case: `/additem -n "chicken rice" -p 3.50`
 
-    1. Test case: `/additem -n "chicken rice" -p 3.50`
+   Expected: Item added successfully.
 
-       Expected: Item added successfully.
+2. Test case: `/additem -n "duck rice" -p three dollars`
 
-    2. Test case: `/additem -n "duck rice" -p three dollars`
+   Expected: Item is not added to the menu. An error message is displayed along with the reason:
+   Price must be a number.
 
-       Expected: Item is not added to the menu. An error message is displayed along with the reason:
-       Price must be a number.
-
-    3. Other incorrect add commands to test: `/additem`, `/additem "name"`, `/additem -n "name"` and `/additem -p 2.50`
+3. Other incorrect add commands to test: `/additem`, `/additem "name"`, `/additem -n "name"` and `/additem -p 2.50`
+```
 
 2. Adding an item when menu is not empty.
 
+```
+1.  Test case: `/additem -n "chicken rice" -p 3.50`
 
-    1.  Test case: `/additem -n "chicken rice" -p 3.50`
-   
-      Expected: Item is not added to the menu. An error message is displayed along with the reason: 
-      Name already exists. Please choose a different name.
+  Expected: Item is not added to the menu. An error message is displayed along with the reason: 
+  Name already exists. Please choose a different name.
+```
 
 ### Deleting a menu item
 
 1. Deleting an item when menu is empty.
 
+```
+1. Test case: `/deleteitem -i 1`
 
-    1. Test case: `/deleteitem -i 1`
-
-       Expected: Item is not deleted. An error message is displayed along with the reason:
-       There are no items on the menu
+   Expected: Item is not deleted. An error message is displayed along with the reason:
+   There are no items on the menu
+```
 
 2. Deleting an item when menu is not empty.
 
+```
+1.  Test case: `/deleteitem -i 1`
 
-    1.  Test case: `/deleteitem -i 1`
-   
-      Expected: Item at index 1 is deleted successfully.
+  Expected: Item at index 1 is deleted successfully.
 
-    2. Test case: `/deleteitem -i 999`
+2. Test case: `/deleteitem -i 999`
 
-       Expected: Item is not deleted. An error message is displayed along with the reason:
-       Index does not exist
+   Expected: Item is not deleted. An error message is displayed along with the reason:
+   Index does not exist
 
-    3. Other incorrect commands to test: `/deleteitem`, `/deleteitem something`, `/deleteitem -i` and `/deleteitem -i something`
+3. Other incorrect commands to test: `/deleteitem`, `/deleteitem something`, `/deleteitem -i` and `/deleteitem -i something`
+```
 
 ### Updating a menu item
 
 1. Updating an item when menu is empty.
 
+```
+1. Test case: `/updateitem -i 1 `
 
-    1. Test case: `/updateitem -i 1 `
-
-       Expected: Item is not updated. An error message is displayed along with the reason:
-       Index does not exist.
+   Expected: Item is not updated. An error message is displayed along with the reason:
+   Index does not exist.
+```
 
 2. Updating an item when menu is not empty.
 
+```
+1.  Test case: `/updateitem -i 1 -p 5.50`
 
-    1.  Test case: `/updateitem -i 1 -p 5.50`
-   
-      Expected: Item at index 1 is updated successfully.
+  Expected: Item at index 1 is updated successfully.
 
-    2. Test case: `/updateitem -i 2 -n "new name"`
+2. Test case: `/updateitem -i 2 -n "new name"`
 
-       Expected: Item at index 2 is updated successfully.
-    3. Test case: `/updateitem -i 2 -p "something"`
+   Expected: Item at index 2 is updated successfully.
+3. Test case: `/updateitem -i 2 -p "something"`
 
-       Expected: Item is not updated. An error message is displayed along with the reason:
-       Price must be a number.
-    4. Other incorrect commands to test: `/updateitem`, `/updateitem something`, `/updateitem -i` and `/updateitem -i 1`
+   Expected: Item is not updated. An error message is displayed along with the reason:
+   Price must be a number.
+4. Other incorrect commands to test: `/updateitem`, `/updateitem something`, `/updateitem -i` and `/updateitem -i 1`
+```
 
 ### Finding a menu item
 
 1. Finding an item when menu is empty.
 
+```
+1. Test case: `/finditem "something"`
 
-    1. Test case: `/finditem "something"`
-
-       Expected: No menu items matching something were found.
+   Expected: No menu items matching something were found.
+```
 
 2. Finding an item when menu is not empty.
 
+```
+1.  Test case: `/finditem "rice"`
 
-    1.  Test case: `/finditem "rice"`
-   
-      Expected: All items that contain "rice" in its names will be displayed.
+  Expected: All items that contain "rice" in its names will be displayed.
 
-    2. Test case: `/finditem`
+2. Test case: `/finditem`
 
-       Expected: Command is not valid. An error message is displayed along with the reason:
-       Please specify the keyword to search for.
-
+   Expected: Command is not valid. An error message is displayed along with the reason:
+   Please specify the keyword to search for.
+```
 
 ### List items
 
 1. Menu list is empty
 
+```
+1. Test case: `listitem`
 
-    1. Test case: `listitem`
+   Expected: There are no items on the menu
+```
 
-       Expected: There are no items on the menu
 2. Menu list is not empty
 
+```
+1. Test case: `listitem`
 
-    1. Test case: `listitem`
+   Expected: All the menu items are listed
 
-       Expected: All the menu items are listed
-
-    2. Test case: `listitem something`
-       Expected: Command is not recognised
+2. Test case: `listitem something`
+   Expected: Command is not recognised
+```
 
 ###### [Back to table of contents](#table-of-contents)
 <hr>
@@ -1222,60 +1237,65 @@ Below are some instructions to test MoneyGoWhere manually.
 
 1. Add single order.
 
+```
+1. Test case: `/addorder -i 1`
 
-    1. Test case: `/addorder -i 1`
+   Expected: Subtotal: $3.00. Order has been added successfully.
+   Please use /pay -a <amount> -t <type> or pay to make payment.
 
-       Expected: Subtotal: $3.00. Order has been added successfully.
-       Please use /pay -a <amount> -t <type> or pay to make payment.
+2. Test case: `/addorder -i 2 -q 10`
 
-    2. Test case: `/addorder -i 2 -q 10`
+   Expected: Subtotal: $34.50. Order has been added successfully.
+   Please use /pay -a <amount> -t <type> or pay to make payment.
 
-       Expected: Subtotal: $34.50. Order has been added successfully.
-       Please use /pay -a <amount> -t <type> or pay to make payment.
+3. Test case: `/addorder -i 999`
+   
+   Expected: Order is not added. An error message is displayed along with the reason:
+   Index does not exist.
 
-    3. Test case: `/addorder -i 999`
-       
-       Expected: Order is not added. An error message is displayed along with the reason:
-       Index does not exist.
-
-    4. Other incorrect add commands to test: `/addorder`, `/addorder -i something` and `/addorder -i 1 -q name`
+4. Other incorrect add commands to test: `/addorder`, `/addorder -i something` and `/addorder -i 1 -q name`
+```
 
 2. Add multiple orders.
 
+```
+1. Test case: `/addorder -I [1:1]`
 
-    1. Test case: `/addorder -I [1:1]`
+   Expected: Subtotal: $3.00. Order has been added successfully.
+   Please use /pay -a <amount> -t <type> or pay to make payment.
 
-       Expected: Subtotal: $3.00. Order has been added successfully.
-       Please use /pay -a <amount> -t <type> or pay to make payment.
+2. Test case: `/addorder -I [1:2,2:3]`
 
-    2. Test case: `/addorder -I [1:2,2:3]`
+   Expected: Subtotal: $16.35. Order has been added successfully.
+   Please use /pay -a <amount> -t <type> or pay to make payment.
 
-       Expected: Subtotal: $16.35. Order has been added successfully.
-       Please use /pay -a <amount> -t <type> or pay to make payment.
+3. Test case: `/addorder -I [999:1]`
 
-    3. Test case: `/addorder -I [999:1]`
+   Expected: Order is not added. An error message is displayed along with the reason:
+   Index does not exist.
 
-       Expected: Order is not added. An error message is displayed along with the reason:
-       Index does not exist.
-   
-    4. Other incorrect add commands to test: `/addorder -I`, `/addorder -I [something]` and `/addorder -I [something:something]`
+4. Other incorrect add commands to test: `/addorder -I`, `/addorder -I [something]` and `/addorder -I [something:something]`
+```
 
 ### List orders
 
 1. Order list is empty
 
+```
+1. Test case: `listorder`
 
-    1. Test case: `listorder`
-
-       Expected: Order list is empty.
+   Expected: Order list is empty.
+```
+       
 2. Order list is not empty
 
+```
+1. Test case: `listorder`
 
-    1. Test case: `listorder`
-
-       Expected: All transactions are listed
-    2. Test case: `listorder something`
-       Expected: Command is not recognised
+   Expected: All transactions are listed
+2. Test case: `listorder something`
+   Expected: Command is not recognised
+```
 
 ###### [Back to table of contents](#table-of-contents)
 <hr>
@@ -1287,22 +1307,23 @@ Below are some instructions to test MoneyGoWhere manually.
 >Test case: 
 > 
 > Subtotal: $30.00. Order has been added successfully. Please use /pay -a <amount> -t <type> or pay to make payment.
+```
+1. Test case: `/pay -a 40 -t cash`
 
-    1. Test case: `/pay -a 40 -t cash`
+   Expected: The calculated change is $10.00. Order has been paid.
 
-       Expected: The calculated change is $10.00. Order has been paid.
+2. Test case: `/pay -a 20 -t cash`
 
-    2. Test case: `/pay -a 20 -t cash`
+   Expected: Order is not completed. An error message is displayed along with the reason:
+   Insufficient amount. Payment amount must be more than or equals to subtotal.
 
-       Expected: Order is not completed. An error message is displayed along with the reason:
-       Insufficient amount. Payment amount must be more than or equals to subtotal.
+3. Test case: `/pay -a 50 -t card`
 
-    3. Test case: `/pay -a 50 -t card`
+   Expected: Order is not completed. An error message is displayed along with the reason:
+   Please input exact amount for card payment.
 
-       Expected: Order is not completed. An error message is displayed along with the reason:
-       Please input exact amount for card payment.
-
-    4. Other incorrect commands to test: `/pay 40`, `/pay -a thirty`, `/pay -a 10 -t 10` and `/pay -t cash`
+4. Other incorrect commands to test: `/pay 40`, `/pay -a thirty`, `/pay -a 10 -t 10` and `/pay -t cash`
+```
 
 ###### [Back to table of contents](#table-of-contents)
 <hr>
@@ -1313,28 +1334,30 @@ Below are some instructions to test MoneyGoWhere manually.
 
 1. Refund an order when order list is empty.
 
+```
+1. Test case: `/refundorder -i 204vfenefnef03nf0`
 
-    1. Test case: `/refundorder -i 204vfenefnef03nf0`
-
-       Expected: Command is not valid. An error message is displayed along with the reason:
-       There is no order to refund.
+   Expected: Command is not valid. An error message is displayed along with the reason:
+   There is no order to refund.
+```
 
 2. Refund an order when order list is not empty.
 
+```
+1. Test case: `/refundorder -i b0d70428-c5b2-4024-82e9-ce77cf89dc0c`
 
-    1. Test case: `/refundorder -i b0d70428-c5b2-4024-82e9-ce77cf89dc0c`
+   Expected: The order's status is now refunded.
 
-       Expected: The order's status is now refunded.
-   
-    2. Test case: `/refundorder -i 2b9262ce-e1db-4e31-9b8e-c9e149669d35`
+2. Test case: `/refundorder -i 2b9262ce-e1db-4e31-9b8e-c9e149669d35`
 
-      Expected: Order is not refunded. An error message is displayed along with the reason:
-      Order is already refunded.
+  Expected: Order is not refunded. An error message is displayed along with the reason:
+  Order is already refunded.
 
-    3. Test case: `/refundorder -i some39399thing`
+3. Test case: `/refundorder -i some39399thing`
 
-      Expected: Order is not refunded. An error message is displayed along with the reason:
-      Invalid order ID.
+  Expected: Order is not refunded. An error message is displayed along with the reason:
+  Invalid order ID.
+```
 
 ###### [Back to table of contents](#table-of-contents)
 <hr>
@@ -1343,38 +1366,41 @@ Below are some instructions to test MoneyGoWhere manually.
 
 1. Rank by sales
 
+```
+1. Test case: `/report -s daily -y 2023`
 
-    1. Test case: `/report -s daily -y 2023`
+   Expected: The chart table is displayed to show all the sales in the year of 2023, grouped by each day.
 
-       Expected: The chart table is displayed to show all the sales in the year of 2023, grouped by each day.
+2. Test case: `/report -s monthly -y 2023`
 
-    2. Test case: `/report -s monthly -y 2023`
+   Expected: The chart table is displayed to show all the sales in the year of 2023, grouped by each month.
 
-       Expected: The chart table is displayed to show all the sales in the year of 2023, grouped by each month.
+3. Test case: `/report -s weekly -y 2023`
 
-    3. Test case: `/report -s weekly -y 2023`
+   Expected: Command is not recognised. An error message is displayed along with the reason:
+   Report type specified in [-r|--rank] or [-s|--sales] option not recognised.
 
-       Expected: Command is not recognised. An error message is displayed along with the reason:
-       Report type specified in [-r|--rank] or [-s|--sales] option not recognised.
+4. Other incorrect commands to test: `/report`, `/report -s` and `/report -s yearly`
+```
 
-    4. Other incorrect commands to test: `/report`, `/report -s` and `/report -s yearly`
 2. Rank by popularity
 
+```
+1. Test case: `/report -r sales -y 2023`
 
-    1. Test case: `/report -r sales -y 2023`
+   Expected: The chart table is displayed to rank items by sales in the year of 2023.
 
-       Expected: The chart table is displayed to rank items by sales in the year of 2023.
+2. Test case: `/report -r popular -y 2023`
 
-    2. Test case: `/report -r popular -y 2023`
+   Expected: The chart table is displayed to rank items by popularity in the year of 2023.
 
-       Expected: The chart table is displayed to rank items by popularity in the year of 2023.
+3. Test case: `/report -r sales -y monthly`
 
-    3. Test case: `/report -r sales -y monthly`
+   Expected: Command is not recognised. An error message is displayed along with the reason:
+   Year format provided in [-y|--year] is/are not recognised
 
-       Expected: Command is not recognised. An error message is displayed along with the reason:
-       Year format provided in [-y|--year] is/are not recognised
-
-    4. Other incorrect commands to test: `/report`, `/report -r` and `/report -r something`
+4. Other incorrect commands to test: `/report`, `/report -r` and `/report -r something`
+```
 
 ###### [Back to table of contents](#table-of-contents)
 <hr>
@@ -1382,18 +1408,21 @@ Below are some instructions to test MoneyGoWhere manually.
 ### Storage Testing
 1. MoneyGoWhere.jar is placed in a location where read and write permissions are given.
 
+```
+1. Test case: First time launched
 
-    1. Test case: First time launched
+   Expected: Datastore folder will be created for menu.json and orders.json file.
 
-       Expected: Datastore folder will be created for menu.json and orders.json file.
+2. Test case: File is corrupted
+   Expected: The application will detect it as a corrupted file, correct the format and restore the data.
+```
 
-    2. Test case: File is corrupted
-       Expected: The application will detect it as a corrupted file, correct the format and restore the data.
 2. MoneyGoWhere.jar is placed in a location with no read and write permissions
 
+```
+1. Test case: First time launched
 
-    1. Test case: First time launched
-
-       Expected: No files are created and saved. Error message is displayed.
+   Expected: No files are created and saved. Error message is displayed.
+```
 
 ###### [Back to table of contents](#table-of-contents)
