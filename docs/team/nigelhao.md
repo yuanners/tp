@@ -23,7 +23,8 @@ Given below are my contributions to the project:
 * v2.0
     * Implemented the Statistics function.
     * Wrote JUnit test cases to check for the Statistic feature's code correctness.
-  
+
+<div style="page-break-after: always;"></div>
 
 #### Contributions to the UG
 * Made the UG more user-friendly, with more emphasis on content.
