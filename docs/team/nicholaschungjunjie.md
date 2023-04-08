@@ -36,10 +36,12 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 #### Contributions to the DG
 * Co-authored contents of the section on `Item`, for both expert and guided modes.
 * Added some sequence diagram for `Item`
+* Corrected formatting issues
 
 ### Contributions to Team-based Tasks
 * Fixed bugs found in PE-D
 * Fixed many failed Java-CI tests
+* Added milestones v2.0 and v2.1
 
 #### Reviewing / Mentoring contributions
 * Helped with PR review before merging

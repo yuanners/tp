@@ -44,25 +44,29 @@ public class TransactionUi extends Ui {
         DecimalFormat df = new DecimalFormat("#.00");
 
         System.out.println("================================================");
+        if (orders.size() != 0) {
+            for (int i = 0; i < orders.size(); i++) {
 
-        for (int i = 0; i < orders.size(); i++) {
+                System.out.println("Order " + (i + 1));
+                System.out.println("Order ID: " + orders.get(i).getOrderId());
+                System.out.println("Order status: " + orders.get(i).getStatus());
+                System.out.println("Order time: " + orders.get(i).getFormatDateTime());
 
-            System.out.println("Order " + (i + 1));
-            System.out.println("Order ID: " + orders.get(i).getOrderId());
-            System.out.println("Order status: " + orders.get(i).getStatus());
-            System.out.println("Order time: " + orders.get(i).getFormatDateTime());
+                for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
+                    System.out.println((j + 1) + ". "
+                            + orders.get(i).getOrderEntries().get(j).getItem().getName()
+                            + " x" + orders.get(i).getOrderEntries().get(j).getQuantity());
+                }
 
-            for (int j = 0; j < orders.get(i).getOrderEntries().size(); j++) {
-                System.out.println((j + 1) + ". "
-                        + orders.get(i).getOrderEntries().get(j).getItem().getName()
-                        + " x" + orders.get(i).getOrderEntries().get(j).getQuantity());
+                String subtotal = df.format(orders.get(i).getSubTotal());
+                System.out.println("\nSubtotal: $" + subtotal);
             }
-
-            String subtotal = df.format(orders.get(i).getSubTotal());
-            System.out.println("\nSubtotal: $" + subtotal);
-            System.out.println("================================================");
+        } else {
+            System.out.println("Order list is empty.");
         }
+        System.out.println("================================================");
     }
+
 
     public void printSuccessfulPayment() {
         System.out.println("Order has been paid!");

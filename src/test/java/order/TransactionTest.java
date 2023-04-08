@@ -1,9 +1,6 @@
-package seedu.moneygowhere;
+package order;
 
 import item.Item;
-import order.Order;
-import order.OrderEntry;
-import order.Transaction;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
