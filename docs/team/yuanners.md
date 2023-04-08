@@ -32,7 +32,7 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 
 #### Contributions to the UG
 * Proofread and corrected content in `Refund order` section
-* Added hyperlinks for glossary.
+* Added table of content and all the hyperlinks.
 
 #### Contributions to the DG
 * Wrote contents of the section on `Finditem`, `List item`, `Refund order`, `Payment` and `Statistic` , for both expert and guided modes.
