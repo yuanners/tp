@@ -26,8 +26,7 @@ Given below are my contributions to the project:
 
 #### Contributions to the UG
 * Wrote content for various features of the UG
-* Generated images used throughout the document with Carbon
-* 
+* Generated images used throughout the document with [Carbon](https://carbon.now.sh/)
 
 #### Contributions to the DG
 * Helped structure the DG and gave a rough outline for explaining the implementation of various commands
@@ -36,10 +35,11 @@ Given below are my contributions to the project:
 * Generated over 50 images for the UG and wrote content for various features
 * Linked issues found in PE-D to respective owners of functions with bugs
 * Fixed some failed Java-CI tests
+* Wrote JUnit tests
 
 #### Reviewing / Mentoring contributions
 * Helped check some code before merging PR
-* Helped hunt for bugs
+* Helped identify bugs in project
 
 #### Contributions beyond the project team
 * Peer reviewed User Guides and Developer Guides of other teams in the same tutorial group.
