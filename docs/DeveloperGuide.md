@@ -11,6 +11,7 @@
     * [User Stories](#user-stories)
     * [Non-functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
+* [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -21,7 +22,11 @@ This will enable upcoming software engineers to acquire a detailed understanding
 making it easier for them to work on the project.
 
 For all sequence diagrams included in this guide, we will not include the interaction
-with the Parser and Router classes as it is implied that all inputs will first be parsed through them.
+with the [Parser](#glossary) and Router classes as it is implied that all inputs will first be parsed through them.
+
+#### [Back to table of contents](#table-of-contents)
+
+<hr>
 
 ## Design
 
@@ -39,23 +44,23 @@ with the Parser and Router classes as it is implied that all inputs will first b
 
 `MoneyGoWhere`
 
-- Upon creation, it initialises and loads `Menu` and `Transaction` from storage and caches them.
-- On run, it initialises `Ui` and `Router` and runs the following in a loop:
-    - `Ui` receives user input and uses `Command` to format the input so that it can be understood by the application.
+- Upon creation, it initialises and loads `Menu` and `Transaction` from [storage](#glossary) and caches them.
+- On run, it initialises [`Ui`](#glossary) and `Router` and runs the following in a loop:
+    - [`Ui`](#glossary) receives user input and uses `Command` to format the input so that it can be understood by the application.
     - The `Command` is then passed to the `Router` for further processing.
 
-`Ui`
+[`Ui`](#glossary)
 
 - Handles the process of obtaining user input and presenting the application's output to the user.
 
-`Parser`
+[`Parser`](#glossary)
 
 - Handles the process of formatting user input for the `Command`
 - Handles the formatting of the `Menu` and `Transaction` components for the `Store`
 
 `Command`
 
-- Work closely with `Parser` to ensure that user input is accurately formatted.
+- Work closely with [`Parser`](#glossary) to ensure that user input is accurately formatted.
 - Stores the necessary information in a comprehensible format that can be readily utilised across the application.
 
 `Router`
@@ -87,7 +92,9 @@ with the Parser and Router classes as it is implied that all inputs will first b
 
 `Store`
 
-- Handles the storage operation of the application.
+- Handles the [storage](#glossary) operation of the application.
+
+###### [Back to table of contents](#table-of-contents)
 
 <hr>
 
@@ -104,7 +111,7 @@ First, its job is to initialise and maintain the instance of `Menu` and `Transac
 After initialisation, it proceed to run a loop which prompts the user for input. When it receives an input from the
 user, it will invoke `Command` to stores the information in a comprehensible format.
 
-The `Parser` is a helper class that assist the `Command` object to extract and format the relevant information from the
+The [`Parser`](#glossary) is a helper class that assist the `Command` object to extract and format the relevant information from the
 given user input.
 
 After the `Command` object has been successfully parsed, it will be handed over to `Router` to determine which methods
@@ -242,10 +249,10 @@ to its methods.
 The `Store` class facilitates the saving and loading of both `Transaction` and `Menu` objects to and from
 the `./datastore` directory.
 
-Both `Transaction` and `Menu` objects undergo JSON serialisation prior to being persisted to a file through the `Parser`
+Both `Transaction` and `Menu` objects undergo JSON serialisation prior to being persisted to a file through the [`Parser`](#glossary)
 component.
 
-The `Parser` component parses the JSON data retrieved from the file, converting it into either a `Transaction` or `Menu`
+The [`Parser`](#glossary) component parses the JSON data retrieved from the file, converting it into either a `Transaction` or `Menu`
 object.
 
 <hr>
@@ -254,7 +261,7 @@ object.
 
 ![](./images/developersGuide/UiComponent.png)
 <br>
-*Figure 8: Class diagram for Ui component*
+*Figure 8: Class diagram for [Ui](#glossary) component*
 
 The `Ui` component manages the process of gathering user input and displaying the application's output to the user.
 
@@ -269,7 +276,7 @@ The `StatisticUi` class are responsible for statistic related Ui
 
 The `StoreUi` class are responsible for store related Ui
 
-The `Flag` enumeration is a comprehensive collection of all error flags utilised throughout the entirety of the
+The [`Flag`](#glossary) enumeration is a comprehensive collection of all error [flags](#glossary) utilised throughout the entirety of the
 MoneyGoWhere application
 
 <hr>
@@ -283,6 +290,8 @@ MoneyGoWhere application
 The `Validation` component validates user input data before processing.
 
 Each class within the `Validation` component is dedicated to validating a specific command.
+
+###### [Back to table of contents](#table-of-contents)
 
 <hr>
 
@@ -389,6 +398,8 @@ The general workflow of `additem` is as follows:
 1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been
    successfully added to the menu or if the user has cancelled the command accordingly.
 
+###### [Back to table of contents](#table-of-contents)
+
 <hr>
 
 #### Delete an Item
@@ -429,7 +440,7 @@ The general workflow of `/deleteitem` is as follows:
 1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been
    successfully added to the menu.
 
-##### Basic Mode [Delete an Item]()
+##### Basic Mode Delete an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
@@ -437,7 +448,6 @@ The expected inputs to add only one menu item into an order is as such:
 * `2`
 
 The sequence diagram is similar to the `Advanced Mode Delete an Item`.
-
 
 The general workflow of `deleteitem` is as follows:
 
@@ -459,6 +469,8 @@ The general workflow of `deleteitem` is as follows:
 1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been
    successfully added to the menu or if the user has cancelled the command accordingly.
 
+###### [Back to table of contents](#table-of-contents)
+
 <hr>
 
 #### List all Items
@@ -478,9 +490,12 @@ The general workflow of `/listorder` is as follows:
 
 1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
    `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
-1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` or `Router#promode` which invokes
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` or `Router#promode` which
+   invokes
    `MenuAssistant#displayList` method to run the `listitem` command.
-1.  The menu items list will be printed onto the console.
+1. The menu items list will be printed onto the console.
+
+###### [Back to table of contents](#table-of-contents)
 
 <hr>
 
@@ -544,7 +559,6 @@ The expected inputs to add only one menu item into an order is as such:
 
 The sequence diagram is similar to the `Advanced Mode Update an Item`.
 
-
 The general workflow of `updateitem` is as follows:
 
 1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
@@ -579,11 +593,14 @@ The general workflow of `updateitem` is as follows:
 1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been
    successfully added to the menu or if the user has cancelled the command accordingly.
 
+###### [Back to table of contents](#table-of-contents)
+
 <hr>
 
 #### Find an Item
 
 ##### Advanced Mode Find an Item
+
 The expected inputs to find any or all items that match the input is as such:
 
 * `/finditem <"description">`
@@ -598,13 +615,34 @@ The general workflow of `finditem` is as follows:
 1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
    `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
 1. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes
-   `Menu#findItem` method to run the `finditem` command.
-1. `Menu#findItem` will then instantiates `FindItemValidation` class to call the `validateInput` method to check if 
-the input matches any of the item names
-1.  If there is matching result, the control will pass to `MenuUi` class to print the list of matched item names.
-1.  If there is no matching names found, the control will pass to `MenuUi` class to print no matching item names found.
+   `Menu#showResultsOffFind` method to run the `/finditem` command.
+1. `Menu#showResultsOffFind` will then instantiates `FindItemValidation` class to call the `validateName` method to
+   ensure the item description is not empty.
+1. If there is matching result, the control will pass to `MenuUi` class to print the list of matched item names.
+1. If there is no matching names found, the control will pass to `MenuUi` class to print no matching item names found.
+
 <hr>
+
 ##### Basic Mode Find an Item
+
+The sequence diagram is similar to the Advanced Mode Find an Item.
+
+The general workflow of finditem is as follows:
+
+1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
+   `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
+1. `Router#handleRoute` is then invoked to process the command and calls `Router#assistRoute` which invokes
+   `MenuAssistant#showResultsOffFind` method to run the `finditem` command.
+1. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
+1. `MenuAssistant#showResultsOffFind` invokes `MenuAssistant#promptItemKeyword` to get the description of the item to be
+   searched.
+1. It then calls the advanced search method `Menu#showResultsOfFind` to search for the matching items.
+   If there is matching result, the control will pass to `MenuUi` class to print the list of matched item names.
+1. If there is no matching names found, the control will pass to `MenuUi` class to print no matching item names found.
+1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been
+   successfully found or if the user has cancelled the command accordingly.
+
+###### [Back to table of contents](#table-of-contents)
 
 <hr> 
 
@@ -617,8 +655,8 @@ the input matches any of the item names
     * [Add Multiple Items](#add-multiple-menu-items-into-an-order)
     * [Basic Mode](#basic-mode-add-an-order)
 * [Make payment](#make-payment)
-  * [Advanced Mode](#advanced-mode-make-payment)
-  * [Basic Mode](#basic-mode-make-payment)
+    * [Advanced Mode](#advanced-mode-make-payment)
+    * [Basic Mode](#basic-mode-make-payment)
 * [List all Orders](#list-all-orders)
 * [Refund an Order](#refund-an-order)
     * [Advanced Mode](#advanced-mode-refund-an-order)
@@ -725,11 +763,14 @@ The general workflow of `addorder` is as follows:
 7. Control will be returned to `MoneyGoWhere` if the user cancels the order at any point when being prompted to add menu
    items into the order, or if the user enters "NO" when prompted, to complete the order.
 
+###### [Back to table of contents](#table-of-contents)
+
 <hr>
 
 #### Make payment
 
 ##### Advanced Mode Make Payment
+
 This sequence diagram shows what happens after a valid add order command is executed.
 
 ![](./images/developersGuide/SequenceDiagrams/Order/handlePayment.png)
@@ -767,17 +808,22 @@ The general workflow of `pay` is as follows:
 3. `Payment#handlePayment` then instantiates the assistant class `PaymentAssistant` and invoke its `makePayment` method.
 4. The method `PaymentAssistant#makePayment` is invoked to check the following:
     * If the user enters `/cancel`, abort the command and return the control to `Router` class.
-    * The `getAmount` and `getType` methods are called to prompt user to enter the payment amount and type, then calles the 
-`PaymentValidation` class to validate the input:
-      * If the payment type is by card, the payment amount must be exact
-      * The payment amount is a valid 2 decimal place double and must be more than or equals to the subtotal of the order.
-5. If the command passes all the validation checks, control is given back to `PaymentAssistant` class and the `Order.status` will
+    * The `getAmount` and `getType` methods are called to prompt user to enter the payment amount and type, then calles
+      the
+      `PaymentValidation` class to validate the input:
+        * If the payment type is by card, the payment amount must be exact
+        * The payment amount is a valid 2 decimal place double and must be more than or equals to the subtotal of the
+          order.
+5. If the command passes all the validation checks, control is given back to `PaymentAssistant` class and
+   the `Order.status` will
    be updated to `completed`,
    the payment type and amount are also updated accordingly and is saved to the `orders.json` file using
    the `Transaction.save` method.
 6. Lastly, the control will be given back to the `Router` class and it then invokes the `Ui#printCommandSuccess` to
    print a
    message indicating that the command has executed successfully.
+
+###### [Back to table of contents](#table-of-contents)
 
 <hr>
 
@@ -798,6 +844,8 @@ The general workflow of `/listorder` is as follows:
 3. The obtained command is then passed back to `MoneyGoWhere`, which calls the `displayList` method in
    the `transactions` object that was initialized alongside `MoneyGoWhere`.
 4. The transactions will be printed onto the console.
+
+###### [Back to table of contents](#table-of-contents)
 
 <hr>
 
@@ -859,6 +907,8 @@ The general workflow of `refundorder` is as follows:
 7. Router#assistRoute then calls MenuAssistant#printResult to print a message indicating that if the item has been
    successfully added to the menu or if the user has cancelled the command accordingly.
 
+###### [Back to table of contents](#table-of-contents)
+
 <hr>
 
 ### Report Commands
@@ -868,27 +918,94 @@ The general workflow of `refundorder` is as follows:
 * [Generate Sales Report](#generate-sales-report)
 * [Generate Ranking Report](#generate-rank-report)
 
+#### Statistics
+
+This sequence diagram models the overview of the statistic components when the user inputs the command `\report`.
+
+![](./images/developersGuide/SequenceDiagrams/Statistic/statistic.png)
+
 #### Generate sales report
+
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command
 `/report {-r sales} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}`
 
 ![](./images/developersGuide/SequenceDiagrams/Statistic/createSalesReport.png)
 
 The general workflow of `/report -r sales` is as follows:
+
+1. User input is passed to `MoneyGoWhere`. `MoneyGoWhere` then passes it to the `Command` class, which instantiates a
+   new `parser` object to extract the command as `report`.
+2. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the
+   user input.
+4. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes
+   `Statistic#handleStatisticRoute` method to run the `/report` command.
+5. It then instantiates the validation class `StatisticValidation` and invokes the `validateRequiredFlag` method. This
+   validates the
+   user input to contain all the required flags in the correct format.
+6. Once the input is validated, it is passed to instantiate the `SalesReport` class.
+7. The `totalSales` method is then invoked to calculate the subtotal of all the completed orders.
+8. If the user input is `daily`, `Chart` class is instantiated and calls the `dailySalesChart` to generate the bar
+   charts based off daily sales.
+9. If the user input is `monthly`, `Chart` class is instantiated and calls the `monthlySalesChart` to generate the bar
+   charts based off monthly sales.
+10. Lastly, the control will be given back to the `MoneyGoWhere` class to prompt for new user input.
+
+###### [Back to table of contents](#table-of-contents)
+
 <hr>
 
 #### Generate rank report
+
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the command
 `/report {-r popular} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}`
 
 ![](./images/developersGuide/SequenceDiagrams/Statistic/createRankReport.png)
 
 The general workflow of `/report -r popular` is as follows:
+
+1. User input is passed to `MoneyGoWhere`. `MoneyGoWhere` then passes it to the `Command` class, which instantiates a
+   new `parser` object to extract the command as `report`.
+2. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the
+   user input.
+4. `Router#handleRoute` is then invoked to process the command and calls `Router#proRoute` which invokes
+   `Statistic#handleStatisticRoute` method to run the `/report` command.
+5. It then instantiates the validation class `StatisticValidation` and invokes the `validateRequiredFlag` method. This
+   validates the
+   user input to contain all the required flags in the correct format.
+8. If the user input is `sales`, the `rankBySales` method is invoked to rank the menu items according to total order
+   sales.
+    * The `StatisticUi#printSalesRankingTable` is called to print the ranking table to the console.
+9. If the user input is `popular`, the `rankByPopularity` method is invoked to rank the menu items according to total
+   number of order quantities.
+    * The `StatisticUi#printPopularityRankingTable` is called to print the ranking table to the console.
+11. Lastly, the control will be given back to the `MoneyGoWhere` class to prompt for new user input.
+
+###### [Back to table of contents](#table-of-contents)
+
 <hr>
 
 ## Requirements
 
 ### Project Scope
+
+**Tagret user profile:**
+
+Our target user profile is the NUS canteen hawker owners, specifically the Deck canteen.
+
+* Canteen operators looking to streamline their operations and improve efficiency
+* Familiar with basic computer usage and is able to type fast
+* Concerned about the cost of traditional POS systems and looking for a more affordable and flexible solution
+
+**Value Proposition:**
+
+MoneyGoWhere is a comprehensive and easy-to-use CLI application designed to simplify canteen operations and streamline
+business processes.
+With its robust features, including menu management, payment processing, and sales statistics generation, MoneyGoWhere
+is an ideal solution for canteens of any size.
+
+###### [Back to table of contents](#table-of-contents)
+
+<hr>
 
 ### User Stories
 
@@ -910,6 +1027,10 @@ The general workflow of `/report -r popular` is as follows:
 | v2.0    | New User           | Add an item(s) to an order step-by-step          | Get used to the new system                                                       |
 | v2.0    | Returning User     | See statistics on based on previous transactions | **TBC**                                                                          |
 
+###### [Back to table of contents](#table-of-contents)
+
+<hr>
+
 ### Non-functional Requirements
 
 1. The application should be able to run on any operating system with `Java 11` installed.
@@ -918,4 +1039,361 @@ The general workflow of `/report -r popular` is as follows:
 4. The application should be easily adaptable to people who are already well-versed in using a traditional
    Point-of-Sale (POS) system.
 
+###### [Back to table of contents](#table-of-contents)
+
+<hr>
+
 ### Glossary
+
+The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
+
+| Term    | Explanation                                                                                                                                              |
+|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Parser  | A Parser is responsible for making sense of the user inputs and processing them as commands for the application to run.                                  |                                                                                                                                      |
+| Flag    | Used to specify instructions and change the behaviour of a command. In this application, flags have a short-form and a long-form, ie. `-n` and `--name`. |
+| Ui      | A UI is an user interface that the user sees on the CLI.                                                                                                 |
+| Storage | A Storage is in charge of saving and reading to and from the save file respectively.                                                                     |
+
+###### [Back to table of contents](#table-of-contents)
+
+<hr>
+
+### Appendix: Instructions for manual testing
+
+Below are some instructions to test MoneyGoWhere manually.
+
+
+> These instructions only provide a starting point for testers to work on; testers are free to do more exploratory
+> testing.
+
+#### Overview
+
+* [Launch and Shutdown](#launch-and-shutdown)
+* [Menu Testing](#menu-testing)
+* [Order Testing](#order-testing)
+* [Payment Testing](#payment-testing)
+* [Refund testing](#refund-testing)
+* [Statistic Testing](#statistic-testing)
+* [Storage Testing](#storage-testing)
+
+### Launch and shutdown
+
+1. Initial launch
+
+
+    1. Ensure that Java 11 or above is installed.
+    2. Download the latest .jar version of MoneyGoWhere from [here](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases/tag/v2.0).
+    3. Copy the file to the folder you wish to use as a home folder for MoneyGoWhere.
+    4. Open a terminal and navigate to the folder.
+    5. Start the application by executing java -jar MoneyGoWhere.jar in the terminal.
+    6. Once MoneyGoWhere has successfully launched a welcome message should appear. When
+       launched for the first time, a folder will be created for file storage.
+
+
+2. Shutting down 
+
+
+    1. Quit the application using the command `exit`
+    2. MoneyGoWhere prints a farewell message before terminating.
+###### [Back to table of contents](#table-of-contents)
+<hr>
+
+### Menu Testing
+### Adding a menu item
+
+1. Adding an item when menu is empty.
+
+
+    1. Test case: `/additem -n "chicken rice" -p 3.50`
+
+       Expected: Item added successfully.
+
+    2. Test case: `/additem -n "duck rice" -p three dollars`
+
+       Expected: Item is not added to the menu. An error message is displayed along with the reason:
+       Price must be a number.
+
+    3. Other incorrect add commands to test: `/additem`, `/additem "name"`, `/additem -n "name"` and `/additem -p 2.50`
+
+2. Adding an item when menu is not empty.
+
+
+    1.  Test case: `/additem -n "chicken rice" -p 3.50`
+   
+      Expected: Item is not added to the menu. An error message is displayed along with the reason: 
+      Name already exists. Please choose a different name.
+
+### Deleting a menu item
+
+1. Deleting an item when menu is empty.
+
+
+    1. Test case: `/deleteitem -i 1`
+
+       Expected: Item is not deleted. An error message is displayed along with the reason:
+       There are no items on the menu
+
+2. Deleting an item when menu is not empty.
+
+
+    1.  Test case: `/deleteitem -i 1`
+   
+      Expected: Item at index 1 is deleted successfully.
+
+    2. Test case: `/deleteitem -i 999`
+
+       Expected: Item is not deleted. An error message is displayed along with the reason:
+       Index does not exist
+
+    3. Other incorrect commands to test: `/deleteitem`, `/deleteitem something`, `/deleteitem -i` and `/deleteitem -i something`
+
+### Updating a menu item
+
+1. Updating an item when menu is empty.
+
+
+    1. Test case: `/updateitem -i 1 `
+
+       Expected: Item is not updated. An error message is displayed along with the reason:
+       Index does not exist.
+
+2. Updating an item when menu is not empty.
+
+
+    1.  Test case: `/updateitem -i 1 -p 5.50`
+   
+      Expected: Item at index 1 is updated successfully.
+
+    2. Test case: `/updateitem -i 2 -n "new name"`
+
+       Expected: Item at index 2 is updated successfully.
+    3. Test case: `/updateitem -i 2 -p "something"`
+
+       Expected: Item is not updated. An error message is displayed along with the reason:
+       Price must be a number.
+    4. Other incorrect commands to test: `/updateitem`, `/updateitem something`, `/updateitem -i` and `/updateitem -i 1`
+
+### Finding a menu item
+
+1. Finding an item when menu is empty.
+
+
+    1. Test case: `/finditem "something"`
+
+       Expected: No menu items matching something were found.
+
+2. Finding an item when menu is not empty.
+
+
+    1.  Test case: `/finditem "rice"`
+   
+      Expected: All items that contain "rice" in its names will be displayed.
+
+    2. Test case: `/finditem`
+
+       Expected: Command is not valid. An error message is displayed along with the reason:
+       Please specify the keyword to search for.
+
+
+### List items
+
+1. Menu list is empty
+
+
+    1. Test case: `listitem`
+
+       Expected: There are no items on the menu
+2. Menu list is not empty
+
+
+    1. Test case: `listitem`
+
+       Expected: All the menu items are listed
+
+    2. Test case: `listitem something`
+       Expected: Command is not recognised
+
+###### [Back to table of contents](#table-of-contents)
+<hr>
+
+### Order Testing
+
+### Adding an order
+
+1. Add single order.
+
+
+    1. Test case: `/addorder -i 1`
+
+       Expected: Subtotal: $3.00. Order has been added successfully.
+       Please use /pay -a <amount> -t <type> or pay to make payment.
+
+    2. Test case: `/addorder -i 2 -q 10`
+
+       Expected: Subtotal: $34.50. Order has been added successfully.
+       Please use /pay -a <amount> -t <type> or pay to make payment.
+
+    3. Test case: `/addorder -i 999`
+       
+       Expected: Order is not added. An error message is displayed along with the reason:
+       Index does not exist.
+
+    4. Other incorrect add commands to test: `/addorder`, `/addorder -i something` and `/addorder -i 1 -q name`
+
+2. Add multiple orders.
+
+
+    1. Test case: `/addorder -I [1:1]`
+
+       Expected: Subtotal: $3.00. Order has been added successfully.
+       Please use /pay -a <amount> -t <type> or pay to make payment.
+
+    2. Test case: `/addorder -I [1:2,2:3]`
+
+       Expected: Subtotal: $16.35. Order has been added successfully.
+       Please use /pay -a <amount> -t <type> or pay to make payment.
+
+    3. Test case: `/addorder -I [999:1]`
+
+       Expected: Order is not added. An error message is displayed along with the reason:
+       Index does not exist.
+   
+    4. Other incorrect add commands to test: `/addorder -I`, `/addorder -I [something]` and `/addorder -I [something:something]`
+
+### List orders
+
+1. Order list is empty
+
+
+    1. Test case: `listorder`
+
+       Expected: Order list is empty.
+2. Order list is not empty
+
+
+    1. Test case: `listorder`
+
+       Expected: All transactions are listed
+    2. Test case: `listorder something`
+       Expected: Command is not recognised
+
+###### [Back to table of contents](#table-of-contents)
+<hr>
+
+### Payment testing
+
+1. Paying an order
+
+>Test case: 
+> 
+> Subtotal: $30.00. Order has been added successfully. Please use /pay -a <amount> -t <type> or pay to make payment.
+
+    1. Test case: `/pay -a 40 -t cash`
+
+       Expected: The calculated change is $10.00. Order has been paid.
+
+    2. Test case: `/pay -a 20 -t cash`
+
+       Expected: Order is not completed. An error message is displayed along with the reason:
+       Insufficient amount. Payment amount must be more than or equals to subtotal.
+
+    3. Test case: `/pay -a 50 -t card`
+
+       Expected: Order is not completed. An error message is displayed along with the reason:
+       Please input exact amount for card payment.
+
+    4. Other incorrect commands to test: `/pay 40`, `/pay -a thirty`, `/pay -a 10 -t 10` and `/pay -t cash`
+
+###### [Back to table of contents](#table-of-contents)
+<hr>
+
+### Refund testing
+
+### Refunding an order
+
+1. Refund an order when order list is empty.
+
+
+    1. Test case: `/refundorder -i 204vfenefnef03nf0`
+
+       Expected: Command is not valid. An error message is displayed along with the reason:
+       There is no order to refund.
+
+2. Refund an order when order list is not empty.
+
+
+    1. Test case: `/refundorder -i b0d70428-c5b2-4024-82e9-ce77cf89dc0c`
+
+       Expected: The order's status is now refunded.
+   
+    2. Test case: `/refundorder -i 2b9262ce-e1db-4e31-9b8e-c9e149669d35`
+
+      Expected: Order is not refunded. An error message is displayed along with the reason:
+      Order is already refunded.
+
+    3. Test case: `/refundorder -i some39399thing`
+
+      Expected: Order is not refunded. An error message is displayed along with the reason:
+      Invalid order ID.
+
+###### [Back to table of contents](#table-of-contents)
+<hr>
+
+### Statistic testing
+
+1. Rank by sales
+
+
+    1. Test case: `/report -s daily -y 2023`
+
+       Expected: The chart table is displayed to show all the sales in the year of 2023, grouped by each day.
+
+    2. Test case: `/report -s monthly -y 2023`
+
+       Expected: The chart table is displayed to show all the sales in the year of 2023, grouped by each month.
+
+    3. Test case: `/report -s weekly -y 2023`
+
+       Expected: Command is not recognised. An error message is displayed along with the reason:
+       Report type specified in [-r|--rank] or [-s|--sales] option not recognised.
+
+    4. Other incorrect commands to test: `/report`, `/report -s` and `/report -s yearly`
+2. Rank by popularity
+
+
+    1. Test case: `/report -r sales -y 2023`
+
+       Expected: The chart table is displayed to rank items by sales in the year of 2023.
+
+    2. Test case: `/report -r popular -y 2023`
+
+       Expected: The chart table is displayed to rank items by popularity in the year of 2023.
+
+    3. Test case: `/report -r sales -y monthly`
+
+       Expected: Command is not recognised. An error message is displayed along with the reason:
+       Year format provided in [-y|--year] is/are not recognised
+
+    4. Other incorrect commands to test: `/report`, `/report -r` and `/report -r something`
+
+###### [Back to table of contents](#table-of-contents)
+<hr>
+
+### Storage Testing
+1. MoneyGoWhere.jar is placed in a location where read and write permissions are given.
+
+
+    1. Test case: First time launched
+
+       Expected: Datastore folder will be created for menu.json and orders.json file.
+
+    2. Test case: File is corrupted
+       Expected: The application will detect it as a corrupted file, correct the format and restore the data.
+2. MoneyGoWhere.jar is placed in a location with no read and write permissions
+
+
+    1. Test case: First time launched
+
+       Expected: No files are created and saved. Error message is displayed.
+
+###### [Back to table of contents](#table-of-contents)
