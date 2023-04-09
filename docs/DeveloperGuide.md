@@ -15,6 +15,9 @@
     * [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
+We would like to acknowledge [Address Book (Level-3)](https://github.com/se-edu/addressbook-level3) as we have referenced their 
+[User Guide(UG)](https://se-education.org/addressbook-level3/UserGuide.html) and [Developer Guide(DG)](https://se-education.org/addressbook-level3/DeveloperGuide.html) to structure
+our documentation.
 
 ## Introduction
 
