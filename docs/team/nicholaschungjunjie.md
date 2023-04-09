@@ -14,7 +14,7 @@ Given below are my contributions to the project:
 
 ### Code Contributed
 
-Please click on this [link to my RepoSense report](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=T09&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-02-17&tabOpen=true&tabType=authorship&tabAuthor=NicholasChungJunJie&tabRepo=AY2223S2-CS2113T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false) to view my contributions.
+Please click on this [link to my RepoSense report](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=t09-2&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-02-17&tabOpen=true&zFR=false&tabType=authorship&tabAuthor=NicholasChungJunJie&tabRepo=AY2223S2-CS2113T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false) to view my contributions.
 
 Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS2113T-T09-2/tp/pulls?q=is%3Apr+author%3ANicholasChungJunJie) to view my pull requests.
 
@@ -49,4 +49,4 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 
 #### Contributions beyond the project team
 * Peer reviewed User Guides and Developer Guides of other teams in the same tutorial group.
-* Found, reported [bugs](https://github.com/NicholasChungJunJie/ped), and made suggestions for team [LifeTracker](https://github.com/AY2223S2-CS2113-W15-1/tp).
+* Found, reported [bugs](https://github.com/NicholasChungJunJie/ped/issues), and made suggestions for team [LifeTracker](https://github.com/AY2223S2-CS2113-W15-1/tp).
