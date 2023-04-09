@@ -102,6 +102,9 @@ public class MenuUi extends Ui {
         case MISSING_FIND_ITEM_DESCRIPTION:
             System.out.println("Please specify the keyword to search for.");
             break;
+        case EMPTY_FIND_ITEM_DESCRIPTION:
+            System.out.println("Keyword cannot be empty.");
+            break;
 
 
         // Item Name
