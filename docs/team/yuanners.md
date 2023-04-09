@@ -36,8 +36,8 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 
 #### Contributions to the DG
 * Wrote contents of the section on `Finditem`, `List item`, `Refund order`, `Payment` and `Statistic` , for both expert and guided modes.
-* Added glossary and corresponding hyperlinks.
-* Added the whole section for instruction on manual testings.
+* Wrote acknowledgement, glossary and added the corresponding hyperlinks.
+* Wrote the whole section for instruction on manual testings.
 
 ### Contributions to Team-based Tasks
 * Fixed bugs found in PE-D
@@ -51,4 +51,4 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
 
 #### Contributions beyond the project team
 * Peer reviewed User Guides and Developer Guides of other teams in the same tutorial group.
-* Found, reported [bugs](https://github.com/yuanners/ped), and made suggestions for team [ChChing](https://github.com/AY2223S2-CS2113-T12-1/tp).
+* Found, reported [bugs](https://github.com/yuanners/ped/issues), and made suggestions for team [ChChing](https://github.com/AY2223S2-CS2113-T12-1/tp).
