@@ -27,15 +27,15 @@ public class Ui {
     }
 
     public void printInvalidCommand(String command) {
-        System.out.println("The command: " + command + " is not a valid command.");
+        System.out.println("\nThe command: " + command + " is not a valid command.\n");
     }
 
     public void printCommandSuccess(String command) {
-        System.out.println("The command: " + command + " was successfully executed!");
+        System.out.println("\nThe command: " + command + " was successfully executed!\n");
     }
 
     public void printCommandCancelled(String command) {
-        System.out.println("The command: " + command + " has been cancelled.");
+        System.out.println("\nThe command: " + command + " has been cancelled.\n");
     }
 
     public void printAssistedHelp() {
@@ -81,7 +81,7 @@ public class Ui {
     }
 
     public void printExit() {
-        System.out.println("Thank you for using MoneyGoWhere. Goodbye!");
+        System.out.println("\nThank you for using MoneyGoWhere. Goodbye!");
     }
 
 

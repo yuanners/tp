@@ -5,4 +5,5 @@ Welcome to MoneyGoWhere!
 To begin, you may enter "help" to see a list of commands.
 
 Please enter a command:
+
 Thank you for using MoneyGoWhere. Goodbye!

@@ -3,6 +3,7 @@ package order;
 import app.Command;
 
 import exception.DuplicateArgumentFoundException;
+import exception.item.NoSuchItemException;
 import exception.order.MissingQuantityArgumentException;
 import exception.order.InvalidIndexNumberFormatException;
 import exception.order.MissingOrderFlagException;
@@ -171,6 +172,7 @@ public class Order implements ComputeOrder {
             command.mapArgumentAlias("items", "I");
 
             if (command.getArgumentMap().get("item") != null) {
+                addOrderValidation.validateItemName(command);
                 command = addOrderValidation.validateCommand(command, listOfItems);
                 addOrderValidation.validateFlag(command);
                 addOrderValidation.validateIndex(command, listOfItems);
@@ -210,6 +212,8 @@ public class Order implements ComputeOrder {
             transactionUi.printError(Flags.Error.INVALID_MULTIPLE_ORDER_FORMAT_EXCEPTION);
         } catch (MultipleSimilarItemsFoundException e) {
             // Error message is already printed in a separate handler
+        } catch (NoSuchItemException e) {
+            transactionUi.printError(Flags.Error.NO_SUCH_ITEM);
         }
         return isAdded;
     }

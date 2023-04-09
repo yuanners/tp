@@ -28,7 +28,7 @@ making it easier for them to work on the project.
 For all sequence diagrams included in this guide, we will not include the interaction
 with the [Parser](#glossary) and Router classes as it is implied that all inputs will first be parsed through them.
 
-#### [Back to table of contents](#table-of-contents)
+###### [Back to table of contents](#table-of-contents)
 
 <hr>
 
@@ -306,24 +306,24 @@ Each class within the `Validation` component is dedicated to validating a specif
 #### Overview
 
 * [Add an Item](#add-an-item)
-    * [Advanced Mode](#advanced-mode-add-an-item)
-    * [Basic Mode](#basic-mode-add-an-item)
+    * [Experienced Mode](#experienced-mode-add-an-item)
+    * [New User Mode](#new-user-mode-add-an-item)
 * [Delete an Item](#delete-an-item)
-    * [Advanced Mode](#advanced-mode-delete-an-item)
-    * [Basic Mode](#basic-mode-delete-an-item)
+    * [Experienced Mode](#experienced-mode-delete-an-item)
+    * [New User Mode](#new-user-mode-delete-an-item)
 * [List all Items](#list-all-items)
 * [Update an Item](#update-an-item)
-    * [Advanced Mode](#advanced-mode-update-an-item)
-    * [Basic Mode](#basic-mode-update-an-item)
+    * [Experienced Mode](#experienced-mode-update-an-item)
+    * [New User Mode](#new-user-mode-update-an-item)
 * [Find an Item](#find-an-item)
-    * [Advanced Mode](#advanced-mode-find-an-item)
-    * [Basic Mode](#basic-mode-find-an-item)
+    * [Experienced Mode](#experienced-mode-find-an-item)
+    * [New User Mode](#new-user-mode-find-an-item)
 
 <hr>
 
 #### Add an Item
 
-##### Advanced Mode Add an Item
+##### Experienced Mode Add an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
@@ -367,14 +367,14 @@ The general workflow of `/additem` is as follows:
 1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been
    successfully added to the menu.
 
-##### Basic Mode Add an Item
+##### New User Mode Add an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
 * `additem`
 * `1`
 
-The sequence diagram is similar to the `Advanced Mode Add an Item`.
+The sequence diagram is similar to the `Experienced Mode Add an Item`.
 
 The general workflow of `additem` is as follows:
 
@@ -408,7 +408,7 @@ The general workflow of `additem` is as follows:
 
 #### Delete an Item
 
-##### Advanced Mode Delete an Item
+##### Experienced Mode Delete an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
@@ -444,14 +444,14 @@ The general workflow of `/deleteitem` is as follows:
 1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been
    successfully added to the menu.
 
-##### Basic Mode Delete an Item
+##### New User Mode Delete an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
 * `deleteitem`
 * `2`
 
-The sequence diagram is similar to the `Advanced Mode Delete an Item`.
+The sequence diagram is similar to the `Experienced Mode Delete an Item`.
 
 The general workflow of `deleteitem` is as follows:
 
@@ -488,7 +488,7 @@ command `/listitem` or `lisitem` or `3`.
 
 ![](./images/developersGuide/SequenceDiagrams/Item/listItem.png)
 
-Note that the work flow for both Basic and Advanced Mode is the same.
+Note that the work flow for both Basic and Experienced Mode is the same.
 
 The general workflow of `/listorder` is as follows:
 
@@ -505,7 +505,7 @@ The general workflow of `/listorder` is as follows:
 
 #### Update an Item
 
-##### Advanced Mode Update an Item
+##### Experienced Mode Update an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
@@ -554,14 +554,14 @@ The general workflow of `/updateitem` is as follows:
 1. `Router` object then calls `MenuUi#printCommandSuccess` to print a message indicating that the item has been
    successfully added to the menu.
 
-##### Basic Mode Update an Item
+##### New User Mode Update an Item
 
 The expected inputs to add only one menu item into an order is as such:
 
 * `updateitem`
 * `4`
 
-The sequence diagram is similar to the `Advanced Mode Update an Item`.
+The sequence diagram is similar to the `Experienced Mode Update an Item`.
 
 The general workflow of `updateitem` is as follows:
 
@@ -603,7 +603,7 @@ The general workflow of `updateitem` is as follows:
 
 #### Find an Item
 
-##### Advanced Mode Find an Item
+##### Experienced Mode Find an Item
 
 The expected inputs to find any or all items that match the input is as such:
 
@@ -627,9 +627,9 @@ The general workflow of `finditem` is as follows:
 
 <hr>
 
-##### Basic Mode Find an Item
+##### New User Mode Find an Item
 
-The sequence diagram is similar to the Advanced Mode Find an Item.
+The sequence diagram is similar to the Experienced Mode Find an Item.
 
 The general workflow of finditem is as follows:
 
@@ -640,7 +640,7 @@ The general workflow of finditem is as follows:
 1. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
 1. `MenuAssistant#showResultsOffFind` invokes `MenuAssistant#promptItemKeyword` to get the description of the item to be
    searched.
-1. It then calls the advanced search method `Menu#showResultsOfFind` to search for the matching items.
+1. It then calls the experienced search method `Menu#showResultsOfFind` to search for the matching items.
    If there is matching result, the control will pass to `MenuUi` class to print the list of matched item names.
 1. If there is no matching names found, the control will pass to `MenuUi` class to print no matching item names found.
 1. `Router#assistRoute` then calls `MenuAssistant#printResult` to print a message indicating that if the item has been
@@ -657,14 +657,14 @@ The general workflow of finditem is as follows:
 * [Add an Order](#add-an-order)
     * [Add a Single Item](#add-only-one-menu-item-into-an-order)
     * [Add Multiple Items](#add-multiple-menu-items-into-an-order)
-    * [Basic Mode](#basic-mode-add-an-order)
+    * [New User Mode](#new-user-mode-add-an-order)
 * [Make payment](#make-payment)
-    * [Advanced Mode](#advanced-mode-make-payment)
-    * [Basic Mode](#basic-mode-make-payment)
+    * [Experienced Mode](#experienced-mode-make-payment)
+    * [New User Mode](#new-user-mode-make-payment)
 * [List all Orders](#list-all-orders)
 * [Refund an Order](#refund-an-order)
-    * [Advanced Mode](#advanced-mode-refund-an-order)
-    * [Basic Mode](#basic-mode-refund-an-order)
+    * [Experienced Mode](#experienced-mode-refund-an-order)
+    * [New User Mode](#new-user-mode-refund-an-order)
 
 <hr>
 
@@ -674,7 +674,7 @@ There are three ways to add an order into MoneyGoWhere.
 
 1. By adding only one menu item into an order
 2. By adding one or more menu items into an order
-3. By using Basic Mode to add one or more menu items into an order
+3. By using New User Mode to add one or more menu items into an order
 
 Both ways work similarly, but are parsed differently.
 
@@ -746,7 +746,7 @@ The general workflow of the `/addorder` command is as follows:
 
 <hr>
 
-##### Basic Mode Add an Order
+##### New User Mode Add an Order
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `addorder` or `6`.
@@ -773,7 +773,7 @@ The general workflow of `addorder` is as follows:
 
 #### Make payment
 
-##### Advanced Mode Make Payment
+##### Experienced Mode Make Payment
 
 This sequence diagram shows what happens after a valid add order command is executed.
 
@@ -801,9 +801,9 @@ The general workflow of `/pay` is as follows:
 
 <hr>
 
-#### Basic Mode Make Payment
+#### New User Mode Make Payment
 
-The sequence diagram is similar to `Advanced Mode Make Payment`.
+The sequence diagram is similar to `Experienced Mode Make Payment`.
 
 The general workflow of `pay` is as follows:
 
@@ -838,7 +838,7 @@ command `/listorder`.
 
 ![](./images/developersGuide/SequenceDiagrams/Order/listOrders.png)
 
-Note that the work flow for both Basic and Advanced Mode is the same, and if the user input is `7` or `listorder`.
+Note that the work flow for both Basic and Experienced Mode is the same, and if the user input is `7` or `listorder`.
 
 The general workflow of `/listorder` is as follows:
 
@@ -855,7 +855,7 @@ The general workflow of `/listorder` is as follows:
 
 #### Refund an Order
 
-##### Advanced Mode Refund an Order
+##### Experienced Mode Refund an Order
 
 This sequence diagram models the interaction between various components in MoneyGoWhere when the user inputs the
 command `/refundorder`.
@@ -868,7 +868,7 @@ The general workflow of `/refundorder` is as follows:
    new `parser` object to extract the command as `/refundorder`.
 2. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the
    user input.
-3. `Router#handleRoute` is then invoked to process the command. It calls the `Router#proRoute` for the advanced mode
+3. `Router#handleRoute` is then invoked to process the command. It calls the `Router#proRoute` for the experienced mode
    commands.
 4. The obtained command `refundorder` is then passed back to `MoneyGoWhere`, which instantiates a new `Refund` object
    and calls the `Refund#refundTransaction` method.
@@ -887,9 +887,9 @@ The general workflow of `/refundorder` is as follows:
 
 <hr>
 
-##### Basic Mode Refund an Order
+##### New User Mode Refund an Order
 
-The sequence diagram is similar to the `Advanced mode Refund an Order`.
+The sequence diagram is similar to the `Experienced mode Refund an Order`.
 
 The general workflow of `refundorder` is as follows:
 
@@ -897,7 +897,7 @@ The general workflow of `refundorder` is as follows:
    new `parser` object to extract the command as `refundorder`.
 2. The 'Parser' object then uses `parser#formatInput` method from Parser class to extract all the arguments from the
    user input.
-3. `Router#handleRoute` is then invoked to process the command. It calls the `Router#assistRoute` for the basic mode
+3. `Router#handleRoute` is then invoked to process the command. It calls the `Router#assistRoute` for the new user mode
    commands.
 4. Once the command runs, it can be aborted at any time when the user inputs `/cancel`.
 4. The obtained command `refundorder` is then passed back to `MoneyGoWhere`, which instantiates a new `RefundAssistant`
