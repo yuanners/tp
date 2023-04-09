@@ -2,6 +2,7 @@ package validation.order;
 
 import app.Command;
 import exception.DuplicateArgumentFoundException;
+import exception.item.NoSuchItemException;
 import exception.order.MissingOrderFlagException;
 import exception.order.MissingOrderArgumentException;
 import exception.order.MissingQuantityArgumentException;
@@ -10,6 +11,7 @@ import exception.order.InvalidIndexNegativeException;
 import exception.order.InvalidIndexOutOfBoundsException;
 import exception.order.InvalidQuantityNumberFormatException;
 import exception.order.InvalidQuantityNegativeException;
+import exception.order.MultipleSimilarItemsFoundException;
 import item.Menu;
 import ui.Flags;
 import ui.TransactionUi;
@@ -26,6 +28,43 @@ public class AddOrderValidation extends Validation {
     public AddOrderValidation(Menu menu) {
         this.menu = menu;
         this.transactionUi = new TransactionUi();
+    }
+
+    public boolean validateItemName(Command command)
+            throws DuplicateArgumentFoundException, MultipleSimilarItemsFoundException, NoSuchItemException {
+
+        command.mapArgumentAlias("item", "i");
+
+        String item;
+
+        if (command.getArgumentString().contains("-i")) {
+            item = command.getArgumentMap().get("i");
+            if (isInteger(item)) {
+                return true;
+            }
+        } else {
+            item = command.getArgumentMap().get("item");
+        }
+
+        System.out.println("Testing: " + item);
+
+        return checkIfSingleItemNameValid(item);
+
+    }
+
+    public boolean checkIfSingleItemNameValid(String itemName)
+            throws DuplicateArgumentFoundException, MultipleSimilarItemsFoundException, NoSuchItemException {
+
+        if (menu.findMatchingItemNames(itemName).size() > 1) {
+            transactionUi.printError(Flags.Error.MULTIPLE_SIMILAR_ITEMS);
+            Command findItemCommand = new Command("finditem " + itemName);
+            menu.showResultsOfFindWithoutSuccessMsg(findItemCommand);
+            throw new MultipleSimilarItemsFoundException();
+        } else if (menu.findMatchingItemNames(itemName).size() == 0) {
+            throw new NoSuchItemException();
+        }
+
+        return true;
     }
 
     public boolean checkValidItemName(String itemName) throws DuplicateArgumentFoundException {
@@ -56,7 +95,7 @@ public class AddOrderValidation extends Validation {
             if (Integer.parseInt(itemName) < 0) {
                 transactionUi.printError(Flags.Error.INVALID_INDEX);
                 return false;
-            } else if (Integer.parseInt(itemName) >= menu.getItems().size()){
+            } else if (Integer.parseInt(itemName) >= menu.getItems().size()) {
                 transactionUi.printError(Flags.Error.INVALID_INDEX);
                 return false;
             }
@@ -86,7 +125,8 @@ public class AddOrderValidation extends Validation {
      * @param arg  user command
      * @param menu menu
      */
-    public Command validateCommand(Command arg, Menu menu) throws DuplicateArgumentFoundException {
+    public Command validateCommand(Command arg, Menu menu)
+            throws DuplicateArgumentFoundException, NoSuchItemException {
         assert arg.getUserInput() != null : "Null input should be handled";
         String item = "";
         String newItem = "";
@@ -99,6 +139,11 @@ public class AddOrderValidation extends Validation {
 
         if (!isInteger(item)) {
             newItem = Integer.toString(menu.findItemIndex(item));
+
+            if (Integer.valueOf(newItem) == -1) {
+                throw new NoSuchItemException();
+            }
+
             String newArgumentString = arg.getArgumentString().replace(item, newItem);
             Command newCommand = new Command("/addorder " + newArgumentString);
             return newCommand;

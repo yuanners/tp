@@ -12,6 +12,7 @@ import exception.item.MissingFindItemDescriptionException;
 import app.Command;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
+import exception.item.NameMinimumLengthException;
 import org.apache.commons.lang3.StringUtils;
 import ui.Flags;
 import ui.MenuUi;
@@ -263,7 +264,6 @@ public class Menu {
             }
         }
 
-        menuUi.printItemNotFound();
         return -1;
 
     }
@@ -312,15 +312,18 @@ public class Menu {
 
         String itemName = command.getArgumentString().trim();
 
+        if (itemName.contains("\"")) {
+            itemName = itemName.replace("\"", "");
+        }
+
         try {
             findItemValidation.validateName(itemName);
         } catch (MissingFindItemDescriptionException e) {
             menuUi.printError(Flags.Error.MISSING_FIND_ITEM_DESCRIPTION);
             return;
-        }
-
-        if (itemName.contains("\"")) {
-            itemName = itemName.replace("\"", "");
+        } catch (NameMinimumLengthException e) {
+            menuUi.printError(Flags.Error.EMPTY_FIND_ITEM_DESCRIPTION);
+            return;
         }
 
         for (int i = 0; i < menu.size(); i++) {
@@ -361,6 +364,9 @@ public class Menu {
             findItemValidation.validateName(itemName);
         } catch (MissingFindItemDescriptionException e) {
             menuUi.printError(Flags.Error.MISSING_FIND_ITEM_DESCRIPTION);
+            return;
+        } catch (NameMinimumLengthException e) {
+            menuUi.printError(Flags.Error.ITEM_NAME_MIN_LENGTH_ERROR);
             return;
         }
 
