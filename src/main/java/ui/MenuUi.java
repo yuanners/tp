@@ -20,7 +20,8 @@ public class MenuUi extends Ui {
 
     public void printMenuHeader() {
         System.out.printf("\n| %-5s | %-25s | %-8s |\n", "Index", "Name", "Price");
-        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25) + " | " + "-".repeat(8) + " |");
+        System.out.println("| " + "-".repeat(5) + " | " + "-".repeat(25)
+                + " | " + "-".repeat(8) + " |");
     }
 
     public void printMenu(ArrayList<Item> menu) {
