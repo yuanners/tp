@@ -16,7 +16,7 @@ public class Payment {
 
     /**
      * Display prompt to pay immediately after an order is added
-     *
+     * Will keep prompting until the input is correct or user enters /cancel
      * @param order list of order entries added
      */
     public void makePayment(Order order) throws DuplicateArgumentFoundException {
