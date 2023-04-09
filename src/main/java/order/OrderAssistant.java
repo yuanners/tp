@@ -79,9 +79,15 @@ public class OrderAssistant {
 
         String item = "";
 
-        transactionUi.promptItemName();
-        item = transactionUi.inputHandler();
-        item = item.toLowerCase();
+        do {
+            transactionUi.promptItemName();
+            item = transactionUi.inputHandler();
+            item = item.toLowerCase();
+
+            if (item.strip().equals("")) {
+                transactionUi.printInvalidInputEntered();
+            }
+        } while (item.strip().equals(""));
 
         return item;
 
@@ -91,9 +97,15 @@ public class OrderAssistant {
 
         String quantity = "";
 
-        transactionUi.promptItemQuantity();
-        quantity = transactionUi.inputHandler();
-        quantity = quantity.toLowerCase();
+        do {
+            transactionUi.promptItemQuantity();
+            quantity = transactionUi.inputHandler();
+            quantity = quantity.toLowerCase();
+
+            if (quantity.strip().equals("")) {
+                transactionUi.printInvalidInputEntered();
+            }
+        } while (quantity.strip().equals(""));
 
         return quantity;
     }

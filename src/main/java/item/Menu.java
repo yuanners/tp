@@ -264,7 +264,6 @@ public class Menu {
             }
         }
 
-        menuUi.printItemNotFound();
         return -1;
 
     }

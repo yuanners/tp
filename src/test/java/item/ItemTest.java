@@ -17,19 +17,19 @@ class ItemTest {
     public void itemTest() throws DuplicateArgumentFoundException {
         Command listcmd = new Command("/listitem");
 
-        Command command = new Command("/additem -p 2.50 -n \"chicken rice\"");
+        Command command = new Command("/additem -p 2.50 -n \"chicken rice test\"");
         menu.addItem(command);
 
-        Command command2 = new Command("/additem -p 20.1 -n \"chicken rice100\"");
+        Command command2 = new Command("/additem -p 20.1 -n \"chicken rice test100\"");
         menu.addItem(command2);
 
-        assertEquals("chicken rice100", menu.getItems().
+        assertEquals("chicken rice test100", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
 
         assertEquals(20.10, menu.getItem(menu.getItems().size() - 1).getPrice());
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice100") : "Item name should be chicken rice100";
+                .getName().equals("chicken rice test100") : "Item name should be chicken rice test100";
 
         assertEquals(20.10, menu.getItem(menu.getItems().size() - 1).getPrice());
 
@@ -65,32 +65,33 @@ class ItemTest {
         itemTest31();
         itemTest32();
         itemTest33();
+        cleanup();
     }
 
     public void itemTest2() throws DuplicateArgumentFoundException {
         // invalid price error
-        Command command = new Command("/additem -p 2kuku0.01 -n \"chicken rice3\"");
+        Command command = new Command("/additem -p 2kuku0.01 -n \"chicken rice test3\"");
         menu.addItem(command);
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice100") : "Item name should be chicken rice100";
+                .getName().equals("chicken rice test100") : "Item name should be chicken rice test100";
 
-        assertEquals("chicken rice100", menu.getItems().
+        assertEquals("chicken rice test100", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
 
     }
 
     public void itemTest3() throws DuplicateArgumentFoundException {
         // max 2dp error
-        Command command = new Command("/additem -p 20.0001 -n \"chicken rice4\"");
+        Command command = new Command("/additem -p 20.0001 -n \"chicken rice test4\"");
         menu.addItem(command);
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice100") : "Item name should be chicken rice100";
+                .getName().equals("chicken rice test100") : "Item name should be chicken rice test100";
 
-        assertEquals("chicken rice100", menu.getItems().
+        assertEquals("chicken rice test100", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -98,14 +99,14 @@ class ItemTest {
         // tests valid update item
         int index = menu.getItems().size() - 1;
 
-        Command command = new Command("/updateitem -i " + index + " -n \"chicken rice1000\"");
+        Command command = new Command("/updateitem -i " + index + " -n \"chicken rice test1000\"");
         menu.updateItem(command);
 
         assert menu.getItems().
                 get(index)
-                .getName().equals("chicken rice1000") : "Item name should be changed to chicken rice1000";
+                .getName().equals("chicken rice test1000") : "Item name should be changed to chicken rice test1000";
 
-        assertEquals("chicken rice1000", menu.getItems().
+        assertEquals("chicken rice test1000", menu.getItems().
                 get(index).getName());
     }
 
@@ -262,22 +263,22 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
     public void itemTest14() throws DuplicateArgumentFoundException {
         //test missing -p
-        Command command = new Command("/additem -n Hokkien Mee");
+        Command command = new Command("/additem -n Hokkien Mee test");
         menu.addItem(command);
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -288,9 +289,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -301,9 +302,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -314,22 +315,22 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
     public void itemTest18() throws DuplicateArgumentFoundException {
         //test negative price
-        Command command = new Command("/additem -p -2 -n \"Hokkien Mee\"");
+        Command command = new Command("/additem -p -2 -n \"Hokkien Mee test\"");
         menu.addItem(command);
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -340,9 +341,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -353,9 +354,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -366,9 +367,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -379,9 +380,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -392,35 +393,35 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
     public void itemTest24() throws DuplicateArgumentFoundException {
         // tests missing index update item
-        Command command = new Command("/updateitem -n \"chicken rice1000\"");
+        Command command = new Command("/updateitem -n \"chicken rice test1000\"");
         menu.updateItem(command);
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
     public void itemTest25() throws DuplicateArgumentFoundException {
         // tests missing -n updateitem
-        Command command = new Command("/updateitem -i 0 \"chicken rice1000\"");
+        Command command = new Command("/updateitem -i 0 \"chicken rice test1000\"");
         menu.updateItem(command);
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -431,7 +432,7 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getPrice() == 2.5 : "Item name should be chicken rice";
+                .getPrice() == 2.5 : "Item name should be chicken rice test";
 
         assertEquals(2.5, menu.getItems().
                 get(menu.getItems().size() - 1).getPrice());
@@ -444,9 +445,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -457,9 +458,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -470,9 +471,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -483,9 +484,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -496,9 +497,9 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
@@ -509,23 +510,31 @@ class ItemTest {
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("chicken rice") : "Item name should be chicken rice";
+                .getName().equals("chicken rice test") : "Item name should be chicken rice test";
 
-        assertEquals("chicken rice", menu.getItems().
+        assertEquals("chicken rice test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
     }
 
     public void itemTest33() throws DuplicateArgumentFoundException {
         // tests valid update name
-        Command command = new Command("/updateitem -i 0 -n \"Hokkien Mee\"");
+        Command command = new Command("/updateitem -i 0 -n \"Hokkien Mee test\"");
         menu.updateItem(command);
 
         assert menu.getItems().
                 get(menu.getItems().size() - 1)
-                .getName().equals("Hokkien Mee") : "Item name should be Hokkien Mee";
+                .getName().equals("Hokkien Mee test") : "Item name should be Hokkien Mee test";
 
-        assertEquals("Hokkien Mee", menu.getItems().
+        assertEquals("Hokkien Mee test", menu.getItems().
                 get(menu.getItems().size() - 1).getName());
+    }
+
+    public void cleanup() throws DuplicateArgumentFoundException {
+        // clean up menu
+        int menuSize = menu.getItems().size();
+        Command command = new Command("/deleteitem -i " + (menuSize-1));
+        menu.deleteItem(command);
+
     }
 
 
