@@ -3,7 +3,7 @@
 <div style="width:30%; height:auto; margin-left: auto; margin-right: auto;">
 
 
-![](https://i.imgur.com/ptkwkny.png)
+<img src="https://i.imgur.com/ptkwkny.png">
 
 
 </div>
