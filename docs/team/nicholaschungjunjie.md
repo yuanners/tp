@@ -31,6 +31,7 @@ Please click on this [link to my Pull Requests](https://github.com/AY2223S2-CS21
     * Added custom Exceptions and exception handling for commands related to `Item`
 
 #### Contributions to the UG
+* Added content for the `Update an Item` section
 * Proofread and corrected content in `Item` section
 
 #### Contributions to the DG
