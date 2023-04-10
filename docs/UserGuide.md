@@ -661,3 +661,150 @@ Without a keyword, MoneyGoWhere will not know what to look for your menu.
 
 [Back to table of contents](#Table-of-Contents)
 
+## Order Features
+
+If you have been successful in adding items to your menu, congratulations! You are now ready to start taking orders.
+
+During business operations, you will be spending almost all of your time adding orders on MoneyGoWhere.
+
+Therefore, it is a good idea to give this section a read if you want to familiarise yourself with adding orders.
+
+## Table of Contents
+* [Add an Order](#Add-an-Order)
+* [List all Orders](#List-all-Orders)
+* [Refund an Order](#Refund-an-Order)
+
+## Add an Order
+
+After adding your items to the menu, you can begin to take orders from your many customers with this [command](#Glossary).
+
+Once an order has been added, the program will calculate the total cost of the order. You will then be asked to enter how much the customer gives you into the program, and MoneyGoWhere will calculate the change for you.
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖  A few days later, John's Chicken Rice stall is finally open! John is so happy that he has MoneyGoWhere as it is very easy and intuitive to use. After familiarizing himself with the system, John is ready to take an order from his hungry customers. 
+</br></br>
+His menu currently looks like this: </br></br>
+
+![](https://i.imgur.com/GXwOhpJ.png)
+
+His first customer orders just <strong>one plate of Roast Chicken Rice</strong>, and the second orders <strong>two plates of White Chicken Rice, and two eggs</strong>.
+
+To add their orders, he will use the <code>addorder</code> command.
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for the index/name and quantity of items, as shown below:<br><br>
+
+| Option       | Description                                  | Restrictions                                                                                                          |
+| ------------ | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `Index/Name` | The index number or name of the item in the menu. | If you choose to enter an index number, it must be a valid index number from `listitem`. The index number cannot be negative. </br></br>You may also choose to enter the full or partial name of the item. However, the entered part of the name must be specific. </br></br>In other words, if your menu contains items with names such as `Chicken Rice`, `Chicken Noodle`, and `Cereal`, then you at least have to enter `chicken r`, `ice`, or `rice` so that the program knows that you are trying to enter `Chicken Rice` and not any of the other two items.
+| `Quantity`   | The number of the specified menu item that the customer wishes to order.                           | The quantity cannot be negative, and avoid entering numbers larger than `10000` as it can cause the program to work incorrectly. |
+
+As for payment, there are restrictions for the amount, and payment type:
+| Option   | Description                      | Restrictions                                                                                 |
+| -------- | -------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `amount` | The amount paid by your customer. | Can have up to two decimal points, and has to be the same or greater than the cost of the order. |
+| `type`   | The type of payment.              | The accepted inputs are `cash`, `card`, or `others`.                                                                     |
+
+</blockquote>
+
+<h3> For New Users </h3>
+
+1. John enters the [command](#Glossary) `addorder`.
+
+   He forgets the index of "Roast Chicken Rice", and instead chooses to search by name instead of index. Take note that the item name must be entered within `"` marks.
+
+   Next, he enters the quantity and states that he has no more items to add. As the customer pays with cash, John then enters the payment information.
+
+![](https://i.imgur.com/3MLgvzN.png)
+
+2. For the second customer, John repeats the same process.
+
+   He enters the command, then the index of "White Chicken Rice" and indicates the quantity.
+
+   He repeats the same process for adding "Egg" to the order, then completes the process by entering the payment details.
+
+![](https://i.imgur.com/AoK5cUD.png)
+
+
+<hr style="width:60%;margin:25px auto;"/>
+
+<h3> For Experienced Users </h3>
+
+**Command Format**
+
+There are two main ways in which an order can be entered using a single `/addorder` command. Listed below are the acceptable formats of the `/addorder` command.
+
+1. To add a single item into an order, using the item index, by using the item name, or by using part of the item name, use any of these formats:
+    ```text
+    /addorder -i <index> -q <quantity>
+    ```
+    ```text
+    /addorder --item <index> -q <quantity>
+    ```
+    ```text
+    /addorder -i "<name>" --quantity <quantity>
+    ``` 
+
+    ```text
+    /addorder --item "<name>" --quantity <quantity>
+    ```
+   If the quantity is not specified, it will be set to 1.
+
+2. To add multiple items into an order using the item indexes, by using the item names, or by using part of the item names, use any of these formats:
+    ```text
+    /addorder -I [<index>:<quantity>,"<name>":<quantity>,...]
+    ```
+    ```text
+    /addorder --items [<index>:<quantity>,"<name>":<quantity>,...]
+    ```
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 To use the command in this manner, remember to add a <code>/</code> before the command, such as <code>/addorder</code>.
+</blockquote>
+
+Here is an example of how the `/addorder` command may be used to add orders.
+
+1. John enters the command `/addorder`. He uses the index of "Roast Chicken Rice",  and enters the quantity.
+
+   As his customer pays with cash, John then enters the payment information with the `/pay` command and by entering the customer's payment details based on the instructions from the program.
+
+![](https://i.imgur.com/QCkbbcR.png)
+
+2. For the second customer, John temporarily forgets the index of "White Chicken Rice".
+
+   As he knows there is only one item with "White Chicken" in the name, he enters that as the first item, along with the quantity.
+
+   Then, he uses the index of "Egg", along with the quantity. After adding both items, he proceeds to enter the payment.
+
+   This time, the customer chose to pay by card, which John enters into the application to reflect that mode of payment.
+
+![](https://i.imgur.com/8cjkkOK.png)
+
+
+<h3> Error Messages </h3>
+
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Insufficient cash**
+
+This error message will appear when the customer attempts to pay an amount less than the total cost of their order.
+
+![](https://i.imgur.com/BHSv3ZA.png)
+
+**Solution:** Ensure that the customer pays more than or the exact cost of the order.
+
+**2. Paying with card**
+
+When your customers pay with their card, entering an amount different from the subtotal will be rejected.
+
+![](https://i.imgur.com/F15Xj8G.png)
+
+**Solution:** Enter the exact price of the order into the program.
+
+<br>
+
+[Back to table of contents](#Table-of-Contents)
+  
