@@ -600,3 +600,64 @@ Without indicating the index, MoneyGoWhere will not know what item you want to u
 <br>
 
 [Back to table of contents](#Table-of-Contents)
+
+## Find an Item
+
+If you forget the index of an item, or want to see all items with a specific word in the name, you can use this [command](#Glossary).
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖  It's a new day and John wants to continue exploring MoneyGoWhere. However, his memory isn't the best, and he cannot remember how many different items he has with the word "Chicken" in the name. So, he wants to find all of these items, with the <code>finditem</code> command. 
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for keyword, as shown below:<br><br>
+
+| Option    | Description                               | Restrictions  |
+| --------- | ----------------------------------------- | ---------------- |
+| `Keyword` | The name or part of the item name you are searching for. | The keyword cannot be empty. |
+
+</blockquote>
+
+<h3> For New Users </h3>
+
+1. John enters the command, and then enters "chicken" to search for all items that have "chicken" in the name, regardless of whether the item name contains capital letters.
+
+![](https://i.imgur.com/0F1hPZK.png)
+
+
+<hr style="width:60%;margin:25px auto;"/>
+
+<h3> For Experienced Users </h3>
+
+**[Command](#Glossary) Format**
+```text
+/finditem "<keyword>"
+```
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 To use the command in this manner, remember to add a <code>/</code> before the command, such as <code>/finditem</code>. 
+</blockquote>
+
+1. John enters the command, and then enters "chicken" to search for all items that have "chicken" in the name, regardless of capitalization.
+
+![](https://i.imgur.com/g18iIZL.png)
+
+
+<h3> Error Messages </h3>
+
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Not entering a keyword**
+
+Without a keyword, MoneyGoWhere will not know what to look for your menu.
+
+![](https://i.imgur.com/0q8kQFd.png)
+
+**Solution:** Include the word or letters you want to look for.
+
+<br>
+
+[Back to table of contents](#Table-of-Contents)
+
