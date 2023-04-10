@@ -2,7 +2,7 @@
 
 <div style="width:30%; height:auto; margin-left: auto; margin-right: auto;">
 
-![MoneyGoWhereIcon](/docs/images/MoneyGoWhere.png)
+![MoneyGoWhereIcon](./MoneyGoWhere.png)
 
 </div>
 
