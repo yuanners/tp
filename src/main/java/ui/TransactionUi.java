@@ -138,7 +138,8 @@ public class TransactionUi extends Ui {
             System.out.println("Please use the correct format: /addorder -I [index:quantity].\n");
             break;
         case MISSING_MULTIPLE_ORDER_ARGUMENT_EXCEPTION:
-            System.out.println("Please specify the item index and quantity in [index:quantity] format after the flag.\n");
+            System.out.println("Please specify the item index " +
+                    "and quantity in [index:quantity] format after the flag.\n");
             break;
         case MISSING_MULTIPLE_ORDER_FLAG_EXCEPTION:
             System.out.println("Please use -I or --items flag to add multiple orders.\n");
