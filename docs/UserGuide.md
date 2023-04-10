@@ -2,7 +2,7 @@
 
 <div style="width:30%; height:auto; margin-left: auto; margin-right: auto;">
 
-![MoneyGoWhereIcon](docs/images/userGuide/MoneyGoWhere.png)
+![MoneyGoWhereIcon](/images/MoneyGoWhere.png)
 
 </div>
 
@@ -805,6 +805,243 @@ When your customers pay with their card, entering an amount different from the s
 **Solution:** Enter the exact price of the order into the program.
 
 <br>
+
+[Back to table of contents](#Table-of-Contents)
+
+## List all Orders
+
+After a long, busy, and profitable day, you can use this command to review all the orders you have entered.
+
+This feature allows you to view the cost, order IDs, the items included in each order, and the time at which the orders were made.
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖  John's first day is a huge success! He has fed so many hungry students and could see them enjoying his delicious food. At the end of the day, he wants to take a look at all the orders he has taken over the day. He will use the <code>listorder</code> command. <br><br>
+
+**Note: Only the first two orders will be shown to reduce the length of the user guide.**
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 This command uses only one word. Adding anything else after the command will cause MoneyGoWhere to not recognize the command. 
+</blockquote>
+
+1. John uses the command `listorder` or `/listorder` to look through all his orders.
+
+![](https://i.imgur.com/HPkJTvq.png)
+
+
+<h3> Error Messages </h3>
+
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Adding words or letters after the command.**
+
+As mentioned, adding anything after `listorder` or `/listorder` will cause the command to be an invalid error.
+
+![](https://i.imgur.com/taGiKBr.png)
+
+<br>
+
+[Back to table of contents](#Table-of-Contents)
+
+## Refund an Order
+
+Did you enter the wrong item, or did a customer change their mind after paying for an item?
+
+Don't worry! If the order has not yet been served or if you allow it, you can use this command to mark an order as refunded.
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖  After using MoneyGoWhere for a few days, John has encountered his worst nightmare: an indecisive customer! This customer wanted Curry Chicken Rice with Vegetables, but has now changed his mind. 
+</br></br>    
+Not wanting to receive bad reviews about his newly opened stall, John decides to give in to his demands for a refund.
+</br></br>    
+John checked his list of orders using the <code>listorder</code> command, and found out that the order ID is <strong>9a382d0f-81ee-4855-b29e-547e8e164f9a</strong>. </br></br>
+
+John needs to refund the order, and can do so with the <code>refundorder</code> command.
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for the name and price of items, as shown below:<br><br>
+
+| Option     | Description                 | Restrictions                                    |
+| ---------- | --------------------------- | -------------------------------------------------- |
+| `Order ID` | A randomly generated order ID. | The entered ID must be a valid entered as shown exactly from the output of the `listorder` command. |
+
+</blockquote>
+
+<h3> For New Users </h3>
+
+1. John uses `listorder` to look through the list of orders and gets the ID as `9a382d0f-81ee-4855-b29e-547e8e164f9a`. He then copies the ID.
+2. Next, he uses the command `refundorder` and inputs the copied order ID from earlier, when asked to do so by the program.
+
+![](https://i.imgur.com/mEdseoT.png)
+
+
+<hr style="width:60%;margin:25px auto;"/>
+
+<h3> For Experienced Users </h3>
+
+**Command Format**
+```text
+/refundorder -i <order_id>
+```
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 To use the command in this manner, remember to add a <code>/</code> before the command, such as <code>/refundorder</code>. 
+</blockquote>
+
+1. John uses `/listorder` to look through the list of orders and gets the ID as `9a382d0f-81ee-4855-b29e-547e8e164f9a`. He copies the order ID from the CLI.
+2. Next, he uses the command `/refundorder` and inputs the copied order ID from earlier.
+
+![](https://i.imgur.com/HYRlOwu.png)
+
+
+<h3> Error Messages </h3>
+
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Wrong order ID.**
+
+If you entered an invalid or non-existent order ID, MoneyGoWhere will not recognise it.
+
+![](https://i.imgur.com/UwyZCfT.png)
+
+**Solution:** Copy the order ID directly from `listorder` and paste it to ensure there are no errors.
+<br>
+
+[Back to table of contents](#Table-of-Contents)aaa
+
+## [Statistics and Report](#Statistics-and-Report)
+
+This important feature of MoneyGoWhere allows you to generate reports to view sales data. For now, there is only one way to generate reports.
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+📖  At this point, John has been running the stall for a few months. He's making so much money that it is hard for him to keep track of how much money he has made. He wants to see four things:</br></br>
+1. For the year 2023, which items bring in the most income?
+</br></br>
+2. For the month of January, which were ordered the most?
+</br></br>
+3. John wants to check how his income has changed over the year.
+</br></br>
+4. John wants to check his income for the first 10 days of March.
+</blockquote>
+
+**Command Format**
+```text
+/report {--rank <type>} {--sale <type} {--year <year>} {--from <start-date> --to <end-date>}
+```
+```text
+/report {-r <type>} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}
+```
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 We understand that these command formats may be complicated. Here is a refesher on how such formats can be more easily understood.
+</br></br>
+1. Any words surrounded by <code><></code>, such as <code><price></code> are for you to fill in. 
+</br></br>
+2. Options that are surrounded by <code>{}</code>, such as <code>{-n "<name>"}</code> are optional. 
+</br></br>
+3. All values have to be accompanied by options (begins with <code>-</code>, such as <code>-n</code> or <code>--price</code>). Commands such as <code>/deleteitem delete -i 10</code> will be an invalid command.
+</blockquote>
+
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for the name and price of items, as shown below:<br><br>
+
+| Option          | Description                                                     | Accepted Inputs                   |
+| --------------- | --------------------------------------------------------------- | --------------------------------- |
+| `rank`          | Order items in the menu based on criteria.                       | `sales` or `popular`              |
+| `sale`          | Shows your income based on criteria.                             | `daily` or `monthly`              |
+| `year`          | The year you are trying to generate a report for.                | A year in the format `YYYY`       |
+| `from` and `to` | The start and end dates you are trying to generate a report for. | A date in the format `DD/MM/YYYY` |
+</blockquote>
+
+
+Don't worry if you find yourself still confused by the format. We admit, it is pretty complex. So, let's break it down:
+
+**Rank vs Sale**
+Of the two, only one can be present in your command.
+
+* When generating your report, you can choose between the options `rank` or `sale`.
+   * Rank orders the items on your menu based on either `sales` (monetary income) or `popular` (quantity ordered).
+   * Meanwhile, Sale shows your income, either on a `daily` basis or `monthly` basis.
+
+**Year vs From/To**
+Of the two, only one can be present in your command.
+
+* You can choose which dates to generate the report.
+   * Year takes the format `YYYY`
+   * From/To takes the format `DD/MM/YYYY`
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖  Now, we will show you how John was able to use this command to achieve his goals. 
+</blockquote>
+
+1. John indicates the `rank` option to be `sales`, and the `year` to be `2023`.
+
+![](https://i.imgur.com/5QhmPmq.png)
+
+2. John indicates the `rank` option to be `popular`, and the date range to be from `01 Jan 2023` to `31 Jan 2023`.
+
+![](https://i.imgur.com/3bVzNuc.png)
+
+3. Now, he wants to look at his monthly sales report for 2023. He indicates the `sale` option to be `monthly` and enters `2023` for the `year` option.
+
+Note that the remaining months have been removed as they are all empty.
+
+![](https://i.imgur.com/gCxyEhW.png)
+
+4. Lastly, he wants to check his daily sales report for the first 10 days of March 2023. He indicates the `sale` option to be `daily` and enters the date range `01/03/2023` to `10/03/2023`.
+
+![](https://i.imgur.com/RCFs2KN.png)
+
+<h3> Error Messages </h3>
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages.
+</blockquote>
+
+**1. Generating a Montly Sale report with From/To**
+
+This happens when you try to generate a montly sale report without using the `year` option.
+
+![](https://i.imgur.com/RNe0j66.png)
+
+**Solution:** When generating a monthly sale report, use the `year` option.
+
+**2. Wrong Date Format**
+
+This happens if you enter the wrong format for the date, such as using `-` instead of `/`.
+
+![](https://i.imgur.com/BWY4U4X.png)
+
+**Solution:** Use the correct format of `DD/MM/YYYY`.
+
+[Back to table of contents](#Table-of-Contents)
+
+<!-- <h1> Save Files </h1>
+
+The list of items and orders and stored as individual `json` files. While can edit these files, the team behind MoneyGoWhere advises against doing so as you may corrupt your file. Should any changes need to be made directly on the file, you may reach out to us and we'll be happy to help.  -->
+
+## Glossary
+
+| Term                     | Explanation                                                                                                                                               |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hyperlink | A phrase or text that you can click.
+| Case-sensitive           | If something is case-sensitive, it means that whether letters are capitalized or not matters. For example, your passwords are case-sensitive.              |
+| Command Line Interface   | A text-based interface. This means there are no icons to click and everything has to be typed.                                                             |
+| Command                  | An instruction given to the program.                                                                                                                      |
+| Terminal                 | A tool used for CLI programmes to be run. It accepts text input and outputs text.                                                                          |
+| Decimal Places           | The number of digits behind a decimal point. For example `2.123` has 3 decimal places, while `4.20` has 2 decimal places.                                  |
+| Directory                | Directories are folders in your computer system.                                                                                                           |
+| Graphical User Interface | A graphic-based interface. Usually, it has buttons or icons of some kind and uses visuals to interact with the user.                                       |
+| Index                    | A set of ordered whole numbers used to indicate elements. For example, you can think about the different levels in a building.                             |
+| Option                   | Used to specify instructions and change the behaviour of a command. In this application, options have a short-form and a long-form, ie. `-n` and `--name`. |
+| Integer                  | A whole number, such as `1`, `100` or `-1`. Numbers such as `1.2` and fractions are not integers.                                                          |
+| Point-of-Sale System     | It is used to accept payments from customers and track sales. For MoneyGoWhere, you are also able to create a menu in addition to tracking sales.          |
+|Flag| A flag is a code used in CLI commands that tells the program where to look for information, and for what kind of information.
 
 [Back to table of contents](#Table-of-Contents)
   
