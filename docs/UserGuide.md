@@ -517,3 +517,86 @@ In other words, you cannot remove something that does not exist!
 <br>
 
 [Back to table of contents](#table-of-contents)
+
+## Update an Item
+
+Realised you entered the wrong name or price? You can update your items with this [command](#Glossary)!
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+📖 John has been happily using MoneyGoWhere to input all his items. However, he is a bit clumsy and entered a few wrong things. This is what the menu currently looks like: <br><br>
+
+![](https://i.imgur.com/6Q3hSNz.png)
+
+He wants to change two things. First, the word <strong>"Vegebatles"</strong>  at index number 6 is spelt wrongly. Also, he wants to <strong>increase the price of "Vegetables" to $2.00</strong>. </br></br> Next, the item <strong>"Curry Chicken Rice" should cost $5.50</strong>. He can update these items with the <code>updateitem</code> command.
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for the index, name, and price of items, as shown below:<br><br>
+
+| Option  | Description               | Restrictions                                                                                |
+| ------- | ------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Index` | The index number of the item.     | Must be a valid index from `listitem`, cannot be a negative number.</br></br> This option is compulsory. |
+| `Name`  | The new name of the item.  | It cannot already exist in the menu.</br></br> This option is not compulsory.                            |
+| `Price` | The new price of the item. | It can have at most two decimal places. </br></br>This option is not compulsory.                         |
+
+</blockquote>
+
+<h3> For New Users </h3>
+
+1. John wants to **change spelling of the word "Vegebatle" to "Vegetable"**. To do so, he first enters the [command](#Glossary) `updateitem`, then confirms that he wants to change the name. He puts in the correct spelling, **without quotation marks**, and then indicates he does not want to change the price.
+
+![](https://i.imgur.com/z09QX60.png)
+
+2. John wants to **change the price of "Curry Chicken Rice" to $5.50, instead of $55**. To do so, he first enters the command, indicates he does not want to change the name, then confirms he wants to change the price. He then puts in the correct price.
+
+![](https://i.imgur.com/esb1Agx.png)
+
+3. After updating, John checks to make sure that the items are now correct with `listitem`.
+
+![](https://i.imgur.com/w4JXXNl.png)
+
+<hr style="width:60%;margin:25px auto;"/>
+
+<h3> For Experienced Users </h3>
+
+**[Command](#Glossary) Format**
+```text
+/updateitem --index <index> {--name "<name>"} {--price <price>}
+```
+```text
+/additem -i <index> {-n "<name>"} {-p <price>}
+```
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 To use the command in this manner, remember to add a <code>/</code> before the command, such as <code>/updateitem</code>. 
+</blockquote>
+
+1. John wants to change the name "Vegebatle" to **"Vegetable"**. The item is currently at index **6**.
+
+![](https://i.imgur.com/k859ijM.png)
+
+2. Next, John wants to change the price of "Curry Chicken Rice", at index 8, to **$5.50** instead of $55.
+
+![](https://i.imgur.com/4qA5esD.png)
+
+3. After updating, John checks to make sure that the items are now correct with `/listitem`.
+
+![](https://i.imgur.com/2gHDVK3.png)
+
+
+<h3> Error Messages </h3>
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Missing Index**
+
+Without indicating the index, MoneyGoWhere will not know what item you want to update.
+
+![](https://i.imgur.com/ou1bDzX.png)
+
+**Solution:** Include the index.
+
+<br>
+
+[Back to table of contents](#Table-of-Contents)
