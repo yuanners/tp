@@ -2,7 +2,9 @@
 
 <div style="width:30%; height:auto; margin-left: auto; margin-right: auto;">
 
-![MoneyGoWhereIcon](https://i.imgur.com/ptkwkny.png)
+
+![](https://i.imgur.com/ptkwkny.png)
+
 
 </div>
 
