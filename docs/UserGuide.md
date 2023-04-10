@@ -1,1382 +1,602 @@
-# User Guide
+<h1> MoneyGoWhere User Guide </h1>
 
-# Introduction
+<div style="width:30%; height:auto; margin-left: auto; margin-right: auto;">
 
-Thank you for your interest in MoneyGoWhere! This user guide aims to show off the features of the application and how to
-use it.
+![MoneyGoWhereIcon](docs/images/userGuide/MoneyGoWhere.png)
 
-MoneyGoWhere is a point-of-sale, desktop app for tracking sales and inventory, optimised for use via a Command line
-Interface (CLI). With the ability to type fast and with familiarity of the system, you will be able to quickly track
-sales, check inventory and calculate change. This CLI application is comparable with Graphical User Interface (GUI)
-applications due to its low-cost and adaptability.
+</div>
 
-This application is primarily tailored towards the hawker stall owners at The Deck in National University of Singapore.
+<h1> Hello Hawker! </h1>
 
-<br>
+Thank you for your interest in MoneyGoWhere!
 
-# Using This Guide
+You have just made the first step in making even more money from your business, nice!
 
-This guide is split into **two** main sections:
+This is the user guide for MoneyGoWhere.
+**It is designed to help you, a hawker at NUS, learn how to use our system easily**.
 
-* [Advanced](#advanced-guide), and
-* [Basic](#basic-guide)
+The purpose of this guide is to **show easy-to-understand instructions on how to use the program**.
 
-Each guide covers two types of commands, those relating to items and those relating to orders.
+There may be new words in the guide that you have never heard of or seen before, but do not worry! We have made sure all
+the harder words are linked to our glossary at the bottom of the guide. All you have to do is click on the difficult
+word, and your computer will lead you to what the word means. Easy!
 
-The functionality between advanced and basic is exactly the same. However, the advanced mode allows for a command to be
-sent in a single line, while the basic mode brings you through the process step-by-step. In each section, the styling
-format used can be found in the command section.
+<h1> What is MoneyGoWhere? </h1>
 
-If you are a returning user or extremely proficient in computers, we recommend the advanced guide. However, if you are
-new to MoneyGoWhere, or less proficient in computers, we recommend the basic guide.
+MoneyGoWhere is a **computer program** that **helps you keep track of your sales**.
 
-Additionally, MoneyGoWhere has a [statistics feature](#statistics-feature) which allows you to generate reports based on
-your sales.
+It works like the _cashier machine_ that you have been using, but is even better! With MoneyGoWhere, **you can see how
+much money you make each day** and **what items you sell the most**.
 
-<br>
+**Now, you can make smarter business decisions, save time, and money**. _Steady_!
 
-# General Table of Contents
+<h1><i> "I have problems now, that's why I am reading the guide!" </i></h1>
+<h3><i> "But I cannot find what I am looking for, how now?"</i></h3>
+We understand that using a new system can be confusing and frustrating. That is why we used simple words and show examples in this guide.
 
-* [Introduction](#introduction)
-* [Using This Guide](#using-this-guide)
-* [Table of Contents](#general-table-of-contents)
-* [Advanced Guide](#advanced-guide)
-* [Basic Guide](#basic-guide)
-* [Statistics Feature](#statistics-feature)
-* [Save File](#save-file)
+We understand that you may be referencing this guide when business is booming - **you can already barely cope, but you
+are unsure of how to use a feature**.
+
+Don't worry! The guide is written in such a way that you can find what you are looking for easily. Click
+on [hyperlinks](#glossary) listed in the Table of Contents to jump to the particular section that you want to know more
+about.
+
+If you cannot find what you are looking for, you may **call us at 9123 4567** so that we can help you as soon as
+possible.
+
+
+<div style="page-break-after: always;"></div>
+
+
+<h1> How to use the Guide </h1>
+
+This guide will bring you through:
+
+1. How to use a [Command Line Interface (CLI)](#glossary)
+2. How to set up MoneyGoWhere
+3. How to use our various [commands](#glossary) to track items, add orders, and generate statistic reports
+
+We will also provide some information on how your data is saved.
+<!-- ^^ We can potentially omit this section -->
+
+Before we begin, take note of the following information:
+This guide uses **three different colored blocks** and **associated icons** to indicate different things.
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖 This is a story block! Story blocks provide an example on how to use the many features of MoneyGoWhere. 
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 These blocks contain information that you should take note of, or additional details that you might be interested in.
+</blockquote>
+
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ These are warning blocks. They are used to show you errors that you may encounter.
+</blockquote>
+
+# Table of Contents
+
+* [Tutorial on CLI](#Tutorial-on-CLI)
+* [Setting up MoneyGoWhere](#Setting-up-MoneyGoWhere)
+* [MoneyGoWhere Commands](#MoneyGoWhere-Commands)
+* [Style Features](#Style-Features)
+* [Summary of Features](#Summary-of-Features)
+    * [Help](#Help)
+    * [Item Features](#Item-Features)
+    * [Order Features](#Order-Features)
+    * [Statistics and Report](#Statistics-and-Report)
+* [Frequently Asked Questions](#Frequently-Asked-Questions)
 * [Glossary](#glossary)
 
-# Advanced Guide
+## Tutorial on CLI
 
-This version of our guide will bring you through how to use the features of MoneyGoWhere in a single command.
+If you're already familiar with CLI, that's great! Feel free to move on to the next section about setting up
+MoneyGoWhere.
 
-To see the beginner's version, [please click here](#basic-guide).
+For those who are new to CLI, this section will give you a simple introduction.
 
-Note that all functionality is the same, regardless of the mode used.
+So, what is CLI? Well, the device you are using needs to get instructions from you, and you might be familiar with
+clicking on icons and images to send these instructions. However, with CLI, you type these instructions.
 
-## Table of Contents
+MoneyGoWhere will prompt you to enter your instructions, such as:
 
-1. [Quick Setup](#quick-setup)
-2. [Features](#advanced-commands)
-    1. [Help](#advanced-help)
-    2. [Items](#advanced-mode-items)
-        * [Add Items](#advanced-mode-add-an-item)
-        * [Delete Items](#advanced-mode-delete-an-item)
-        * [List Items](#advanced-mode-list-all-items)
-        * [Find Items](#advanced-mode-find-an-item)
-        * [Update Items](#advanced-mode-update-an-item)
-    3. [Orders](#advanced-mode-orders)
-        * [Add Order](#advanced-mode-add-an-order)
-            * [Single Item](#advanced-mode-single-item)
-            * [Multiple Items](#advanced-mode-multiple-items)
-        * [List all Orders](#advanced-mode-list-all-orders)
-        * [Refund an Order](#advanced-mode-refund-an-order)
+![](https://i.imgur.com/xZ24DTM.png)
 
-<br>
-
-## Quick Setup
-
-Need more help? [Click here to see our detailed guide!](#setting-up-moneygowhere)
-
-1. Ensure you have Java 11 installed,
-   and [download the latest release of MoneyGoWhere](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it
-   in a folder.
-
-   ![downloadMoneyGoWhere](/images/userGuide/downloadMoneyGoWhere.png)
-
-2. Open the command terminal and navigate to the folder where the `.jar` file is, by doing `cd "<file path>"`.
-3. Use the command `java -jar moneygowhere.jar` to launch our application. If correct, you should see the following on
-   startup:
-
-    ```text
-    ░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀
-    ░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀
-    ░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀
-    Welcome to MoneyGoWhere!
-        
-    Please enter a command:
-    ```
-
-4. When you are done using MoneyGoWhere, you can exit the application with the command `exit`.
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-
-## Advanced Commands
-
-* Note that all command options have multiple methods of input. For example, the option for name when adding an item can
-  be signified by the flag `-n` or `--name`. More details are given in each command.
-    * All of these command options are **case-sensitive**.
-    * All examples will be given with the short-form flag, as it is the preferred method of input. However, the longer
-      version will also be provided.
-    * To use the long-form flag, just replace the short-form flag.
-* All options are signified by `<example>`, which means you can change it according to what you need. Options wrapped
-  in `{}` are optional, such as in [Multiple Items](#advanced-mode-multiple-items).
-* In all the examples, the use of `>` signifies a user input. Normal text is _italicised_ to signify the options that
-  will be used as the command.
-* In advanced mode, all commands are prefixed with `/`, to distinguish them from the basic commands. Without the
-  inclusion of this character, commands will be interpreted as a [basic command](#basic-commands).
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-
-### Advanced Help
-
-Entering this command will show you a list of all available commands.
-
-Note that it is possible to use the given index as a command input, but doing so will execute commands as if you were
-using the [basic mode](#basic-guide). To use these commands as in advanced mode, append a `/` at the beginning of the
-command, along with the proper flags, as explained in the next few sections.
-
-Format: `help`
-
-The output of running the `help` command is as follows:
-
-```text
-Please enter a command: 
-> help
-There are 8 commands you can use in MoneyGoWhere. For more details, please refer to the user guide.
-1. additem
-2. deleteitem
-3. listitem
-4. updateitem
-5. finditem
-6. addorder
-7. listorder
-8. refundorder
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode Items
-
-There are five different commands you can run for items.
-
-* [Add an Item](#advanced-mode-add-an-item)
-* [Delete an Item](#advanced-mode-delete-an-item)
-* [List all Items](#advanced-mode-list-all-items)
-* [Find an Item](#advanced-mode-find-an-item)
-* [Update an Item](#advanced-mode-update-an-item)
-
-### Advanced Mode Add an Item
-
-This adds a new item to the menu. New items must have a name and price.
-
-Format: `/additem -n "<name>" -p <price>` or `/additem --name "<name>" --price <price>`
-
-* Name refers to the name of the item
-    * It is case-insensitive
-    * It has an upper limit of 25 characters
-    * Names are unique, regardless of how the words are capitalized. `Chicken` and `chicken` will count as the same
-      word.
-* Price refers to the price of the item
-    * It can have up to two decimal places (`2`, `2.1`, `2.22` are all valid inputs).
-
-**Examples of Usage**
-
-* You want to add a new item, _Chicken Rice_, which costs _$3.55_. To do so, use the
-  command `/additem -n "Chicken Rice" -p 3.55`.
-
-```text
-Please enter a command: 
-> /additem -n "Chicken Rice" -p 3.55
-The command: /additem was successfully executed!
-```
-
-* You want to add a new item, _Egg_, which costs _$0.80_. To do so, use the command `/additem -n "Egg" -p 0.8`,
-  or `/additem -n "Egg" -p 0.80`.
-
-```text
-Please enter a command: 
-> /additem -n "Egg" -p 0.8
-The command: /additem was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode Delete an Item
-
-This removes an item from the menu, identified by its index when [listing all items](#advanced-mode-list-all-items).
-
-Format: `/deleteitem -i <index>` or `/deleteitem --index <index>`
-
-* The index must be a valid number.
-
-Note that deleting an item will affect the index of all other items.
-
-**Example of Usage**
-
-* You change your mind and no longer want to sell _Chicken Rice_. [Looking at the menu](#advanced-mode-list-all-items),
-  you find that the index of _Chicken Rice_ is _0_. To delete Chicken Rice, use the command `/deleteitem -i 0`.
-
-```text
-Please enter a command: 
-> /deleteitem -i 0
-The command: /deleteitem was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode List all Items
-
-This lists all items currently in the menu.
-
-Note that the index is important as it is the reference for [adding Orders](#advanced-mode-add-an-order).
-
-Format: `/listitem`
-
-* This command accepts no additional parameters. Even if additional parameters are listed, they will be ignored.
-
-**Examples of Usage**
-
-* List all items currently in menu, using the command `/listitem`
-
-```text
-Please enter a command: 
-> /listitem
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Chicken Rice              | 3.55  |
-| 1     | Egg                       | 0.80  |
-The command: listitem was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode Find an Item
-
-This command is used to find any and all items that match your input. It will give you the item's index, full name, and
-price.
-
-Format: `/finditem <partial name>`
-
-* The partial name is case-insensitive.
-
-**Example of Usage**
-
-```text
-Please enter a command: 
-> /listitem
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Chicken Rice              | 3.55  |
-| 1     | Egg                       | 0.80  |
-| 2     | Whole Roast Chicken       | 16.00 |
-| 3     | Laksa                     | 3.55  |
-| 4     | Fried Rice                | 5.00  |
-| 5     | Mee Goreng                | 4.50  |
-| 6     | Whole White Chicken       | 16.00 |
-The command: listitem was successfully executed!
-Please enter a command: 
-> /finditem Chicken
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Chicken Rice              | 3.55  |
-| 2     | Whole Roast Chicken       | 16.00 |
-| 6     | Whole White Chicken       | 16.00 |
-The command: /finditem was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode Update an Item
-
-If you make a mistake when entering details for one of your items, you can update it with this command. The index of the
-item will not change.
-
-Format `/updateitem -i <index> {-n "<name>"} {-p <price>}`
-
-* The index refers to corresponding index when you use the command `/listitem`.
-* The name refers to the new name of the item.
-* The price refers to the new name of the price.
-* For each execution of `/updateitem`, you can update the name and/or price of the item. You must update at least one
-  detail for the command to work.
-
-**Example of Usage**
-
-Assume your menu currently looks like this:
-
-```text
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Egg                       | 0.08  |
-| 1     | Laksa                     | 3.55  |
-| 2     | Fried Ric                 | 2.00  |
-| 3     | Mee Goreng                | 4.50  |
-| 4     | Wantom Mee                | 4.00  |
-```
-
-You realize three things:
-
-1. The price of _Egg_ should be _$0.80_.
-2. _Wantom Mee_ should be spelt _Wanton Mee_.
-3. _Fried Ric_ should be formatted properly as _Fried Rice_, and its price should be _$4_.
-
-Assuming the following examples are sequential. So, example 2 is completed after example 1, and example 3 is completed
-after example 1 and 2.
-
-**Example 1: Updating the Price**
-
-To fix the first issue, use the command `/updateitem -i 0 -p 0.80`.
-
-After this command, the menu will be updated to:
-
-```text
-Please enter a command: 
-> /updateitem -i 0 -p 0.80
-The command: /updateitem was successfully executed!
-Please enter a command: 
-> /listitem
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Egg                       | 0.80  |
-| 1     | Laksa                     | 3.55  |
-| 2     | Fried Ric                 | 2.00  |
-| 3     | Mee Goreng                | 4.50  |
-| 4     | Wanton M                  | 4.00  |
-The command: listitem was successfully executed!
-```
-
-**Example 2: Updating the Name**
-
-To fix the second issue, use the command `/updateitem -i 4 -n "Wanton Mee"`
-
-After this command, the menu will be updated to:
-
-```text
-Please enter a command: 
-/updateitem -i 4 -n "Wanton Mee"
-The command: /updateitem was successfully executed!
-Please enter a command: 
-/listitem
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Egg                       | 0.80  |
-| 1     | Laksa                     | 3.55  |
-| 2     | Fried Ric                 | 2.00  |
-| 3     | Mee Goreng                | 4.50  |
-| 4     | Wanton Mee                | 4.00  |
-The command: listitem was successfully executed!
-```
-
-**Example 3: Updating the Name and Price**
-
-To fix the third issue, use the command `/updateitem -i 2 -n "Fried Rice" -p 4`
-
-After this command, the menu will be updated to:
-
-```text
-Please enter a command: 
-> /updateitem -i 2 -n "Fried Rice" -p 4
-The command: /updateitem was successfully executed!
-Please enter a command: 
-> /listitem
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Egg                       | 0.80  |
-| 1     | Laksa                     | 3.55  |
-| 2     | Fried Rice                | 4.00  |
-| 3     | Mee Goreng                | 4.50  |
-| 4     | Wanton Mee                | 4.00  |
-The command: listitem was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode Orders
-
-There are three different commands you can run for orders. It is highly recommended that you read the
-entire [Add an Order](#advanced-mode-add-an-order) section as they are all related.
-
-* [Add an Order](#advanced-mode-add-an-order)
-    * [Add a Single Item to an Order](#advanced-mode-single-item)
-    * [Add Multiple Items to an Order](#advanced-mode-multiple-items)
-    * [Searching by Name](#advanced-mode-search-by-name)
-* [List all Orders](#advanced-mode-list-all-orders)
-
-### Advanced Mode Add an Order
-
-When you add an order, the total price will be given. Afterwards, you have to add the amount paid, as well as the method
-of payment.
-
-After adding the order, you will be prompted to add the payment, which can be done with `/pay -a <amount> -t <type>`
-or `/pay --amount <amount> --type <type>`
-
-* `Amount` refers to the amount paid, with up to 2 decimal places. (`2`, `2.1`, and `2.22` are all valid inputs).
-* `Type` must use one of the following three modes: `Card`, `Cash` or `Others`.
-    * It is case-insensitive.
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-#### Advanced Mode Single Item
-
-This mode of input allows you to add an order with a single item with ease.
-
-**It is highly recommended to read the entire [`Add an Order` section](#advanced-mode-add-an-order), as details for
-the `/pay` command is not addressed here, and all different modes of payment will be covered across both sections of
-adding orders.**
-
-Format: `/addorder -i <index> -q <quantity>` or `/addorder --index <index> --quantity <quantity>`
-
-* The `index` refers to the index obtained when printing [all items](#advanced-mode-list-all-items).
-* The quantity must be a positive whole number.
-* Repeated sets of index and quantity must be separated by a comma.
-
-**Example of Usage**
-**Example 1 - Cash Payment**
-
-Assume your menu is as follows:
-
-```text
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Egg                       | 0.80  |
-| 1     | Laksa                     | 3.55  |
-| 2     | Fried Rice                | 4.00  |
-| 3     | Mee Goreng                | 4.50  |
-| 4     | Wanton Mee                | 4.00  |
-```
-
-* You have a customer, who wants to order _2_ plates of _Fried Rice_. To add their order, use the
-  command `/addorder -i 3 -q 2`
-
-```text
-Please enter a command: 
-> /addorder -i 3 -q 2
-Order has been added successfully. Total amount: $9.00.
-Please use /pay command to add payment for the order.
-```
-
-* You tell them the total amount is _$9.00_, and they give you _$10_ in _cash_. So, you input `/pay -a 10 -t cash`, and
-  obtain the following result:
-
-```text
-Please use /pay command to add payment for the order.
-> /pay -a 10 -t cash
-The calculated change is $1.00.
-The command: /pay was successfully executed!
-```
-
-**Example 2 - Card Payment**
-
-* The next customer orders _3_ bowls of _Laksa_. This time, they want to pay with their card (the amount paid is exact).
-  So you input `/addorder -i 1 -q 3`.
-
-```text
-Please enter a command: 
-> /addorder -i 1 -q 3
-Order has been added successfully. Total amount: $10.65.
-Please use /pay command to add payment for the order.
-```
-
-* Next, you use the command `/pay -a 10.65 -t card` and obtain the following result:
-
-```text
-Please use /pay command to add payment for the order.
-> /pay -a 10.65 -t card
-The command: /pay was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-#### Advanced Mode Multiple Items
-
-This command allows you to add multiple items to a single order.
-
-Format: `/addorder -I [<index>:<quantity>{,<index>:<quantity>}`
-
-* You need at least one set of `<index>:<quantity>`. Multiple sets need to be separated by commands, without spaces.
-    * Additional sets of index and quantity are
-* The same item can be input multiple times.
-
-**It is highly recommended to read the entire [`Add an Order` section](#advanced-mode-add-an-order), as details for
-the `/pay` command is not addressed here, and all different modes of payment will be covered across both sections of
-adding orders.**
-
-**Example of Usage:**
-
-Assume your menu is as follows:
-
-```text
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Egg                       | 0.80  |
-| 1     | Laksa                     | 3.55  |
-| 2     | Fried Rice                | 4.00  |
-| 3     | Mee Goreng                | 4.50  |
-| 4     | Wanton Mee                | 4.00  |
-```
-
-A large group comes to your store and orders _2_ bowls of _Laksa_, _3_ plates of _Fried Rice_, and _2_ plates of Wanton
-Mee. At the last moment, your customer adds another _2_ bowls of _Laksa_. This customer uses a voucher to pay (an "
-_others_" mode of payment). To add this lengthy order, you can use the command `/addorder -I [1:2,2:3,2:4,1:2]`.
-
-```text
-Please enter a command: 
-> /addorder -I [1:2,2:3,4:2,1:2]
-Order has been added successfully. Total amount: $42.20.
-Please use /pay command to add payment for the order.
-> /pay -a 42.20 -t others
-The calculated change is $0.0.
-The command: /pay was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-#### Advanced Mode Search by Name
-
-Forgot the index of an item? Fret not! You can also add an item to an order by searching its name.
-
-* For single items, use the command `/addorder -i "<name>" -q <quantity>`
-* For multiple items, use the command `/addorder -I ["<name>":q{,"<name>":q}]`
-    * Like in the previous section, Advanced Mode Multiple Items, the command requires a minimum of one item and its
-      corresponding quantity.
-    * Different items are split by a comma.
-
-**Example of Usage**
-
-**Single Item Order**
-
-```text
-Please enter a command: 
-/addorder -i "laksa" -q 2
-Order has been added successfully. Total amount: $7.1.
-Please use /pay command to add payment for the order.
-/pay -a 7.1 -t card
-The calculated change is $0.0.
-The command: /pay was successfully executed!
-```
-
-**Multiple Items Order**
-
-```text
-Please enter a command: 
-/addorder -I ["laksa":2,"mee goreng":4]
-Order has been added successfully. Total amount: $25.1.
-Please use /pay command to add payment for the order.
-/pay -a 25.1 -t cash
-The calculated change is $0.0.
-The command: /pay was successfully executed!
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode List all Orders
-
-After adding many orders, you may wish to view a list of all transactions.
-
-Format: `/listorder`
-
-**Example of Usage**
-
-```text
-> /listorder
-================================================
-Order 1
-Order ID: f5fda17b-a520-4ea0-a42a-cefa6c9315d7
-Order status: COMPLETED
-Order time: 2023-03-20 16:01:40
-1. Laksa x2
-2. Fried Rice x3
-3. Wanton Mee x2
-4. Laksa x2
-
-Subtotal: $34.20
-================================================
-Order 2
-Order ID: ffc76ebe-09b1-48d2-9378-af49c234f399
-Order status: COMPLETED
-Order time: 2023-03-20 15:16:52
-1. Mee Goreng x2
-
-Subtotal: $9.00
-================================================
-```
-
-The above example is just a small extract from a long list of transactions and is non-exhaustive.
-
-The Order ID is important as it is used for [refunding orders](#advanced-mode-refund-an-order).
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Advanced Mode Refund An Order
-
-If you made a mistake in an order, or wish to refund a customer's order, you may do so with this feature.
-
-Format: `/refundorder <order ID>`.
-
-* The order ID refers to the order ID given from [printing the list of orders](#advanced-mode-list-all-orders) or
-  the `orders.json` file.
-    * You cannot refund an order that has already been refunded.
-    * The ID can be copied and pasted from and into the CLI for ease of use.
-
-More information about data storage and `.json` files can be found [here](#save-file).
-
-**Example of Usage**
-
-Assume you want to refund the following order.
-
-```text
-================================================
-Order 2
-Order ID: ffc76ebe-09b1-48d2-9378-af49c234f399
-Order status: COMPLETED
-Order time: 2023-03-20 15:16:52
-1. Mee Goreng x2
-
-Subtotal: $9.00
-================================================
-```
-
-To refund it, you use the command `/refundorder ffc76ebe-09b1-48d2-9378-af49c234f399`.
-
-* The order ID can be copied from the interface.
-
-```text
-Please enter a command: 
-> /refundorder ffc76ebe-09b1-48d2-9378-af49c234f399
-The command: /refundorder was successfully executed!
-```
-
-This changes the status of the order to _REFUNDED_.
-
-```text
-================================================
-Order 2
-Order ID: ffc76ebe-09b1-48d2-9378-af49c234f399
-Order status: REFUNDED
-Order time: 2023-03-20 15:16:52
-1. Mee Goreng x2
-
-Subtotal: $9.00
-================================================
-```
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-## Advanced Mode Command Summary
-
-Note that the long version of the commands, for example `--name` instead of `-name` will be omitted as it is not the
-preferred mode of input.
-
-| Command Type                  | General Format                                           | Example                                                                                                    |
-|-------------------------------|----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| Help                          | `help`                                                   | `help`                                                                                                     |
-| Add an item                   | `/additem -n "<name>" -p <price>`                        | `/additem -n "Chicken Rice" -p 3.5`                                                                        |
-| Delete an item                | `/deleteitem -i <index>`                                 | `/deleteitem -i 0`                                                                                         |
-| List an Item                  | `/listitem`                                              | `/listitem`                                                                                                |
-| Find an Item                  | `/finditem <description>`                                | `/finditem "Chicken R"`                                                                                    |
-| Update an Item                | `/updateitem -i <index> {-n "<name>"} {-p <price>}`      | `/updateitem -i 2 -n "Laksa"` <br> `/updateitem -i 3 -p 3.55` <br> `/updateitem -i 1 -n "Fried Rice" -p 5` |
-| Add an Order (Single Item)    | `/addorder -i {index} -q {quantity}`                     | `/addorder -i 10 -q 5` <br> `/addorder -i "Chicken Ri" -q 5`                                               |
-| Add an Order (Multiple Items) | `/addorder -I [<index>:<quantity>{,<index>:<quantity>}]` | `/addorder -I [1:3,"Chicken Ri":5,6:2]`                                                                    |
-| List an Order                 | `/listorder`                                             | `/listorder`                                                                                               | 
-| Refund an Order               | `/refundorder <ID>`                                      | `/refundorder ffc76ebe-09b1-48d2-9378-af49c234f399`                                                        |
-
-[Return back to Advanced Guide](#advanced-guide) | [Go to Advanced Mode Items](#advanced-mode-items) | [Go to Advanced Mode Orders](#advanced-mode-orders) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
-<br>
-
-# Basic Guide
-
-This version of our guide will bring you through how to use the many features of MoneyGoWhere, in basic mode. In this
-mode, you will be prompted step-by-step to use the various features and complete commands.
-To see the advanced version, [please click here](#advanced-guide).
-
-Note that all functionality is the same, regardless of the mode used.
-
-## Table of Contents
-
-1. [Setting up MoneyGoWhere](#setting-up-moneygowhere)
-2. [Basic Commands](#basic-commands)
-    1. [Help](#basic-help)
-    2. [Items](#basic-mode-items)
-        * [Add Items](#basic-mode-add-an-item)
-        * [Delete Items](#basic-mode-delete-an-item)
-        * [List all Items](#basic-mode-list-all-items)
-        * [Find an Item](#basic-mode-find-an-item)
-        * [Update an Item](#basic-mode-update-an-item)
-    3. [Orders](#basic-mode-orders)
-        * [Add an Order](#basic-mode-add-an-order)
-        * [List all Orders](#basic-mode-list-all-orders)
-        * [Refund an order](#basic-mode-refund-an-order)
-3. [Command Summary](#basic-mode-command-summary)
-
-<br>
+[Back to table of contents](#table-of-contents)
 
 ## Setting up MoneyGoWhere
 
 1. Before installing and using MoneyGoWhere, do note that Java 11 is required. If you do not already have it installed,
-   you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11)
-    * For Windows users, download the x64 Installer.
-      ![JavaWindows](images/userGuide/downloadJavaWindows.png)
-    * For Mac users, download the ARM 64 DMG Installer.
-      ![JavaWindows](images/userGuide/downloadJavaMac.png)
-2. After installing Java 11, please download the `.jar`
-   file [here](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases) and place it in a folder. Doing so ensures that
-   the save-file will not be lost, allowing you to use data that you have previously entered. Click
-   on `MoneyGoWhere.jar` to automatically download the file. Ensure that it is the latest version.
-   ![downloadMoneyGoWhere](/images/userGuide/downloadMoneyGo
-3. Move the jar file into a folder. This will allow you to view all data related to MoneyGoWhere easily, as all data
-   files will be stored here.
-4. Open the command terminal and navigate to the folder where the `.jar` file is. If you are unsure of how to do so,
-   follow steps 5 to 7.
-5. Right-click the file and select the "Properties" option. Then, copy the text under "Location".
+   you can do so [here](https://www.oracle.com/sg/java/technologies/downloads/#java11).
+    * For Windows users, download the x64 Installer. Ensure you are on the "Windows" page and download the correct
+      version, in the red box.
 
-   ![image](images/userGuide/findFileLocation.png)
+      ![](https://i.imgur.com/ibRX7fQ.png)
 
-6. Open a command terminal by entering `cmd` in your start menu.
-7. In the terminal, navigate to the location of the folder by doing `cd "<file path>"`.
-    - This step is important as it ensures that the saved tasks file will be saved in the same directory. Otherwise, the
-      file will be stored in the current working directory.
-8. Use the command `java -jar MoneyGoWhere.jar` to launch MoneyGoWhere. If done correctly, you will see something like
-   this on your first start up:
+    * For Mac users, download the ARM 64 DMG Installer.Ensure you are on the "macOS" page and download the correct
+      version, in the red box.
 
-    ```text
-    ░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀
-    ░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀
-    ░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀
-    Welcome to MoneyGoWhere!
-        
-    Please enter a command:
-    ```
+      ![](https://i.imgur.com/DGn8lrt.png)
 
-9. When you are done using the app, enter `exit` to shut the application down.
+1. After installing Java
+   11, [please download the latest release of the `MoneyGoWhere.jar` file](https://github.com/AY2223S2-CS2113T-T09-2/tp/releases).
+   Click on `MoneyGoWhere.jar` to automatically download the file. Ensure that it is the latest version (the one with
+   the biggest number).
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+   ![](https://i.imgur.com/V8xLkBL.png)
 
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
+1. Find `MoneyGoWhere` in your Downloads folder.
 
-## Basic Commands
+1. Open `cmd` and navigate to the folder where the `MoneyGoWhere.jar` file is. If you are unsure of how to do so, follow
+   steps 5 to 7. Otherwise, you may skip ahead to step 8.
 
-* All options are signified by `<example>`, which means you can change it according to what you need.
-* In all the examples, the use of `>` signifies a user input. Normal text is _italicised_ to signify the options that
-  will be used as the command.
-* In advanced mode, all commands are prefixed with `/`, to distinguish them from the basic commands. To view advanced
-  commands, [click here](#advanced-guide)
+1. Open a command [terminal](#glossary) by entering `cmd` in your start menu and select the first [option](#glossary)
+   that appears.
+   ![](https://i.imgur.com/Ezt3rky.png)
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+1. Get the file path of `MoneyGoWhere.jar` in your computer. To easily do so, you can do the following:
 
-<br>
+    * For Windows users, right-click the file and select the "Properties" [option](#glossary). Then, copy the text
+      under "Location".
+      ![](https://i.imgur.com/bc72Izn.png)
 
-### Basic Help
+    * For Mac users, right-click the file and select "Copy".
+      ![](https://i.imgur.com/mKfwVrc.png)
 
-Entering this command will show you a list of all available commands.
+1. In the CLI, navigate to the location of the folder by typing `cd `, type or paste the file path that you found from
+   the previous step by pressing CTRL and V at the same time on your keyboard, then press enter.
 
-Note that it is possible to use the given index as a command input, but doing so will execute commands in basic mode.
+    * For example, if the file path that you have is `C:\Users\natas\Downloads\Folder`, then you should
+      enter `cd C:\Users\natas\Downloads\Folder` into the CLI.
 
-Format: `help`
+    <!--* This step is important as it ensures that the saved tasks file will be saved in the same directory. Otherwise, the file will be stored in the current working directory.-->
 
-The output of running the `help` command is as follows:
+1. Use the [command](#glossary) `java -jar MoneyGoWhere.jar` to launch MoneyGoWhere.
+   If done correctly, you will see this on your first start up:
+   ![](https://i.imgur.com/xZ24DTM.png)
 
-```text
-Please enter a command: 
-> help
-There are 8 commands you can use in MoneyGoWhere. For more details, please refer to the user guide.
-1. additem
-2. deleteitem
-3. listitem
-4. updateitem
-5. finditem
-6. addorder
-7. listorder
-8. refundorder
-```
+1. When you are done using the app, enter `exit` to shut the application down or simply close the window by clicking on
+   the `X` on the top right hand corner of the CLI.
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+<div style="page-break-after: always;"></div>
 
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
+[Back to table of contents](#table-of-contents)
 
-### Basic Mode Items
+## MoneyGoWhere [Commands](#glossary)
 
-* [Add an Item](#basic-mode-add-an-item)
-* [Delete an Item](#basic-mode-delete-an-item)
-* [List all Items](#basic-mode-list-all-items)
-* [Update an Item](#basic-mode-update-an-item)
-* [Find an Item](#basic-mode-find-an-item)
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+📖 Meet John! He will be a character that is constantly referenced throughout the next few sections to better explain how the commands work. John is an aspiring hawker, and plans on running a new stall at The Deck in NUS. 
+</blockquote>
 
-### Basic Mode Add an Item
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡   For new users, it is recommended to read the sections labelled as <strong>For New Users</strong>. These sections will bring you through using commands in a guided, step-by-step manner.
+<br><br>  
+As you become more familiar with MoneyGoWhere and want to speed up using the application, we recommend reading sections labelled as  <strong>For Experienced Users</strong>. In these sections, we provide examples on how to use each feature with just a single line of input.
+</blockquote>
 
-Format: `additem` or `1`
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 Even though the <strong>New User</strong> and <strong>Experienced User</strong> commands are entered into the application slightly differently, they both work exactly the same. <br><br> In other words, there is nothing that the <strong>Experienced User</strong> commands can do that the <strong>New User</strong> commands cannot.
+</blockquote>
 
-This allows you to add an item to the menu, where you will be prompted to input the name, then the price of the item.
+[Back to table of contents](#table-of-contents)
 
-**Example of Usage**
+## Style Features
 
-If you want to add _Chicken Rice_, which costs _$3.50_ to your menu, you can use `additem` to begin the process of
-adding it to your menu.
+For the following sections, all examples on how to run [commands](#glossary) are shown in images. There are four things
+to take note of:
 
-```text
-Please enter a command: 
-> additem
-Please enter the item's name: 
-> Chicken Rice
-Please enter the item's price: 
-> 3.50
-Item added successfully.
-```
+1. Standard text printed by the application is written in **white**.
+2. User input is signified and is written in <text  style="color:#88B3F6">**blue**</text>.
+3. Success messages and examples of expected output is written in <text  style="color:#7ED321">**green**</text>.
+4. Error messages are written in <text style="color:#F25569">**red**</text>.
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+**When you use the application, the text on your screen will be in white.**
 
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
+We have chosen to color-code our examples so it is easier for you to follow along and tell apart different parts of the
+examples.
 
-### Basic Mode Delete an Item
+Here is an example of what you can expect to see in this Guide.
 
-Format: `deleteitem` or `2`.
+![](https://i.imgur.com/MT5YgYP.png)
 
-This allows you to delete an item from the menu, where you will be asked to input the index of the item to be deleted.
+For those reading the **New User** sections, do also note the following:
 
-Note that deleting an item will affect the index of all other items.
+1. At any point, if you wish to exit from the command, you can do so with `/cancel`
 
-**Example of Usage**
+For those reading the **Experienced User** sections, do also note the following:
 
-Assume your menu currently looks like this.
+1. Any words surrounded by `<>`, such as `<price>` are for you to fill in.
+2. Options that are surrounded by `{}`, such as `{-n "<name>"}` are optional.
+3. All values have to be accompanied by options (begins with `-`, such as `-n` or `--price`). Commands such
+   as `/deleteitem delete -i 10` will be an invalid [command](#glossary).
 
-```text
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Chicken Rice              | 3.50  |
-```
+[Back to table of contents](#table-of-contents)
 
-You change your mind and decide you no longer want to sell Chicken Rice, which is at index _0_. To begin the process of
-deleting it from your menu, you can use the command `deleteitem`.
+## Summary of Features
 
-```text
-Please enter a command: 
-> deleteitem
-Please enter the item's index: 
-> 0
-Item deleted successfully.
-```
+There are 10 features built into MoneyGoWhere, as described in the table below.
+More details are provided in their individual sections.
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+| Name                                              | Description                                                          |
+|---------------------------------------------------|----------------------------------------------------------------------|
+| [Help](#Help)                                     | Displays information about various commands                          |
+| [**Item Features**](#Item-Features)               |                                                                      |
+| [Add an Item](#Add-an-Item)                       | Adds an item to the menu                                             |
+| [Delete an Item](#Delete-an-Item)                 | Deletes an item from the menu                                        |
+| [List All Items](#List-All-Items)                 | Lists items in the menu                                              |
+| [Update an Item](#Update-an-Item)                 | Updates an item in the menu                                          |
+| [Find an Item](#Find-an-Item)                     | Finds an item in the menu, based on its name                         |
+| [**Order Features**](#Order-Features)             |                                                                      |
+| [Add an Order](#Add-an-Order)                     | Adds an order, with the [index](#glossary) and quantity of each item |
+| [List All Orders](#List-All-Orders)               | Lists all orders                                                     |
+| [Refund an Order](#Refund-an-Order)               | Refunds an order based on the unique order ID                        |
+| **Statistics**                                    |                                                                      |
+| [Statistics and Reports](#Statistics-and-Reports) | Generates a report based on various options                          |
 
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
+[Back to table of contents](#table-of-contents)
 
-### Basic Mode List all Items
+## Help
 
-Format: `listitem` or `3`
+This [command](#glossary) displays information about the other commands available in MoneyGoWhere.
 
-This allows you to list all items in the menu. It accepts no additional input.
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖 John has just downloaded MoneyGoWhere. Unlike you, he does not know that MoneyGoWhere has a user guide and wants to find out more about the various commands offered by MoneyGoWhere. To find out more about the commands offered, he can use the <code>help</code> command. <br><br>
+    Currently, all he knows is that he can do <code>help</code>, or <code>/help</code>.
+</blockquote>
 
-**Example of Usage**
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 The help command does not accept any other input. Entering anything other than <code>help</code> or <code>/help</code> will cause an error.
+</blockquote>
 
-```text
-Please enter a command: 
-> listitem
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Chicken Rice              | 3.50  |
-| 1     | Fried Rice                | 5.00  |
-| 2     | Mee Goreng                | 5.00  |
-| 3     | Fish Soup                 | 6.50  |
-All items in the menu have been listed!
-```
+<h3> For New Users </h3>
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖 As someone who is unfamiliar with the application, John wants to be guided step-by-step to use MoneyGoWhere. To view the commands available to him, he can use the <code>help</code> command.
+</blockquote>
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+![](https://i.imgur.com/OlmWorh.png)
 
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
 
-### Basic Mode Update an Item
+<h3> For Experienced Users </h3>
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖 In the future, John develops a love for typing and now prefers to use just one line to complete an command. He can use the <code>/help</code> command to view how to use these single-line commands.
+</blockquote>
 
-Format: `updateitem` or `4`
+![](https://i.imgur.com/FBxnCgC.png)
 
-This allows you to update the name and/or price of the item. You will be prompted to enter the index, then the option to
-change the item's name, then price.
+<h3> Error Messages </h3>
 
-**Example of Usage**
+**1. Adding words or letters after the [command](#glossary)**
 
-To show all different ways of updating an item, assume your menu looks like this.
+MoneyGoWhere does not allow for additional letters or words after the `help` command word.
 
-```text
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | chicken Rice              | 3.50  |
-| 1     | Egg                       | 80.00 |
-| 2     | mEE gORENG                | 56.00 |
-```
+![](https://i.imgur.com/Wki6DmO.png)
 
-You want to change 3 things:
+**Solution:** Only enter the command word, `help` or `/help`.
 
-1. Change the name to "_Chicken Rice_" at Index _0_.
-2. Change the price to _$0.80_ at Index _1_.
-3. Change the name to "_Mee Goreng_" and change the price to _$5.60_ at Index _2_.
+[Back to table of contents](#table-of-contents)
 
-To do so, use the command `updateitem`.
+## Item Features
 
-**Example 1: Change the Name**
+Before you start taking orders, you will need to set up your menu. This must be done at least once.
 
-```text
-Please enter a command: 
-> updateitem
-Please enter the item's index: 
-> 0
-Would you like to update item name? (yes/no)
-> yes
-Please enter the item's name: 
-> Chicken Rice
-Would you like to update item price? (yes/no)
-> no
-Item updated successfully.
-```
+Depending on the size of your menu, you may need to spend quite a bit of time to add all of your menu items into
+MoneyGoWhere. It is important that you do this before opening shop for the day, to ensure that your business can be run
+without any disruptions.
 
-**Example 2: Change the Price**
+You may continue to add new items to the menu at any point of time.
+<!--This should be a one-time process, but you can always add more items or remove old items at any point.-->
 
-```text
-Please enter a command: 
-> updateitem
-Please enter the item's index: 
-> 1
-Would you like to update item name? (yes/no)
-> no
-Would you like to update item price? (yes/no)
-> yes
-Please enter the item's price: 
-> 0.80
-Item updated successfully.
-```
+## Table of Contents
 
-**Example 3: Change Name and Price**
+* [Add an Item](#Add-an-Item)
+* [List all Items](#List-all-Items)
+* [Delete an Item](#Delete-an-Item)
+* [Update an Item](#Update-an-Item)
+* [Find an Item](#Find-an-Item)
+
+## Add an Item
+
+If you need to add an item to the menu, you can use this [command](#glossary). To add an item, you will need the item's
+name and price.
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖John wants to run a Chicken Rice store.  Currently, he only has two things to sell and has already set the cost: <strong>White Chicken Rice ($4.50)</strong> and <strong>Egg ($0.80)</strong>. He will need to use the <code>additem</code> command to add these two items.
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for the name and price of items, as shown below:<br><br>
+
+| Option      | Description            | Restrictions                                                                                                                                                                                            |
+|-------------|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Item Name` | The name of the item.  | Any input that is not empty and has less than 25 characters. <br><br> It cannot only have numbers.                                                                                                      |
+| `Price`     | The price of the item. | A number, with up to 2 [decimal places](#glossary). For example, `1`, `10.23` and `5.20` are valid inputs. However, `1.234` is not a valid input. <br><br> The price of the item is limited to `10000`. |
+
+</blockquote>
+
+
+<h3> <strong>For New Users </strong></h3>
+
+This example will show you how to add an item step-by-step.
+
+1. John starts the application for the first time. He sees the greeting and knows that he set up the application
+   correctly. Now, he wants to add **White Chicken Rice**, which costs **$4.50** to the menu.
+
+![](https://i.imgur.com/YBkgvEQ.png)
+
+2. He sees that he is successful and feels happy that the application is easy to use. Now, he wants to add **Egg**,
+   which costs **$0.80** to the menu.
+
+![](https://i.imgur.com/qeTaDFj.png)
+
+3. Lastly, John uses [`listitem`](#List-all-Items) to check that he has added the items correctly.
+   **//TODO: HYPERLINK listitem**.
+
+![](https://i.imgur.com/yiScNE0.png)
+
+
+<hr style="width:60%;margin:25px auto;"/>
+
+<h3> <strong>For Experienced Users </strong></h3>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 To use the command in this manner, remember to add a <code>/</code> before the command, such as <code>/additem</code>. 
+</blockquote>
+
+**[Command](#glossary) Format**
+These are the different command formats that are accepted when adding a new item into the menu.
 
 ```text
-Please enter a command: 
-> updateitem
-Please enter the item's index: 
-> 2
-Would you like to update item name? (yes/no)
-> yes
-Please enter the item's name: 
-> Mee Goreng
-Would you like to update item price? (yes/no)
-> yes
-Please enter the item's price: 
-> 5.60
-Item updated successfully.
+/additem --name "<item name>" --price <price>
 ```
-
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Basic Mode Find an Item
-
-Format: `finditem` or `5`
-
-This allows you to find an item. You will be prompted to input the full or partial name of a string. A list of all items
-in the menu matching the input will be printed.
-
-Entering `finditem` on its own will achieve the same effect as [`listitem`](#basic-mode-list-all-items).
-
-Note that the input is not case-sensitive. Entering `chicken` and `Chicken` will have the same effect.
-
-**Example of Usage**
-
-Assume your menu looks like this.
 
 ```text
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Chicken Rice              | 3.50  |
-| 1     | Fried Rice                | 5.00  |
-| 2     | Mee Goreng                | 5.00  |
-| 3     | Fish Soup                 | 6.50  |
+/additem -n "<item name>" -p <price>
 ```
 
-You temporarily forget which items on your menu have "_rice_" in the name. To search for all of them, use the
-command `finditem`.
+You may also interchange the location of the [flags](#glossary) in the commands.
+
+For example, the following command is also valid.
 
 ```text
-Please enter a command: 
-> finditem
-Please enter the keyword to search for: 
-> rice
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | chicken Rice              | 3.50  |
-| 1     | Fried Rice                | 5.00  |
-finditem completed!
+/additem  -p <price> -n "<item name>"
 ```
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+This example below will show you how to add an item in a single command.
+
+1. John starts the application for the first time. He sees the greeting and knows that he set up the application
+   correctly. Now, he wants to add **White Chicken Rice**, which costs **$4.50** to the menu.
+
+![](https://i.imgur.com/iblVSBb.png)
+
+2. He sees that he is successful and feels happy that the application is easy to use. Now, he wants to add **Egg**,
+   which costs **$0.80** to the menu.
+
+![](https://i.imgur.com/ARJOgRB.png)
+
+3. Lastly, John uses [`listitem`](#List-all-Items) to check that he has added the items correctly.
+
+![](https://i.imgur.com/pYNA0uT.png)
+
+<h3>Error Messages</h3>
+
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next few examples are invalid inputs, designed to show off some error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Name already exists**
+
+MoneyGoWhere does not allow for multiple items with the same name. If you try to put in an item with the same name, you
+will get the following error.
+
+![](https://i.imgur.com/ULSYB6F.png)
+
+**Solution:** Use a different name.
+
+<br> 
+
+**2. Price has more than two [decimal places](#glossary)**
+
+MoneyGoWhere does not allow you to enter a number with more than two [decimal places](#glossary). This is because there
+are no such denominations in real life.
+
+![](https://i.imgur.com/bGhE59B.png)
+
+**Solution:** Limit the price to 2 decimal points.
+
+<br> 
+
+[Back to table of contents](#table-of-contents)
+
+## List all Items
+
+To see all the items you have entered in your menu, use this [command](#glossary)!
+
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+    📖  John has spent the past 10 minutes entering all the items he plans to sell. Happy with his work, he wants to look at all the items in the menu to make sure that everything has been enetered correctly. To view the items in his menu, he will need the <code>listitem</code> command.
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 This command uses only one word. Adding anything else after the command will cause MoneyGoWhere to not recognize the command. 
+</blockquote>
+
+1. John has added 10 items to the menu and he wants to check that they are all correct. He uses the command `listitem`
+   or `/listitem` to do so.
+
+   ![](https://i.imgur.com/4TZqeA7.png)
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 Notice typos? Don't worry, it's intentional! These typos will be used in later sections. 
+</blockquote>
+
+
+<h3>Error Messages</h3>
+
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Adding words or letters after the [command](#glossary).**
+
+Adding anything after `listitem` or `/listitem` will cause the command to be invalid.
+
+![](https://i.imgur.com/oPwXAGW.png)
 
 <br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
 
-### Basic Mode Orders
+[Back to table of contents](#table-of-contents)
 
-* [Add an Order](#basic-mode-add-an-order)
-* [List all Orders](#basic-mode-list-all-orders)
-* [Refund an Order](#basic-mode-refund-an-order)
+## Delete an Item
 
-### Basic Mode Add an Order
+If you decide to stop selling a particular item, you can remove it from the menu with this [command](#glossary).
 
-Format: `addorder` or `6`
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">💡By using this command, you may potentially change the other index numbers of your other menu items. This may or may not affect the way you add items to orders. It is recommended that you use <code>listitem</code> to confirm if there are any changes.</blockquote>
 
-This allows you to add an order. You will be prompted to first input the name or index of the item, then the quantity.
-After each set of item and quantity, you will be asked if you want to add more items to the order. After adding all
-items, you will be prompted to input payment.
+To view more about listitem, [click here](#list-all-items).
 
-Note that the payment type can be one of the following 3 types:
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+📖  As per the previous example, John currently plans to sell Fried Rice. However, after asking his friends, he realized that no one wants to buy Fried Rice from a Chicken Rice stall. The menu currently looks like this: <br><br>
 
-* Cash
-* Card
-* Others
+![](https://i.imgur.com/V30OtYU.png)
 
-**Example of Usage**
+So, he has decided to delete Fried Rice, which has an index of <strong>8</strong> from his menu using the <code>
+deleteitem</code> command.
+</blockquote>
 
-Assume your menu looks like this:
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for the index, as shown below:<br><br>
+
+| Option  | Description                           | Restrictions                                                                                                             |
+|---------|---------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| `Index` | The position of the item in the menu. | The entered number must be a valid index number from `listitem`. <br><br>The entered number cannot be a negative number. |
+
+</blockquote>
+
+<h3> For New Users </h3>
+
+1. John wants to delete **Fried Rice**, which has index number **8**.
+
+![](https://i.imgur.com/M2twWZL.png)
+
+
+<hr style="width:60%;margin:25px auto;"/>
+
+<h3> For Experienced Users </h3>
+
+**[Command](#glossary) Format**
 
 ```text
-| Index | Name                      | Price |
-| ----- | ------------------------- | ----- |
-| 0     | Egg                       | 0.80  |
-| 1     | Mee Goreng                | 5.60  |
-| 2     | Pasta                     | 10.00 |
-| 3     | Chicken Rice              | 5.00  |
+/deleteitem --index <index>
 ```
-
-A customer orders _2_ plates of _Chicken Rice_ and _5_ bowls of _Pasta_. Use the command `addorder` to add their order.
 
 ```text
-Please enter a command: 
-> addorder
-Please enter the item's name or index: 
-> chicken rice
-Please enter the quantity of the item: 
-> 2
-Do you have more items to add? (yes/no/cancel)
-> yes
-Please enter the item's name or index: 
-> 2
-Please enter the quantity of the item: 
-> 5
-Do you have more items to add? (yes/no/cancel)
-> no
-Order added successfully!
-
-Subtotal: $60.00
-Order has been added successfully. Total amount: $60.00
-Please use /pay -a <amount> -t <type> or pay to make payment.
-> pay
-Please enter amount to pay.
-> 60
-Please enter payment type.
-> cash
-The command: addorder was successfully executed!
+/deleteitem -i <index>
 ```
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 To use the command in this manner, remember to add a <code>/</code> before the command, such as <code>/deleteitem</code>. 
+</blockquote>
+
+1. John wants to delete **Fried Rice**, which has index number **8**.
+
+![](https://i.imgur.com/Gagm3P2.png)
+
+<h3>Error Messages </h3>
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Invalid index**
+
+You will not be able to delete an item if the index number of that item does not exist in the menu.
+In other words, you cannot remove something that does not exist!
+
+![](https://i.imgur.com/dXH4yq4.png)
+
+**Solution:** Use a valid index.
 
 <br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
 
-### Basic Mode List all Orders
+[Back to table of contents](#table-of-contents)
 
-Format: `listorder` or `7`
+## Update an Item
 
-This allows you to list all orders. It accepts no additional input.
+Realised you entered the wrong name or price? You can update your items with this [command](#Glossary)!
 
-**Example of Usage**
+<blockquote style="background-color:#EAF5FF; color:#364253; border-color:#3399FF; padding: 2% 3%">
+📖 John has been happily using MoneyGoWhere to input all his items. However, he is a bit clumsy and entered a few wrong things. This is what the menu currently looks like: <br><br>
 
-This is an example of what you will see when you use the command `listorder`. Note that this is just one of many
-transactions, which all follow the same format.
+![](https://i.imgur.com/6Q3hSNz.png)
 
+He wants to change two things. First, the word <strong>"Vegebatles"</strong>  at index number 6 is spelt wrongly. Also, he wants to <strong>increase the price of "Vegetables" to $2.00</strong>. </br></br> Next, the item <strong>"Curry Chicken Rice" should cost $5.50</strong>. He can update these items with the <code>updateitem</code> command.
+</blockquote>
+
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+💡 There are restrictions for the index, name, and price of items, as shown below:<br><br>
+
+| Option  | Description               | Restrictions                                                                                |
+| ------- | ------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Index` | The index number of the item.     | Must be a valid index from `listitem`, cannot be a negative number.</br></br> This option is compulsory. |
+| `Name`  | The new name of the item.  | It cannot already exist in the menu.</br></br> This option is not compulsory.                            |
+| `Price` | The new price of the item. | It can have at most two decimal places. </br></br>This option is not compulsory.                         |
+
+</blockquote>
+
+<h3> For New Users </h3>
+
+1. John wants to **change spelling of the word "Vegebatle" to "Vegetable"**. To do so, he first enters the [command](#Glossary) `updateitem`, then confirms that he wants to change the name. He puts in the correct spelling, **without quotation marks**, and then indicates he does not want to change the price.
+
+![](https://i.imgur.com/z09QX60.png)
+
+2. John wants to **change the price of "Curry Chicken Rice" to $5.50, instead of $55**. To do so, he first enters the command, indicates he does not want to change the name, then confirms he wants to change the price. He then puts in the correct price.
+
+![](https://i.imgur.com/esb1Agx.png)
+
+3. After updating, John checks to make sure that the items are now correct with `listitem`.
+
+![](https://i.imgur.com/w4JXXNl.png)
+
+<hr style="width:60%;margin:25px auto;"/>
+
+<h3> For Experienced Users </h3>
+
+**[Command](#Glossary) Format**
 ```text
-================================================
-Order 11
-Order ID: bca43cce-ba65-424a-bdaf-406f808aee52
-Order status: COMPLETED
-Order time: 2023-03-27 10:15:14
-1. Chicken Rice x2
-2. Pasta x5
-
-Subtotal: $60.00
-================================================
+/updateitem --index <index> {--name "<name>"} {--price <price>}
 ```
-
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
-
-### Basic Mode Refund an Order
-
-Format: `refundorder` or `8`
-
-This allows you to refund an order. You will be prompted to enter the order ID, which can be obtained from
-the `order.json` file, or through `listorder`. You cannot refund an order that has already been refunded.
-
-The ID can be copied and pasted from and into the CLI for ease of use.
-
-More information about data storage and `.json` files can be found [here](#save-file).
-
-**Example of Usage**
-
-Enter the unique order ID of the order you want to refund.
-
 ```text
-Please enter a command: 
-> refundorder
-Please enter the order ID: 
-> 19fcc4fb-98b1-4344-a5cb-e6ff07ffd798
-Order is refunded successfully.
+/additem -i <index> {-n "<name>"} {-p <price>}
 ```
 
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
+<blockquote style="background-color:#FEEFD0; color:#364253; border-color:#877039; padding: 2% 3%">
+    💡 To use the command in this manner, remember to add a <code>/</code> before the command, such as <code>/updateitem</code>. 
+</blockquote>
+
+1. John wants to change the name "Vegebatle" to **"Vegetable"**. The item is currently at index **6**.
+
+![](https://i.imgur.com/k859ijM.png)
+
+2. Next, John wants to change the price of "Curry Chicken Rice", at index 8, to **$5.50** instead of $55.
+
+![](https://i.imgur.com/4qA5esD.png)
+
+3. After updating, John checks to make sure that the items are now correct with `/listitem`.
+
+![](https://i.imgur.com/2gHDVK3.png)
+
+
+<h3> Error Messages </h3>
+<blockquote style="background-color:#FADDDD; color:#364253; border-color:#893232; padding: 2% 3%">
+    ❗ The next example is an invalid input, designed to show off the error messages we have in place. This is not the full list of error messages. Additionally, these error messages will be shown for both <strong>New User</strong> and <strong>Experienced User</strong> commands if the mistake is made. 
+</blockquote>
+
+**1. Missing Index**
+
+Without indicating the index, MoneyGoWhere will not know what item you want to update.
+
+![](https://i.imgur.com/ou1bDzX.png)
+
+**Solution:** Include the index.
 
 <br>
-<hr style="height:3px; background-color:black ;border:none; width:60%; text-align:center; margin: 0 auto;">
-<br>
 
-## Basic Mode Command Summary
-
-| Command Type    | Command       |
-|-----------------|---------------|
-| Help            | `help`        |
-| Add an Item     | `additem`     | 
-| Delete an Item  | `deleteitem`  | 
-| List an Item    | `listitem`    |
-| Find an Item    | `finditem`    | 
-| Update an Item  | `updateitem`  |
-| Add an Order    | `addorder`    | 
-| List an Order   | `listorder`   |
-| Refund an Order | `refundorder` |
-
-[Return back to Basic Guide](#basic-guide) | [Go to Basic Mode Items](#basic-mode-items) | [Go to Basic Mode Orders](#basic-mode-orders) | [Go to Advanced Guide](#advanced-guide)
-
-<br>
-<hr>
-<br>
-
-# Statistics Feature
-
-One unique feature of MoneyGoWhere is the ability to generate reports to view sales data.
-
-At the moment, we only allow for reports to be generated with a single command, taking the following formats:
-
-* Short-form Flag Format: `/report {-r <type>} {-s <type} {-y <year>} {-f <start-date> -t <end-date>}`
-* Long-form Flag Format: `/report {--rank <type>} {--sale <type} {--year <year>} {--from <start-date> --to <end-date>}`
-
-Note the following:
-
-* Of the two, only one of `rank` or `sales` must be present. You cannot enter both flags at the same time.
-    * The type for `rank` is either `sales` or `popular`.
-    * The type for `sales` is either `daily` or `monthly`.
-        * `Monthly` sales must be generated by `year`.
-* Of the two, only one of `year` or `from` and `to` must be present. You cannot enter both `year` and `from` and `to`.
-    * The `year` takes the format `YYYY`.
-    * The dates for `from` and `to` takes the format `DD/MM/YYYY`.
-
-To display information on how to use this feature, use the command `report`.
-
-```text
-Select report type: 
-1. Rank
-2. Sales
-Select sales mode: 
-1. Daily
-2. Monthly
-Select rank mode: 
-1. Sales
-2. Popular
-Select date type: 
-1. Year
-2. Date range
-```
-
-**Example of Usage**
-**Example 1: Rank popular items over the year**
-
-```text
-Please enter a command: 
-> /report -r popular -y 2023
-| ----------------------------------------- |
-| Rank by quantity sold                     |
-| Date: 01/01/2023 - 31/12/2023             |
-| ----------------------------------------- |
-| Rank  | Name                      | Count |
-| ----- | ------------------------- | ----- |
-| 1     | Pasta                     | 5     |
-| 2     | Chicken Rice              | 2     |
-| 3     | Mee Goreng                | 2     |
-| 4     | Egg                       | 0     |
-| ----------------------------------------- |
-```
-
-**Example 2: Rank by sales over the year**
-
-```text
-Please enter a command: 
-> /report -r sales -y 2023
-| ---------------------------------------------- |
-| Rank by sales                                  |
-| Date: 01/01/2023 - 31/12/2023                  |
-| ---------------------------------------------- |
-| Rank  | Name                      | Sales($)   |
-| ----- | ------------------------- | ---------- |
-| 1     | Pasta                     | 50.00      |
-| 2     | Mee Goreng                | 11.20      |
-| 3     | Chicken Rice              | 10.00      |
-| 4     | Egg                       | 0.00       |
-| ---------------------------------------------- |
-```
-
-**Example 3: Daily sales from 26 March 2023 to 27 March 2023**
-
-```text
-Please enter a command: 
-> /report -s daily -f 01/03/2023 -t 10/03/2023
-| ----------------------------------------------------------------------------------------------------------------------------------- |
-| Daily statistic for the date range 01/03/2023 - 10/03/2023                                                                          |
-| Total sales: $97.20                                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------------------------------- |
-| Date         | Sales($)      | Performance                                                                                          |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 01/03/2023   | 9.00          | |||||||||                                                                                            |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 02/03/2023   | 7.60          | |||||||                                                                                              |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 03/03/2023   | 16.80         | |||||||||||||||||                                                                                    |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 04/03/2023   | 3.50          | |||                                                                                                  |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 05/03/2023   | 9.70          | |||||||||                                                                                            |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 06/03/2023   | 9.70          | |||||||||                                                                                            |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 07/03/2023   | 33.20         | ||||||||||||||||||||||||||||||||||                                                                   |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 08/03/2023   | 7.70          | |||||||                                                                                              |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 09/03/2023   | 0.00          |                                                                                                      |
-| ------------ | ------------- | ---------------------------------------------------------------------------------------------------- |
-| 10/03/2023   | 0.00          |                                                                                                      |
-| ----------------------------------------------------------------------------------------------------------------------------------- |
-```
-
-**Example 4: Monthly sales for 2023**
-The following is a small extract of an entire year's monthly sales report.
-
-```text
-Please enter a command: 
-> /report -s monthly -y 2023
-| ----------------------------------------------------------------------------------------------------------------------------------- |
-| Monthly statistic for the year 2023                                                                                                 |
-| Total sales: $282.30                                                                                                                |
-| ----------------------------------------------------------------------------------------------------------------------------------- |
-| Month      | Sales($)        | Performance                                                                                          |
-| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
-| Jan 2023   | 96.60           | ||||||||||||||||||||||||||||||||||                                                                   |
-| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
-| Feb 2023   | 88.50           | |||||||||||||||||||||||||||||||                                                                      |
-| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
-| Mar 2023   | 97.20           | ||||||||||||||||||||||||||||||||||                                                                   |
-| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
-| Apr 2023   | 0.00            |                                                                                                      |
-| ---------- | --------------- | ---------------------------------------------------------------------------------------------------- |
-```
-
-[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
-<br>
-
-# Save File
-
-The menu and transactions are stored in `json` files. The team at MoneyGoWhere advises against editing these files
-directly as inexperienced users may potentially corrupt the files.
-
-[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
-
-<br>
-<hr style="height:3px; background-color:black ;border:none; text-align:center; margin: 0 auto;">
-<br>
-
-# Glossary
-
-The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
-The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
-The glossary is shown in alphabetical order. If you have any additional questions, please reach out to our team.
-
-| Term                     | Explanation                                                                                                                                              |
-|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Case-sensitive           | If something is case-sensitive, it means that whether letters are capitalized or not matters. For example, your passwords are case-sensitive             |
-| Command Line Interface   | A text-based interface. This means there are no icons to click and everything has to be typed.                                                           |
-| Command                  | An instruction given to the computer.                                                                                                                    |
-| Terminal                 | A tool used for CLI programmes to be run. It accepts text input and outputs text.                                                                        |
-| Decimal Places           | The number of digits behind a decimal point. For example `2.123` has 3 decimal places, while `4.20` has 2 decimal places.                                |
-| Directory                | Directories are folders in your computer system.                                                                                                         |
-| Flag                     | Used to specify instructions and change the behaviour of a command. In this application, flags have a short-form and a long-form, ie. `-n` and `--name`. |
-| Graphical User Interface | A graphic-based interface. Usually, it has buttons or icons of some kind and uses visuals to interact with the user.                                     |
-| Index                    | A set of ordered whole numbers used to indicate elements. For example, you can think about the different levels in a building.                           |
-| Integer                  | A whole number, such as `1`, `100` or `-1`. Numbers such as `1.2` and fractions are not integers.                                                        |
-| Point-of-Sale System     | It is used to accept payments from customers and track sales. For MoneyGoWhere, you are also able to create a menu in addition to tracking sales.        |
-
-[Go to Advanced Guide](#advanced-guide) | [Go to Basic Guide](#basic-guide)
+[Back to table of contents](#Table-of-Contents)

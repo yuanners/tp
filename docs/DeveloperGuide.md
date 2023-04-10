@@ -6,6 +6,9 @@
 * [Introduction](#introduction)
 * [Design](#design)
 * [Implementation](#implementation)
+  * [Item Commands](#item-commands)
+  * [Order Commands](#order-commands)
+  * [Report Commands](#report-commands)
 * [Requirements](#requirements)
     * [Project Scope](#project-scope)
     * [User Stories](#user-stories)
@@ -490,7 +493,7 @@ command `/listitem` or `lisitem` or `3`.
 
 Note that the work flow for both Basic and Experienced Mode is the same.
 
-The general workflow of `/listorder` is as follows:
+The general workflow of `/listitem` is as follows:
 
 1. `MoneyGoWhere` then creates a new `Command` object using the user input, whose constructor invokes
    `Parser#formatArguments` method to extract the arguments for each flag into a `Map`.
