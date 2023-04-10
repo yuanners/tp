@@ -1,5 +1,9 @@
 package ui;
 
+import app.Command;
+import exception.UnrecognisedCommandException;
+import validation.Validation;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +12,8 @@ public class Ui {
         System.out.println("░█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ █──█ ░█▀▀█ █▀▀█ ░█──░█ █──█ █▀▀ █▀▀█ █▀▀\n" +
                 "░█░█░█ █──█ █──█ █▀▀ █▄▄█ ░█─▄▄ █──█ ░█░█░█ █▀▀█ █▀▀ █▄▄▀ █▀▀\n" +
                 "░█──░█ ▀▀▀▀ ▀──▀ ▀▀▀ ▄▄▄█ ░█▄▄█ ▀▀▀▀ ░█▄▀▄█ ▀──▀ ▀▀▀ ▀─▀▀ ▀▀▀");
-        System.out.println("Welcome to MoneyGoWhere!\n");
+        System.out.println("Welcome to MoneyGoWhere!");
+        System.out.println("To begin, you may enter \"help\" to see a list of commands.\n");
     }
 
     public void promptUserInput() {
@@ -22,24 +27,24 @@ public class Ui {
     }
 
     public void printInvalidCommand(String command) {
-        System.out.println("The command: " + command + " is not a valid command.");
+        System.out.println("\nThe command: " + command + " is not a valid command.\n");
     }
 
     public void printCommandSuccess(String command) {
-        System.out.println("The command: " + command + " was successfully executed!");
+        System.out.println("\nThe command: " + command + " was successfully executed!\n");
     }
 
     public void printCommandCancelled(String command) {
-        System.out.println("The command: " + command + " has been cancelled.");
+        System.out.println("\nThe command: " + command + " has been cancelled.\n");
     }
 
     public void printAssistedHelp() {
-        System.out.println("There are 10 commands you can use as a new user in MoneyGoWhere.\n" +
+        System.out.println("\nThere are 10 commands you can use as a new user in MoneyGoWhere.\n" +
                 "For more details, please refer to the User Guide.\n" +
                 "0. help\n" +
                 "1. additem\n" +
-                "2. deleteitem\n" +
-                "3. listitem\n" +
+                "2. listitem\n" +
+                "3. deleteitem\n" +
                 "4. updateitem\n" +
                 "5. finditem\n" +
                 "6. addorder\n" +
@@ -50,13 +55,21 @@ public class Ui {
         );
     }
 
-    public void printHelp() {
-        System.out.println("There are 10 commands you can use as an experienced user in MoneyGoWhere.\n" +
+    public void printHelp(Command command) {
+        try {
+            Validation validation = new Validation();
+            validation.validateNoArgumentCommand(command);
+        } catch (UnrecognisedCommandException e) {
+            this.printError(Flags.Error.UNRECOGNISED_COMMAND_ERROR);
+            return;
+        }
+
+        System.out.println("\nThere are 10 commands you can use as an experienced user in MoneyGoWhere.\n" +
                 "For more details, please refer to the User Guide.\n" +
                 "0.  /help\n" +
                 "1.  /additem -n \"<name>\" -p <price>\n" +
-                "2.  /deleteitem -i <index>\n" +
-                "3.  /listitem\n" +
+                "2.  /listitem\n" +
+                "3.  /deleteitem -i <index>\n" +
                 "4.  /updateitem -i <index> {-n <name>} {-p <price>}\n" +
                 "5.  /finditem -n \"<name>\"\n" +
                 "6a. /addorder -i <index> -q <quantity>\n" +
@@ -68,7 +81,7 @@ public class Ui {
     }
 
     public void printExit() {
-        System.out.println("Thank you for using MoneyGoWhere. Goodbye!");
+        System.out.println("\nThank you for using MoneyGoWhere. Goodbye!");
     }
 
 

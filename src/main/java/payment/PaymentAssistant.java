@@ -100,12 +100,14 @@ public class PaymentAssistant {
         isCancelled = getType();
 
         if (isCancelled) {
+            order.setStatus("CANCELED");
             return true;
         }
 
         isCancelled = getAmount(order);
 
         if (isCancelled) {
+            order.setStatus("CANCELED");
             return true;
         }
 
